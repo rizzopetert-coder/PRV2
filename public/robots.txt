@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /api/ # Protect your diagnostic logic
+Sitemap: https://principalresolution.com/sitemap.xml
