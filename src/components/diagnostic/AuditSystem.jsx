@@ -557,7 +557,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                     {STEP_TITLES[STEPS.PERSONNEL]}
                   </h3>
                   <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold mt-4">
-                    Count the leadership group being assessed — not the full organization.
+                    How many people are in the room where decisions get made? Count only the group where the friction lives — not your full headcount.
                   </p>
                 </div>
 
