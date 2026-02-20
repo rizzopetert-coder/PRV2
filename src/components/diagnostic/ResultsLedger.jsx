@@ -609,10 +609,8 @@ if (dispatchUrl) {
               </p>
             </div>
           </div>
-
         </div>
       </div>
-</div>
 
       {/* ── DISPATCH — outside PDF capture ─────────────── */}
 <div className="border-t-2 border-brand-accent p-10 space-y-8 bg-brand-bg">
