@@ -57,12 +57,16 @@
 /* 🏛️ GLOBAL ARCHITECTURE */
 @layer base {
   html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    /* EXECUTIVE SCALE BASELINE */
-    font-size: 20px; 
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 20px;
   }
+}
 
   body {
     background-color: var(--brand-bg);
