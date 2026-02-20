@@ -254,9 +254,9 @@ export function useDiagnosticEngine(step, data) {
     lastInsightRef.current = text;
   }
   return {
-    insight:    text,
-    insightKey: `${step}-${sequenceRef.current}-${text.slice(0, 12)}`,
-  };
+  insight:    text,
+  insightKey: `${step}-${sequenceRef.current}-${text ? text.slice(0, 12) : 'empty'}`,
+};
 }, [
   step,
   data.industry,
