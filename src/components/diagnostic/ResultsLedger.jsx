@@ -277,10 +277,6 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
     ? (annualRecovery / recommendation.fee).toFixed(1)
     : null;
 
-  const returnMultiple  = recommendation.fee
-    ? (annualRecovery / recommendation.fee).toFixed(1)
-    : null;
-
   // ── EMAIL CAPTURE STATE ──────────────────────────────────────
   const [email, setEmail]                     = useState('');
   const [optSendRecord, setOptSendRecord]     = useState(false);
