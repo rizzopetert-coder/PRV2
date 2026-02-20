@@ -588,7 +588,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
 
     <div className="space-y-3">
       <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
-        Where does the friction live?
+        Every organization carries friction somewhere. Where does it tend to concentrate in yours?
       </label>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {Object.entries(FRICTION_LOCATIONS).map(([key, val]) => (
@@ -767,7 +767,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
     If this situation resolved completely in the next 90 days, what would become possible that isn't possible now?
   </label>
   <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
-    Optional. Your answer stays with us — it won't appear in your record.
+    Optional. Whatever is shared here will not be reshared anywhere — not even in your report.
   </p>
   <textarea
     placeholder="What does the other side of this look like for you?"

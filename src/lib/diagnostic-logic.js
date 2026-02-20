@@ -48,10 +48,10 @@ export const AVOIDANCE_MECHANISMS = {
   NOT_AN_ISSUE: { label: "They do happen here",            tierSignal: null }
 };
 export const PRIOR_ATTEMPTS = {
-  NONE:        { label: "We haven't addressed it yet",                        tierSignal: "ROADMAP"       },
-  CONVERSATION:{ label: "We've had the conversation — nothing changed",      tierSignal: "INTERVENTION"  },
-  EXTERNAL:    { label: "We brought someone in and it didn't work",            tierSignal: "SAFE_HARBOR"   },
-  UNCLEAR:     { label: "We tried something, but we're not sure it addressed the right thing", tierSignal: "INTERVENTION" },
+  NONE:        { label: "We haven't addressed it yet",                                tierSignal: "ROADMAP"       },
+  CONVERSATION:{ label: "We've had the conversation — nothing changed",               tierSignal: "INTERVENTION"  },
+  EXTERNAL:    { label: "We brought someone in and it didn't work",                   tierSignal: "SAFE_HARBOR"   },
+  UNCLEAR:     { label: "We tried something — not sure it addressed the right thing", tierSignal: "INTERVENTION" },
 };
 
 export const PERSONNEL_RISK = {
