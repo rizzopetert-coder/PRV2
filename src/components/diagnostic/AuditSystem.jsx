@@ -124,9 +124,9 @@ const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -8 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="fixed z-[150] shadow-2xl pointer-events-none
-          bottom-0 left-0 right-0
-          md:bottom-8 md:right-8 md:left-auto md:w-80 xl:w-96"
+        className="fixed z-[150] shadow-2xl pointer-events-auto
+  bottom-0 left-0 right-0
+  md:bottom-8 md:right-8 md:left-auto md:w-80 xl:w-96"
         style={{ maxWidth: '100vw' }}
       >
         <div className="border-l-4 border-brand-accent bg-brand-text text-brand-bg p-4 md:p-6 relative overflow-hidden max-h-[40vh] md:max-h-none overflow-y-auto">
