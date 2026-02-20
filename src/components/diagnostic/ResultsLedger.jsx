@@ -448,15 +448,15 @@ if (dispatchUrl) {
           </div>
 
           {/* COST FIGURE */}
-          <div className="border-y border-brand-border/40 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div className="border-y border-brand-border/40 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10 overflow-hidden">
             <div className="lg:col-span-2 space-y-3">
               <span className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
                 Annual Institutional Cost
               </span>
               <div
-                className="font-fjalla text-brand-text leading-none"
-                style={{ fontSize: 'clamp(3.5rem, 8vw, 7.5rem)' }}
-              >
+  className="font-fjalla text-brand-text leading-none overflow-hidden"
+  style={{ fontSize: 'clamp(3.5rem, 6vw, 6rem)' }}
+>
                 {formatCurrency(total)}
               </div>
             </div>
