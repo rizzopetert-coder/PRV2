@@ -454,9 +454,9 @@ if (dispatchUrl) {
                 Annual Institutional Cost
               </span>
               <div
-  className="font-fjalla text-brand-text leading-none overflow-hidden"
-  style={{ fontSize: 'clamp(3.5rem, 6vw, 6rem)' }}
->
+                className="font-fjalla text-brand-text leading-none overflow-hidden"
+                style={{ fontSize: 'clamp(3.5rem, 6vw, 6rem)' }}
+              >
                 {formatCurrency(total)}
               </div>
             </div>
@@ -467,7 +467,7 @@ if (dispatchUrl) {
                 </span>
                 <span
                   className="font-serif italic text-brand-accent block"
-                  style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)' }}
+                  style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
                 >
                   {formatCurrency(monthlyBurn)}
                 </span>
@@ -479,7 +479,7 @@ if (dispatchUrl) {
                   </span>
                   <span
                     className="font-serif italic text-brand-text block"
-                    style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)' }}
+                    style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
                   >
                     {formatCurrency(executionGap)}
                   </span>
@@ -504,27 +504,114 @@ if (dispatchUrl) {
             </motion.p>
           </div>
 
-{(() => {
-  const inferredObservation = buildInferredObservation(summary, inputData);
-  return inferredObservation ? (
-    <div className="space-y-4 pt-2">
-      <div className="flex items-center gap-4">
-        <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold">
-          Advisor Inference
-        </span>
-        <div className="flex-1 h-px bg-brand-border" />
-      </div>
-      <div className="border-l-4 border-brand-accent/40 pl-6 space-y-2">
-        <p
-          className="font-serif italic text-brand-muted leading-relaxed"
-          style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)' }}
-        >
-          {inferredObservation}
-        </p>
-      </div>
-    </div>
-  ) : null;
-})()}
+          {/* ADVISOR INFERENCE */}
+          {(() => {
+            const inferredObservation = buildInferredObservation(summary, inputData);
+            return inferredObservation ? (
+              <div className="space-y-4 pt-2">
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold">
+                    Advisor Inference
+                  </span>
+                  <div className="flex-1 h-px bg-brand-border" />
+                </div>
+                <div className="border-l-4 border-brand-accent/40 pl-6 space-y-2">
+                  <p
+                    className="font-serif italic text-brand-muted leading-relaxed"
+                    style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)' }}
+                  >
+                    {inferredObservation}
+                  </p>
+                </div>
+              </div>
+            ) : null;
+          })()}
+
+          {/* RECOMMENDED TIER */}
+          <div className="space-y-5">
+            <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block">
+              Recommended Engagement
+            </span>
+            <div className="p-8 border border-brand-accent/30 space-y-4">
+              <h3
+                className="font-serif italic text-brand-text tracking-tight leading-none"
+                style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}
+              >
+                {recommendation.name}
+              </h3>
+              <p
+                className="font-mono text-brand-accent font-bold leading-relaxed"
+                style={{ fontSize: 'clamp(0.65rem, 1vw, 0.75rem)' }}
+              >
+                {recommendation.outcome}
+              </p>
+            </div>
+          </div>
+
+          {/* WHY THIS ENGAGEMENT */}
+          {(() => {
+            const rationale = buildRecommendationRationale(summary, inputData);
+            return rationale ? (
+              <div className="space-y-4 pt-2">
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold">
+                    Why This Engagement
+                  </span>
+                  <div className="flex-1 h-px bg-brand-border" />
+                </div>
+                <div className="border-l-4 border-brand-accent pl-6">
+                  <p
+                    className="font-serif italic text-brand-text leading-relaxed"
+                    style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)' }}
+                  >
+                    {rationale}
+                  </p>
+                </div>
+              </div>
+            ) : null;
+          })()}
+
+          {/* COST COMPARISON */}
+          <div className="space-y-5">
+            <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block">
+              The Case for Action
+            </span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-brand-border/40 border border-brand-border/40">
+              <div className="bg-brand-bg p-8 space-y-3">
+                <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold block">
+                  Cost of inaction // Per year
+                </span>
+                <div
+                  className="font-fjalla text-brand-text leading-none"
+                  style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)' }}
+                >
+                  {formatCurrency(total)}
+                </div>
+                <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
+                  Confirmed by this diagnostic
+                </p>
+              </div>
+              <div className="bg-brand-accent/5 p-8 space-y-3 border-l border-brand-border/40">
+                <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold block">
+                  Cost of resolution // {recommendation.name}
+                </span>
+                <div
+                  className="font-fjalla text-brand-accent leading-none"
+                  style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)' }}
+                >
+                  {recommendation.feeLabel}
+                </div>
+                {returnMultiple && (
+                  <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
+                    {returnMultiple}× return on a 10% friction reduction
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+        </div>  {/* closes space-y-14 */}
+      </div>    {/* closes data-report-container */}
 
 {/* ── RECOMMENDATION RATIONALE ────────────────── */}
 {(() => {
@@ -589,30 +676,7 @@ if (dispatchUrl) {
             </div>
           </div>
 
-          {/* RECOMMENDED TIER */}
-          <div className="space-y-5">
-            <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block">
-              Recommended Engagement
-            </span>
-            <div className="p-8 border border-brand-accent/30 space-y-4">
-              <h3
-                className="font-serif italic text-brand-text tracking-tight leading-none"
-                style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}
-              >
-                {recommendation.name}
-              </h3>
-              <p
-                className="font-mono text-brand-accent font-bold leading-relaxed"
-                style={{ fontSize: 'clamp(0.65rem, 1vw, 0.75rem)' }}
-              >
-                {recommendation.outcome}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── DISPATCH — outside PDF capture ─────────────── */}
+                {/* ── DISPATCH — outside PDF capture ─────────────── */}
 <div className="border-t-2 border-brand-accent p-10 space-y-8 bg-brand-bg">
   <div className="space-y-2">
     <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block">
