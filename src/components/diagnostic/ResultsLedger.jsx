@@ -462,7 +462,7 @@ if (dispatchUrl) {
             </div>
             <div className="space-y-6">
               <div className="space-y-1">
-                <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold block">
+                <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold block">
                   Monthly Burn
                 </span>
                 <span
@@ -474,7 +474,7 @@ if (dispatchUrl) {
               </div>
               {executionGap > 0 && (
                 <div className="space-y-1">
-                  <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold block">
+                  <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold block">
                     Execution Gap
                   </span>
                   <span
@@ -510,7 +510,7 @@ if (dispatchUrl) {
             return inferredObservation ? (
               <div className="space-y-4 pt-2">
                 <div className="flex items-center gap-4">
-                  <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold">
+                  <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold">
                     Advisor Inference
                   </span>
                   <div className="flex-1 h-px bg-brand-border" />
@@ -554,7 +554,7 @@ if (dispatchUrl) {
             return rationale ? (
               <div className="space-y-4 pt-2">
                 <div className="flex items-center gap-4">
-                  <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold">
+                  <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold">
                     Why This Engagement
                   </span>
                   <div className="flex-1 h-px bg-brand-border" />
@@ -578,7 +578,7 @@ if (dispatchUrl) {
             </span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-brand-border/40 border border-brand-border/40">
               <div className="bg-brand-bg p-8 space-y-3">
-                <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold block">
+                <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold block">
                   Cost of inaction // Per year
                 </span>
                 <div
@@ -587,12 +587,12 @@ if (dispatchUrl) {
                 >
                   {formatCurrency(total)}
                 </div>
-                <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
+                <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold">
                   Confirmed by this diagnostic
                 </p>
               </div>
               <div className="bg-brand-accent/5 p-8 space-y-3 border-l border-brand-border/40">
-                <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold block">
+                <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold block">
                   Cost of resolution // {recommendation.name}
                 </span>
                 <div
@@ -602,7 +602,7 @@ if (dispatchUrl) {
                   {recommendation.feeLabel}
                 </div>
                 {returnMultiple && (
-                  <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
+                  <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold">
                     {returnMultiple}× return on a 10% friction reduction
                   </p>
                 )}
@@ -625,7 +625,7 @@ if (dispatchUrl) {
     >
       You've seen the number. Here's what to do with it.
     </h4>
-    <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
+    <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold">
       Download the record and sit with it — or let's talk about what it means for you specifically.
     </p>
   </div>
@@ -650,7 +650,7 @@ if (dispatchUrl) {
   {/* ── OPTIONAL EMAIL CAPTURE ─────────────────────── */}
   <div className="border border-brand-border p-6 space-y-5">
     <div className="space-y-1">
-      <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold block">
+      <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block">
         Optional
       </span>
       <p className="font-serif italic text-brand-text" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)' }}>
@@ -675,7 +675,7 @@ if (dispatchUrl) {
           onChange={(e) => setOptSendRecord(e.target.checked)}
           className="mt-0.5 accent-brand-accent shrink-0"
         />
-        <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted group-hover:text-brand-text transition-colors font-bold">
+        <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted group-hover:text-brand-text transition-colors font-bold">
           Send me this record
         </span>
       </label>
@@ -686,7 +686,7 @@ if (dispatchUrl) {
           onChange={(e) => setOptIntelligence(e.target.checked)}
           className="mt-0.5 accent-brand-accent shrink-0"
         />
-        <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted group-hover:text-brand-text transition-colors font-bold">
+        <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted group-hover:text-brand-text transition-colors font-bold">
           Keep me informed of new Intelligence Memos
         </span>
       </label>
@@ -694,13 +694,13 @@ if (dispatchUrl) {
 
     {email && (optSendRecord || optIntelligence) && (
   dispatched ? (
-    <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold py-4">
+    <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold py-4">
       Received. You'll hear from us.
     </p>
   ) : (
     <button
       onClick={handleEmailDispatch}
-      className="w-full py-4 border border-brand-accent text-brand-accent font-mono text-[9px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all"
+      className="w-full py-4 border border-brand-accent text-brand-accent font-mono text-[11px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all"
     >
       Submit
     </button>
@@ -710,7 +710,7 @@ if (dispatchUrl) {
 
   <button
     onClick={onReset}
-    className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-briefing text-brand-muted hover:text-brand-accent transition-colors font-bold"
+    className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-briefing text-brand-muted hover:text-brand-accent transition-colors font-bold"
   >
     <RotateCcw size={12} />
     Run it again with different inputs
