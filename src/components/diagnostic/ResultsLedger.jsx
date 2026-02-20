@@ -394,7 +394,6 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
     pdf.save(`Principal_Resolution_Record_${Date.now()}.pdf`);
 
     // Silent webhook after download
-    // Silent webhook after download
 if (dispatchUrl) {
   fetch('/api/diagnostic-dispatch', {
     method:  'POST',
@@ -613,7 +612,7 @@ if (dispatchUrl) {
 
         </div>
       </div>
-</div>);
+</div>)
 
       {/* ── DISPATCH — outside PDF capture ─────────────── */}
 <div className="border-t-2 border-brand-accent p-10 space-y-8 bg-brand-bg">
@@ -718,4 +717,5 @@ if (dispatchUrl) {
     Run it again with different inputs
   </button>
 </div>
+  );
 }
