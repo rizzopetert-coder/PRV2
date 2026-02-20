@@ -44,6 +44,7 @@ const initialData = {
   industry:              '',
   orgStage:              '',
   headcountRange:        '',
+  headcountDisplay:      '',
   leadershipTenure:      '',
   personnel: [
     { id: 'EXECUTIVE',    label: 'Executives and Owners',  count: 0 },
@@ -484,15 +485,29 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
 
                 <div className="space-y-3">
                   <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
-                    Total Organization Size
+                    Approximately how many people work in your organization?
                   </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {Object.entries(HEADCOUNT_RANGES).map(([key, val]) => (
-                      <OptionButton key={key} value={key} current={data.headcountRange} field="headcountRange" onSelect={setField}>
-                        {val.label}
-                      </OptionButton>
-                    ))}
-                  </div>
+                  <input
+                    type="text"
+                    placeholder="Estimated total headcount"
+                    value={data.headcountRange ? data.headcountDisplay || '' : ''}
+                    onChange={(e) => {
+                      const raw = e.target.value.replace(/[^0-9]/g, '');
+                      const num = parseInt(raw, 10);
+                      const bucket = !raw ? '' 
+                        : num <= 25   ? 'SMALL'
+                        : num <= 100  ? 'MID'
+                        : num <= 500  ? 'LARGE'
+                        : 'ENTERPRISE';
+                      setData(prev => ({ 
+                        ...prev, 
+                        headcountRange: bucket,
+                        headcountDisplay: raw,
+                      }));
+                    }}
+                    className="w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
+                    style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
+                  />
                 </div>
 
                 <div className="space-y-3">
