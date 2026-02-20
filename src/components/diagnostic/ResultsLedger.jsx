@@ -284,6 +284,42 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
     ? (annualRecovery / recommendation.fee).toFixed(1)
     : null;
 
+  const returnMultiple  = recommendation.fee
+    ? (annualRecovery / recommendation.fee).toFixed(1)
+    : null;
+
+  // ── EMAIL CAPTURE STATE ──────────────────────────────────────
+  const [email, setEmail]                     = useState('');
+  const [optSendRecord, setOptSendRecord]     = useState(false);
+  const [optIntelligence, setOptIntelligence] = useState(false);
+  const [dispatched, setDispatched]           = useState(false);
+
+  const handleEmailDispatch = async () => {
+    try {
+      await fetch('/api/diagnostic-dispatch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          verdict:             state.label,
+          tier:                resolvedTier,
+          monthlyBurn:         monthlyBurn,
+          total:               total,
+          context:             summary.context,
+          email:               email,
+          Opt_Send_Record:     optSendRecord,
+          optIntelligence:     optIntelligence,
+          prior_attempt:       inputData.priorAttempt,
+          personnel_risk:      inputData.personnelRisk,
+          resolution_blockage: inputData.resolutionBlockage,
+          resolution_vision:   inputData.resolutionVision,
+        }),
+      });
+      setDispatched(true);
+    } catch (err) {
+      setDispatched(true);
+    }
+  };
+
   const downloadPDF = async () => {
     const element = reportRef.current;
     if (!element) return;
@@ -670,13 +706,19 @@ if (dispatchUrl) {
     </div>
 
     {email && (optSendRecord || optIntelligence) && (
-      <button
-        onClick={handleEmailDispatch}
-        className="w-full py-4 border border-brand-accent text-brand-accent font-mono text-[9px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all"
-      >
-        Submit
-      </button>
-    )}
+  dispatched ? (
+    <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold py-4">
+      Received. You'll hear from us.
+    </p>
+  ) : (
+    <button
+      onClick={handleEmailDispatch}
+      className="w-full py-4 border border-brand-accent text-brand-accent font-mono text-[9px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all"
+    >
+      Submit
+    </button>
+  )
+)}
   </div>
 
   <button
