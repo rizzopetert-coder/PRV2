@@ -123,12 +123,14 @@ const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -8 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="fixed bottom-8 right-8 z-[150] w-80 xl:w-96 shadow-2xl pointer-events-none"
-        style={{ maxWidth: 'calc(100vw - 2rem)' }}
+        className="fixed z-[150] shadow-2xl pointer-events-none
+          bottom-0 left-0 right-0
+          md:bottom-8 md:right-8 md:left-auto md:w-80 xl:w-96"
+        style={{ maxWidth: '100vw' }}
       >
-        <div className="border-l-4 border-brand-accent bg-brand-text text-brand-bg p-6 relative overflow-hidden">
+        <div className="border-l-4 border-brand-accent bg-brand-text text-brand-bg p-4 md:p-6 relative overflow-hidden">
           <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-brand-accent to-transparent pointer-events-none" />
-          <div className="flex items-center gap-3 mb-4 relative z-10">
+          <div className="flex items-center gap-3 mb-3 md:mb-4 relative z-10">
             <div className="flex gap-1">
               {[0, 0.2, 0.4].map((delay, i) => (
                 <motion.div
@@ -144,12 +146,12 @@ const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
             </span>
           </div>
           <p
-  className="font-serif italic leading-relaxed relative z-10 text-brand-bg"
-  style={{ fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)' }}
->
+            className="font-serif italic leading-relaxed relative z-10 text-brand-bg"
+            style={{ fontSize: 'clamp(0.95rem, 1.2vw, 0.95rem)' }}
+          >
             {liveInsight}
           </p>
-          <div className="flex gap-1.5 mt-4 relative z-10">
+          <div className="flex gap-1.5 mt-3 md:mt-4 relative z-10">
             {[0,1,2,3].map(s => (
               <div
                 key={s}
