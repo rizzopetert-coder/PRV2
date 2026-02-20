@@ -613,69 +613,6 @@ if (dispatchUrl) {
         </div>  {/* closes space-y-14 */}
       </div>    {/* closes data-report-container */}
 
-{/* ── RECOMMENDATION RATIONALE ────────────────── */}
-{(() => {
-  const rationale = buildRecommendationRationale(summary, inputData);
-  return rationale ? (
-    <div className="space-y-4 pt-2">
-      <div className="flex items-center gap-4">
-        <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold">
-          Why This Engagement
-        </span>
-        <div className="flex-1 h-px bg-brand-border" />
-      </div>
-      <div className="border-l-4 border-brand-accent pl-6">
-        <p
-          className="font-serif italic text-brand-text leading-relaxed"
-          style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)' }}
-        >
-          {rationale}
-        </p>
-      </div>
-    </div>
-  ) : null;
-})()}
-
-
-          {/* COST COMPARISON */}
-          <div className="space-y-5">
-            <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block">
-              The Case for Action
-            </span>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-brand-border/40 border border-brand-border/40">
-              <div className="bg-brand-bg p-8 space-y-3">
-                <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold block">
-                  Cost of inaction // Per year
-                </span>
-                <div
-                  className="font-fjalla text-brand-text leading-none"
-                  style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)' }}
-                >
-                  {formatCurrency(total)}
-                </div>
-                <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
-                  Confirmed by this diagnostic
-                </p>
-              </div>
-              <div className="bg-brand-accent/5 p-8 space-y-3 border-l border-brand-border/40">
-                <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold block">
-                  Cost of resolution // {recommendation.name}
-                </span>
-                <div
-                  className="font-fjalla text-brand-accent leading-none"
-                  style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)' }}
-                >
-                  {recommendation.feeLabel}
-                </div>
-                {returnMultiple && (
-                  <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
-                    {returnMultiple}× return on a 10% friction reduction
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-
                 {/* ── DISPATCH — outside PDF capture ─────────────── */}
 <div className="border-t-2 border-brand-accent p-10 space-y-8 bg-brand-bg">
   <div className="space-y-2">
