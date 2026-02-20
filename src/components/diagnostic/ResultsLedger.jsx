@@ -62,12 +62,17 @@ function buildSynthesis(summary, inputData) {
     UNCLEAR:      "It's unclear whether previous efforts addressed the right problem, which is itself a finding.",
   }[inputData.priorAttempt] || "";
 
-  // ── INFERRED OBSERVATION SYSTEM ──────────────────────────────────
-// Place this function in ResultsLedger.jsx alongside buildSynthesis.
-// It takes the full profile and returns a single observation the user
-// didn't input directly but will recognize immediately as true.
-// Returns null if no high-signal combination is matched — section
-// simply doesn't render in that case.
+  return [
+    `This ${stage.toLowerCase()} ${industry} organization is presenting a ${state.label} pattern.`,
+    `The friction is concentrated ${friction}, with leadership in place for ${tenure.toLowerCase()}.`,
+    avoidanceLine,
+    personnelRiskLine,
+    resolutionBlockageLine,
+    priorAttemptLine,
+    `At ${formatCurrency(monthlyBurn)} per month, the annual institutional cost is ${formatCurrency(total)}.`,
+    `Based on this profile, the recommended entry point is ${recommendation.name}.`,
+  ].filter(Boolean).join(' ');
+}
 
 function buildInferredObservation(summary, inputData) {
   const { state } = summary;
@@ -256,18 +261,6 @@ function buildRecommendationRationale(summary, inputData) {
   }
 
   return null;
-}
-
-  return [
-    `This ${stage.toLowerCase()} ${industry} organization is presenting a ${state.label} pattern.`,
-    `The friction is concentrated ${friction}, with leadership in place for ${tenure.toLowerCase()}.`,
-    avoidanceLine,
-    personnelRiskLine,
-    resolutionBlockageLine,
-    priorAttemptLine,
-    `At ${formatCurrency(monthlyBurn)} per month, the annual institutional cost is ${formatCurrency(total)}.`,
-    `Based on this profile, the recommended entry point is ${recommendation.name}.`,
-  ].filter(Boolean).join(' ');
 }
 
 export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData }) {
