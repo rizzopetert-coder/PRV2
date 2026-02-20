@@ -68,7 +68,7 @@ const initialData = {
 // ── MEMOIZED PERSONNEL STEPPER ──────────────────────────────────
 const PersonnelStepper = memo(({ tier, onUpdate }) => (
   <div className="p-8 border border-brand-border hover:border-brand-accent/50 transition-colors duration-300 flex flex-col items-center gap-6">
-    <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold text-center leading-relaxed">
+    <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold text-center leading-relaxed">
       {tier.label}
     </span>
     <div className="flex items-center gap-6">
@@ -102,7 +102,7 @@ const OptionButton = memo(({ value, current, field, onSelect, children }) => (
   <button
     type="button"
     onClick={() => onSelect(field, value)}
-    className={`w-full text-left p-5 border font-mono text-[10px] uppercase tracking-briefing font-bold transition-all duration-200
+    className={`w-full text-left p-5 border font-mono text-[12px] uppercase tracking-briefing font-bold transition-all duration-200
       ${current === value
         ? 'border-brand-accent text-brand-accent bg-brand-accent/5'
         : 'border-brand-border text-brand-muted hover:border-brand-accent/40 hover:text-brand-text'
@@ -139,7 +139,7 @@ const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
                 />
               ))}
             </div>
-            <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold">
+            <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold">
               Advisor Intelligence
             </span>
           </div>
@@ -289,7 +289,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
         {/* HEADER */}
         <div className="w-full border-b border-brand-border/30 px-6 lg:px-24 py-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 relative z-10">
           <div>
-            <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
+            <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
               Institutional Diagnostic // 2026
             </span>
             <h2
@@ -317,7 +317,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
               {step > STEPS.CONTEXT && (
                 <button
                   onClick={() => setStep(s => s - 1)}
-                  className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-briefing text-brand-muted hover:text-brand-accent transition-colors group"
+                  className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-briefing text-brand-muted hover:text-brand-accent transition-colors group"
                 >
                   <ArrowLeft size={13} className="group-hover:-translate-x-1 transition-transform" />
                   Back
@@ -325,7 +325,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
               )}
               <button
                 onClick={resetAudit}
-                className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-briefing text-brand-muted hover:text-brand-accent transition-colors"
+                className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-briefing text-brand-muted hover:text-brand-accent transition-colors"
               >
                 <RotateCcw size={13} /> Reset
               </button>
@@ -349,7 +349,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 className="space-y-16 max-w-2xl"
               >
                 <div className="space-y-6">
-                  <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block">
+                  <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block">
                     Before You Begin
                   </span>
                   <h3
@@ -367,7 +367,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 </div>
 
                 <div className="space-y-6">
-                  <h4 className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold">
+                  <h4 className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold">
                     What you will receive
                   </h4>
                   <div className="space-y-4">
@@ -393,7 +393,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="p-6 border border-brand-border space-y-3">
-                    <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold block">
+                    <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block">
                       Time required
                     </span>
                     <p className="font-serif italic text-brand-text" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)' }}>
@@ -401,7 +401,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                     </p>
                   </div>
                   <div className="p-6 border border-brand-border space-y-3">
-                    <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent font-bold block">
+                    <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block">
                       How it works
                     </span>
                     <p className="font-serif italic text-brand-text" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)' }}>
@@ -410,13 +410,13 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                   </div>
                 </div>
 
-                <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
+                <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold">
                   No email required. No pitch waiting at the end. Just an honest picture of what's happening.
                 </p>
 
                 <button
                   onClick={() => setStep(STEPS.CONTEXT)}
-                  className="w-full py-8 bg-brand-accent text-white font-mono text-[11px] uppercase tracking-briefing font-bold hover:bg-brand-text transition-all shadow-xl flex items-center justify-center gap-4 group"
+                  className="w-full py-8 bg-brand-accent text-white font-mono text-[13px] uppercase tracking-briefing font-bold hover:bg-brand-text transition-all shadow-xl flex items-center justify-center gap-4 group"
                 >
                   Show Me What This Is Costing
                   <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -435,7 +435,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 className="space-y-10"
               >
                 <div>
-                  <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
+                  <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
                     Module 01 of 04
                   </span>
                   <h3
@@ -447,7 +447,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 </div>
 
                 <div className="space-y-3" onFocus={() => setActiveField('industry')}>
-                  <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+                  <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                     Sector
                   </label>
                   <select
@@ -465,7 +465,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 </div>
 
                 <div className="space-y-3">
-                  <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+                  <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                     Organizational Stage
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -478,7 +478,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 </div>
 
                 <div className="space-y-3">
-                  <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+                  <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                     Total Organization Size
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -491,7 +491,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 </div>
 
                 <div className="space-y-3">
-                  <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+                  <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                     How long has current leadership been in place?
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -506,7 +506,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 <button
                   onClick={() => setStep(STEPS.PERSONNEL)}
                   disabled={!canProceed()}
-                  className="w-full py-7 bg-brand-text text-brand-bg font-mono text-[11px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all shadow-xl flex items-center justify-center gap-4 group disabled:opacity-25 disabled:cursor-not-allowed"
+                  className="w-full py-7 bg-brand-text text-brand-bg font-mono text-[13px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all shadow-xl flex items-center justify-center gap-4 group disabled:opacity-25 disabled:cursor-not-allowed"
                 >
                   Map the Room
                   <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
@@ -525,7 +525,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 className="space-y-10"
               >
                 <div>
-                  <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
+                  <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
                     Module 02 of 04
                   </span>
                   <h3
@@ -534,7 +534,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                   >
                     {STEP_TITLES[STEPS.PERSONNEL]}
                   </h3>
-                  <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold mt-4">
+                  <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold mt-4">
                     Count the leadership group being assessed — not the full organization.
                   </p>
                 </div>
@@ -546,7 +546,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 </div>
 
                 {data.personnel.reduce((a, p) => a + p.count, 0) > 0 && (
-                  <div className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
+                  <div className="flex items-center gap-4 font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold">
                     <div className="w-4 h-px bg-brand-accent" />
                     {data.personnel.reduce((a, p) => a + p.count, 0)} people in the room
                     <div className="flex-1 h-px bg-brand-border" />
@@ -556,7 +556,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 <button
                   onClick={() => setStep(STEPS.BEHAVIOR)}
                   disabled={!canProceed()}
-                  className="w-full py-7 bg-brand-text text-brand-bg font-mono text-[11px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all shadow-xl flex items-center justify-center gap-4 group disabled:opacity-25 disabled:cursor-not-allowed"
+                  className="w-full py-7 bg-brand-text text-brand-bg font-mono text-[13px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all shadow-xl flex items-center justify-center gap-4 group disabled:opacity-25 disabled:cursor-not-allowed"
                 >
                   Locate the Friction
                   <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
@@ -575,7 +575,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
     className="space-y-10"
   >
     <div>
-      <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
+      <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
         Module 03 of 04
       </span>
       <h3
@@ -587,7 +587,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
     </div>
 
     <div className="space-y-3">
-      <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+      <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
         Every organization carries friction somewhere. Where does it tend to concentrate in yours?
       </label>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -600,7 +600,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
     </div>
 
     <div className="space-y-3">
-      <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+      <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
         When difficult conversations don't happen here, what's the usual reason?
       </label>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -613,7 +613,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
     </div>
 
     <div className="space-y-3">
-      <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+      <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
         Has your organization attempted to address this before?
       </label>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -626,7 +626,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
     </div>
 
     <div className="space-y-3">
-      <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+      <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
         Is there someone this situation is making it harder to keep?
       </label>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -639,7 +639,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
     </div>
 
     <div className="space-y-3">
-      <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+      <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
         Is there a personnel decision that has been identified but you haven't been able to move forward?
       </label>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -654,7 +654,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
     <button
       onClick={() => setStep(STEPS.FINANCIAL)}
       disabled={!canProceed()}
-      className="w-full py-7 bg-brand-text text-brand-bg font-mono text-[11px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all shadow-xl flex items-center justify-center gap-4 group disabled:opacity-25 disabled:cursor-not-allowed"
+      className="w-full py-7 bg-brand-text text-brand-bg font-mono text-[13px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all shadow-xl flex items-center justify-center gap-4 group disabled:opacity-25 disabled:cursor-not-allowed"
     >
       Count the Cost
       <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
@@ -673,7 +673,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                 className="space-y-10"
               >
                 <div>
-                  <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
+                  <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
                     Module 04 of 04
                   </span>
                   <h3
@@ -682,14 +682,14 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                   >
                     {STEP_TITLES[STEPS.FINANCIAL]}
                   </h3>
-                  <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold mt-3">
+                  <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold mt-3">
                     All fields optional. Estimates are sufficient. Bypasses available for every input.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                       Annual Cumulative Payroll
                     </label>
                     <input
@@ -704,14 +704,14 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                     <button
                       type="button"
                       onClick={() => setData(prev => ({ ...prev, isUnsurePayroll: true, payroll: 'UNSURE' }))}
-                      className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent hover:underline font-bold"
+                      className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent hover:underline font-bold"
                     >
                       Use industry average instead
                     </button>
                   </div>
 
                   <div className="space-y-3">
-                    <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                       Capital in Stalled Initiatives
                     </label>
                     <input
@@ -726,7 +726,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                   </div>
 
                   <div className="space-y-3">
-                    <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                       Target Monthly Revenue
                     </label>
                     <input
@@ -741,7 +741,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                   </div>
 
                   <div className="space-y-3">
-                    <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                       Current Monthly Trend
                     </label>
                     <input
@@ -756,17 +756,17 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                     <button
                       type="button"
                       onClick={() => setData(prev => ({ ...prev, isUnsureRevenue: true, revenueWorst: 'UNSURE' }))}
-                      className="font-mono text-[9px] uppercase tracking-briefing text-brand-accent hover:underline font-bold"
+                      className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent hover:underline font-bold"
                     >
                       Use sector projection instead
                     </button>
                   </div>
                 </div>
 <div className="space-y-3">
-  <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+  <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
     If this situation resolved completely in the next 90 days, what would become possible that isn't possible now?
   </label>
-  <p className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted font-bold">
+  <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold">
     Optional. Whatever is shared here will not be reshared anywhere — not even in your report.
   </p>
   <textarea
@@ -779,7 +779,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
   />
 </div>
                 <div className="space-y-4">
-                  <label className="font-mono text-[10px] uppercase tracking-briefing text-brand-muted font-bold block">
+                  <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                     Weekly Meeting Burden — {data.meetingHours} {data.meetingHours === 1 ? 'hour' : 'hours'}
                   </label>
                   <input
@@ -788,7 +788,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                     onChange={(e) => setField('meetingHours', Number(e.target.value))}
                     className="w-full h-0.5 bg-brand-border rounded appearance-none cursor-pointer accent-brand-accent"
                   />
-                  <div className="flex justify-between font-mono text-[9px] text-brand-muted uppercase tracking-briefing">
+                  <div className="flex justify-between font-mono text-[11px] text-brand-muted uppercase tracking-briefing">
                     <span>None</span>
                     <span>20 hrs</span>
                     <span>40 hrs</span>
@@ -797,7 +797,7 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
 
                 <button
                   onClick={handleAudit}
-                  className="w-full py-7 bg-brand-accent text-white font-mono text-[11px] uppercase tracking-briefing font-bold hover:bg-brand-text hover:text-brand-bg transition-all shadow-xl flex items-center justify-center gap-4 group"
+                  className="w-full py-7 bg-brand-accent text-white font-mono text-[13px] uppercase tracking-briefing font-bold hover:bg-brand-text hover:text-brand-bg transition-all shadow-xl flex items-center justify-center gap-4 group"
                 >
                   Generate Institutional Record
                   <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
