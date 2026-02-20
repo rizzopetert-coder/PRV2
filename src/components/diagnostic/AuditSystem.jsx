@@ -456,7 +456,9 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                   <select
                     value={data.industry}
                     onChange={(e) => setField('industry', e.target.value)}
-                    className="w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent appearance-none cursor-pointer transition-colors"
+                    className={`w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic focus:outline-none focus:border-brand-accent appearance-none cursor-pointer transition-colors ${
+                      data.industry ? 'text-brand-text' : 'text-brand-accent'
+                    }`}
                     style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
                   >
                     <option value="" disabled className="bg-brand-bg text-brand-muted font-sans text-base">
