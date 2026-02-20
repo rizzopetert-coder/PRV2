@@ -41,7 +41,7 @@ const STEP_TITLES = {
 };
 
 const initialData = {
-  industry:              'TECH',
+  industry:              '',
   orgStage:              '',
   headcountRange:        '',
   leadershipTenure:      '',
@@ -456,6 +456,9 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                     className="w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent appearance-none cursor-pointer transition-colors"
                     style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
                   >
+                    <option value="" disabled className="bg-brand-bg text-brand-muted font-sans text-base">
+                      Select your sector
+                    </option>
                     {Object.entries(INDUSTRY_BENCHMARKS).map(([key, val]) => (
                       <option key={key} value={key} className="bg-brand-bg text-brand-text font-sans text-base">
                         {val.label}
