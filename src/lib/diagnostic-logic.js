@@ -271,7 +271,8 @@ export const calculateRealitySummary = (data) => {
   const cTax = 1 + (Math.log10(Math.max(1, headcountMidpoint)) * scalingFactor);
 
   // MEETING BURN
-  const hourlyRate = activePayroll / 2080;
+  const perPersonPayroll = activePayroll / Math.max(1, totalHeadcount);
+  const hourlyRate = perPersonPayroll / 2080;
   const monthlyMeetingBurn = (meetingHours * 4 * hourlyRate) * cTax * (weightedHeadcount / 10);
 
   // STALLED DRAG — default to 5% of payroll
