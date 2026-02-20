@@ -128,7 +128,7 @@ const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
           md:bottom-8 md:right-8 md:left-auto md:w-80 xl:w-96"
         style={{ maxWidth: '100vw' }}
       >
-        <div className="border-l-4 border-brand-accent bg-brand-text text-brand-bg p-4 md:p-6 relative overflow-hidden">
+        <div className="border-l-4 border-brand-accent bg-brand-text text-brand-bg p-4 md:p-6 relative overflow-hidden max-h-[40vh] md:max-h-none overflow-y-auto">
           <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-brand-accent to-transparent pointer-events-none" />
           <div className="flex items-center gap-3 mb-3 md:mb-4 relative z-10">
             <div className="flex gap-1">
@@ -147,7 +147,7 @@ const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
           </div>
           <p
             className="font-serif italic leading-relaxed relative z-10 text-brand-bg"
-            style={{ fontSize: 'clamp(0.95rem, 1.2vw, 0.95rem)' }}
+            style={{ fontSize: 'clamp(0.8rem, 1.2vw, 0.95rem)' }}
           >
             {liveInsight}
           </p>
