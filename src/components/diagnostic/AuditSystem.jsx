@@ -556,9 +556,13 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                   >
                     {STEP_TITLES[STEPS.PERSONNEL]}
                   </h3>
-                  <p className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold mt-4">
-                    How many people are in the room where decisions get made? Count only the group where the friction lives — not your full headcount.
-                  </p>
+                  <div className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold mt-4 space-y-3">
+  <p>This diagnostic measures what leadership friction is costing your organization. Enter the number of people in each role category for the group this assessment is about.</p>
+  <p>Not sure how to scope it? Three common starting points:</p>
+  <p>— A pure executive team: 3 Executives, 0 Managers, 0 Staff</p>
+  <p>— A department with its leadership: 1 Executive, 2 Managers, 8 Staff</p>
+  <p>— A cross-functional group: 2 Executives, 4 Managers, 0 Staff</p>
+</div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
