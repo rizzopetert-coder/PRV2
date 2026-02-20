@@ -27,3 +27,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# API keys and sensitive config (uncomment if you want to ignore these)
+PRINCIPAL_RESOLUTION_CORE.txt

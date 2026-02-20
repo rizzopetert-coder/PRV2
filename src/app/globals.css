@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 🏛️ INSTITUTIONAL THEMES */
+/* 🏛️ INSTITUTIONAL THEMES // PRINCIPAL RESOLUTION */
 :root {
-  /* 01: HARBOR (Light) */
   --brand-bg: #FAF9F6;
   --brand-text: #1C1C1C;
-  --brand-text-muted: #78716C;
+  --brand-muted: #78716C;        /* add this line */
   --brand-accent: #FF5733;
   --brand-border: rgba(28, 28, 28, 0.1);
   --brand-card-bg: rgba(28, 28, 28, 0.02);
@@ -15,28 +14,38 @@
   --selection-text: #ffffff;
 }
 
-[data-theme='bone'] {
-  /* 02: BONE (Warm Ivory) */
-  --brand-bg: #F2F0E9;
-  --brand-text: #151515;
-  --brand-text-muted: #5A5A5A;
-  --brand-accent: #FF5733;
-  --brand-border: rgba(0, 0, 0, 0.15);
-  --brand-card-bg: rgba(0, 0, 0, 0.04);
+[data-theme='archive'] {
+  /* 02: ARCHIVE (Deep Forest & Copper) */
+  --brand-bg: #121F1F;
+  --brand-text: #FAF9F6;
+  --brand-text-muted: #8A9A9A;
+  --brand-accent: #B87333; /* Copper */
+  --brand-border: rgba(184, 115, 51, 0.2);
+  --brand-card-bg: rgba(26, 46, 46, 0.8);
 }
 
-[data-theme='sea'] {
-  /* 03: DEEP SEA (Midnight Navy) */
-  --brand-bg: #0A192F;
-  --brand-text: #E6F1FF;
-  --brand-text-muted: #8892B0;
-  --brand-accent: #FF5733;
-  --brand-border: rgba(100, 255, 218, 0.1);
-  --brand-card-bg: rgba(17, 34, 64, 0.7);
+[data-theme='briefing'] {
+  /* 03: BRIEFING (Burgundy & Decisive Red) */
+  --brand-bg: #2D0B0B;
+  --brand-text: #FAF9F6;
+  --brand-text-muted: #A38080;
+  --brand-accent: #D32F2F; /* High-Stakes Red */
+  --brand-border: rgba(211, 47, 47, 0.2);
+  --brand-card-bg: rgba(61, 18, 18, 0.8);
+}
+
+[data-theme='terminal'] {
+  /* 04: TERMINAL (Obsidian & Cyan) */
+  --brand-bg: #0A0A0A;
+  --brand-text: #FAF9F6;
+  --brand-text-muted: #808080;
+  --brand-accent: #00E5FF; /* Cyan Intelligence */
+  --brand-border: rgba(0, 229, 255, 0.2);
+  --brand-card-bg: rgba(20, 20, 20, 0.9);
 }
 
 [data-theme='slate'] {
-  /* 04: BOARDROOM (Slate) */
+  /* 05: BOARDROOM (Slate) */
   --brand-bg: #1C1C1C;
   --brand-text: #FAF9F6;
   --brand-text-muted: #A8A29E;
@@ -45,22 +54,14 @@
   --brand-card-bg: rgba(255, 255, 255, 0.03);
 }
 
-[data-theme='night'] {
-  /* 05: NIGHT (Pure Black) */
-  --brand-bg: #000000;
-  --brand-text: #FFFFFF;
-  --brand-text-muted: #707070;
-  --brand-accent: #FF5733;
-  --brand-border: rgba(255, 255, 255, 0.1);
-  --brand-card-bg: rgba(255, 255, 255, 0.05);
-}
-
 /* 🏛️ GLOBAL ARCHITECTURE */
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* EXECUTIVE SCALE BASELINE */
+    font-size: 20px; 
   }
 
   body {
@@ -69,6 +70,7 @@
     transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.8s ease;
     position: relative;
     overflow-x: hidden;
+    line-height: 1.6;
   }
 
   /* Natural paper grain texture for institutional heritage */
@@ -87,10 +89,13 @@
     background: var(--selection-bg);
     color: var(--selection-text);
   }
+
+  h1, h2, h3, h4 {
+    @apply font-serif italic tracking-tighter leading-verdict;
+  }
 }
 
 @layer components {
-  /* Tactical UI Utilities */
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   
@@ -98,23 +103,13 @@
     background: radial-gradient(circle, transparent 20%, var(--brand-bg) 100%);
   }
 
-  /* Editorial Link Style */
   .link-underlined {
     @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-brand-accent after:origin-bottom-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-bottom-left;
   }
 
-  /* Institutional Typography Helpers */
-  .tracking-institutional {
-    letter-spacing: 0.5em;
-  }
-  
-  .tracking-briefing {
-    letter-spacing: 0.4em;
-  }
-  
-  .leading-verdict {
-    line-height: 0.9;
-  }
+  .tracking-institutional { letter-spacing: 0.5em; }
+  .tracking-briefing { letter-spacing: 0.4em; }
+  .leading-verdict { line-height: 0.9; }
 }
 
 /* 🏛️ TACTICAL SCROLLBAR */
@@ -123,7 +118,6 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  /* Fix: Using a direct color instead of nesting rgba variables */
   background: transparent;
   border-bottom: 1px solid var(--brand-border);
 }

@@ -1,23 +1,36 @@
 import "./globals.css";
-import { Instrument_Serif, Inter } from "next/font/google";
+import { Newsreader, Space_Mono, Fjalla_One } from 'next/font/google';
 import Script from 'next/script';
-import ThemeToggle from "../components/ThemeToggle";
+import StewardshipPanel from "../components/StewardshipPanel";
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  variable: "--font-instrument-serif",
-  weight: "400",
-  style: "italic",
+const instrumentSerif = Newsreader({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
+  display: 'swap',
+  adjustFontFallback: false, // suppresses the override warning
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+const spaceMono = Space_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-space-mono',
+  display: 'swap',
+});
+
+const fjallaOne = Fjalla_One({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal'],
+  variable: '--font-fjalla',
+  display: 'swap',
 });
 
 /**
  * Institutional Identity // Principal Resolution
- * Focus: High-authority SEO for board-level search results.
+ * Focus: High-authority SEO and Executive Scale Accessibility.
  * Tenet: Absolute Candor.
  */
 export const metadata = {
@@ -70,20 +83,25 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={`${instrumentSerif.variable} ${inter.variable} font-sans antialiased`}>
-        {/* The theme script prevents the white flash on load */}
+      <body className={`
+        ${instrumentSerif.variable}
+        ${spaceMono.variable}
+        ${fjallaOne.variable}
+        font-sans antialiased
+      `}>
+        {/* Prevents white flash on theme load */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                const theme = localStorage.getItem('pr-theme') || 'light';
+                const theme = localStorage.getItem('pr-theme') || 'harbor';
                 document.documentElement.setAttribute('data-theme', theme);
               })()
             `,
           }}
         />
         {children}
-        <ThemeToggle />
+        <StewardshipPanel />
       </body>
     </html>
   );
