@@ -495,10 +495,10 @@ if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMech
                       const raw = e.target.value.replace(/[^0-9]/g, '');
                       const num = parseInt(raw, 10);
                       const bucket = !raw ? '' 
-                        : num <= 25   ? 'SMALL'
-                        : num <= 100  ? 'MID'
-                        : num <= 500  ? 'LARGE'
-                        : 'ENTERPRISE';
+                        : num < 25  ? 'MICRO'
+                        : num < 100 ? 'SMALL'
+                        : num < 500 ? 'MID'
+                        : 'LARGE';
                       setData(prev => ({ 
                         ...prev, 
                         headcountRange: bucket,
