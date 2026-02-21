@@ -14,11 +14,9 @@ import {
 } from '../../lib/diagnostic-logic';
 
 /**
- * ResultsLedger // Principal Resolution v3.2
- * Full capture fix, light PDF, cost comparison,
- * advisor synthesis, tier recommendation, dispatch.
- * Email capture + Dubsado workflow integration.
- * Tenet: Results (Effectiveness).
+ * ResultsLedger // Principal Resolution v3.3
+ * Mobile-optimized layout pass.
+ * Reduced padding, single-column grids, clamp floors adjusted.
  */
 
 const formatCurrency = (val) =>
@@ -87,76 +85,187 @@ function buildInferredObservation(summary, inputData) {
     resolutionBlockage,
   } = inputData;
 
-  // ── HIGHEST SIGNAL: Prior attempt + blockage combinations ──────
-
-  // External attempt + active blockage = protected source
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
     return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection — someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
   }
-
-  // External attempt + known blockage = wrong level reached
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'KNOWN') {
     return "A previous external engagement didn't produce lasting change, and there's a decision the organization knows needs to happen but hasn't. Those two facts are usually related. The prior intervention likely addressed the visible dynamic without reaching the source of the blockage.";
   }
-
-  // Conversation attempted + cross-functional friction = wrong level
   if (priorAttempt === 'CONVERSATION' && frictionLocation === 'CROSS_FUNCTIONAL') {
     return "Cross-functional friction that survives a direct conversation is almost never a communication problem. If the conversation happened and nothing changed, the friction is structural — it lives in how the organization is designed, not in how the people in it are talking to each other.";
   }
-
-  // Conversation attempted + within leadership = source still protected
   if (priorAttempt === 'CONVERSATION' && frictionLocation === 'WITHIN_LEADERSHIP') {
     return "A leadership team conversation that produced no lasting change usually means the conversation didn't include the person who most needed to be in it — or that person was in it and the dynamic made honest engagement impossible. The source is still in place.";
   }
-
-  // ── WITHIN LEADERSHIP COMBINATIONS ────────────────────────────
-
-  // Within leadership + predetermined + external attempt
   if (frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'PREDETERMINED' && priorAttempt === 'EXTERNAL') {
     return "The previous engagement didn't hold because predetermined outcomes in a leadership team almost always trace back to a single person whose position makes the outcome feel inevitable before the conversation starts. Until that dynamic is named directly, any intervention will work around it rather than through it.";
   }
-
-  // Within leadership + no forum + known blockage
   if (frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'NO_FORUM' && resolutionBlockage === 'KNOWN') {
     return "The organization knows what needs to happen and has built — probably without deciding to — a culture that makes it impossible to say so out loud. That's not an accident and it's not a coincidence. The absence of a forum and the presence of an unmade decision are the same problem from two different angles.";
   }
-
-  // Within leadership + legacy + long tenure
   if (frictionLocation === 'WITHIN_LEADERSHIP' && orgStage === 'LEGACY' && leadershipTenure === 'SEVEN_PLUS') {
     return "When leadership friction has been present for seven-plus years in a legacy organization with no forum to surface it, the patterns have usually been in place longer than anyone will admit out loud. The people who built them are still in the room. That's not an obstacle to resolution — it's the resolution. The conversation has to include them directly.";
   }
-
-  // ── INSTITUTIONAL STATE COMBINATIONS ──────────────────────────
-
-  // Executive embargo + known blockage
   if (state.label === 'Executive Embargo' && resolutionBlockage === 'KNOWN') {
     return "The leadership team is both the source of the friction and the reason the resolution can't happen. That's a closed loop — the people with the authority to make the decision are the same people whose dynamic is preventing it. Getting out of it requires someone outside that loop to name it clearly enough that action becomes possible.";
   }
-
-  // Caffeine culture + no prior attempt
   if (state.label === 'Caffeine Culture' && priorAttempt === 'NONE') {
     return "This organization has been moving fast enough that it hasn't stopped to name what it's actually running on. Speed is functioning as avoidance here — not deliberately, but effectively. The cost has been accumulating in the background while the activity level made it easy not to look.";
   }
-
-  // Talent hemorrhage + personnel risk confirmed
   if (state.label === 'Talent Hemorrhage' && (personnelRisk === 'YES' || personnelRisk === 'LOST')) {
     return "The institutional state and the personnel risk signal are confirming the same thing: this culture is already selecting against the people it most needs to keep. That's not a retention problem with a recruiting solution. It's an environment problem, and the people with the highest standards for how they want to work are the first ones to act on it.";
   }
-
-  // Brilliant sabotage + no prior attempt
   if (state.label === 'Brilliant Sabotage' && priorAttempt === 'NONE') {
     return "High individual performance coexisting with collective dysfunction almost never resolves on its own — because the person at the center of it is also the person whose output makes it feel too costly to address. The longer it goes unnamed, the more entrenched the dynamic becomes and the more the organization shapes itself around accommodating it.";
   }
-
-  // ── INDUSTRY-SPECIFIC COMBINATIONS ────────────────────────────
-
-  // Consulting or Finance + predetermined avoidance
   if ((industry === 'CONSULTING' || industry === 'FINANCE') && avoidanceMechanism === 'PREDETERMINED') {
     return "In an organization that runs on analytical rigor, predetermined outcomes in leadership conversations are a specific kind of credibility problem. The analysis is real. The conclusion was decided before it started. The rigor is being used to justify a decision that was made on other grounds — and the people in the room know it.";
   }
-
-  // Nonprofit + lost personnel
   if (industry === 'NONPROFIT' && personnelRisk === 'LOST') {
+    return "Losing someone to organizational dysfunction in a mission-driven organization carries a specific cost that doesn't appear in any financial calculation. The people who join nonprofits have already made a values-based trade. When the environment fails them, they don't just leave the organization — they often leave the sector. The mission didn't protect the person serving it.";
+  }
+  if (industry === 'MEDIA' && frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'NO_FORUM') {
+    return "Creative cultures are often psychologically safer for disagreement about the work than for disagreement about the people doing it. The same environment that produces passionate creative debate can be completely silent about the leadership dynamic making that debate harder. The two cultures coexist in the same room and almost never interact.";
+  }
+  if (industry === 'TECH' && orgStage === 'STARTUP' && priorAttempt === 'EXTERNAL') {
+    return "An external engagement that didn't hold in a startup usually means the founding dynamic reasserted itself as soon as the external presence left. That dynamic is the product of the founding relationships — it predates the organization and it will outlast any intervention that doesn't reach it directly.";
+  }
+  return null;
+}
+
+function buildRecommendationRationale(summary, inputData) {
+  const { state, recommendation } = summary;
+  const {
+    industry,
+    orgStage,
+    frictionLocation,
+    avoidanceMechanism,
+    priorAttempt,
+    personnelRisk,
+    resolutionBlockage,
+    leadershipTenure,
+  } = inputData;
+
+  const tier = recommendation.name;
+
+  if (tier === 'Stability Support') {
+    return "The math has turned on this one. The diagnostic is showing a cost of inaction that exceeds what a structured intervention can address incrementally. What's needed now isn't a plan — it's immediate stabilization. Stability Support is the right entry point because the window for a deliberate process has closed and what happens in the next few weeks will determine what's possible after that.";
+  }
+
+  if (tier === 'Safe Harbor') {
+    if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
+      return "Safe Harbor is the right entry point here because two prior attempts at resolution haven't held, which tells us the source of the blockage has institutional protection. What's needed isn't another structured engagement — it's a sustained, confidential relationship that can operate outside the dynamics that have protected the problem so far.";
+    }
+    if (leadershipTenure === 'UNDER_ONE') {
+      return "Safe Harbor is the right entry point because you're navigating a problem you inherited, not one you created. The friction predates your tenure and the people who built it are probably still in the room. What you need isn't an intervention — it's a confidential relationship with someone who can help you see the landscape clearly and move through it without the constraints that come with a formal engagement.";
+    }
+    if (frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'PREDETERMINED') {
+      return "Safe Harbor is the right entry point because predetermined outcomes in a leadership team almost always trace back to a single dynamic that a structured intervention can work around but rarely reaches directly. What's needed is the kind of relationship where that dynamic can be named without consequence and addressed without the political weight that comes with a formal process.";
+    }
+    if (personnelRisk === 'LOST' || resolutionBlockage === 'ATTEMPTED') {
+      return "Safe Harbor is the right entry point because this situation has already produced consequences — and something is actively preventing the resolution the organization knows it needs. A structured engagement alone won't reach that. What's needed is a sustained, confidential presence that can operate where the formal process can't.";
+    }
+    return "Safe Harbor is the right entry point because what this profile describes isn't a situation that a time-bound structured engagement will resolve. The friction is too embedded, the stakes are too specific, and what's needed is an indefinite confidential relationship — not a project with a deliverable at the end.";
+  }
+
+  if (tier === 'The Intervention') {
+    if (personnelRisk === 'YES' && resolutionBlockage === 'KNOWN') {
+      return `Based on what this diagnostic describes — ${state.label.toLowerCase()} in a ${INDUSTRY_BENCHMARKS[industry]?.label || industry} organization, with someone at risk of leaving and a decision the organization knows needs to happen — The Intervention is the right entry point. The situation is already in motion. What's needed isn't a roadmap for addressing it. It's someone in the room to move it through.`;
+    }
+    if (priorAttempt === 'CONVERSATION') {
+      return `The Intervention is the right entry point because a prior conversation addressed this without producing change — which means the source hasn't been reached yet. The Roadmap assumes a level of organizational readiness to act on its findings that this profile suggests isn't fully in place. The Intervention goes where the conversation didn't.`;
+    }
+    if (priorAttempt === 'EXTERNAL') {
+      return `A previous external engagement didn't hold, which tells us the resolution needs to go somewhere the last one didn't reach. The Intervention is the right entry point because it doesn't produce a plan for your organization to execute — it produces the resolution directly, in the room, with the people who need to be part of it.`;
+    }
+    if (frictionLocation === 'WITHIN_LEADERSHIP' && personnelRisk !== 'NONE') {
+      return `The Intervention is the right entry point because the friction is inside the leadership team and there's already a personnel consequence in play. At that combination, a diagnostic and roadmap phase delays the resolution the organization actually needs. We come in, we address it directly, and you leave with the thing done — not a plan to do it.`;
+    }
+    if (orgStage === 'LEGACY' && leadershipTenure === 'SEVEN_PLUS') {
+      return `The Intervention is the right entry point because what this profile describes has been in place long enough that a roadmap phase would spend its time documenting what everyone already knows. The patterns are established, the cost is confirmed, and the organization needs someone to move it — not map it.`;
+    }
+    return `The Intervention is the right entry point based on this profile. The ${state.label} pattern combined with the behavioral signals this diagnostic has surfaced indicates that what's needed is resolution, not a plan for resolution. The Roadmap is the right entry point when the organization needs clarity on what to address. This organization already has that clarity. What it needs now is someone to address it.`;
+  }
+
+  if (tier === 'The Roadmap') {
+    if (priorAttempt === 'NONE') {
+      return `The Roadmap is the right entry point because this is the first structured look at what's happening and what it's costing. Before bringing someone in to resolve it, it's worth getting a precise diagnosis of where the friction lives, what's sustaining it, and what resolution actually needs to look like for this specific organization. The Roadmap produces that — and a plan your team can execute on.`;
+    }
+    if (frictionLocation === 'CROSS_FUNCTIONAL') {
+      return `Cross-functional friction is the hardest kind to resolve without first mapping it precisely — because what looks like a relationship problem is almost always a structural one. The Roadmap is the right entry point because it will identify whether the friction is in the design of the organization or in the dynamics between the people in it. Those are different problems with different solutions, and the distinction is worth getting right before bringing someone in to address it.`;
+    }
+    if (frictionLocation === 'TEAM') {
+      return `The Roadmap is the right entry point because friction between leadership and the team almost always has a specific origin point that a diagnostic phase will surface. Going straight to intervention without that clarity risks addressing the symptom rather than the source. The Roadmap gives you the precise picture and a structured path forward.`;
+    }
+    return `The Roadmap is the right entry point based on this profile. The friction is real and the cost is confirmed — but the profile indicates this organization is in a position to address it deliberately rather than urgently. The Roadmap will name the source precisely, build the case internally, and give your team a structured path to resolution that doesn't require an external presence to execute.`;
+  }
+
+  return null;
+}
+
+export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData }) {
+  const {
+    total, monthlyBurn, executionGap,
+    state, recommendation, resolvedTier,
+  } = summary;
+
+  const reportRef       = useRef(null);
+  const synthesis       = useMemo(() => buildSynthesis(summary, inputData), [summary, inputData]);
+  const monthlyRecovery = Math.round(monthlyBurn * 0.10);
+  const annualRecovery  = monthlyRecovery * 12;
+  const returnMultiple  = recommendation.fee
+    ? (annualRecovery / recommendation.fee).toFixed(1)
+    : null;
+
+  // ── EMAIL CAPTURE STATE ──────────────────────────────────────
+  const [email, setEmail]                     = useState('');
+  const [optSendRecord, setOptSendRecord]     = useState(false);
+  const [optIntelligence, setOptIntelligence] = useState(false);
+  const [dispatched, setDispatched]           = useState(false);
+
+  const handleEmailDispatch = async () => {
+    try {
+      await fetch('/api/diagnostic-dispatch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          verdict:             state.label,
+          tier:                resolvedTier,
+          monthlyBurn:         monthlyBurn,
+          total:               total,
+          context:             summary.context,
+          email:               email,
+          Opt_Send_Record:     optSendRecord,
+          optIntelligence:     optIntelligence,
+          prior_attempt:       inputData.priorAttempt,
+          personnel_risk:      inputData.personnelRisk,
+          resolution_blockage: inputData.resolutionBlockage,
+          resolution_vision:   inputData.resolutionVision,
+        }),
+      });
+      setDispatched(true);
+    } catch (err) {
+      setDispatched(true);
+    }
+  };
+
+  const downloadPDF = async () => {
+    const element = reportRef.current;
+    if (!element) return;
+
+    const prev = {
+      overflow:  element.style.overflow,
+      height:    element.style.height,
+      maxHeight: element.style.maxHeight,
+    };
+    element.style.overflow  = 'visible';
+    element.style.height    = 'auto';
+    element.style.maxHeight = 'none';
+
+    const canvas = await html2canvas(element, {
+      scale:           2,
+      backgroundColor: '#FAF9F6',
+      useCORS:       && personnelRisk === 'LOST') {
     return "Losing someone to organizational dysfunction in a mission-driven organization carries a specific cost that doesn't appear in any financial calculation. The people who join nonprofits have already made a values-based trade. When the environment fails them, they don't just leave the organization — they often leave the sector. The mission didn't protect the person serving it.";
   }
 
