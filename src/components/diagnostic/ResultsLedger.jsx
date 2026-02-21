@@ -235,7 +235,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
           total:               total,
           context:             summary.context,
           email:               email,
-          Opt_Send_Record:     optSendRecord,
+          optSendRecord:       optSendRecord,
           optIntelligence:     optIntelligence,
           prior_attempt:       inputData.priorAttempt,
           personnel_risk:      inputData.personnelRisk,

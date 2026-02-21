@@ -21,7 +21,6 @@ export async function POST(request) {
   total,
   context = {},
   email = null,
-  optInMemos = false,
   optSendRecord = false,
   optIntelligence = false,
   prior_attempt = '',
