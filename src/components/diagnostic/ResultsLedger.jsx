@@ -472,6 +472,9 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
     el.querySelectorAll('[class*="select-none"]').forEach(node => {
   node.style.color = 'rgba(28,28,28,0.08)';
 });
+    el.querySelectorAll('[class*="font-fjalla"]').forEach(node => {
+  node.style.fontFamily = 'Georgia, serif';
+});
 
   }
 },    });
