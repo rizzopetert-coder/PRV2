@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 
   // ── cost figure ──
   costFigureLarge: {
-    fontFamily: 'Times-Bold',
+    fontFamily: 'Helvetica-Bold',
     fontSize: 48,
     color: T.text,
     lineHeight: 1,
