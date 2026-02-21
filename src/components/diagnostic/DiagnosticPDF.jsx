@@ -20,7 +20,8 @@ const T = {
 const styles = StyleSheet.create({
   page: {
     backgroundColor: T.bg,
-    paddingVertical:   48,
+    paddingTop:        36,
+    paddingBottom:     36,
     paddingHorizontal: 52,
     fontFamily: 'Times-Roman',
     color: T.text,
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica-Bold',
     fontSize: 48,
     color: T.text,
-    lineHeight: 1,
+    lineHeight: 2,
     marginBottom: 16,
   },
   costFigureRow: { flexDirection: 'row', gap: 32, marginTop: 4 },
