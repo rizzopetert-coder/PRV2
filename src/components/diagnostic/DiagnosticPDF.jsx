@@ -356,11 +356,6 @@ export function DiagnosticDocument({ summary, inputData }) {
   const synthesis           = buildSynthesis(summary, inputData);
   const inferredObservation = buildInferredObservation(summary, inputData);
   const rationale           = buildRecommendationRationale(summary, inputData);
-
-  const synthesis           = buildSynthesis(summary, inputData);
-  const inferredObservation = buildInferredObservation(summary, inputData);
-  const rationale           = buildRecommendationRationale(summary, inputData);
-
   const monthlyRecovery = Math.round(monthlyBurn * 0.10);
   const annualRecovery  = monthlyRecovery * 12;
   const returnMultiple  = recommendation.fee
@@ -404,16 +399,6 @@ export function DiagnosticDocument({ summary, inputData }) {
             <Text style={styles.label}>Advisor Synthesis</Text>
             <Text style={styles.body}>{synthesis}</Text>
           </View>
-          </View>
-
-          <View style={styles.divider} />
-
-          {/* ── 3. ADVISOR SYNTHESIS ── */}
-          <View style={styles.section}>
-            <Text style={styles.label}>Advisor Synthesis</Text>
-            <Text style={styles.body}>{synthesis}</Text>
-          </View>
-
           {/* ── 4. ADVISOR INFERENCE (conditional) ── */}
           {inferredObservation ? (
             <View style={styles.section}>
@@ -425,9 +410,6 @@ export function DiagnosticDocument({ summary, inputData }) {
             </View>
           ) : null}
           <View style={styles.divider} />
-
-          <View style={styles.divider} />
-
           {/* ── 5. RECOMMENDED ENGAGEMENT ── */}
           <View style={styles.section}>
             <Text style={styles.label}>Recommended Engagement</Text>
@@ -436,7 +418,6 @@ export function DiagnosticDocument({ summary, inputData }) {
               <Text style={styles.engagementOutcome}>{recommendation.outcome}</Text>
             </View>
           </View>
-
           {/* ── 6. WHY THIS ENGAGEMENT (conditional) ── */}
           {rationale ? (
             <View style={styles.section}>
@@ -448,9 +429,6 @@ export function DiagnosticDocument({ summary, inputData }) {
             </View>
           ) : null}
           <View style={styles.divider} />
-
-          <View style={styles.divider} />
-
           {/* ── 7. THE CASE FOR ACTION ── */}
           <View style={styles.sectionLast}>
             <Text style={styles.label}>The Case for Action</Text>
@@ -469,7 +447,6 @@ export function DiagnosticDocument({ summary, inputData }) {
               </View>
             </View>
           </View>
-
         </View>
       </Page>
     </Document>
