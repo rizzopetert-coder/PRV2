@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: T.bg,
     paddingTop:        36,
+    paddingBottom:     36,
     paddingHorizontal: 52,
     fontFamily: 'Times-Roman',
     color: T.text,
@@ -410,7 +411,9 @@ export function DiagnosticDocument({ summary, inputData }) {
         {/* ── 2. COST FIGURE ── */}
         <View style={styles.section}>
           <Text style={styles.labelMuted}>Annual Institutional Cost</Text>
-          <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
+          <View style={{ minHeight: 80 }}>
+            <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
+          </View>
           <View style={styles.costFigureRow}>
             <View style={styles.costFigureItem}>
               <Text style={styles.labelMuted}>Monthly Burn</Text>
