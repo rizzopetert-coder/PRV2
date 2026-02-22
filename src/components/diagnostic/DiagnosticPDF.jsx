@@ -7,14 +7,12 @@ import {
   FRICTION_LOCATIONS,
   AVOIDANCE_MECHANISMS,
 } from '../../lib/diagnostic-logic';
-
 Font.register({
   family: 'Roboto',
   fonts: [
     { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.ttf', fontWeight: 700 },
   ],
 });
-
 // ── DESIGN TOKENS ────────────────────────────────────────────────────────────
 const T = {
   bg:      '#FAF9F6',
@@ -23,7 +21,6 @@ const T = {
   muted:   '#6B6560',
   border:  '#D0CBC2',
 };
-
 const styles = StyleSheet.create({
   page: {
     backgroundColor: T.bg,
@@ -33,7 +30,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Times-Roman',
     color: T.text,
   },
-
   // ── watermark ──
   watermark: {
     position: 'absolute',
@@ -46,11 +42,9 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     textTransform: 'uppercase',
   },
-
   // ── section spacing ──
   section: { marginBottom: 32 },
   sectionLast: { marginBottom: 0 },
-
   // ── label / eyebrow ──
   label: {
     fontFamily: 'Courier',
@@ -70,7 +64,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 6,
   },
-
   // ── verdict ──
   verdictTitle: {
     fontFamily: 'Times-Italic',
@@ -89,21 +82,19 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     maxWidth: 480,
   },
-
   // ── divider ──
   divider: {
     borderTopWidth: 0.5,
     borderTopColor: T.border,
     marginVertical: 24,
   },
-
   // ── cost figure ──
   costFigureLarge: {
     fontFamily: 'Roboto',
     fontWeight: 700,
     fontSize: 48,
     color: T.text,
-    lineHeight: 2,
+    lineHeight: 1.4,
     marginBottom: 16,
   },
   costFigureRow: { flexDirection: 'row', gap: 32, marginTop: 4 },
@@ -118,7 +109,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: T.text,
   },
-
   // ── body text (synthesis / inference / rationale) ──
   body: {
     fontFamily: 'Times-Italic',
@@ -140,7 +130,6 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     maxWidth: 480,
   },
-
   // ── divider row (label + rule) ──
   labelRow: {
     flexDirection: 'row',
@@ -149,7 +138,6 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   labelRule: { flex: 1, borderTopWidth: 0.5, borderTopColor: T.border },
-
   // ── recommended engagement box ──
   engagementBox: {
     borderWidth: 0.75,
@@ -172,7 +160,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     lineHeight: 1.5,
   },
-
   // ── case for action grid ──
   caseGrid: {
     borderWidth: 0.5,
@@ -208,7 +195,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
 // ── HELPERS ──────────────────────────────────────────────────────────────────
 const fmt = (val) =>
   new Intl.NumberFormat('en-US', {
@@ -216,40 +202,33 @@ const fmt = (val) =>
     currency: 'USD',
     maximumFractionDigits: 0,
   }).format(val);
-
 function buildSynthesis(summary, inputData) {
   const { state, recommendation, monthlyBurn, total, context } = summary;
   const { orgStage, leadershipTenure, frictionLocation, avoidanceMechanism } = context;
-
   const industry = INDUSTRY_BENCHMARKS[inputData.industry]?.label || inputData.industry;
   const stage    = ORG_STAGES[orgStage]?.label || orgStage;
   const tenure   = LEADERSHIP_TENURES[leadershipTenure]?.label || leadershipTenure;
   const friction = FRICTION_LOCATIONS[frictionLocation]?.label?.toLowerCase() || 'an unlocated source';
-
   const avoidanceLine = {
     NO_FORUM:      "The absence of a safe forum means the real conversation has never had a place to happen.",
     PREDETERMINED: "When outcomes feel predetermined, filtered information reaches leadership — and the real problem stays hidden.",
     COST_TOO_HIGH: "The perceived cost of the conversation is being weighed against the actual cost of avoiding it. The math does not favor avoidance.",
   }[avoidanceMechanism] || "";
-
   const personnelRiskLine = {
     LOST:     "This organization has already lost someone because of this dynamic. That's a confirmed cost, not a projection.",
     YES:      "There is someone in the room this situation is making it harder to keep.",
     POSSIBLY: "There are early signs that this situation is affecting retention.",
   }[inputData.personnelRisk] || "";
-
   const resolutionBlockageLine = {
     ATTEMPTED: "Something is actively preventing a decision the organization knows needs to happen. That blockage is its own compounding liability.",
     KNOWN:     "The organization knows what needs to happen and hasn't been able to act on it. The cost of that gap is included in this assessment.",
     SUSPECTED: "There may be a personnel decision being avoided. Whether or not it's named, the organization is carrying its weight.",
   }[inputData.resolutionBlockage] || "";
-
   const priorAttemptLine = {
     EXTERNAL:     "A previous external engagement didn't hold, which means the resolution needs to go somewhere the last one didn't reach.",
     CONVERSATION: "A prior conversation addressed this without producing change — a signal that the source hasn't been reached yet.",
     UNCLEAR:      "It's unclear whether previous efforts addressed the right problem, which is itself a finding.",
   }[inputData.priorAttempt] || "";
-
   return [
     `This ${stage.toLowerCase()} ${industry} organization is presenting a ${state.label} pattern.`,
     `The friction is concentrated ${friction}, with leadership in place for ${tenure.toLowerCase()}.`,
@@ -261,14 +240,12 @@ function buildSynthesis(summary, inputData) {
     `Based on this profile, the recommended entry point is ${recommendation.name}.`,
   ].filter(Boolean).join(' ');
 }
-
 function buildInferredObservation(summary, inputData) {
   const { state } = summary;
   const {
     industry, orgStage, leadershipTenure, frictionLocation,
     avoidanceMechanism, priorAttempt, personnelRisk, resolutionBlockage,
   } = inputData;
-
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
     return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection — someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
   }
@@ -316,16 +293,13 @@ function buildInferredObservation(summary, inputData) {
   }
   return null;
 }
-
 function buildRecommendationRationale(summary, inputData) {
   const { state, recommendation } = summary;
   const {
     industry, orgStage, frictionLocation, avoidanceMechanism,
     priorAttempt, personnelRisk, resolutionBlockage, leadershipTenure,
   } = inputData;
-
   const tier = recommendation.name;
-
   if (tier === 'Stability Support') {
     return "The math has turned on this one. The diagnostic is showing a cost of inaction that exceeds what a structured intervention can address incrementally. What's needed now isn't a plan — it's immediate stabilization. Stability Support is the right entry point because the window for a deliberate process has closed and what happens in the next few weeks will determine what's possible after that.";
   }
@@ -376,120 +350,103 @@ function buildRecommendationRationale(summary, inputData) {
   }
   return null;
 }
-
 // ── DOCUMENT ─────────────────────────────────────────────────────────────────
 export function DiagnosticDocument({ summary, inputData }) {
   const { total, monthlyBurn, executionGap, state, recommendation, resolvedTier } = summary;
-
-  const synthesis          = buildSynthesis(summary, inputData);
+  const synthesis           = buildSynthesis(summary, inputData);
   const inferredObservation = buildInferredObservation(summary, inputData);
-  const rationale          = buildRecommendationRationale(summary, inputData);
-
+  const rationale           = buildRecommendationRationale(summary, inputData);
   const monthlyRecovery = Math.round(monthlyBurn * 0.10);
   const annualRecovery  = monthlyRecovery * 12;
   const returnMultiple  = recommendation.fee
     ? (annualRecovery / recommendation.fee).toFixed(1)
     : null;
-
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={{ flex: 1, paddingBottom: 36 }}>
-
-        {/* Watermark */}
-        <Text style={styles.watermark}>Confidential // Record v3.1</Text>
-
-        {/* ── 1. VERDICT ── */}
-        <View style={styles.section}>
-          <Text style={styles.label}>Institutional State</Text>
-          <Text style={styles.verdictTitle}>{state.label}.</Text>
-          <Text style={styles.verdictDesc}>{state.desc}</Text>
-        </View>
-
-        <View style={styles.divider} />
-
-        {/* ── 2. COST FIGURE ── */}
-        <View style={styles.section}>
-          <Text style={styles.labelMuted}>Annual Institutional Cost</Text>
-          <View style={{ minHeight: 80 }}>
-            <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
+          {/* Watermark */}
+          <Text style={styles.watermark}>Confidential // Record v3.1</Text>
+          {/* ── 1. VERDICT ── */}
+          <View style={styles.section}>
+            <Text style={styles.label}>Institutional State</Text>
+            <Text style={styles.verdictTitle}>{state.label}.</Text>
+            <Text style={styles.verdictDesc}>{state.desc}</Text>
           </View>
-          <View style={styles.costFigureRow}>
-            <View style={styles.costFigureItem}>
-              <Text style={styles.labelMuted}>Monthly Burn</Text>
-              <Text style={styles.costFigureValue}>{fmt(monthlyBurn)}</Text>
+          <View style={styles.divider} />
+          {/* ── 2. COST FIGURE ── */}
+          <View style={styles.section}>
+            <Text style={styles.labelMuted}>Annual Institutional Cost</Text>
+            <View style={{ minHeight: 80 }}>
+              <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
             </View>
-            {executionGap > 0 && (
+            <View style={styles.costFigureRow}>
               <View style={styles.costFigureItem}>
-                <Text style={styles.labelMuted}>Execution Gap</Text>
-                <Text style={styles.costFigureValueNeutral}>{fmt(executionGap)}</Text>
+                <Text style={styles.labelMuted}>Monthly Burn</Text>
+                <Text style={styles.costFigureValue}>{fmt(monthlyBurn)}</Text>
               </View>
-            )}
+              {executionGap > 0 && (
+                <View style={styles.costFigureItem}>
+                  <Text style={styles.labelMuted}>Execution Gap</Text>
+                  <Text style={styles.costFigureValueNeutral}>{fmt(executionGap)}</Text>
+                </View>
+              )}
+            </View>
           </View>
-        </View>
-
-        <View style={styles.divider} />
-
-        {/* ── 3. ADVISOR SYNTHESIS ── */}
-        <View style={styles.section}>
-          <Text style={styles.label}>Advisor Synthesis</Text>
-          <Text style={styles.body}>{synthesis}</Text>
-        </View>
-
-        {/* ── 4. ADVISOR INFERENCE (conditional) ── */}
-        {inferredObservation ? (
+          <View style={styles.divider} />
+          {/* ── 3. ADVISOR SYNTHESIS ── */}
           <View style={styles.section}>
-            <View style={styles.labelRow}>
-              <Text style={styles.label}>Advisor Inference</Text>
-              <View style={styles.labelRule} />
+            <Text style={styles.label}>Advisor Synthesis</Text>
+            <Text style={styles.body}>{synthesis}</Text>
+          </View>
+          {/* ── 4. ADVISOR INFERENCE (conditional) ── */}
+          {inferredObservation ? (
+            <View style={styles.section}>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>Advisor Inference</Text>
+                <View style={styles.labelRule} />
+              </View>
+              <Text style={styles.bodyMuted}>{inferredObservation}</Text>
             </View>
-            <Text style={styles.bodyMuted}>{inferredObservation}</Text>
-          </View>
-        ) : null}
-
-        <View style={styles.divider} />
-
-        {/* ── 5. RECOMMENDED ENGAGEMENT ── */}
-        <View style={styles.section}>
-          <Text style={styles.label}>Recommended Engagement</Text>
-          <View style={styles.engagementBox}>
-            <Text style={styles.engagementName}>{recommendation.name}</Text>
-            <Text style={styles.engagementOutcome}>{recommendation.outcome}</Text>
-          </View>
-        </View>
-
-        {/* ── 6. WHY THIS ENGAGEMENT (conditional) ── */}
-        {rationale ? (
+          ) : null}
+          <View style={styles.divider} />
+          {/* ── 5. RECOMMENDED ENGAGEMENT ── */}
           <View style={styles.section}>
-            <View style={styles.labelRow}>
-              <Text style={styles.label}>Why This Engagement</Text>
-              <View style={styles.labelRule} />
-            </View>
-            <Text style={styles.body}>{rationale}</Text>
-          </View>
-        ) : null}
-
-        <View style={styles.divider} />
-
-        {/* ── 7. THE CASE FOR ACTION ── */}
-        <View style={styles.sectionLast}>
-          <Text style={styles.label}>The Case for Action</Text>
-          <View style={styles.caseGrid}>
-            <View style={styles.caseCell}>
-              <Text style={styles.labelMuted}>Cost of Inaction // Per Year</Text>
-              <Text style={styles.caseCostNeutral}>{fmt(total)}</Text>
-              <Text style={styles.caseNote}>Confirmed by this diagnostic</Text>
-            </View>
-            <View style={styles.caseCellBottom}>
-              <Text style={styles.labelMuted}>Cost of Resolution // {recommendation.name}</Text>
-              <Text style={styles.caseCostAccent}>{recommendation.feeLabel}</Text>
-              {returnMultiple ? (
-                <Text style={styles.caseNote}>{returnMultiple}x return on a 10% friction reduction</Text>
-              ) : null}
+            <Text style={styles.label}>Recommended Engagement</Text>
+            <View style={styles.engagementBox}>
+              <Text style={styles.engagementName}>{recommendation.name}</Text>
+              <Text style={styles.engagementOutcome}>{recommendation.outcome}</Text>
             </View>
           </View>
-        </View>
-
+          {/* ── 6. WHY THIS ENGAGEMENT (conditional) ── */}
+          {rationale ? (
+            <View style={styles.section}>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>Why This Engagement</Text>
+                <View style={styles.labelRule} />
+              </View>
+              <Text style={styles.body}>{rationale}</Text>
+            </View>
+          ) : null}
+          <View style={styles.divider} />
+          {/* ── 7. THE CASE FOR ACTION ── */}
+          <View style={styles.sectionLast}>
+            <Text style={styles.label}>The Case for Action</Text>
+            <View style={styles.caseGrid}>
+              <View style={styles.caseCell}>
+                <Text style={styles.labelMuted}>Cost of Inaction // Per Year</Text>
+                <Text style={styles.caseCostNeutral}>{fmt(total)}</Text>
+                <Text style={styles.caseNote}>Confirmed by this diagnostic</Text>
+              </View>
+              <View style={styles.caseCellBottom}>
+                <Text style={styles.labelMuted}>Cost of Resolution // {recommendation.name}</Text>
+                <Text style={styles.caseCostAccent}>{recommendation.feeLabel}</Text>
+                {returnMultiple ? (
+                  <Text style={styles.caseNote}>{returnMultiple}x return on a 10% friction reduction</Text>
+                ) : null}
+              </View>
+            </View>
+          </View>
         </View>
       </Page>
     </Document>
