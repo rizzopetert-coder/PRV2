@@ -9,7 +9,9 @@ import {
 
 /**
  * StewardshipPanel // Principal Resolution
- * Cycle button (click) + Settings panel (gear icon).
+ * Two-sided accordion trigger: palette side ← [toggle] → settings side.
+ * Desktop (hover capable): expands on mouseenter, collapses on mouseleave.
+ * Mobile (touch): tap the center toggle to expand/collapse.
  * Default theme: slate (Boardroom).
  * Font scaling with corrected type handling.
  */
@@ -57,9 +59,21 @@ const DEFAULT_FONT_SIZE = 100;
 
 export default function StewardshipPanel() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [canHover, setCanHover] = useState(false);
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
   const initialized = useRef(false);
+
+  // ─── Detect hover-capable pointer (mouse/trackpad, not touch) ─────────────
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+    setCanHover(mq.matches);
+    const handler = (e) => setCanHover(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   // ─── Persist & Apply ───────────────────────────────────────────────────────
 
@@ -111,48 +125,124 @@ export default function StewardshipPanel() {
     return () => window.removeEventListener('keydown', handler);
   }, [isOpen]);
 
+  // ─── Shared spring config ──────────────────────────────────────────────────
+
+  const accordionSpring = { type: 'spring', damping: 30, stiffness: 260 };
+
   return (
     <>
-      {/* ── TRIGGER CLUSTER ─────────────────────────────────────── */}
-      <div className="fixed bottom-10 right-10 z-[110] flex items-center gap-2">
-
-        {/* CYCLE BUTTON — primary action */}
-        <motion.button
-          onClick={cycleTheme}
-          whileTap={{ scale: 0.93 }}
-          aria-label={`Current theme: ${currentTheme.label}. Click to cycle.`}
-          className="flex items-center gap-3 px-5 py-3.5 bg-brand-bg/80 border border-brand-border backdrop-blur-xl shadow-2xl hover:border-brand-accent transition-all duration-300 group"
+      {/* ── TRIGGER CLUSTER — two-sided accordion ───────────────── */}
+      <div className="fixed bottom-10 right-10 z-[110]">
+        <motion.div
+          layout
+          transition={accordionSpring}
+          onMouseEnter={() => { if (canHover) setIsExpanded(true); }}
+          onMouseLeave={() => { if (canHover) setIsExpanded(false); }}
+          className="flex items-stretch bg-brand-bg/80 border border-brand-border backdrop-blur-xl shadow-2xl"
         >
-          {/* Live swatch dots */}
-          <div className="flex items-center gap-1">
-            {currentTheme.swatch.map((color, i) => (
-              <span
-                key={i}
-                className="w-2 h-2 rounded-full transition-all duration-500"
-                style={{ backgroundColor: color }}
-              />
-            ))}
-          </div>
-          <div className="text-brand-text group-hover:text-brand-accent transition-colors">
-            {currentTheme.icon}
-          </div>
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-brand-muted group-hover:text-brand-text transition-colors font-bold">
-            {currentTheme.label}
-          </span>
-        </motion.button>
 
-        {/* GEAR ICON — opens the full panel */}
-        <motion.button
-          onClick={() => setIsOpen(true)}
-          whileTap={{ scale: 0.93 }}
-          aria-label="Open stewardship panel"
-          className="p-3.5 bg-brand-bg/80 border border-brand-border backdrop-blur-xl shadow-2xl hover:border-brand-accent transition-all duration-300 group"
-        >
-          <Settings
-            size={16}
-            className="text-brand-muted group-hover:text-brand-accent transition-colors duration-300 group-hover:rotate-90 transition-transform"
-          />
-        </motion.button>
+          {/* ── LEFT SIDE: Color palette / cycle ── */}
+          <AnimatePresence initial={false}>
+            {isExpanded && (
+              <motion.div
+                key="palette"
+                initial={{ maxWidth: 0, opacity: 0 }}
+                animate={{ maxWidth: 280, opacity: 1 }}
+                exit={{ maxWidth: 0, opacity: 0 }}
+                transition={accordionSpring}
+                className="overflow-hidden shrink-0"
+              >
+                <button
+                  onClick={cycleTheme}
+                  aria-label={`Current theme: ${currentTheme.label}. Click to cycle.`}
+                  className="flex items-center gap-3 px-5 py-3.5 hover:bg-brand-accent/5 transition-colors border-r border-brand-border whitespace-nowrap group h-full"
+                >
+                  <div className="flex items-center gap-1">
+                    {currentTheme.swatch.map((color, i) => (
+                      <span
+                        key={i}
+                        className="w-2 h-2 rounded-full transition-all duration-500"
+                        style={{ backgroundColor: color }}
+                      />
+                    ))}
+                  </div>
+                  <div className="text-brand-text group-hover:text-brand-accent transition-colors">
+                    {currentTheme.icon}
+                  </div>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-brand-muted group-hover:text-brand-text transition-colors font-bold">
+                    {currentTheme.label}
+                  </span>
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* ── CENTER: Toggle (tap on mobile; purely visual anchor on desktop) ── */}
+          <motion.button
+            layout
+            onClick={() => { if (!canHover) setIsExpanded((v) => !v); }}
+            whileTap={{ scale: 0.91 }}
+            aria-label={isExpanded ? 'Collapse controls' : 'Expand theme and accessibility controls'}
+            className="px-3.5 py-3.5 flex items-center justify-center hover:bg-brand-accent/5 transition-colors shrink-0"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {isExpanded ? (
+                <motion.span
+                  key="close"
+                  initial={{ opacity: 0, rotate: -45 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: 45 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <X size={13} className="text-brand-muted" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="swatches"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className="flex items-center gap-0.5"
+                >
+                  {currentTheme.swatch.map((color, i) => (
+                    <span
+                      key={i}
+                      className="w-1.5 h-1.5 rounded-full transition-colors duration-500"
+                      style={{ backgroundColor: color }}
+                    />
+                  ))}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
+
+          {/* ── RIGHT SIDE: Settings / accessibility ── */}
+          <AnimatePresence initial={false}>
+            {isExpanded && (
+              <motion.div
+                key="settings"
+                initial={{ maxWidth: 0, opacity: 0 }}
+                animate={{ maxWidth: 80, opacity: 1 }}
+                exit={{ maxWidth: 0, opacity: 0 }}
+                transition={accordionSpring}
+                className="overflow-hidden shrink-0"
+              >
+                <button
+                  onClick={() => { setIsOpen(true); setIsExpanded(false); }}
+                  aria-label="Open stewardship panel"
+                  className="p-3.5 flex items-center justify-center border-l border-brand-border hover:bg-brand-accent/5 transition-colors group h-full whitespace-nowrap"
+                >
+                  <Settings
+                    size={16}
+                    className="text-brand-muted group-hover:text-brand-accent transition-colors duration-300"
+                  />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+        </motion.div>
       </div>
 
       {/* ── STEWARDSHIP PANEL ───────────────────────────────────── */}
