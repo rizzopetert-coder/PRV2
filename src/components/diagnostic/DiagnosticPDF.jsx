@@ -1,3 +1,6 @@
+Diagnosticpdf · JSX
+Copy
+
 import React from 'react';
 import { Document, Page, View, Text, StyleSheet, Font } from '@react-pdf/renderer';
 import {
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     fontSize: 48,
     color: T.text,
-    lineHeight: 2,
+    lineHeight: 1.4,
     marginBottom: 16,
   },
   costFigureRow: { flexDirection: 'row', gap: 32, marginTop: 4 },
@@ -381,9 +384,9 @@ function buildRecommendationRationale(summary, inputData) {
 export function DiagnosticDocument({ summary, inputData }) {
   const { total, monthlyBurn, executionGap, state, recommendation, resolvedTier } = summary;
 
-  const synthesis          = buildSynthesis(summary, inputData);
+  const synthesis           = buildSynthesis(summary, inputData);
   const inferredObservation = buildInferredObservation(summary, inputData);
-  const rationale          = buildRecommendationRationale(summary, inputData);
+  const rationale           = buildRecommendationRationale(summary, inputData);
 
   const monthlyRecovery = Math.round(monthlyBurn * 0.10);
   const annualRecovery  = monthlyRecovery * 12;
@@ -396,99 +399,99 @@ export function DiagnosticDocument({ summary, inputData }) {
       <Page size="A4" style={styles.page}>
         <View style={{ flex: 1, paddingBottom: 36 }}>
 
-        {/* Watermark */}
-        <Text style={styles.watermark}>Confidential // Record v3.1</Text>
+          {/* Watermark */}
+          <Text style={styles.watermark}>Confidential // Record v3.1</Text>
 
-        {/* ── 1. VERDICT ── */}
-        <View style={styles.section}>
-          <Text style={styles.label}>Institutional State</Text>
-          <Text style={styles.verdictTitle}>{state.label}.</Text>
-          <Text style={styles.verdictDesc}>{state.desc}</Text>
-        </View>
-
-        <View style={styles.divider} />
-
-        {/* ── 2. COST FIGURE ── */}
-        <View style={styles.section}>
-          <Text style={styles.labelMuted}>Annual Institutional Cost</Text>
-          <View style={{ minHeight: 80 }}>
-            <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
+          {/* ── 1. VERDICT ── */}
+          <View style={styles.section}>
+            <Text style={styles.label}>Institutional State</Text>
+            <Text style={styles.verdictTitle}>{state.label}.</Text>
+            <Text style={styles.verdictDesc}>{state.desc}</Text>
           </View>
-          <View style={styles.costFigureRow}>
-            <View style={styles.costFigureItem}>
-              <Text style={styles.labelMuted}>Monthly Burn</Text>
-              <Text style={styles.costFigureValue}>{fmt(monthlyBurn)}</Text>
+
+          <View style={styles.divider} />
+
+          {/* ── 2. COST FIGURE ── */}
+          <View style={styles.section}>
+            <Text style={styles.labelMuted}>Annual Institutional Cost</Text>
+            <View style={{ minHeight: 80 }}>
+              <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
             </View>
-            {executionGap > 0 && (
+            <View style={styles.costFigureRow}>
               <View style={styles.costFigureItem}>
-                <Text style={styles.labelMuted}>Execution Gap</Text>
-                <Text style={styles.costFigureValueNeutral}>{fmt(executionGap)}</Text>
+                <Text style={styles.labelMuted}>Monthly Burn</Text>
+                <Text style={styles.costFigureValue}>{fmt(monthlyBurn)}</Text>
               </View>
-            )}
+              {executionGap > 0 && (
+                <View style={styles.costFigureItem}>
+                  <Text style={styles.labelMuted}>Execution Gap</Text>
+                  <Text style={styles.costFigureValueNeutral}>{fmt(executionGap)}</Text>
+                </View>
+              )}
+            </View>
           </View>
-        </View>
 
-        <View style={styles.divider} />
+          <View style={styles.divider} />
 
-        {/* ── 3. ADVISOR SYNTHESIS ── */}
-        <View style={styles.section}>
-          <Text style={styles.label}>Advisor Synthesis</Text>
-          <Text style={styles.body}>{synthesis}</Text>
-        </View>
-
-        {/* ── 4. ADVISOR INFERENCE (conditional) ── */}
-        {inferredObservation ? (
+          {/* ── 3. ADVISOR SYNTHESIS ── */}
           <View style={styles.section}>
-            <View style={styles.labelRow}>
-              <Text style={styles.label}>Advisor Inference</Text>
-              <View style={styles.labelRule} />
+            <Text style={styles.label}>Advisor Synthesis</Text>
+            <Text style={styles.body}>{synthesis}</Text>
+          </View>
+
+          {/* ── 4. ADVISOR INFERENCE (conditional) ── */}
+          {inferredObservation ? (
+            <View style={styles.section}>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>Advisor Inference</Text>
+                <View style={styles.labelRule} />
+              </View>
+              <Text style={styles.bodyMuted}>{inferredObservation}</Text>
             </View>
-            <Text style={styles.bodyMuted}>{inferredObservation}</Text>
-          </View>
-        ) : null}
+          ) : null}
 
-        <View style={styles.divider} />
+          <View style={styles.divider} />
 
-        {/* ── 5. RECOMMENDED ENGAGEMENT ── */}
-        <View style={styles.section}>
-          <Text style={styles.label}>Recommended Engagement</Text>
-          <View style={styles.engagementBox}>
-            <Text style={styles.engagementName}>{recommendation.name}</Text>
-            <Text style={styles.engagementOutcome}>{recommendation.outcome}</Text>
-          </View>
-        </View>
-
-        {/* ── 6. WHY THIS ENGAGEMENT (conditional) ── */}
-        {rationale ? (
+          {/* ── 5. RECOMMENDED ENGAGEMENT ── */}
           <View style={styles.section}>
-            <View style={styles.labelRow}>
-              <Text style={styles.label}>Why This Engagement</Text>
-              <View style={styles.labelRule} />
-            </View>
-            <Text style={styles.body}>{rationale}</Text>
-          </View>
-        ) : null}
-
-        <View style={styles.divider} />
-
-        {/* ── 7. THE CASE FOR ACTION ── */}
-        <View style={styles.sectionLast}>
-          <Text style={styles.label}>The Case for Action</Text>
-          <View style={styles.caseGrid}>
-            <View style={styles.caseCell}>
-              <Text style={styles.labelMuted}>Cost of Inaction // Per Year</Text>
-              <Text style={styles.caseCostNeutral}>{fmt(total)}</Text>
-              <Text style={styles.caseNote}>Confirmed by this diagnostic</Text>
-            </View>
-            <View style={styles.caseCellBottom}>
-              <Text style={styles.labelMuted}>Cost of Resolution // {recommendation.name}</Text>
-              <Text style={styles.caseCostAccent}>{recommendation.feeLabel}</Text>
-              {returnMultiple ? (
-                <Text style={styles.caseNote}>{returnMultiple}x return on a 10% friction reduction</Text>
-              ) : null}
+            <Text style={styles.label}>Recommended Engagement</Text>
+            <View style={styles.engagementBox}>
+              <Text style={styles.engagementName}>{recommendation.name}</Text>
+              <Text style={styles.engagementOutcome}>{recommendation.outcome}</Text>
             </View>
           </View>
-        </View>
+
+          {/* ── 6. WHY THIS ENGAGEMENT (conditional) ── */}
+          {rationale ? (
+            <View style={styles.section}>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>Why This Engagement</Text>
+                <View style={styles.labelRule} />
+              </View>
+              <Text style={styles.body}>{rationale}</Text>
+            </View>
+          ) : null}
+
+          <View style={styles.divider} />
+
+          {/* ── 7. THE CASE FOR ACTION ── */}
+          <View style={styles.sectionLast}>
+            <Text style={styles.label}>The Case for Action</Text>
+            <View style={styles.caseGrid}>
+              <View style={styles.caseCell}>
+                <Text style={styles.labelMuted}>Cost of Inaction // Per Year</Text>
+                <Text style={styles.caseCostNeutral}>{fmt(total)}</Text>
+                <Text style={styles.caseNote}>Confirmed by this diagnostic</Text>
+              </View>
+              <View style={styles.caseCellBottom}>
+                <Text style={styles.labelMuted}>Cost of Resolution // {recommendation.name}</Text>
+                <Text style={styles.caseCostAccent}>{recommendation.feeLabel}</Text>
+                {returnMultiple ? (
+                  <Text style={styles.caseNote}>{returnMultiple}x return on a 10% friction reduction</Text>
+                ) : null}
+              </View>
+            </View>
+          </View>
 
         </View>
       </Page>
