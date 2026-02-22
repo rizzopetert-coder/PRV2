@@ -86,7 +86,7 @@ export default function StewardshipPanel() {
   const applyFontSize = useCallback((percent) => {
     const clamped = Math.min(150, Math.max(80, Number(percent)));
     setFontSize(clamped);
-    document.documentElement.style.fontSize = `${(clamped / 100) * 20}px`;
+    document.documentElement.style.setProperty('--font-scale', clamped / 100);
     localStorage.setItem('pr-font-size', String(clamped));
   }, []);
 

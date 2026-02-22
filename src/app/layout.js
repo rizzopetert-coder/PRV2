@@ -96,6 +96,8 @@ export default function RootLayout({ children }) {
               (function() {
                 const theme = localStorage.getItem('pr-theme') || 'harbor';
                 document.documentElement.setAttribute('data-theme', theme);
+                const scale = parseFloat(localStorage.getItem('pr-font-size') || '100') / 100;
+                document.documentElement.style.setProperty('--font-scale', scale);
               })()
             `,
           }}
