@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, RotateCcw } from 'lucide-react';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { pdf } from '@react-pdf/renderer';
+import { DiagnosticDocument } from './DiagnosticPDF';
 import {
   INDUSTRY_BENCHMARKS,
   ORG_STAGES,
@@ -209,7 +209,6 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
     state, recommendation, resolvedTier,
   } = summary;
 
-  const reportRef       = useRef(null);
   const synthesis       = useMemo(() => buildSynthesis(summary, inputData), [summary, inputData]);
   const monthlyRecovery = Math.round(monthlyBurn * 0.10);
   const annualRecovery  = monthlyRecovery * 12;
@@ -235,7 +234,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
           total:               total,
           context:             summary.context,
           email:               email,
-          Opt_Send_Record:     optSendRecord,
+          optSendRecord:       optSendRecord,
           optIntelligence:     optIntelligence,
           prior_attempt:       inputData.priorAttempt,
           personnel_risk:      inputData.personnelRisk,
@@ -250,79 +249,16 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
   };
 
   const downloadPDF = async () => {
-    const element = reportRef.current;
-    if (!element) return;
+    const blob = await pdf(
+      <DiagnosticDocument summary={summary} inputData={inputData} />
+    ).toBlob();
 
-    const prev = {
-      overflow:  element.style.overflow,
-      height:    element.style.height,
-      maxHeight: element.style.maxHeight,
-    };
-    element.style.overflow  = 'visible';
-    element.style.height    = 'auto';
-    element.style.maxHeight = 'none';
-
-    const canvas = await html2canvas(element, {
-      scale:           2,
-      backgroundColor: '#FAF9F6',
-      useCORS:         true,
-      logging:         false,
-      scrollY:         -window.scrollY,
-      windowWidth:     800,
-      windowHeight:    element.scrollHeight,
-      onclone: (clonedDoc) => {
-        const el = clonedDoc.querySelector('[data-report-container]');
-        if (el) {
-          el.style.width      = '800px';
-          el.style.padding    = '48px';
-          el.style.height     = 'auto';
-          el.style.maxHeight  = 'none';
-          el.style.overflow   = 'visible';
-          el.style.position   = 'relative';
-          el.style.background = '#FAF9F6';
-          el.style.color      = '#1C1C1C';
-          el.querySelectorAll('*').forEach(node => {
-            node.style.color = '#1C1C1C';
-            node.style.backgroundColor = 'transparent';
-            node.style.borderColor = '#D0CBC2';
-          });
-          el.querySelectorAll('[class*="text-brand-accent"]').forEach(node => {
-            node.style.color = '#FF4500';
-          });
-          el.style.background = '#FAF9F6';
-          el.querySelectorAll('[class*="select-none"]').forEach(node => {
-            node.style.color = 'rgba(28,28,28,0.08)';
-          });
-          el.querySelectorAll('[class*="font-fjalla"]').forEach(node => {
-            node.style.fontFamily = 'Georgia, serif';
-          });
-        }
-      },
-    });
-
-    element.style.overflow  = prev.overflow;
-    element.style.height    = prev.height;
-    element.style.maxHeight = prev.maxHeight;
-
-    const imgData   = canvas.toDataURL('image/png');
-    const pdf       = new jsPDF('p', 'mm', 'a4');
-    const pdfWidth  = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-
-    let heightLeft = imgHeight;
-    let position   = 0;
-    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-    heightLeft -= pdfHeight;
-
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-      heightLeft -= pdfHeight;
-    }
-
-    pdf.save(`Principal_Resolution_Record_${Date.now()}.pdf`);
+    const url  = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href     = url;
+    link.download = `Principal_Resolution_Record_${Date.now()}.pdf`;
+    link.click();
+    URL.revokeObjectURL(url);
 
     if (dispatchUrl) {
       fetch('/api/diagnostic-dispatch', {
@@ -347,7 +283,6 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
 
       {/* ── CAPTURE TARGET ─────────────────────────────── */}
       <div
-        ref={reportRef}
         data-report-container
         className="bg-brand-bg border border-brand-border p-6 md:p-10 lg:p-16 shadow-2xl relative transition-colors duration-700"
       >
