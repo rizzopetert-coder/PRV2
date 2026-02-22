@@ -10,7 +10,8 @@ import {
 /**
  * StewardshipPanel // Principal Resolution
  * Two-sided accordion trigger: palette side ← [toggle] → settings side.
- * Collapsed by default (small footprint on mobile).
+ * Desktop (hover capable): expands on mouseenter, collapses on mouseleave.
+ * Mobile (touch): tap the center toggle to expand/collapse.
  * Default theme: slate (Boardroom).
  * Font scaling with corrected type handling.
  */
@@ -59,9 +60,20 @@ const DEFAULT_FONT_SIZE = 100;
 export default function StewardshipPanel() {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [canHover, setCanHover] = useState(false);
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
   const initialized = useRef(false);
+
+  // ─── Detect hover-capable pointer (mouse/trackpad, not touch) ─────────────
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+    setCanHover(mq.matches);
+    const handler = (e) => setCanHover(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   // ─── Persist & Apply ───────────────────────────────────────────────────────
 
@@ -124,6 +136,8 @@ export default function StewardshipPanel() {
         <motion.div
           layout
           transition={accordionSpring}
+          onMouseEnter={() => { if (canHover) setIsExpanded(true); }}
+          onMouseLeave={() => { if (canHover) setIsExpanded(false); }}
           className="flex items-stretch bg-brand-bg/80 border border-brand-border backdrop-blur-xl shadow-2xl"
         >
 
@@ -163,10 +177,10 @@ export default function StewardshipPanel() {
             )}
           </AnimatePresence>
 
-          {/* ── CENTER: Toggle (always visible) ── */}
+          {/* ── CENTER: Toggle (tap on mobile; purely visual anchor on desktop) ── */}
           <motion.button
             layout
-            onClick={() => setIsExpanded((v) => !v)}
+            onClick={() => { if (!canHover) setIsExpanded((v) => !v); }}
             whileTap={{ scale: 0.91 }}
             aria-label={isExpanded ? 'Collapse controls' : 'Expand theme and accessibility controls'}
             className="px-3.5 py-3.5 flex items-center justify-center hover:bg-brand-accent/5 transition-colors shrink-0"
