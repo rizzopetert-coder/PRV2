@@ -1,12 +1,5 @@
 import React from 'react';
 import { Document, Page, View, Text, StyleSheet, Font } from '@react-pdf/renderer';
-
-Font.register({
-  family: 'Roboto',
-  fonts: [
-    { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.ttf', fontWeight: 700 },
-  ],
-});
 import {
   INDUSTRY_BENCHMARKS,
   ORG_STAGES,
@@ -14,6 +7,13 @@ import {
   FRICTION_LOCATIONS,
   AVOIDANCE_MECHANISMS,
 } from '../../lib/diagnostic-logic';
+
+Font.register({
+  family: 'Roboto',
+  fonts: [
+    { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.ttf', fontWeight: 700 },
+  ],
+});
 
 // ── DESIGN TOKENS ────────────────────────────────────────────────────────────
 const T = {
