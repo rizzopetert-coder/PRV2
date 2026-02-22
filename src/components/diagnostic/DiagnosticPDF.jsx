@@ -1,5 +1,12 @@
 import React from 'react';
-import { Document, Page, View, Text, StyleSheet } from '@react-pdf/renderer';
+import { Document, Page, View, Text, StyleSheet, Font } from '@react-pdf/renderer';
+
+Font.register({
+  family: 'Roboto',
+  fonts: [
+    { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.ttf', fontWeight: 700 },
+  ],
+});
 import {
   INDUSTRY_BENCHMARKS,
   ORG_STAGES,
@@ -21,7 +28,6 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: T.bg,
     paddingTop:        36,
-    paddingBottom:     36,
     paddingHorizontal: 52,
     fontFamily: 'Times-Roman',
     color: T.text,
@@ -92,7 +98,8 @@ const styles = StyleSheet.create({
 
   // ── cost figure ──
   costFigureLarge: {
-    fontFamily: 'Helvetica-Bold',
+    fontFamily: 'Roboto',
+    fontWeight: 700,
     fontSize: 48,
     color: T.text,
     lineHeight: 2,
@@ -386,6 +393,7 @@ export function DiagnosticDocument({ summary, inputData }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
+        <View style={{ flex: 1, paddingBottom: 36 }}>
 
         {/* Watermark */}
         <Text style={styles.watermark}>Confidential // Record v3.1</Text>
@@ -479,6 +487,7 @@ export function DiagnosticDocument({ summary, inputData }) {
           </View>
         </View>
 
+        </View>
       </Page>
     </Document>
   );
