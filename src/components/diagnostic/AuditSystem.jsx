@@ -284,8 +284,8 @@ export default function AuditSystem() {
   };
 
   const canProceed = () => {
-    if (step === STEPS.CONTEXT)   return data.industry && data.orgStage && data.headcountRange && data.leadershipTenure;
-    if (step === STEPS.PERSONNEL) return data.personnel.reduce((a, p) => a + p.count, 0) > 0;
+    if (step === STEPS.CONTEXT)   return data.industry && data.orgStage && data.leadershipTenure;
+    if (step === STEPS.PERSONNEL) return data.headcountRange && data.personnel.reduce((a, p) => a + p.count, 0) > 0;
     if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMechanism && data.priorAttempt && data.personnelRisk && data.resolutionBlockage;
     if (step === STEPS.FINANCIAL) return true;
     return false;
@@ -512,33 +512,6 @@ export default function AuditSystem() {
 
                   <div className="space-y-3">
                     <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
-                      Approximately how many people work in your organization?
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Estimated total headcount"
-                      value={data.headcountRange ? data.headcountDisplay || '' : ''}
-                      onChange={(e) => {
-                        const raw = e.target.value.replace(/[^0-9]/g, '');
-                        const num = parseInt(raw, 10);
-                        const bucket = !raw ? ''
-                          : num < 25  ? 'MICRO'
-                          : num < 100 ? 'SMALL'
-                          : num < 500 ? 'MID'
-                          : 'LARGE';
-                        setData(prev => ({
-                          ...prev,
-                          headcountRange: bucket,
-                          headcountDisplay: raw,
-                        }));
-                      }}
-                      className="w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
-                      style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
-                    />
-                  </div>
-
-                  <div className="space-y-3">
-                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                       How long has current leadership been in place?
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -584,13 +557,41 @@ export default function AuditSystem() {
                     >
                       {STEP_TITLES[STEPS.PERSONNEL]}
                     </h3>
-                    <div className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold mt-4 space-y-3">
-                      <p>This diagnostic measures what leadership friction is costing your organization. Enter the number of people in each role category for the group this assessment is about.</p>
-                      <p>Not sure how to scope it? Three common starting points:</p>
-                      <p>-- A pure executive team: 3 Executives, 0 Managers, 0 Staff</p>
-                      <p>-- A department with its leadership: 1 Executive, 2 Managers, 8 Staff</p>
-                      <p>-- A cross-functional group: 2 Executives, 4 Managers, 0 Staff</p>
-                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
+                      Approximately how many people work in your organization?
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Estimated total headcount"
+                      value={data.headcountRange ? data.headcountDisplay || '' : ''}
+                      onChange={(e) => {
+                        const raw = e.target.value.replace(/[^0-9]/g, '');
+                        const num = parseInt(raw, 10);
+                        const bucket = !raw ? ''
+                          : num < 25  ? 'MICRO'
+                          : num < 100 ? 'SMALL'
+                          : num < 500 ? 'MID'
+                          : 'LARGE';
+                        setData(prev => ({
+                          ...prev,
+                          headcountRange: bucket,
+                          headcountDisplay: raw,
+                        }));
+                      }}
+                      className="w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
+                      style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
+                    />
+                  </div>
+
+                  <div className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold space-y-3">
+                    <p>This diagnostic measures what leadership friction is costing your organization. Enter the number of people in each role category for the group this assessment is about.</p>
+                    <p>Not sure how to scope it? Three common starting points:</p>
+                    <p>-- A pure executive team: 3 Executives, 0 Managers, 0 Staff</p>
+                    <p>-- A department with its leadership: 1 Executive, 2 Managers, 8 Staff</p>
+                    <p>-- A cross-functional group: 2 Executives, 4 Managers, 0 Staff</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
