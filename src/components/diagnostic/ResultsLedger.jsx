@@ -18,7 +18,7 @@ import {
  * State label sync: IFTTT Multi-Signal Matrix.
  * buildSynthesis updated for sentence-style labels.
  * buildInferredObservation: v4.0 blocks added above legacy blocks.
- * buildRecommendationRationale: unchanged.
+ * buildRecommendationRationale: Gravity Override added (v4.1).
  */
 
 const formatCurrency = (val) =>
@@ -225,6 +225,10 @@ function buildRecommendationRationale(summary, inputData) {
   }
 
   if (tier === 'The Intervention') {
+    // Gravity Override: High-cost structural friction
+    if (summary.total > 1000000 && state.label.includes("structural")) {
+      return "The Intervention is the right entry point because the financial gravity of this situation has exceeded the window for a standard roadmap. At an annual cost of " + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(summary.total) + ", the roadmap phase represents an additional and unnecessary liability. We recommend moving directly to resolution.";
+    }
     if (personnelRisk === 'YES' && resolutionBlockage === 'KNOWN') {
       return `Based on what this diagnostic describes -- ${state.label.replace(/\.$/, '').toLowerCase()} in a ${INDUSTRY_BENCHMARKS[industry]?.label || industry} organization, with someone at risk of leaving and a decision the organization knows needs to happen -- The Intervention is the right entry point. The situation is already in motion. What's needed isn't a roadmap for addressing it. It's someone in the room to move it through.`;
     }
