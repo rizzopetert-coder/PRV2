@@ -278,11 +278,13 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
 
   // ── EMAIL CAPTURE STATE ──────────────────────────────────────
   const [email, setEmail]                     = useState('');
+  const [companyName, setCompanyName]         = useState('');
   const [optSendRecord, setOptSendRecord]     = useState(false);
   const [optIntelligence, setOptIntelligence] = useState(false);
   const [dispatched, setDispatched]           = useState(false);
 
   const handleEmailDispatch = async () => {
+    const resolvedCompany = companyName.trim() || email.split('@')[1] || '';
     try {
       await fetch('/api/diagnostic-dispatch', {
         method: 'POST',
@@ -294,6 +296,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
           total:               total,
           context:             summary.context,
           email:               email,
+          companyName:         resolvedCompany,
           optSendRecord:       optSendRecord,
           optIntelligence:     optIntelligence,
           prior_attempt:       inputData.priorAttempt,
@@ -582,6 +585,15 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
               Leave your email to receive this record directly -- and to hear from us when new Intelligence Memos are published.
             </p>
           </div>
+
+          <input
+            type="text"
+            placeholder="Company name (optional)"
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
+            className="w-full bg-transparent border-b border-brand-border py-3 font-serif italic text-brand-text placeholder:text-brand-muted focus:outline-none focus:border-brand-accent transition-colors"
+            style={{ fontSize: 'clamp(1rem, 1.5vw, 1.15rem)' }}
+          />
 
           <input
             type="email"
