@@ -8,6 +8,19 @@ import {
   AVOIDANCE_MECHANISMS,
 } from '../../lib/diagnostic-logic';
 Font.register({
+  family: 'Newsreader',
+  fonts: [
+    { src: '/fonts/Newsreader-Italic.ttf', fontStyle: 'italic' },
+  ],
+});
+Font.register({
+  family: 'SpaceMono',
+  fonts: [
+    { src: '/fonts/SpaceMono-Regular.ttf', fontWeight: 400 },
+    { src: '/fonts/SpaceMono-Bold.ttf', fontWeight: 700 },
+  ],
+});
+Font.register({
   family: 'Roboto',
   fonts: [
     { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.ttf', fontWeight: 700 },
@@ -27,7 +40,8 @@ const styles = StyleSheet.create({
     paddingTop:        36,
     paddingBottom:     36,
     paddingHorizontal: 52,
-    fontFamily: 'Times-Roman',
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
     color: T.text,
   },
   // ── watermark ──
@@ -36,7 +50,7 @@ const styles = StyleSheet.create({
     top: 40,
     right: 32,
     fontSize: 7,
-    fontFamily: 'Courier',
+    fontFamily: 'SpaceMono',
     color: T.text,
     opacity: 0.08,
     letterSpacing: 2,
@@ -47,33 +61,35 @@ const styles = StyleSheet.create({
   sectionLast: { marginBottom: 0 },
   // ── label / eyebrow ──
   label: {
-    fontFamily: 'Courier',
+    fontFamily: 'SpaceMono',
     fontSize: 8,
     letterSpacing: 2,
     textTransform: 'uppercase',
     color: T.accent,
-    fontWeight: 'bold',
+    fontWeight: 700,
     marginBottom: 8,
   },
   labelMuted: {
-    fontFamily: 'Courier',
+    fontFamily: 'SpaceMono',
     fontSize: 8,
     letterSpacing: 2,
     textTransform: 'uppercase',
     color: T.muted,
-    fontWeight: 'bold',
+    fontWeight: 700,
     marginBottom: 6,
   },
   // ── verdict ──
   verdictTitle: {
-    fontFamily: 'Times-Italic',
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
     fontSize: 52,
     color: T.text,
     lineHeight: 1,
     marginBottom: 14,
   },
   verdictDesc: {
-    fontFamily: 'Times-Italic',
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
     fontSize: 12,
     color: T.muted,
     lineHeight: 1.6,
@@ -100,18 +116,21 @@ const styles = StyleSheet.create({
   costFigureRow: { flexDirection: 'row', gap: 32, marginTop: 4 },
   costFigureItem: { flexDirection: 'column', gap: 4 },
   costFigureValue: {
-    fontFamily: 'Times-Italic',
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
     fontSize: 22,
     color: T.accent,
   },
   costFigureValueNeutral: {
-    fontFamily: 'Times-Italic',
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
     fontSize: 22,
     color: T.text,
   },
   // ── body text (synthesis / inference / rationale) ──
   body: {
-    fontFamily: 'Times-Italic',
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
     fontSize: 11,
     color: T.text,
     lineHeight: 1.65,
@@ -121,7 +140,8 @@ const styles = StyleSheet.create({
     maxWidth: 480,
   },
   bodyMuted: {
-    fontFamily: 'Times-Italic',
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
     fontSize: 10.5,
     color: T.muted,
     lineHeight: 1.65,
@@ -146,18 +166,19 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   engagementName: {
-    fontFamily: 'Times-Italic',
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
     fontSize: 22,
     color: T.text,
     marginBottom: 8,
   },
   engagementOutcome: {
-    fontFamily: 'Courier',
+    fontFamily: 'SpaceMono',
     fontSize: 7.5,
     letterSpacing: 1,
     textTransform: 'uppercase',
     color: T.accent,
-    fontWeight: 'bold',
+    fontWeight: 700,
     lineHeight: 1.5,
   },
   // ── case for action grid ──
@@ -175,24 +196,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF5F0',
   },
   caseCostNeutral: {
-    fontFamily: 'Times-Bold',
+    fontFamily: 'SpaceMono',
+    fontWeight: 700,
     fontSize: 28,
     color: T.text,
     lineHeight: 1,
   },
   caseCostAccent: {
-    fontFamily: 'Times-Bold',
+    fontFamily: 'SpaceMono',
+    fontWeight: 700,
     fontSize: 28,
     color: T.accent,
     lineHeight: 1,
   },
   caseNote: {
-    fontFamily: 'Courier',
+    fontFamily: 'SpaceMono',
     fontSize: 7.5,
     letterSpacing: 1,
     textTransform: 'uppercase',
     color: T.muted,
-    fontWeight: 'bold',
+    fontWeight: 700,
   },
 });
 // ── HELPERS ──────────────────────────────────────────────────────────────────
