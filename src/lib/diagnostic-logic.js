@@ -237,7 +237,11 @@ const resolveState = (data, leakRatio) => {
     frictionLocation,
     avoidanceMechanism,
   } = data;
-
+  // Rule 0 -- Financial Override (Stability Signal)
+  // If the math is this bad, no behavioral rule overrides it
+  if (leakRatio >= 0.25) {
+    return INSTITUTIONAL_STATES.TOTAL_FRICTION_COLLAPSE;
+  }
   // Rule 1 -- Priority Escalation (Blockage Signal)
   if (resolutionBlockage === 'ATTEMPTED' && priorAttempt === 'EXTERNAL') {
     return INSTITUTIONAL_STATES.INSTITUTIONAL_PROTECTION;
