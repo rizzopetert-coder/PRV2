@@ -568,10 +568,11 @@ export default function AuditSystem() {
                           : num < 500 ? 'MID'
                           : 'LARGE';
                         setData(prev => ({
-                          ...prev,
-                          headcountRange: bucket,
-                          headcountDisplay: raw,
-                        }));
+  ...prev,
+  headcountRange: bucket,
+  headcountDisplay: raw,
+  headcount: num || 0,
+}));
                       }}
                       className="w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
                       style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
