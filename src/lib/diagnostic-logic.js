@@ -282,9 +282,11 @@ const resolveTier = (financialTier, data) => {
     personnelRisk, resolutionBlockage, priorAttempt,
   } = data;
 
-  // Active blockage with failed prior attempt = most acute signal
+  // Financial severity at maximum overrides all behavioral signals
+  if (financialTier === 'STABILITY') return 'STABILITY';
+
+  // Active blockage with failed prior attempt = most acute behavioral signal
   if (resolutionBlockage === 'ATTEMPTED' && priorAttempt === 'EXTERNAL') {
-    if (financialTier === 'STABILITY') return 'STABILITY';
     return 'SAFE_HARBOR';
   }
 
@@ -411,7 +413,7 @@ export const calculateRealitySummary = (data) => {
       if (execCount > 4)                           stateKey = "RELATIONAL_FRICTION";
       else if (activeRevGap > activePayroll * 0.1) stateKey = "TALENT_HEMORRHAGE";
       else                                         stateKey = "CAFFEINE_CULTURE";
-    } else if (leakRatio < 0.35) {
+    } else if (leakRatio < 0.25) {
       if (cTax > 1.3)                                   stateKey = "INSTITUTIONAL_RIGIDITY";
       else if (execCount > 5)                           stateKey = "EXECUTIVE_EMBARGO";
       else if (activeStalledDrag > activePayroll * 0.1) stateKey = "STALLED_HEGEMONY";
