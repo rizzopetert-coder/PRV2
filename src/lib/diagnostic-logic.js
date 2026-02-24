@@ -238,8 +238,8 @@ const resolveState = (data, leakRatio) => {
     avoidanceMechanism,
   } = data;
   // Rule 0 -- Financial Override (Stability Signal)
-  // If the math is this bad, no behavioral rule overrides it
-  if (leakRatio >= 0.25) {
+  // 5% coordination tax is the institutional red line
+  if (leakRatio >= 0.05) {
     return INSTITUTIONAL_STATES.TOTAL_FRICTION_COLLAPSE;
   }
   // Rule 1 -- Priority Escalation (Blockage Signal)
@@ -288,6 +288,11 @@ const resolveTier = (financialTier, data) => {
 
   // Financial severity at maximum overrides all behavioral signals
   if (financialTier === 'STABILITY') return 'STABILITY';
+
+  // Behavioral collapse signal escalates to Stability regardless of financial tier
+  if (resolutionBlockage === 'ATTEMPTED' && priorAttempt === 'EXTERNAL' && personnelRisk === 'LOST') {
+    return 'STABILITY';
+  }
 
   // Active blockage with failed prior attempt = most acute behavioral signal
   if (resolutionBlockage === 'ATTEMPTED' && priorAttempt === 'EXTERNAL') {
@@ -409,16 +414,15 @@ export const calculateRealitySummary = (data) => {
 
   if (!diagnosedState) {
     let stateKey = "STRATEGIC_DRIFT";
-
-    if (leakRatio < 0.10) {
+    if (leakRatio < 0.01) {
       if (cTax > 1.2)                            stateKey = "PROCESS_PARALYSIS";
-      else if (leakRatio < 0.05 && cTax < 1.1)  stateKey = "SILO_ISOLATION";
+      else if (cTax < 1.1)                       stateKey = "SILO_ISOLATION";
       else                                        stateKey = "STAGNANT_STABILITY";
-    } else if (leakRatio < 0.20) {
+    } else if (leakRatio < 0.02) {
       if (execCount > 4)                           stateKey = "RELATIONAL_FRICTION";
       else if (activeRevGap > activePayroll * 0.1) stateKey = "TALENT_HEMORRHAGE";
       else                                         stateKey = "CAFFEINE_CULTURE";
-    } else if (leakRatio < 0.25) {
+    } else if (leakRatio < 0.05) {
       if (cTax > 1.3)                                   stateKey = "INSTITUTIONAL_RIGIDITY";
       else if (execCount > 5)                           stateKey = "EXECUTIVE_EMBARGO";
       else if (activeStalledDrag > activePayroll * 0.1) stateKey = "STALLED_HEGEMONY";
