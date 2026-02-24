@@ -67,34 +67,26 @@ const initialData = {
   isUnsureRevenue:       false,
 };
 
-// ── MEMOIZED PERSONNEL STEPPER ──────────────────────────────────
+// ── MEMOIZED PERSONNEL INPUT ──────────────────────────────────
 const PersonnelStepper = memo(({ tier, onUpdate }) => (
   <div className="p-8 border border-brand-border hover:border-brand-accent/50 transition-colors duration-300 flex flex-col items-center gap-6">
     <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold text-center leading-relaxed">
       {tier.label}
     </span>
-    <div className="flex items-center gap-6">
-      <button
-        type="button"
-        onPointerDown={(e) => { e.preventDefault(); onUpdate(tier.id, -1); }}
-        className="w-10 h-10 border border-brand-border text-brand-muted hover:text-brand-accent hover:border-brand-accent transition-colors duration-150 font-bold text-xl flex items-center justify-center select-none"
-      >
-        -
-      </button>
-      <span
-        className="font-serif text-brand-text w-10 text-center tabular-nums"
-        style={{ fontSize: 'clamp(2rem, 3vw, 2.8rem)' }}
-      >
-        {tier.count}
-      </span>
-      <button
-        type="button"
-        onPointerDown={(e) => { e.preventDefault(); onUpdate(tier.id, 1); }}
-        className="w-10 h-10 border border-brand-border text-brand-muted hover:text-brand-accent hover:border-brand-accent transition-colors duration-150 font-bold text-xl flex items-center justify-center select-none"
-      >
-        +
-      </button>
-    </div>
+    <input
+      type="text"
+      inputMode="numeric"
+      pattern="[0-9]*"
+      value={tier.count === 0 ? '' : tier.count}
+      placeholder="0"
+      onChange={(e) => {
+        const raw = e.target.value.replace(/[^0-9]/g, '');
+        const num = raw === '' ? 0 : Math.min(9999, parseInt(raw, 10));
+        onUpdate(tier.id, num - tier.count);
+      }}
+      className="w-full bg-transparent border-b-2 border-brand-border text-center font-serif italic text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
+      style={{ fontSize: 'clamp(2rem, 3vw, 2.8rem)' }}
+    />
   </div>
 ));
 PersonnelStepper.displayName = 'PersonnelStepper';
