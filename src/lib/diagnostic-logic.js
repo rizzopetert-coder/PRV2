@@ -366,10 +366,11 @@ export const calculateRealitySummary = (data) => {
   const headcountMidpoint = HEADCOUNT_RANGES[headcountRange]?.midpoint || 60;
 
   // PERSONNEL COUNT AND WEIGHTING
-  const execCount    = personnel.find(p => p.id === 'EXECUTIVE')?.count    || 0;
-  const managerCount = personnel.find(p => p.id === 'MANAGER')?.count      || 0;
-  const staffCount   = personnel.find(p => p.id === 'PROFESSIONAL')?.count || 0;
-  const totalHeadcount    = Math.max(1, execCount + managerCount + staffCount);
+ const execCount   = personnel.find(p => p.id === 'EXECUTIVE')?.count  || 0;
+  const managerCount= personnel.find(p => p.id === 'MANAGER')?.count    || 0;
+  const staffCount  = personnel.find(p => p.id === 'PROFESSIONAL')?.count || 0;
+  // totalHeadcount uses org-wide midpoint -- friction is paid for by the full org budget
+  const totalHeadcount = Math.max(1, headcountMidpoint);
   const weightedHeadcount = (execCount * 1.5) + (managerCount * 1.2) + staffCount;
 
   // PAYROLL -- use industry estimate if bypassed
