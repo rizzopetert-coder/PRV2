@@ -60,11 +60,11 @@
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
+  font-size: calc(var(--font-scale, 1) * 16px);
 }
 @media (min-width: 768px) {
   html {
-    font-size: 20px;
+    font-size: calc(var(--font-scale, 1) * 20px);
   }
 }
 
