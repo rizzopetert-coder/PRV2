@@ -218,7 +218,7 @@ for (const profile of profiles) {
       );
 
       // Assertion 1: Verdict h2 -- Gemini confirmed selector pattern
-      const verdictH2 = page.locator('h2', { hasText: profile.expected.verdict });
+      const verdictH2 = page.locator('h2', { hasText: new RegExp(`^${profile.expected.verdict}$`) });
       await expect(verdictH2).toBeVisible({ timeout: 5000 });
 
       // Assertion 2: Engagement tier name in h3
@@ -237,8 +237,11 @@ for (const profile of profiles) {
     } catch (err) {
       // Capture the results page state at the moment of failure.
       // Saved to test-results/ alongside trace and video artifacts.
+      // Capture the actual verdict rendered so the diff is immediately readable
+      const actualVerdict = await page.locator('h2').first().textContent().catch(() => 'NOT_FOUND');
+      const actualTier = await page.locator('[data-report-container] h3').first().textContent().catch(() => 'NOT_FOUND');
       await page.screenshot({
-        path: `test-results/${profile.id}-failure.png`,
+        path: `test-results/${profile.id}-GOT_${actualVerdict.trim().replace(/\s+/g, '_').slice(0, 30)}-EXPECTED_${profile.expected.verdict.replace(/\s+/g, '_')}.png`,
         fullPage: true,
       });
       throw err;
