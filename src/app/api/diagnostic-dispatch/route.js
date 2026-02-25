@@ -4,6 +4,12 @@
  * Purpose: Receives diagnostic results post-download,
  * forwards structured payload to Zapier webhook -> Dubsado.
  * Fires silently -- never interrupts the user experience.
+ * v5.0: audit_verdict and audit_tier are now split fields.
+ *       verdict = state.label (e.g. "Talent Hemorrhage")
+ *       tier    = resolvedTier enum (e.g. "SAFE_HARBOR")
+ *       Recommended = recommendation.name (e.g. "Safe Harbor")
+ *       All three are sent. Zapier triggers on audit_verdict.
+ *       Dubsado engagement mapping uses Recommended.
  * v4.5: Forensic Layer fields added (hammerCitation, confirmedHistoricalLoss,
  *        radiatedImpact, frictionDurationMonths).
  */
@@ -45,11 +51,25 @@ export async function POST(request) {
     }
 
     // Structure the Zapier payload
-    // Field names match what Zapier expects to forward to Dubsado
+    // Field names match what Zapier expects to forward to Dubsado.
+    // Dubsado custom fields use Spaces (e.g. "Audit Verdict").
+    // Zapier template variables use Underscores (e.g. audit_verdict).
     const zapierPayload = {
-      // Core diagnostic
+      // ── v5.0 Split Verdict/Tier Fields ──────────────────
+      // audit_verdict: the Institutional State label (e.g. "Talent Hemorrhage")
+      // audit_tier:    the resolvedTier enum (e.g. "SAFE_HARBOR")
+      // These two are now independent. A Talent Hemorrhage can sit in Safe Harbor.
+      // Zapier should trigger separately on each -- do not conflate them.
+      audit_verdict:       verdict,
+      audit_tier:          tier,
+
+      // Legacy field -- kept for backward compatibility with existing Zap steps.
+      // Maps to recommendation.name (e.g. "Safe Harbor", "The Intervention").
+      // Do not remove until Dubsado field audit confirms it is unused.
       Audit_Verdict:       verdict,
       Recommended:         tier,
+
+      // Core financial
       Annual_Cost:         total,
       Monthly_Burn:        monthlyBurn,
 
