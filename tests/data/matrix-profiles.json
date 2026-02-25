@@ -356,8 +356,8 @@
     },
     "expected": {
       "verdict": "Stagnant Stability",
-     "tier": "The Roadmap",
-     "forceTag": "FINANCIAL_GRAVITY"
+      "tier": "The Roadmap",
+      "forceTag": "FINANCIAL_GRAVITY"
     }
   }
 ]
