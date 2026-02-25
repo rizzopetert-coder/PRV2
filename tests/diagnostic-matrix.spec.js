@@ -82,11 +82,18 @@ class AuditPage {
 
   // Module 02 -- Personnel
   async fillPersonnel(inputs) {
-    await this.page.getByPlaceholder('Estimated total headcount').fill(String(inputs.headcount));
+    // React synthetic event fix -- .fill() bypasses onChange without these
+    const headcountInput = this.page.getByPlaceholder('Estimated total headcount');
+    await headcountInput.fill(String(inputs.headcount));
+    await headcountInput.dispatchEvent('input', { bubbles: true });
+    await headcountInput.blur();
 
     // PersonnelStepper inputs -- inputmode numeric per Gemini selector map
     const steppers = this.page.locator('input[inputmode="numeric"]');
-    await steppers.first().fill('3');
+    const firstStepper = steppers.first();
+    await firstStepper.fill('3');
+    await firstStepper.dispatchEvent('input', { bubbles: true });
+    await firstStepper.blur();
 
     await this.page.getByRole('button', { name: /Locate the Friction/i }).click();
   }
@@ -160,14 +167,22 @@ class AuditPage {
       const payrollInput = this.page.getByPlaceholder('Estimate is sufficient');
       await payrollInput.clear();
       await payrollInput.fill(inputs.payroll);
+      await payrollInput.dispatchEvent('input', { bubbles: true });
+      await payrollInput.blur();
     }
 
     if (inputs.stalledProjectCapital && inputs.stalledProjectCapital !== '') {
-      await this.page.getByPlaceholder('Optional').first().fill(inputs.stalledProjectCapital);
+      const stalledInput = this.page.getByPlaceholder('Optional').first();
+      await stalledInput.fill(inputs.stalledProjectCapital);
+      await stalledInput.dispatchEvent('input', { bubbles: true });
+      await stalledInput.blur();
     }
 
     if (typeof inputs.meetingHours === 'number' && inputs.meetingHours !== 5) {
-      await this.page.locator('input[type="range"]').fill(String(inputs.meetingHours));
+      const slider = this.page.locator('input[type="range"]');
+      await slider.fill(String(inputs.meetingHours));
+      await slider.dispatchEvent('input', { bubbles: true });
+      await slider.blur();
     }
 
     await this.page.getByRole('button', { name: /Generate Institutional Record/i }).click();
@@ -188,26 +203,45 @@ class AuditPage {
 for (const profile of profiles) {
   test(`[${profile.id}] ${profile.name}`, async ({ page }) => {
     const audit = new AuditPage(page);
-    await audit.runAudit(profile.inputs);
 
-    await page.waitForSelector('[data-report-container]', { timeout: 10000 });
+    try {
+      await audit.runAudit(profile.inputs);
 
-    // Assertion 1: Verdict h2 -- Gemini confirmed selector pattern
-    const verdictH2 = page.locator('h2', { hasText: profile.expected.verdict });
-    await expect(verdictH2).toBeVisible({ timeout: 5000 });
+      // Wait for results container to mount
+      await page.waitForSelector('[data-report-container]', { timeout: 10000 });
 
-    // Assertion 2: Engagement tier name in h3
-    const engagementH3 = page.locator('[data-report-container] h3', {
-      hasText: profile.expected.tier,
-    });
-    await expect(engagementH3).toBeVisible({ timeout: 5000 });
+      // Wait for the Institutional State label to appear before asserting the h2.
+      // This guards against asserting before React has committed the verdict render.
+      await page.waitForSelector(
+        'span:text("Institutional State")',
+        { timeout: 8000 }
+      );
 
-    // Assertion 3: Forensic Proof block source matches forceTag
-    const expectedSource = CITATION_SOURCE_MAP[profile.expected.forceTag];
-    if (expectedSource) {
-      const forensicLabel = page.locator('[data-report-container]').getByText(/Forensic Proof/i);
-      await expect(forensicLabel).toBeVisible({ timeout: 5000 });
-      await expect(forensicLabel).toContainText(expectedSource);
+      // Assertion 1: Verdict h2 -- Gemini confirmed selector pattern
+      const verdictH2 = page.locator('h2', { hasText: profile.expected.verdict });
+      await expect(verdictH2).toBeVisible({ timeout: 5000 });
+
+      // Assertion 2: Engagement tier name in h3
+      const engagementH3 = page.locator('[data-report-container] h3', {
+        hasText: profile.expected.tier,
+      });
+      await expect(engagementH3).toBeVisible({ timeout: 5000 });
+
+      // Assertion 3: Forensic Proof block source matches forceTag
+      const expectedSource = CITATION_SOURCE_MAP[profile.expected.forceTag];
+      if (expectedSource) {
+        const forensicLabel = page.locator('[data-report-container]').getByText(/Forensic Proof/i);
+        await expect(forensicLabel).toBeVisible({ timeout: 5000 });
+        await expect(forensicLabel).toContainText(expectedSource);
+      }
+    } catch (err) {
+      // Capture the results page state at the moment of failure.
+      // Saved to test-results/ alongside trace and video artifacts.
+      await page.screenshot({
+        path: `test-results/${profile.id}-failure.png`,
+        fullPage: true,
+      });
+      throw err;
     }
   });
 }
