@@ -350,14 +350,14 @@ export const calculateRealitySummary = (data) => {
     orgStage         = 'ESTABLISHED',
     headcountRange   = 'SMALL',
     headcount,                          // exact count -- primary denominator
-    activePayroll: rawPayroll,
+    payroll: rawPayroll,
     leadershipTenure = 'THREE_SEVEN',
     frictionLocation = 'UNKNOWN',
     avoidanceMechanism = 'NOT_AN_ISSUE',
     priorAttempt,
     personnelRisk,
     resolutionBlockage,
-    downstreamPopulation = 'NONE',
+    downstreamPopulation: rawDownstream,
     frictionDuration = 'UNDER_3',
     meetingHours     = 5,
     isUnsurePayroll  = false,
@@ -397,7 +397,8 @@ export const calculateRealitySummary = (data) => {
   const monthlyMeetingBurn   = (meetingHours * 4 * hourlyRate) * cTax * frictionGroupSize;
 
   // ── RADIATED IMPACT (10% Idle Tax on downstream population) ─────────────
-  const downstreamConfig = DOWNSTREAM_POPULATIONS[downstreamPopulation] || DOWNSTREAM_POPULATIONS.NONE;
+  const downstreamPopulation = (rawDownstream && DOWNSTREAM_POPULATIONS[rawDownstream]) ? rawDownstream : 'NONE';
+  const downstreamConfig = DOWNSTREAM_POPULATIONS[downstreamPopulation];
   const downstreamCount  = downstreamConfig.multiplier === null
     ? totalHeadcount                    // FULL_ORG
     : (downstreamConfig.multiplier || 0);
