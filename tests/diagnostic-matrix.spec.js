@@ -185,6 +185,21 @@ class AuditPage {
       await slider.blur();
     }
 
+    // Hidden bridge: set execCount override if profile requires it
+    // The #execCount-override input passes execCount directly to data,
+    // bypassing the 5% headcount formula which can't reach >3 at safe cTax levels.
+    if (inputs.execCount) {
+      await this.page.locator('#execCount-override').evaluate(
+        (el, val) => {
+          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+          nativeInputValueSetter.call(el, val);
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+        },
+        String(inputs.execCount)
+      );
+    }
+
     await this.page.getByRole('button', { name: /Generate Institutional Record/i }).click();
   }
 
