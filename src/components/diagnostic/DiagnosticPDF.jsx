@@ -78,8 +78,7 @@ const styles = StyleSheet.create({
     color: T.muted,
     fontWeight: 700,
     marginBottom: 6,
-  },
-  // ── verdict ──
+  },  // ── verdict ──
   verdictTitle: {
     fontFamily: 'Newsreader',
     fontStyle: 'italic',
@@ -114,8 +113,8 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
     marginBottom: 16,
   },
-  costFigureRow: { flexDirection: 'row', gap: 32, marginTop: 4, flexWrap: 'wrap' },
-  costFigureItem: { flexDirection: 'column', gap: 4 },
+  costFigureRow: { flexDirection: 'row', marginTop: 4, flexWrap: 'wrap' },
+  costFigureItem: { flexDirection: 'column', marginRight: 32 },
   costFigureValue: {
     fontFamily: 'Newsreader',
     fontStyle: 'italic',
@@ -156,9 +155,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    gap: 10,
   },
-  labelRule: { flex: 1, borderTopWidth: 0.5, borderTopColor: T.border },
+  labelRule: { flex: 1, borderTopWidth: 0.5, borderTopColor: T.border, marginLeft: 10 },
   // ── recommended engagement box ──
   engagementBox: {
     borderWidth: 0.75,
@@ -192,7 +190,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     padding: 12,
-    gap: 16,
     borderBottomWidth: 0.5,
     borderBottomColor: T.border,
   },
@@ -200,7 +197,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     padding: 12,
-    gap: 16,
   },
   legendTerm: {
     fontFamily: 'SpaceMono',
@@ -210,6 +206,7 @@ const styles = StyleSheet.create({
     color: T.accent,
     fontWeight: 700,
     width: 110,
+    marginRight: 16,
     paddingTop: 1,
   },
   legendDefinition: {
@@ -248,10 +245,9 @@ const styles = StyleSheet.create({
     borderColor: T.border,
     marginTop: 4,
   },
-  caseCell: { padding: 20, gap: 8 },
+  caseCell: { padding: 20 },
   caseCellBottom: {
     padding: 20,
-    gap: 8,
     borderTopWidth: 0.5,
     borderTopColor: T.border,
     backgroundColor: '#FFF5F0',
