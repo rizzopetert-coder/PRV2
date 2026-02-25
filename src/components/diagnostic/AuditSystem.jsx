@@ -14,15 +14,18 @@ import {
   PERSONNEL_RISK,
   RESOLUTION_BLOCKAGE,
   HEADCOUNT_RANGES,
+  FRICTION_DURATIONS,
+  DOWNSTREAM_POPULATIONS,
 } from '../../lib/diagnostic-logic';
 import { useDiagnosticEngine } from '../../hooks/useDiagnosticEngine';
 import ResultsLedger from './ResultsLedger';
 
 /**
- * AuditSystem // Principal Resolution v4.0
+ * AuditSystem // Principal Resolution v4.1
  * Navigation: Back buttons added to each module footer and Results header.
  * State preservation: data is untouched by back navigation.
  * Tenet: Truth (Absolute Candor).
+ * v4.1: frictionDuration and downstreamPopulation inputs added to BEHAVIOR module.
  */
 
 const STEPS = {
@@ -57,6 +60,8 @@ const initialData = {
   priorAttempt:          '',
   personnelRisk:         '',
   resolutionBlockage:    '',
+  frictionDuration:      '',
+  downstreamPopulation:  '',
   resolutionVision:      '',
   payroll:               '',
   revenueBest:           '',
@@ -244,9 +249,6 @@ export default function AuditSystem() {
   }, []);
 
   // ── BACK NAVIGATION ──────────────────────────────────────────
-  // Never touches data or result. From RESULTS, returns to FINANCIAL
-  // with all state preserved so re-submission is possible without
-  // recalculating. From CONTEXT, returns to INTRO.
   const handleBack = useCallback(() => {
     setStep(prev => {
       if (prev === STEPS.CONTEXT) return STEPS.INTRO;
@@ -278,7 +280,15 @@ export default function AuditSystem() {
   const canProceed = () => {
     if (step === STEPS.CONTEXT)   return data.industry && data.orgStage && data.leadershipTenure;
     if (step === STEPS.PERSONNEL) return data.headcountRange && data.personnel.reduce((a, p) => a + p.count, 0) > 0;
-    if (step === STEPS.BEHAVIOR)  return data.frictionLocation && data.avoidanceMechanism && data.priorAttempt && data.personnelRisk && data.resolutionBlockage;
+    if (step === STEPS.BEHAVIOR)  return (
+      data.frictionLocation &&
+      data.avoidanceMechanism &&
+      data.priorAttempt &&
+      data.personnelRisk &&
+      data.resolutionBlockage &&
+      data.frictionDuration &&
+      data.downstreamPopulation
+    );
     if (step === STEPS.FINANCIAL) return true;
     return false;
   };
@@ -315,10 +325,8 @@ export default function AuditSystem() {
             </h2>
           </div>
 
-          {/* Header controls: visible on all active steps including RESULTS */}
           {step >= STEPS.CONTEXT && (
             <div className="flex items-center gap-8">
-              {/* Progress pips -- hide on RESULTS */}
               {step < STEPS.RESULTS && (
                 <div className="flex gap-2">
                   {[0,1,2,3].map(s => (
@@ -333,7 +341,6 @@ export default function AuditSystem() {
                   ))}
                 </div>
               )}
-              {/* Back header link -- shown on steps 1-3 and RESULTS */}
               {step > STEPS.CONTEXT && (
                 <button
                   onClick={handleBack}
@@ -524,7 +531,6 @@ export default function AuditSystem() {
                       Map the Room
                       <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                     </button>
-                    {/* No BackButton on CONTEXT -- INTRO is pre-flow, header handles it */}
                   </div>
                 </motion.div>
               )}
@@ -568,11 +574,11 @@ export default function AuditSystem() {
                           : num < 500 ? 'MID'
                           : 'LARGE';
                         setData(prev => ({
-  ...prev,
-  headcountRange: bucket,
-  headcountDisplay: raw,
-  headcount: num || 0,
-}));
+                          ...prev,
+                          headcountRange: bucket,
+                          headcountDisplay: raw,
+                          headcount: num || 0,
+                        }));
                       }}
                       className="w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
                       style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
@@ -696,6 +702,34 @@ export default function AuditSystem() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {Object.entries(RESOLUTION_BLOCKAGE).map(([key, val]) => (
                         <OptionButton key={key} value={key} current={data.resolutionBlockage} field="resolutionBlockage" onSelect={setField}>
+                          {val.label}
+                        </OptionButton>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* ── NEW: FRICTION DURATION ─────────────────────────────── */}
+                  <div className="space-y-3">
+                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
+                      How long has this been going on?
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {Object.entries(FRICTION_DURATIONS).map(([key, val]) => (
+                        <OptionButton key={key} value={key} current={data.frictionDuration} field="frictionDuration" onSelect={setField}>
+                          {val.label}
+                        </OptionButton>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* ── NEW: DOWNSTREAM POPULATION ────────────────────────── */}
+                  <div className="space-y-3">
+                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
+                      Beyond the friction group itself, how many people are waiting on decisions this situation is holding up?
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {Object.entries(DOWNSTREAM_POPULATIONS).map(([key, val]) => (
+                        <OptionButton key={key} value={key} current={data.downstreamPopulation} field="downstreamPopulation" onSelect={setField}>
                           {val.label}
                         </OptionButton>
                       ))}
@@ -887,7 +921,6 @@ export default function AuditSystem() {
         </div>
       </section>
 
-      {/* FLOATING ADVISOR -- outside section to escape overflow-hidden stacking context */}
       <FloatingAdvisor
         step={step}
         insightKey={insightKey}

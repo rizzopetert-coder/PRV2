@@ -1,8 +1,16 @@
+import { HAMMER_CITATIONS } from '../data/hammer-citations';
+
 /**
- * Principal Resolution // Institutional Logic v4.0
+ * Principal Resolution // Institutional Logic v4.1
  * Purpose: Converting relatable inputs into a definitive ledger.
  * Tenet: Absolute Candor.
  * Constraints: No em dashes. No semicolons. No "forensic" or "surgical".
+ *
+ * Priority Matrix v4.5 (The Latitude Mandate)
+ * Rule 0: 7% Red Line -- leakRatio >= 0.07 returns TOTAL_FRICTION_COLLAPSE (STABILITY)
+ * Rule 1: Historical Weight -- confirmedHistoricalLoss >= 7% of activePayroll returns STABILITY
+ * Rule 2: Acute Behavior -- ATTEMPTED + EXTERNAL returns SAFE_HARBOR (or STABILITY if Rule 0/1 fired)
+ * Rule 3: Proportional Fallback -- leakRatio bands assign Authority / Efficiency / Clarity tiers
  */
 
 export const INDUSTRY_BENCHMARKS = {
@@ -28,37 +36,37 @@ export const ORG_STAGES = {
 };
 
 export const LEADERSHIP_TENURES = {
-  UNDER_ONE:   { label: "Under 1 year", context: "inherited"    },
-  ONE_THREE:   { label: "1 to 3 years", context: "transitional" },
-  THREE_SEVEN: { label: "3 to 7 years", context: "established"  },
-  SEVEN_PLUS:  { label: "7+ years",     context: "entrenched"   }
+  UNDER_ONE:   { label: "Under 1 year",  context: "inherited"     },
+  ONE_THREE:   { label: "1 to 3 years",  context: "transitional"  },
+  THREE_SEVEN: { label: "3 to 7 years",  context: "established"   },
+  SEVEN_PLUS:  { label: "7+ years",      context: "entrenched"    }
 };
 
 export const FRICTION_LOCATIONS = {
-  TEAM:             { label: "Between leadership and the team",                tierSignal: "ROADMAP"      },
-  CROSS_FUNCTIONAL: { label: "Between departments or functions",               tierSignal: "INTERVENTION" },
-  WITHIN_LEADERSHIP:{ label: "Within the leadership team itself",              tierSignal: "SAFE_HARBOR"  },
-  UNKNOWN:          { label: "We know something is wrong but can't locate it", tierSignal: "ROADMAP"      }
+  TEAM:             { label: "Between leadership and the team",            tierSignal: "ROADMAP"       },
+  CROSS_FUNCTIONAL: { label: "Between departments or functions",           tierSignal: "INTERVENTION"  },
+  WITHIN_LEADERSHIP:{ label: "Within the leadership team itself",          tierSignal: "SAFE_HARBOR"   },
+  UNKNOWN:          { label: "We know something is wrong but can't locate it", tierSignal: "ROADMAP"   }
 };
 
 export const AVOIDANCE_MECHANISMS = {
-  NO_FORUM:     { label: "No safe forum for them",          tierSignal: "SAFE_HARBOR"  },
-  PREDETERMINED:{ label: "The outcome feels predetermined", tierSignal: "INTERVENTION" },
-  COST_TOO_HIGH:{ label: "The cost seems too high",         tierSignal: "ROADMAP"      },
-  NOT_AN_ISSUE: { label: "They do happen here",             tierSignal: null           }
+  NO_FORUM:     { label: "No safe forum for them",           tierSignal: "SAFE_HARBOR"   },
+  PREDETERMINED:{ label: "The outcome feels predetermined",  tierSignal: "INTERVENTION"  },
+  COST_TOO_HIGH:{ label: "The cost seems too high",          tierSignal: "ROADMAP"       },
+  NOT_AN_ISSUE: { label: "They do happen here",              tierSignal: null            }
 };
 
 export const PRIOR_ATTEMPTS = {
-  NONE:        { label: "We haven't addressed it yet",                                 tierSignal: "ROADMAP"      },
-  CONVERSATION:{ label: "We've had the conversation -- nothing changed",               tierSignal: "INTERVENTION" },
-  EXTERNAL:    { label: "We brought someone in and it didn't work",                    tierSignal: "SAFE_HARBOR"  },
-  UNCLEAR:     { label: "We tried something -- not sure it addressed the right thing", tierSignal: "INTERVENTION" },
+  NONE:        { label: "We haven't addressed it yet",                                tierSignal: "ROADMAP"      },
+  CONVERSATION:{ label: "We've had the conversation -- nothing changed",              tierSignal: "INTERVENTION" },
+  EXTERNAL:    { label: "We brought someone in and it didn't work",                   tierSignal: "SAFE_HARBOR"  },
+  UNCLEAR:     { label: "We tried something -- not sure it addressed the right thing",tierSignal: "INTERVENTION" },
 };
 
 export const PERSONNEL_RISK = {
-  NONE:    { label: "Not that I'm aware of",                    urgencySignal: 0 },
-  POSSIBLY:{ label: "There are signs -- nothing confirmed",     urgencySignal: 1 },
-  YES:     { label: "Yes, and we know who",                     urgencySignal: 2 },
+  NONE:    { label: "Not that I'm aware of",               urgencySignal: 0 },
+  POSSIBLY:{ label: "There are signs -- nothing confirmed", urgencySignal: 1 },
+  YES:     { label: "Yes, and we know who",                 urgencySignal: 2 },
   LOST:    { label: "We've already lost someone because of it", urgencySignal: 3 },
 };
 
@@ -66,7 +74,7 @@ export const RESOLUTION_BLOCKAGE = {
   NONE:     { label: "No -- nothing like that is pending",                    urgencySignal: 0 },
   SUSPECTED:{ label: "Possibly -- we haven't named it yet",                   urgencySignal: 1 },
   KNOWN:    { label: "Yes -- we know what needs to happen but haven't acted", urgencySignal: 2 },
-  ATTEMPTED:{ label: "We've tried and something keeps getting in the way",    urgencySignal: 3 },
+  ATTEMPTED:{ label: "We've tried to move on it and haven't been able to",    urgencySignal: 3 },
 };
 
 export const HEADCOUNT_RANGES = {
@@ -76,55 +84,24 @@ export const HEADCOUNT_RANGES = {
   LARGE: { label: "500+",       midpoint: 750 }
 };
 
-// ---------------------------------------------------------------------------
-// INSTITUTIONAL_STATES
-// v4.0 IFTTT states listed first.
-// v3.0 legacy states retained below for backward compatibility until the
-// Triple-File Sync is complete.
-// ---------------------------------------------------------------------------
+// Downstream population exposed to friction-at-the-top
+export const DOWNSTREAM_POPULATIONS = {
+  NONE:    { label: "Just the friction group",         multiplier: 0    },
+  SMALL:   { label: "Up to 25 people",                 multiplier: 25   },
+  MEDIUM:  { label: "25 to 100 people",                multiplier: 60   },
+  LARGE:   { label: "100 to 500 people",               multiplier: 250  },
+  FULL_ORG:{ label: "The entire organization",         multiplier: null }, // uses totalHeadcount
+};
+
+export const FRICTION_DURATIONS = {
+  UNDER_3:  { label: "Under 3 months",  months: 2   },
+  THREE_6:  { label: "3 to 6 months",   months: 4.5 },
+  SIX_12:   { label: "6 to 12 months",  months: 9   },
+  ONE_2YR:  { label: "1 to 2 years",    months: 18  },
+  OVER_2YR: { label: "Over 2 years",    months: 30  },
+};
 
 export const INSTITUTIONAL_STATES = {
-
-  // --- v4.0 IFTTT States ---
-
-  INSTITUTIONAL_PROTECTION: {
-    label: "Institutional protection is blocking your path forward.",
-    desc: "Two attempts at resolution and something keeps getting in the way. That pattern almost always means the blockage has institutional protection. The people with the authority to move this forward have a reason not to. That is the problem to solve before any other problem gets solved.",
-    tier: "SAFE_HARBOR"
-  },
-
-  CULTURE_SELECTING_OUT: {
-    label: "Culture is currently selecting against high performers.",
-    desc: "This organization has already lost someone because of this dynamic. That is a confirmed cost, not a projection. The people who have other options are quietly evaluating them -- not because the work isn't interesting, but because the environment isn't honest enough to keep people who have standards for how they want to work.",
-    tier: "INTERVENTION"
-  },
-
-  PROBLEM_AT_THE_TOP: {
-    label: "The problem is at the top.",
-    desc: "The people with the authority to make the decision are the same people whose dynamic is preventing it. That is a closed loop. No amount of process improvement or structural change will resolve something that lives in the leadership team itself. The dynamic has to be named and worked directly.",
-    tier: "SAFE_HARBOR"
-  },
-
-  STRUCTURAL_NOT_PERSONAL: {
-    label: "The problem is structural, not personal.",
-    desc: "Individual units are performing. The connective tissue between them isn't. Information is staying inside departments that need to be sharing it, and the friction isn't about the people -- it's about how the organization is designed. Fixing this requires changing the structure, not the people.",
-    tier: "INTERVENTION"
-  },
-
-  UNKNOWN_UNKNOWN: {
-    label: "We don't know what we don't know.",
-    desc: "That is a legitimate presenting condition, not a failure of self-awareness. The diagnostic exists precisely for this. Something is wrong and the organization can feel it. The first act of resolution is locating it accurately. That is what this work does.",
-    tier: "ROADMAP"
-  },
-
-  HIGH_ACTIVITY_HIGH_BURN: {
-    label: "High activity is masking high burn.",
-    desc: "The organization is moving fast. A lot of that energy is being spent overcoming internal friction rather than market challenges. Busy and effective are not the same thing, and right now they're being treated like they are. The math does not favor avoidance.",
-    tier: "ROADMAP"
-  },
-
-  // --- v3.0 Legacy States ---
-
   STAGNANT_STABILITY: {
     label: "Stagnant Stability",
     desc: "Nothing is visibly breaking, which is part of the problem. The organization is safe and silent in equal measure -- and what looks like stability is usually just friction that everyone has learned to live around.",
@@ -187,10 +164,6 @@ export const INSTITUTIONAL_STATES = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// TIER_RECOMMENDATIONS
-// ---------------------------------------------------------------------------
-
 export const TIER_RECOMMENDATIONS = {
   ROADMAP: {
     name: "The Roadmap",
@@ -223,238 +196,288 @@ export const TIER_RECOMMENDATIONS = {
 };
 
 // ---------------------------------------------------------------------------
-// resolveState -- Multi-Signal IFTTT Matrix v4.0
-// Evaluates signals in strict priority order.
-// Returns a state object from INSTITUTIONAL_STATES, or null to fall through
-// to the legacy leakRatio block.
+// METRIC LEGEND -- definitions used in ResultsLedger and PDF
 // ---------------------------------------------------------------------------
+export const METRIC_LEGEND = [
+  {
+    term: "Institutional Leak",
+    definition: "The monthly hard-dollar cost of time lost to friction. Not an estimate of what might happen -- a calculation of what is already leaving the building every month."
+  },
+  {
+    term: "Coordination Tax",
+    definition: "A weighted multiplier for organizational complexity. Larger organizations pay more per friction event because every misalignment ripples across more people, more meetings, and more decisions."
+  },
+  {
+    term: "Radiated Impact",
+    definition: "Secondary burn on downstream populations waiting for decisions that aren't being made. When friction lives at the top, the people below it absorb a 10% productivity loss while they wait."
+  },
+  {
+    term: "Execution Gap",
+    definition: "The delta between best-case revenue potential and actual results. The space between what this organization could be producing and what it is."
+  },
+  {
+    term: "Confirmed Historical Loss",
+    definition: "Capital already incinerated. The Institutional Leak multiplied by how long the friction has been running. This is a ledger entry, not a projection."
+  },
+];
 
-const resolveState = (data, leakRatio) => {
-  const {
-    resolutionBlockage,
-    priorAttempt,
-    personnelRisk,
-    frictionLocation,
-    avoidanceMechanism,
-  } = data;
-  // Rule 0 -- Financial Override (Stability Signal)
-  // 5% coordination tax is the institutional red line
-  if (leakRatio >= 0.05) {
-    return INSTITUTIONAL_STATES.TOTAL_FRICTION_COLLAPSE;
-  }
-  // Rule 1 -- Priority Escalation (Blockage Signal)
-  if (resolutionBlockage === 'ATTEMPTED' && priorAttempt === 'EXTERNAL') {
-    return INSTITUTIONAL_STATES.INSTITUTIONAL_PROTECTION;
-  }
-
-  // Rule 2 -- Retention Escalation (Talent Signal)
-  if (personnelRisk === 'LOST') {
-    return INSTITUTIONAL_STATES.CULTURE_SELECTING_OUT;
-  }
-
-  // Rule 3 -- Leadership Matrix (Source Axis)
-  if (frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'PREDETERMINED') {
-    return INSTITUTIONAL_STATES.PROBLEM_AT_THE_TOP;
-  }
-
-  // Rule 4 -- Structural Matrix (Policy Axis)
-  if (frictionLocation === 'CROSS_FUNCTIONAL') {
-    return INSTITUTIONAL_STATES.STRUCTURAL_NOT_PERSONAL;
+// ---------------------------------------------------------------------------
+// COMPETITIVE PRIORITY MATRIX v4.5
+// ---------------------------------------------------------------------------
+const resolveFinancialState = (leakRatio, confirmedHistoricalLoss, activePayroll) => {
+  // Rule 0: The 7% Red Line
+  if (leakRatio >= 0.07) {
+    return { stateKey: 'TOTAL_FRICTION_COLLAPSE', financialTier: 'STABILITY' };
   }
 
-  // Rule 5 -- Clarity Matrix (Ambiguity Axis)
-  if (frictionLocation === 'UNKNOWN' || avoidanceMechanism === 'UNKNOWN') {
-    return INSTITUTIONAL_STATES.UNKNOWN_UNKNOWN;
+  // Rule 1: Historical Weight -- accumulated loss >= 7% of annual payroll
+  if (confirmedHistoricalLoss >= activePayroll * 0.07) {
+    return { stateKey: 'TOTAL_FRICTION_COLLAPSE', financialTier: 'STABILITY' };
   }
 
-  // Rule 6 -- Default (Efficiency Signal)
-  if (leakRatio > 0.20) {
-    return INSTITUTIONAL_STATES.HIGH_ACTIVITY_HIGH_BURN;
+  // Rule 3: Proportional Fallback
+  // Authority band: 2% to 7% leak ratio
+  if (leakRatio >= 0.02) {
+    return { stateKey: null, financialTier: 'AUTHORITY' };
   }
 
-  // No IFTTT rule matched -- fall through to legacy leakRatio block
-  return null;
+  // Efficiency band: 1% to 2%
+  if (leakRatio >= 0.01) {
+    return { stateKey: null, financialTier: 'EFFICIENCY' };
+  }
+
+  // Clarity band: < 1%
+  return { stateKey: null, financialTier: 'CLARITY' };
 };
 
-// ---------------------------------------------------------------------------
-// resolveTier -- Escalation logic (unchanged from v3.0)
-// ---------------------------------------------------------------------------
+const resolveStateFromBandAndSignals = (financialTier, data, cTax, execCount, activeRevGap, activePayroll, activeStalledDrag) => {
+  const { frictionLocation, avoidanceMechanism, orgStage, leadershipTenure, personnelRisk } = data;
 
-const resolveTier = (financialTier, data) => {
-  const {
-    avoidanceMechanism, frictionLocation, orgStage, leadershipTenure,
-    personnelRisk, resolutionBlockage, priorAttempt,
-  } = data;
+  if (financialTier === 'STABILITY') return 'TOTAL_FRICTION_COLLAPSE';
 
-  // Financial severity at maximum overrides all behavioral signals
-  if (financialTier === 'STABILITY') return 'STABILITY';
-
-  // Behavioral collapse signal escalates to Stability regardless of financial tier
-  if (resolutionBlockage === 'ATTEMPTED' && priorAttempt === 'EXTERNAL' && personnelRisk === 'LOST') {
-    return 'STABILITY';
+  if (financialTier === 'AUTHORITY') {
+    // Within the leadership team is the most contained version of authority-band friction
+    if (frictionLocation === 'WITHIN_LEADERSHIP') return 'EXECUTIVE_EMBARGO';
+    if (cTax > 1.3) return 'INSTITUTIONAL_RIGIDITY';
+    if (personnelRisk === 'LOST' || personnelRisk === 'YES') return 'TALENT_HEMORRHAGE';
+    if (avoidanceMechanism === 'PREDETERMINED' && execCount > 3) return 'BRILLIANT_SABOTAGE';
+    return 'RELATIONAL_FRICTION';
   }
 
-  // Active blockage with failed prior attempt = most acute behavioral signal
+  if (financialTier === 'EFFICIENCY') {
+    if (activeStalledDrag > activePayroll * 0.10) return 'STALLED_HEGEMONY';
+    if (activeRevGap > activePayroll * 0.10) return 'TALENT_HEMORRHAGE';
+    if (execCount > 4) return 'CAFFEINE_CULTURE';
+    return 'CAFFEINE_CULTURE';
+  }
+
+  // CLARITY band
+  if (cTax > 1.2) return 'PROCESS_PARALYSIS';
+  if (frictionLocation === 'CROSS_FUNCTIONAL') return 'SILO_ISOLATION';
+  if (orgStage === 'LEGACY' && leadershipTenure === 'SEVEN_PLUS') return 'STRATEGIC_DRIFT';
+  return 'STAGNANT_STABILITY';
+};
+
+// Rule 2: Behavioral override -- runs after financial state is set
+const applyBehavioralOverride = (financialTier, stateKey, data) => {
+  const { resolutionBlockage, priorAttempt, personnelRisk, frictionLocation, avoidanceMechanism, orgStage, leadershipTenure } = data;
+
+  // Rule 2: Acute behavior -- ATTEMPTED blockage + EXTERNAL prior = institutional protection
   if (resolutionBlockage === 'ATTEMPTED' && priorAttempt === 'EXTERNAL') {
-    return 'SAFE_HARBOR';
+    if (financialTier === 'STABILITY') return { stateKey, resolvedTier: 'STABILITY' };
+    return { stateKey, resolvedTier: 'SAFE_HARBOR' };
   }
 
-  // Known blockage or confirmed personnel loss always escalates
+  // Known blockage or confirmed personnel loss -- escalate to at least INTERVENTION
   if (resolutionBlockage === 'KNOWN' || personnelRisk === 'LOST') {
-    if (financialTier === 'STABILITY') return 'STABILITY';
-    if (financialTier === 'SAFE_HARBOR') return 'SAFE_HARBOR';
-    return 'INTERVENTION';
+    if (financialTier === 'STABILITY') return { stateKey, resolvedTier: 'STABILITY' };
+    if (financialTier === 'AUTHORITY') return { stateKey, resolvedTier: 'SAFE_HARBOR' };
+    return { stateKey, resolvedTier: 'INTERVENTION' };
   }
 
-  // Personnel at confirmed risk escalates to at least Intervention
+  // Confirmed personnel at risk
   if (personnelRisk === 'YES') {
-    if (financialTier === 'STABILITY') return 'STABILITY';
-    if (financialTier === 'SAFE_HARBOR') return 'SAFE_HARBOR';
-    return 'INTERVENTION';
+    if (financialTier === 'STABILITY') return { stateKey, resolvedTier: 'STABILITY' };
+    if (financialTier === 'AUTHORITY') return { stateKey, resolvedTier: 'SAFE_HARBOR' };
+    return { stateKey, resolvedTier: 'INTERVENTION' };
   }
 
-  // Avoidance mechanism signals
-  if (avoidanceMechanism && avoidanceMechanism !== 'NOT_AN_ISSUE') {
-    const avoidanceTier = AVOIDANCE_MECHANISMS[avoidanceMechanism]?.tierSignal;
-    if (avoidanceTier === 'SAFE_HARBOR') return 'SAFE_HARBOR';
+  // Avoidance mechanism: no safe forum = can't even start
+  if (avoidanceMechanism === 'NO_FORUM') {
+    if (financialTier === 'STABILITY') return { stateKey, resolvedTier: 'STABILITY' };
+    return { stateKey, resolvedTier: 'SAFE_HARBOR' };
   }
 
-  // Friction location can upgrade
-  if (frictionLocation) {
-    const locationTier = FRICTION_LOCATIONS[frictionLocation]?.tierSignal;
-    if (locationTier === 'SAFE_HARBOR' && financialTier !== 'STABILITY') return 'SAFE_HARBOR';
-    if (locationTier === 'INTERVENTION' && financialTier === 'ROADMAP') return 'INTERVENTION';
+  // Friction location signals
+  if (frictionLocation === 'WITHIN_LEADERSHIP' && financialTier !== 'STABILITY') {
+    return { stateKey, resolvedTier: 'SAFE_HARBOR' };
+  }
+  if (frictionLocation === 'CROSS_FUNCTIONAL' && financialTier === 'CLARITY') {
+    return { stateKey, resolvedTier: 'INTERVENTION' };
   }
 
-  // Prior attempt that didn't hold warrants at least Intervention
-  if (priorAttempt === 'EXTERNAL' || priorAttempt === 'CONVERSATION') {
-    if (financialTier === 'ROADMAP') return 'INTERVENTION';
+  // Prior attempt escalation
+  if ((priorAttempt === 'EXTERNAL' || priorAttempt === 'CONVERSATION') && financialTier === 'CLARITY') {
+    return { stateKey, resolvedTier: 'INTERVENTION' };
   }
 
-  // Legacy org with entrenched leadership + low financial signal
-  if (orgStage === 'LEGACY' && leadershipTenure === 'SEVEN_PLUS' && financialTier === 'ROADMAP') {
-    return 'INTERVENTION';
-  }
-
-  // Inherited leadership problem
+  // Inherited leadership in a high-stakes context
   if (leadershipTenure === 'UNDER_ONE' && financialTier !== 'STABILITY') {
-    return 'SAFE_HARBOR';
+    return { stateKey, resolvedTier: 'SAFE_HARBOR' };
   }
 
-  return financialTier;
+  // Legacy + entrenched leadership
+  if (orgStage === 'LEGACY' && leadershipTenure === 'SEVEN_PLUS' && financialTier === 'CLARITY') {
+    return { stateKey, resolvedTier: 'INTERVENTION' };
+  }
+
+  // Map financial tier to engagement tier
+  const tierMap = {
+    STABILITY:  'STABILITY',
+    AUTHORITY:  'SAFE_HARBOR',
+    EFFICIENCY: 'INTERVENTION',
+    CLARITY:    'ROADMAP',
+  };
+
+  return { stateKey, resolvedTier: tierMap[financialTier] || 'ROADMAP' };
 };
 
 // ---------------------------------------------------------------------------
-// calculateRealitySummary -- Main export
+// MAIN EXPORT
 // ---------------------------------------------------------------------------
-
 export const calculateRealitySummary = (data) => {
   const {
-    payroll,
-    industry = 'TECH',
-    headcountRange = 'SMALL',
-    revenueBest,
-    revenueWorst,
-    personnel = [],
-    stalledProjectCapital,
-    meetingHours = 5,
-    isUnsurePayroll = false,
-    isUnsureRevenue = false,
-    orgStage = 'ESTABLISHED',
+    industry         = 'TECH',
+    orgStage         = 'ESTABLISHED',
+    headcountRange   = 'SMALL',
+    headcount,                          // exact count -- primary denominator
+    activePayroll: rawPayroll,
     leadershipTenure = 'THREE_SEVEN',
     frictionLocation = 'UNKNOWN',
     avoidanceMechanism = 'NOT_AN_ISSUE',
-    urgency = 'NO'
+    priorAttempt,
+    personnelRisk,
+    resolutionBlockage,
+    downstreamPopulation = 'NONE',
+    frictionDuration = 'UNDER_3',
+    meetingHours     = 5,
+    isUnsurePayroll  = false,
+    revenueBest,
+    revenueWorst,
+    isUnsureRevenue  = false,
+    stalledProjectCapital,
   } = data;
 
   const sector = INDUSTRY_BENCHMARKS[industry] || INDUSTRY_BENCHMARKS.OTHER;
+
+  // ── PRECISION HEADCOUNT ─────────────────────────────────────────────────
+  // Exact headcount is the primary denominator. Midpoint is the fallback only.
   const headcountMidpoint = HEADCOUNT_RANGES[headcountRange]?.midpoint || 60;
+  const totalHeadcount    = Number(headcount) || headcountMidpoint;
 
-  // PERSONNEL COUNT AND WEIGHTING
- const execCount   = personnel.find(p => p.id === 'EXECUTIVE')?.count  || 0;
-  const managerCount= personnel.find(p => p.id === 'MANAGER')?.count    || 0;
-  const staffCount  = personnel.find(p => p.id === 'PROFESSIONAL')?.count || 0;
-  // totalHeadcount uses org-wide midpoint -- friction is paid for by the full org budget
-  const totalHeadcount = Math.max(1, headcountMidpoint);
-  const weightedHeadcount = (execCount * 1.5) + (managerCount * 1.2) + staffCount;
-
-  // PAYROLL -- use industry estimate if bypassed
+  // ── PAYROLL ──────────────────────────────────────────────────────────────
   const activePayroll = isUnsurePayroll
-    ? (headcountMidpoint * sector.avgSalary)
-    : (Number(payroll) || (headcountMidpoint * sector.avgSalary));
+    ? (totalHeadcount * sector.avgSalary)
+    : (Number(rawPayroll) || (totalHeadcount * sector.avgSalary));
 
-  // REVENUE GAP -- use sector volatility if bypassed
+  // ── HOURLY RATE -- per Section 3 MOB precision rule ─────────────────────
+  // perPersonPayroll / 2080, never activePayroll / 2080
+  const perPersonPayroll = activePayroll / Math.max(1, totalHeadcount);
+  const hourlyRate       = perPersonPayroll / 2080;
+
+  // ── COORDINATION TAX ─────────────────────────────────────────────────────
+  const scalingFactor = totalHeadcount > 500 ? 0.35 : 0.20;
+  const cTax          = 1 + (Math.log10(Math.max(1, totalHeadcount)) * scalingFactor);
+
+  // ── EXECUTIVE COUNT (estimated from headcount range if not provided) ────
+  const execCount = data.execCount || Math.max(2, Math.round(totalHeadcount * 0.05));
+
+  // ── INSTITUTIONAL LEAK (Direct Burn) ────────────────────────────────────
+  // Meeting hours * weekly * hourly rate * coordination tax * friction group size
+  const frictionGroupSize    = Math.min(execCount + Math.round(totalHeadcount * 0.10), totalHeadcount);
+  const monthlyMeetingBurn   = (meetingHours * 4 * hourlyRate) * cTax * frictionGroupSize;
+
+  // ── RADIATED IMPACT (10% Idle Tax on downstream population) ─────────────
+  const downstreamConfig = DOWNSTREAM_POPULATIONS[downstreamPopulation] || DOWNSTREAM_POPULATIONS.NONE;
+  const downstreamCount  = downstreamConfig.multiplier === null
+    ? totalHeadcount                    // FULL_ORG
+    : (downstreamConfig.multiplier || 0);
+
+  // Monthly cost of a 10% productivity loss on the downstream group
+  const radiatedImpact = downstreamCount > 0
+    ? (perPersonPayroll / 12) * 0.10 * downstreamCount
+    : 0;
+
+  // ── TOTAL MONTHLY LEAK ──────────────────────────────────────────────────
+  const monthlyLeak = monthlyMeetingBurn + radiatedImpact;
+
+  // ── CONFIRMED HISTORICAL LOSS ────────────────────────────────────────────
+  const durationMonths           = FRICTION_DURATIONS[frictionDuration]?.months || 2;
+  const confirmedHistoricalLoss  = monthlyLeak * durationMonths;
+
+  // ── REVENUE GAP ──────────────────────────────────────────────────────────
   const activeRevGap = isUnsureRevenue
     ? (activePayroll * sector.volatility)
     : Math.max(0, (Number(revenueBest) || 0) - (Number(revenueWorst) || 0));
 
-  // COORDINATION TAX -- log scaling based on headcount range
-  const scalingFactor = headcountMidpoint > 500 ? 0.35 : 0.20;
-  const cTax = 1 + (Math.log10(Math.max(1, headcountMidpoint)) * scalingFactor);
-
-  // MEETING BURN
-  const perPersonPayroll   = activePayroll / Math.max(1, totalHeadcount);
-  const hourlyRate         = perPersonPayroll / 2080;
-  const monthlyMeetingBurn = (meetingHours * 4 * hourlyRate) * cTax * (weightedHeadcount / 10);
-
-  // STALLED DRAG -- default to 5% of payroll
+  // ── STALLED DRAG ─────────────────────────────────────────────────────────
   const activeStalledDrag = Number(stalledProjectCapital) || (activePayroll * 0.05);
 
-  // TOTALS
-  const monthlyLeak     = monthlyMeetingBurn;
+  // ── TOTALS ───────────────────────────────────────────────────────────────
   const historicalWaste = activeStalledDrag + activeRevGap;
-  const totalImpact     = (monthlyLeak * 12) + historicalWaste;
+  const totalImpact     = (monthlyLeak * 12) + historicalWaste + confirmedHistoricalLoss;
 
-  // FINANCIAL RATIO
+  // ── LEAK RATIO ───────────────────────────────────────────────────────────
   const monthlyPayroll = activePayroll / 12;
-  const leakRatio      = monthlyLeak / monthlyPayroll;
+  const leakRatio      = monthlyLeak / Math.max(1, monthlyPayroll);
 
-  // STATE ASSIGNMENT -- IFTTT matrix first, legacy leakRatio block as fallback
-  let diagnosedState = resolveState(data, leakRatio);
+  // ── PRIORITY MATRIX v4.5 ─────────────────────────────────────────────────
+  const { stateKey: financialStateKey, financialTier } = resolveFinancialState(
+    leakRatio,
+    confirmedHistoricalLoss,
+    activePayroll
+  );
 
-  if (!diagnosedState) {
-    let stateKey = "STRATEGIC_DRIFT";
-    if (leakRatio < 0.01) {
-      if (cTax > 1.2)                            stateKey = "PROCESS_PARALYSIS";
-      else if (cTax < 1.1)                       stateKey = "SILO_ISOLATION";
-      else                                        stateKey = "STAGNANT_STABILITY";
-    } else if (leakRatio < 0.02) {
-      if (execCount > 4)                           stateKey = "RELATIONAL_FRICTION";
-      else if (activeRevGap > activePayroll * 0.1) stateKey = "TALENT_HEMORRHAGE";
-      else                                         stateKey = "CAFFEINE_CULTURE";
-    } else if (leakRatio < 0.05) {
-      if (cTax > 1.3)                                   stateKey = "INSTITUTIONAL_RIGIDITY";
-      else if (execCount > 5)                           stateKey = "EXECUTIVE_EMBARGO";
-      else if (activeStalledDrag > activePayroll * 0.1) stateKey = "STALLED_HEGEMONY";
-      else                                              stateKey = "BRILLIANT_SABOTAGE";
-    } else {
-      stateKey = "TOTAL_FRICTION_COLLAPSE";
-    }
+  const resolvedStateKey = financialStateKey || resolveStateFromBandAndSignals(
+    financialTier, data, cTax, execCount, activeRevGap, activePayroll, activeStalledDrag
+  );
 
-    diagnosedState = INSTITUTIONAL_STATES[stateKey];
-  }
+  const { stateKey: finalStateKey, resolvedTier } = applyBehavioralOverride(
+    financialTier, resolvedStateKey, data
+  );
 
-  const financialTier  = diagnosedState.tier;
-  const resolvedTier   = resolveTier(financialTier, data);
+  const diagnosedState = INSTITUTIONAL_STATES[finalStateKey] || INSTITUTIONAL_STATES.STAGNANT_STABILITY;
   const recommendation = TIER_RECOMMENDATIONS[resolvedTier];
 
+  const hammerCitation = getHammerCitation({
+    leakRatio,
+    personnelRisk:      data.personnelRisk,
+    resolutionBlockage: data.resolutionBlockage,
+    frictionDuration:   data.frictionDuration,
+  });
+
   return {
-    total:           Math.round(totalImpact),
-    monthlyBurn:     Math.round(monthlyLeak),
-    historicalWaste: Math.round(historicalWaste),
-    executionGap:    Math.round(activeRevGap),
-    coordinationTax: cTax.toFixed(2),
-    state:           diagnosedState,
+    total:                  Math.round(totalImpact),
+    monthlyBurn:            Math.round(monthlyLeak),
+    radiatedImpact:         Math.round(radiatedImpact),
+    confirmedHistoricalLoss:Math.round(confirmedHistoricalLoss),
+    historicalWaste:        Math.round(historicalWaste),
+    executionGap:           Math.round(activeRevGap),
+    coordinationTax:        cTax.toFixed(2),
+    state:                  diagnosedState,
     recommendation,
     resolvedTier,
+    leakRatio:              leakRatio.toFixed(4),
+    frictionDurationMonths: durationMonths,
+    hammerCitation,
     context: {
       orgStage,
       leadershipTenure,
       frictionLocation,
       avoidanceMechanism,
-      urgency,
       industry,
       headcountRange,
+      totalHeadcount,
       execCount,
       leakRatio: leakRatio.toFixed(3)
     },
@@ -463,4 +486,37 @@ export const calculateRealitySummary = (data) => {
       frictionLatency: "The time cost between identifying a problem and acting on it. High latency equals a higher monthly burn."
     }
   };
+};
+
+// ---------------------------------------------------------------------------
+// HAMMER CITATION SELECTOR
+// Selects the single most aggressive citation based on firing priority:
+// 1. TALENT_ARSON   -- personnelRisk YES or LOST
+// 2. DECISION_LATENCY -- resolutionBlockage ATTEMPTED
+// 3. CULTURAL_SCARRING -- frictionDuration > 12 months
+// 4. FINANCIAL_GRAVITY -- leakRatio > 5% (baseline fallback)
+// Within each category, the highest-weight citation is returned.
+// ---------------------------------------------------------------------------
+export const getHammerCitation = ({ leakRatio, personnelRisk, resolutionBlockage, frictionDuration }) => {
+  const LONG_DURATION_KEYS = new Set(['ONE_2YR', 'OVER_2YR']);
+
+  let targetTag = null;
+
+  if (personnelRisk === 'YES' || personnelRisk === 'LOST') {
+    targetTag = 'TALENT_ARSON';
+  } else if (resolutionBlockage === 'ATTEMPTED') {
+    targetTag = 'DECISION_LATENCY';
+  } else if (LONG_DURATION_KEYS.has(frictionDuration)) {
+    targetTag = 'CULTURAL_SCARRING';
+  } else if (leakRatio >= 0.05) {
+    targetTag = 'FINANCIAL_GRAVITY';
+  }
+
+  // Fallback: highest-weight citation in the full catalog
+  if (!targetTag) {
+    return HAMMER_CITATIONS.reduce((best, c) => c.weight > best.weight ? c : best);
+  }
+
+  const pool = HAMMER_CITATIONS.filter(c => c.forceTag === targetTag);
+  return pool.reduce((best, c) => c.weight > best.weight ? c : best);
 };

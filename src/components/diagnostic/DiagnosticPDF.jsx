@@ -6,6 +6,7 @@ import {
   LEADERSHIP_TENURES,
   FRICTION_LOCATIONS,
   AVOIDANCE_MECHANISMS,
+  METRIC_LEGEND,
 } from '../../lib/diagnostic-logic';
 Font.register({
   family: 'Newsreader',
@@ -23,7 +24,7 @@ Font.register({
 Font.register({
   family: 'Roboto',
   fonts: [
-    { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.ttf', fontWeight: 700 },
+    { src: '/fonts/Roboto-Bold.ttf', fontWeight: 700 },
   ],
 });
 // ── DESIGN TOKENS ────────────────────────────────────────────────────────────
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
     marginBottom: 16,
   },
-  costFigureRow: { flexDirection: 'row', gap: 32, marginTop: 4 },
+  costFigureRow: { flexDirection: 'row', gap: 32, marginTop: 4, flexWrap: 'wrap' },
   costFigureItem: { flexDirection: 'column', gap: 4 },
   costFigureValue: {
     fontFamily: 'Newsreader',
@@ -180,6 +181,66 @@ const styles = StyleSheet.create({
     color: T.accent,
     fontWeight: 700,
     lineHeight: 1.5,
+  },
+  // ── metric legend ──
+  legendTable: {
+    borderWidth: 0.5,
+    borderColor: T.border,
+    marginTop: 4,
+  },
+  legendRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    padding: 12,
+    gap: 16,
+    borderBottomWidth: 0.5,
+    borderBottomColor: T.border,
+  },
+  legendRowLast: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    padding: 12,
+    gap: 16,
+  },
+  legendTerm: {
+    fontFamily: 'SpaceMono',
+    fontSize: 7,
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+    color: T.accent,
+    fontWeight: 700,
+    width: 110,
+    paddingTop: 1,
+  },
+  legendDefinition: {
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
+    fontSize: 9.5,
+    color: T.muted,
+    lineHeight: 1.55,
+    flex: 1,
+  },
+  // ── benchmark block ──
+  benchmarkBlock: {
+    backgroundColor: T.text,
+    padding: 20,
+    marginTop: 4,
+  },
+  benchmarkLabel: {
+    fontFamily: 'SpaceMono',
+    fontSize: 7.5,
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+    color: T.accent,
+    fontWeight: 700,
+    marginBottom: 8,
+  },
+  benchmarkQuote: {
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
+    fontSize: 11,
+    color: T.bg,
+    lineHeight: 1.65,
   },
   // ── case for action grid ──
   caseGrid: {
@@ -290,40 +351,26 @@ function buildInferredObservation(summary, inputData) {
   } = inputData;
 
   // ── v4.0 IFTTT State Observations ──────────────────────────────────────────
-  // Evaluated in same priority order as resolveState in diagnostic-logic.js.
-
-  // Rule 1 -- Institutional Protection
   if (state.label === V4_LABELS.INSTITUTIONAL_PROTECTION) {
     return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection -- someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
   }
-
-  // Rule 2 -- Culture Selecting Out
   if (state.label === V4_LABELS.CULTURE_SELECTING_OUT) {
     return "This organization has already lost someone because of this dynamic. That is a confirmed cost, not a projection. The people who have other options are quietly evaluating them -- not because the work isn't interesting, but because the environment isn't honest enough to keep people who have standards for how they want to work. That's a specific and expensive kind of culture problem, and it compounds with time.";
   }
-
-  // Rule 3 -- Problem at the Top
   if (state.label === V4_LABELS.PROBLEM_AT_THE_TOP) {
     return "The people with the authority to make the decision are the same people whose dynamic is preventing it. That is a closed loop. No amount of process improvement or structural change will resolve something that lives in the leadership team itself. Until that dynamic is named and worked directly, any intervention will work around it rather than through it.";
   }
-
-  // Rule 4 -- Structural Not Personal
   if (state.label === V4_LABELS.STRUCTURAL_NOT_PERSONAL) {
     return "Cross-functional friction that survives a direct conversation is almost never a communication problem. If the friction is between departments, it lives in how the organization is designed -- not in how the people in it are talking to each other. Those are different problems with different solutions, and it matters which one you're actually addressing.";
   }
-
-  // Rule 5 -- Unknown Unknown
   if (state.label === V4_LABELS.UNKNOWN_UNKNOWN) {
     return "Not being able to locate the source of organizational friction is a legitimate presenting condition, not a failure of self-awareness. Organizations that can't locate the problem are often the ones closest to it. The diagnostic exists precisely for this -- the first act of resolution is finding out exactly what you're resolving.";
   }
-
-  // Rule 6 -- High Activity High Burn
   if (state.label === V4_LABELS.HIGH_ACTIVITY_HIGH_BURN) {
     return "This organization has been moving fast enough that it hasn't stopped to name what it's actually running on. Speed is functioning as avoidance here -- not deliberately, but effectively. The cost has been accumulating in the background while the activity level made it easy not to look.";
   }
 
   // ── v3.0 Legacy State Observations ─────────────────────────────────────────
-
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
     return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection -- someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
   }
@@ -398,7 +445,6 @@ function buildRecommendationRationale(summary, inputData) {
     return "Safe Harbor is the right entry point because what this profile describes isn't a situation that a time-bound structured engagement will resolve. The friction is too embedded, the stakes are too specific, and what's needed is an indefinite confidential relationship -- not a project with a deliverable at the end.";
   }
   if (tier === 'The Intervention') {
-    // Gravity Override: High-cost structural friction
     if (summary.total > 1000000 && state.label.includes("structural")) {
       return "The Intervention is the right entry point because the financial gravity of this situation has exceeded the window for a standard roadmap. At an annual cost of " + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(summary.total) + ", the roadmap phase represents an additional and unnecessary liability. We recommend moving directly to resolution.";
     }
@@ -436,7 +482,12 @@ function buildRecommendationRationale(summary, inputData) {
 
 // ── DOCUMENT ─────────────────────────────────────────────────────────────────
 export function DiagnosticDocument({ summary, inputData }) {
-  const { total, monthlyBurn, executionGap, state, recommendation, resolvedTier } = summary;
+  const { total: _total, monthlyBurn: _monthlyBurn, executionGap: _executionGap, radiatedImpact: _radiated, confirmedHistoricalLoss: _chl, state, recommendation, resolvedTier, hammerCitation } = summary;
+  const total                  = Number(_total)     || 0;
+  const monthlyBurn            = Number(_monthlyBurn) || 0;
+  const executionGap           = Number(_executionGap) || 0;
+  const radiatedImpact         = Number(_radiated)   || 0;
+  const confirmedHistoricalLoss= Number(_chl)        || 0;
   const synthesis           = buildSynthesis(summary, inputData);
   const inferredObservation = buildInferredObservation(summary, inputData);
   const rationale           = buildRecommendationRationale(summary, inputData);
@@ -450,12 +501,12 @@ export function DiagnosticDocument({ summary, inputData }) {
       <Page size="A4" style={styles.page}>
         <View style={{ flex: 1, paddingBottom: 36 }}>
           {/* Watermark */}
-          <Text style={styles.watermark}>Confidential // Record v4.0</Text>
+          <Text style={styles.watermark}>Confidential // Record v4.1</Text>
           {/* ── 1. VERDICT ── */}
           <View style={styles.section}>
             <Text style={styles.label}>Institutional State</Text>
             <Text style={styles.verdictTitle}>{state.label}</Text>
-            <Text style={styles.verdictDesc}>{state.desc}</Text>
+            <Text style={styles.verdictDesc}>{state.desc || ''}</Text>
           </View>
           <View style={styles.divider} />
           {/* ── 2. COST FIGURE ── */}
@@ -469,6 +520,18 @@ export function DiagnosticDocument({ summary, inputData }) {
                 <Text style={styles.labelMuted}>Monthly Burn</Text>
                 <Text style={styles.costFigureValue}>{fmt(monthlyBurn)}</Text>
               </View>
+              {radiatedImpact > 0 && (
+                <View style={styles.costFigureItem}>
+                  <Text style={styles.labelMuted}>Radiated Impact</Text>
+                  <Text style={styles.costFigureValueNeutral}>{fmt(radiatedImpact)}</Text>
+                </View>
+              )}
+              {confirmedHistoricalLoss > 0 && (
+                <View style={styles.costFigureItem}>
+                  <Text style={styles.labelMuted}>Confirmed Historical Loss</Text>
+                  <Text style={styles.costFigureValueNeutral}>{fmt(confirmedHistoricalLoss)}</Text>
+                </View>
+              )}
               {executionGap > 0 && (
                 <View style={styles.costFigureItem}>
                   <Text style={styles.labelMuted}>Execution Gap</Text>
@@ -499,7 +562,7 @@ export function DiagnosticDocument({ summary, inputData }) {
             <Text style={styles.label}>Recommended Engagement</Text>
             <View style={styles.engagementBox}>
               <Text style={styles.engagementName}>{recommendation.name}</Text>
-              <Text style={styles.engagementOutcome}>{recommendation.outcome}</Text>
+              <Text style={styles.engagementOutcome}>{recommendation.outcome || ''}</Text>
             </View>
           </View>
           {/* ── 6. WHY THIS ENGAGEMENT (conditional) ── */}
@@ -513,7 +576,40 @@ export function DiagnosticDocument({ summary, inputData }) {
             </View>
           ) : null}
           <View style={styles.divider} />
-          {/* ── 7. THE CASE FOR ACTION ── */}
+          {/* ── 7. INSTITUTIONAL BENCHMARKS (conditional) ── */}
+          {hammerCitation ? (
+            <View style={styles.section}>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>Institutional Benchmarks</Text>
+                <View style={styles.labelRule} />
+              </View>
+              <View style={styles.benchmarkBlock}>
+                <Text style={styles.benchmarkLabel}>{hammerCitation.source}</Text>
+                <Text style={styles.benchmarkQuote}>"{hammerCitation.text}"</Text>
+              </View>
+            </View>
+          ) : null}
+          <View style={styles.divider} />
+          {/* ── 8. HOW THE MATH WORKS (Metric Legend) ── */}
+          <View style={styles.section}>
+            <View style={styles.labelRow}>
+              <Text style={styles.label}>How the Math Works</Text>
+              <View style={styles.labelRule} />
+            </View>
+            <View style={styles.legendTable}>
+              {METRIC_LEGEND.map((item, i) => (
+                <View
+                  key={item.term}
+                  style={i < METRIC_LEGEND.length - 1 ? styles.legendRow : styles.legendRowLast}
+                >
+                  <Text style={styles.legendTerm}>{item.term}</Text>
+                  <Text style={styles.legendDefinition}>{item.definition}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+          <View style={styles.divider} />
+          {/* ── 8. THE CASE FOR ACTION ── */}
           <View style={styles.sectionLast}>
             <Text style={styles.label}>The Case for Action</Text>
             <View style={styles.caseGrid}>
@@ -524,7 +620,7 @@ export function DiagnosticDocument({ summary, inputData }) {
               </View>
               <View style={styles.caseCellBottom}>
                 <Text style={styles.labelMuted}>Cost of Resolution // {recommendation.name}</Text>
-                <Text style={styles.caseCostAccent}>{recommendation.feeLabel}</Text>
+                <Text style={styles.caseCostAccent}>{recommendation.feeLabel || ''}</Text>
                 {returnMultiple ? (
                   <Text style={styles.caseNote}>{returnMultiple}x return on a 10% friction reduction</Text>
                 ) : null}

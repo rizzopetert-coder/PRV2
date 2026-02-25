@@ -11,14 +11,16 @@ import {
   LEADERSHIP_TENURES,
   FRICTION_LOCATIONS,
   AVOIDANCE_MECHANISMS,
+  METRIC_LEGEND,
 } from '../../lib/diagnostic-logic';
 
 /**
- * ResultsLedger // Principal Resolution v4.0
+ * ResultsLedger // Principal Resolution v4.1
  * State label sync: IFTTT Multi-Signal Matrix.
  * buildSynthesis updated for sentence-style labels.
  * buildInferredObservation: v4.0 blocks added above legacy blocks.
  * buildRecommendationRationale: Gravity Override added (v4.1).
+ * Metric Legend: added (v4.1).
  */
 
 const formatCurrency = (val) =>
@@ -266,7 +268,9 @@ function buildRecommendationRationale(summary, inputData) {
 export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData }) {
   const {
     total, monthlyBurn, executionGap,
+    radiatedImpact, confirmedHistoricalLoss,
     state, recommendation, resolvedTier,
+    hammerCitation,
   } = summary;
 
   const synthesis       = useMemo(() => buildSynthesis(summary, inputData), [summary, inputData]);
@@ -351,7 +355,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
       >
         {/* Watermark */}
         <div className="absolute top-10 right-10 font-mono text-[9px] uppercase tracking-institutional opacity-10 rotate-90 origin-top-right text-brand-text font-bold select-none">
-          Confidential // Record v4.0
+          Confidential // Record v4.1
         </div>
 
         <div className="space-y-12">
@@ -388,7 +392,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
                 {formatCurrency(total)}
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-6">
+            <div className="flex flex-col sm:flex-row gap-6 flex-wrap">
               <div className="space-y-1">
                 <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold block">
                   Monthly Burn
@@ -400,6 +404,32 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
                   {formatCurrency(monthlyBurn)}
                 </span>
               </div>
+              {radiatedImpact > 0 && (
+                <div className="space-y-1">
+                  <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold block">
+                    Radiated Impact
+                  </span>
+                  <span
+                    className="font-serif italic text-brand-text block"
+                    style={{ fontSize: 'clamp(1.3rem, 2.5vw, 2.4rem)' }}
+                  >
+                    {formatCurrency(radiatedImpact)}
+                  </span>
+                </div>
+              )}
+              {confirmedHistoricalLoss > 0 && (
+                <div className="space-y-1">
+                  <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold block">
+                    Confirmed Historical Loss
+                  </span>
+                  <span
+                    className="font-serif italic text-brand-text block"
+                    style={{ fontSize: 'clamp(1.3rem, 2.5vw, 2.4rem)' }}
+                  >
+                    {formatCurrency(confirmedHistoricalLoss)}
+                  </span>
+                </div>
+              )}
               {executionGap > 0 && (
                 <div className="space-y-1">
                   <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold block">
@@ -415,6 +445,22 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
               )}
             </div>
           </div>
+
+          {/* FORENSIC PROOF */}
+          {hammerCitation && (
+            <div className="bg-brand-text p-6 md:p-8 space-y-3 relative overflow-hidden">
+              <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-brand-accent to-transparent pointer-events-none" />
+              <span className="font-mono text-[10px] uppercase tracking-briefing text-brand-accent font-bold block relative z-10">
+                Forensic Proof // {hammerCitation.source}
+              </span>
+              <p
+                className="font-serif italic text-brand-bg leading-relaxed relative z-10"
+                style={{ fontSize: 'clamp(0.95rem, 1.6vw, 1.15rem)' }}
+              >
+                "{hammerCitation.text}"
+              </p>
+            </div>
+          )}
 
           {/* ADVISOR SYNTHESIS */}
           <div className="space-y-4">
@@ -535,6 +581,34 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
                   </p>
                 )}
               </div>
+            </div>
+          </div>
+
+          {/* ── METRIC LEGEND ─────────────────────────────────────── */}
+          <div className="space-y-4 pt-2">
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-accent font-bold">
+                How the Math Works
+              </span>
+              <div className="flex-1 h-px bg-brand-border" />
+            </div>
+            <div className="space-y-0 border border-brand-border/40">
+              {METRIC_LEGEND.map((item, i) => (
+                <div
+                  key={item.term}
+                  className={`p-4 md:p-6 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6${i < METRIC_LEGEND.length - 1 ? ' border-b border-brand-border/40' : ''}`}
+                >
+                  <span className="font-mono text-[10px] uppercase tracking-briefing text-brand-accent font-bold shrink-0 sm:w-44 pt-0.5">
+                    {item.term}
+                  </span>
+                  <p
+                    className="font-serif italic text-brand-muted leading-relaxed"
+                    style={{ fontSize: 'clamp(0.85rem, 1.4vw, 0.95rem)' }}
+                  >
+                    {item.definition}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
 
