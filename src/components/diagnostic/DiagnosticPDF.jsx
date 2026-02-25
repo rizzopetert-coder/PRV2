@@ -118,6 +118,18 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
     marginBottom: 16,
   },
+  // Gravity Floor: used when totalImpact < $50k.
+  // A low dollar figure next to a serious verdict undermines institutional authority.
+  // This style renders the fallback statement at a readable, non-dominant size.
+  costFigureFloor: {
+    fontFamily: 'Newsreader',
+    fontStyle: 'italic',
+    fontSize: 18,
+    color: T.accent,
+    lineHeight: 1.4,
+    maxWidth: 400,
+    marginBottom: 16,
+ },
   costFigureRow: { flexDirection: 'row', marginTop: 4, flexWrap: 'wrap' },
   costFigureItem: { flexDirection: 'column', marginRight: 32 },
   costFigureValue: {
