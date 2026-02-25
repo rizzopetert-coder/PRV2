@@ -1,0 +1,362 @@
+[
+  {
+    "id": "T-01",
+    "name": "Total Friction Collapse",
+    "notes": "Rule 0: leakRatio >= 0.07. headcount 50, payroll 5000000, meetingHours 25, FULL_ORG downstream. perPersonPayroll=100000, hourlyRate=48.08, frictionGroup=7, monthlyMeetingBurn=48.08*100*cTax*7. Should push well past 7% Red Line.",
+    "inputs": {
+      "industry": "TECH",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "THREE_SEVEN",
+      "headcount": 50,
+      "payroll": "5000000",
+      "frictionLocation": "WITHIN_LEADERSHIP",
+      "avoidanceMechanism": "NO_FORUM",
+      "priorAttempt": "EXTERNAL",
+      "personnelRisk": "LOST",
+      "resolutionBlockage": "ATTEMPTED",
+      "frictionDuration": "OVER_2YR",
+      "downstreamPopulation": "FULL_ORG",
+      "meetingHours": 25,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Total Friction Collapse",
+      "tier": "Stability Support",
+      "forceTag": "TALENT_ARSON"
+    }
+  },
+  {
+    "id": "T-02",
+    "name": "Executive Embargo",
+    "notes": "AUTHORITY band (leakRatio 2-7%) + WITHIN_LEADERSHIP. avoidanceMechanism COST_TOO_HIGH avoids NO_FORUM Safe Harbor override. personnelRisk NONE avoids Hemorrhage. cTax low (small org) avoids Rigidity.",
+    "inputs": {
+      "industry": "FINANCE",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "THREE_SEVEN",
+      "headcount": 40,
+      "payroll": "7400000",
+      "frictionLocation": "WITHIN_LEADERSHIP",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "THREE_6",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 20,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Executive Embargo",
+      "tier": "Safe Harbor",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  },
+  {
+    "id": "T-03",
+    "name": "Institutional Rigidity",
+    "notes": "AUTHORITY band + cTax > 1.3. headcount 600 crosses 500 threshold, scalingFactor=0.35, cTax=1+log10(600)*0.35=1.97. frictionLocation not WITHIN_LEADERSHIP. personnelRisk NONE.",
+    "inputs": {
+      "industry": "MANUFACTURING",
+      "orgStage": "LEGACY",
+      "leadershipTenure": "SEVEN_PLUS",
+      "headcount": 600,
+      "payroll": "57000000",
+      "frictionLocation": "CROSS_FUNCTIONAL",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "SIX_12",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 18,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Institutional Rigidity",
+      "tier": "Safe Harbor",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  },
+  {
+    "id": "T-04",
+    "name": "Talent Hemorrhage",
+    "notes": "AUTHORITY band + personnelRisk YES. frictionLocation TEAM avoids Embargo. cTax low avoids Rigidity. Behavioral override: personnelRisk YES + AUTHORITY = SAFE_HARBOR.",
+    "inputs": {
+      "industry": "CONSULTING",
+      "orgStage": "GROWTH",
+      "leadershipTenure": "ONE_THREE",
+      "headcount": 60,
+      "payroll": "9300000",
+      "frictionLocation": "TEAM",
+      "avoidanceMechanism": "PREDETERMINED",
+      "priorAttempt": "CONVERSATION",
+      "personnelRisk": "YES",
+      "resolutionBlockage": "KNOWN",
+      "frictionDuration": "SIX_12",
+      "downstreamPopulation": "SMALL",
+      "meetingHours": 15,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Talent Hemorrhage",
+      "tier": "Safe Harbor",
+      "forceTag": "TALENT_ARSON"
+    }
+  },
+  {
+    "id": "T-05",
+    "name": "Brilliant Sabotage",
+    "notes": "AUTHORITY band + PREDETERMINED + execCount > 3. headcount 80 gives execCount=4. frictionLocation TEAM avoids Embargo. personnelRisk NONE avoids Hemorrhage. No behavioral override fires (COST_TOO_HIGH, NONE risk, NONE blockage). tierMap AUTHORITY = SAFE_HARBOR.",
+    "inputs": {
+      "industry": "MEDIA",
+      "orgStage": "GROWTH",
+      "leadershipTenure": "THREE_SEVEN",
+      "headcount": 80,
+      "payroll": "10000000",
+      "frictionLocation": "TEAM",
+      "avoidanceMechanism": "PREDETERMINED",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "THREE_6",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 16,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Brilliant Sabotage",
+      "tier": "Safe Harbor",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  },
+  {
+    "id": "T-06",
+    "name": "Relational Friction",
+    "notes": "AUTHORITY band fallback after all priority branches miss. frictionLocation TEAM, no personnel risk, COST_TOO_HIGH avoidance (not NO_FORUM), no blockage. tierMap AUTHORITY = SAFE_HARBOR.",
+    "inputs": {
+      "industry": "NONPROFIT",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "THREE_SEVEN",
+      "headcount": 40,
+      "payroll": "3600000",
+      "frictionLocation": "TEAM",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "THREE_6",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 14,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Relational Friction",
+      "tier": "Safe Harbor",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  },
+  {
+    "id": "T-07",
+    "name": "Stalled Hegemony",
+    "notes": "EFFICIENCY band (1-2% leakRatio) + stalledProjectCapital > 10% of activePayroll. payroll 5000000, stalled 600000 = 12%. meetingHours 8 keeps leakRatio in 1-2% band.",
+    "inputs": {
+      "industry": "TECH",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "THREE_SEVEN",
+      "headcount": 50,
+      "payroll": "5000000",
+      "frictionLocation": "CROSS_FUNCTIONAL",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "SIX_12",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 8,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "600000",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Stalled Hegemony",
+      "tier": "The Intervention",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  },
+  {
+    "id": "T-08",
+    "name": "Caffeine Culture",
+    "notes": "EFFICIENCY band fallback. No stalled capital above threshold, no revenue gap. meetingHours 9 with small org puts leakRatio in 1-2% band. tierMap EFFICIENCY = INTERVENTION.",
+    "inputs": {
+      "industry": "TECH",
+      "orgStage": "STARTUP",
+      "leadershipTenure": "ONE_THREE",
+      "headcount": 30,
+      "payroll": "3300000",
+      "frictionLocation": "TEAM",
+      "avoidanceMechanism": "NOT_AN_ISSUE",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "UNDER_3",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 9,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Caffeine Culture",
+      "tier": "The Intervention",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  },
+  {
+    "id": "T-09",
+    "name": "Process Paralysis",
+    "notes": "CLARITY band + cTax > 1.2. headcount 200 gives cTax=1+log10(200)*0.20=1.46. meetingHours 3 keeps leakRatio below 1%. frictionLocation TEAM avoids Silo. tierMap CLARITY = ROADMAP.",
+    "inputs": {
+      "industry": "HEALTH",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "THREE_SEVEN",
+      "headcount": 200,
+      "payroll": "29000000",
+      "frictionLocation": "TEAM",
+      "avoidanceMechanism": "NOT_AN_ISSUE",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "UNDER_3",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 3,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Process Paralysis",
+      "tier": "The Roadmap",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  },
+  {
+    "id": "T-10",
+    "name": "Silo Isolation",
+    "notes": "CLARITY band + frictionLocation CROSS_FUNCTIONAL. headcount 15 gives cTax=1+log10(15)*0.20=1.235, just above 1.2 -- use headcount 10 for cTax=1.20 exactly, which is NOT > 1.2, so Paralysis misses. Behavioral override: CROSS_FUNCTIONAL + CLARITY = INTERVENTION.",
+    "inputs": {
+      "industry": "LOGISTICS",
+      "orgStage": "GROWTH",
+      "leadershipTenure": "ONE_THREE",
+      "headcount": 10,
+      "payroll": "1000000",
+      "frictionLocation": "CROSS_FUNCTIONAL",
+      "avoidanceMechanism": "NOT_AN_ISSUE",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "UNDER_3",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 2,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Silo Isolation",
+      "tier": "The Intervention",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  },
+  {
+    "id": "T-11",
+    "name": "Strategic Drift",
+    "notes": "CLARITY band + orgStage LEGACY + leadershipTenure SEVEN_PLUS. frictionLocation TEAM avoids Silo. cTax <= 1.2 avoids Paralysis (headcount 10). Behavioral override: LEGACY+SEVEN_PLUS+CLARITY = INTERVENTION.",
+    "inputs": {
+      "industry": "ENERGY",
+      "orgStage": "LEGACY",
+      "leadershipTenure": "SEVEN_PLUS",
+      "headcount": 10,
+      "payroll": "1350000",
+      "frictionLocation": "TEAM",
+      "avoidanceMechanism": "NOT_AN_ISSUE",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "UNDER_3",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 2,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Strategic Drift",
+      "tier": "The Intervention",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  },
+  {
+    "id": "T-12",
+    "name": "Stagnant Stability",
+    "notes": "CLARITY band absolute fallback. cTax <= 1.2, frictionLocation TEAM, not LEGACY+SEVEN_PLUS. Minimum inputs, minimum burn. tierMap CLARITY = ROADMAP.",
+    "inputs": {
+      "industry": "RETAIL",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "ONE_THREE",
+      "headcount": 10,
+      "payroll": "850000",
+      "frictionLocation": "TEAM",
+      "avoidanceMechanism": "NOT_AN_ISSUE",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "UNDER_3",
+      "downstreamPopulation": "NONE",
+      "meetingHours": 1,
+      "revenueBest": "",
+      "revenueWorst": "",
+      "stalledProjectCapital": "",
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Stagnant Stability",
+      "tier": "The Roadmap",
+      "forceTag": "FINANCIAL_GRAVITY"
+    }
+  }
+]
