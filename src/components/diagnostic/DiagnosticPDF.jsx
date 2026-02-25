@@ -17,14 +17,19 @@ Font.register({
 Font.register({
   family: 'SpaceMono',
   fonts: [
-    { src: '/fonts/SpaceMono-Regular.ttf', fontWeight: 400 },
-    { src: '/fonts/SpaceMono-Bold.ttf', fontWeight: 700 },
+    { src: '/fonts/SpaceMono-Regular.ttf', fontWeight: 400, fontStyle: 'normal' },
+    { src: '/fonts/SpaceMono-Bold.ttf',    fontWeight: 700, fontStyle: 'normal' },
+    // SpaceMono has no true italic -- alias to satisfy renderer when page-level
+    // fontStyle: 'italic' bleeds into mono nodes.
+    { src: '/fonts/SpaceMono-Regular.ttf', fontWeight: 400, fontStyle: 'italic' },
+    { src: '/fonts/SpaceMono-Bold.ttf',    fontWeight: 700, fontStyle: 'italic' },
   ],
 });
 Font.register({
   family: 'Roboto',
   fonts: [
-    { src: '/fonts/Roboto-Bold.ttf', fontWeight: 700 },
+    { src: '/fonts/Roboto-Bold.ttf', fontWeight: 700, fontStyle: 'normal' },
+    { src: '/fonts/Roboto-Bold.ttf', fontWeight: 700, fontStyle: 'italic' },
   ],
 });
 // ── DESIGN TOKENS ────────────────────────────────────────────────────────────

@@ -8,7 +8,7 @@ import { HAMMER_CITATIONS } from '../data/hammer-citations';
  *
  * Priority Matrix v4.5 (The Latitude Mandate)
  * Rule 0: 7% Red Line -- leakRatio >= 0.07 returns TOTAL_FRICTION_COLLAPSE (STABILITY)
- * Rule 1: Historical Weight -- confirmedHistoricalLoss >= 7% of activePayroll returns STABILITY
+ * Rule 1: [Removed] -- confirmedHistoricalLoss is a display-only ledger entry, not a state trigger
  * Rule 2: Acute Behavior -- ATTEMPTED + EXTERNAL returns SAFE_HARBOR (or STABILITY if Rule 0/1 fired)
  * Rule 3: Proportional Fallback -- leakRatio bands assign Authority / Efficiency / Clarity tiers
  */
@@ -224,16 +224,15 @@ export const METRIC_LEGEND = [
 // ---------------------------------------------------------------------------
 // COMPETITIVE PRIORITY MATRIX v4.5
 // ---------------------------------------------------------------------------
-const resolveFinancialState = (leakRatio, confirmedHistoricalLoss, activePayroll) => {
+const resolveFinancialState = (leakRatio) => {
   // Rule 0: The 7% Red Line
   if (leakRatio >= 0.07) {
     return { stateKey: 'TOTAL_FRICTION_COLLAPSE', financialTier: 'STABILITY' };
   }
 
-  // Rule 1: Historical Weight -- accumulated loss >= 7% of annual payroll
-  if (confirmedHistoricalLoss >= activePayroll * 0.07) {
-    return { stateKey: 'TOTAL_FRICTION_COLLAPSE', financialTier: 'STABILITY' };
-  }
+  // Rule 1: confirmedHistoricalLoss is a display-only ledger entry.
+  // It is returned in the summary object and shown in the UI and PDF
+  // but does not participate in state assignment.
 
   // Rule 3: Proportional Fallback
   // Authority band: 2% to 7% leak ratio
@@ -425,18 +424,14 @@ export const calculateRealitySummary = (data) => {
 
   // ── TOTALS ───────────────────────────────────────────────────────────────
   const historicalWaste = activeStalledDrag + activeRevGap;
-  const totalImpact     = (monthlyLeak * 12) + historicalWaste + confirmedHistoricalLoss;
+  const totalImpact     = (monthlyLeak * 12) + historicalWaste;
 
   // ── LEAK RATIO ───────────────────────────────────────────────────────────
   const monthlyPayroll = activePayroll / 12;
   const leakRatio      = monthlyLeak / Math.max(1, monthlyPayroll);
 
   // ── PRIORITY MATRIX v4.5 ─────────────────────────────────────────────────
-  const { stateKey: financialStateKey, financialTier } = resolveFinancialState(
-    leakRatio,
-    confirmedHistoricalLoss,
-    activePayroll
-  );
+  const { stateKey: financialStateKey, financialTier } = resolveFinancialState(leakRatio);
 
   const resolvedStateKey = financialStateKey || resolveStateFromBandAndSignals(
     financialTier, data, cTax, execCount, activeRevGap, activePayroll, activeStalledDrag
