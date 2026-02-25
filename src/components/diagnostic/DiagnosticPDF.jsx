@@ -525,9 +525,17 @@ export function DiagnosticDocument({ summary, inputData }) {
           {/* ── 2. COST FIGURE ── */}
           <View style={styles.section}>
             <Text style={styles.labelMuted}>Annual Institutional Cost</Text>
-            <View style={{ minHeight: 110 }}>
-              <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
-            </View>
+            {/* Gravity Floor: Signal-Conjunction routing can produce high-severity states  */}
+  {/* with low leakRatio. A sub-$50k figure next to Talent Hemorrhage or          */}
+  {/* Executive Embargo reads as a calibration error. It is not -- the math is    */}
+  {/* early-stage. The floor statement preserves diagnostic authority.            */}
+  <View style={{ minHeight: 110 }}>
+    {total >= 50000 ? (
+      <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
+    ) : (
+      <Text style={styles.costFigureFloor}>This is the beginning of an expensive pattern.</Text>
+    )}
+  </View>
             <View style={styles.costFigureRow}>
               <View style={styles.costFigureItem}>
                 <Text style={styles.labelMuted}>Monthly Burn</Text>
