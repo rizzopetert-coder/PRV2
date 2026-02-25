@@ -70,6 +70,7 @@ const initialData = {
   meetingHours:          5,
   isUnsurePayroll:       false,
   isUnsureRevenue:       false,
+  execCount:             undefined,
 };
 
 // ── MEMOIZED PERSONNEL INPUT ──────────────────────────────────
@@ -867,6 +868,21 @@ export default function AuditSystem() {
                       style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)' }}
                     />
                   </div>
+
+                  {/* CRITICAL: DO NOT RENAME OR REMOVE. Used by Playwright forensic matrix testing. */}
+                  {/* This is the Forensic Portal -- a hidden input that allows automated tests       */}
+                  {/* to inject a manual execCount value, bypassing the 5% headcount formula.        */}
+                  <input
+                    type="hidden"
+                    id="execCount-override"
+                    value={data.execCount || ''}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value, 10);
+                      if (!isNaN(val) && val > 0) {
+                        setData(prev => ({ ...prev, execCount: val }));
+                      }
+                    }}
+                  />
 
                   <div className="space-y-4">
                     <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
