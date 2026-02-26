@@ -300,16 +300,6 @@ const fmt = (val) =>
     maximumFractionDigits: 0,
   }).format(val);
 
-// v4.0 label constants -- must match INSTITUTIONAL_STATES exactly
-const V4_LABELS = {
-  INSTITUTIONAL_PROTECTION: "Institutional protection is blocking your path forward.",
-  CULTURE_SELECTING_OUT:    "Culture is currently selecting against high performers.",
-  PROBLEM_AT_THE_TOP:       "The problem is at the top.",
-  STRUCTURAL_NOT_PERSONAL:  "The problem is structural, not personal.",
-  UNKNOWN_UNKNOWN:          "We don't know what we don't know.",
-  HIGH_ACTIVITY_HIGH_BURN:  "High activity is masking high burn.",
-};
-
 function buildSynthesis(summary, inputData) {
   const { state, recommendation, monthlyBurn, total, context } = summary;
   const { orgStage, leadershipTenure, frictionLocation, avoidanceMechanism } = context;
@@ -363,27 +353,6 @@ function buildInferredObservation(summary, inputData) {
     avoidanceMechanism, priorAttempt, personnelRisk, resolutionBlockage,
   } = inputData;
 
-  // ── v4.0 IFTTT State Observations ──────────────────────────────────────────
-  if (state.label === V4_LABELS.INSTITUTIONAL_PROTECTION) {
-    return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection -- someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
-  }
-  if (state.label === V4_LABELS.CULTURE_SELECTING_OUT) {
-    return "This organization has already lost someone because of this dynamic. That is a confirmed cost, not a projection. The people who have other options are quietly evaluating them -- not because the work isn't interesting, but because the environment isn't honest enough to keep people who have standards for how they want to work. That's a specific and expensive kind of culture problem, and it compounds with time.";
-  }
-  if (state.label === V4_LABELS.PROBLEM_AT_THE_TOP) {
-    return "The people with the authority to make the decision are the same people whose dynamic is preventing it. That is a closed loop. No amount of process improvement or structural change will resolve something that lives in the leadership team itself. Until that dynamic is named and worked directly, any intervention will work around it rather than through it.";
-  }
-  if (state.label === V4_LABELS.STRUCTURAL_NOT_PERSONAL) {
-    return "Cross-functional friction that survives a direct conversation is almost never a communication problem. If the friction is between departments, it lives in how the organization is designed -- not in how the people in it are talking to each other. Those are different problems with different solutions, and it matters which one you're actually addressing.";
-  }
-  if (state.label === V4_LABELS.UNKNOWN_UNKNOWN) {
-    return "Not being able to locate the source of organizational friction is a legitimate presenting condition, not a failure of self-awareness. Organizations that can't locate the problem are often the ones closest to it. The diagnostic exists precisely for this -- the first act of resolution is finding out exactly what you're resolving.";
-  }
-  if (state.label === V4_LABELS.HIGH_ACTIVITY_HIGH_BURN) {
-    return "This organization has been moving fast enough that it hasn't stopped to name what it's actually running on. Speed is functioning as avoidance here -- not deliberately, but effectively. The cost has been accumulating in the background while the activity level made it easy not to look.";
-  }
-
-  // ── v3.0 Legacy State Observations ─────────────────────────────────────────
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
     return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection -- someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
   }
@@ -514,7 +483,7 @@ export function DiagnosticDocument({ summary, inputData }) {
       <Page size="A4" style={styles.page}>
         <View style={{ flex: 1, paddingBottom: 36 }}>
           {/* Watermark */}
-          <Text style={styles.watermark}>Confidential // Record v4.1</Text>
+          <Text style={styles.watermark}>Confidential // Record v5.0</Text>
           {/* ── 1. VERDICT ── */}
           <View style={styles.section}>
             <Text style={styles.label}>Institutional State</Text>
