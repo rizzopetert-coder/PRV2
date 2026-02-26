@@ -353,51 +353,99 @@ function buildInferredObservation(summary, inputData) {
     avoidanceMechanism, priorAttempt, personnelRisk, resolutionBlockage,
   } = inputData;
 
+  // ── LAYER 1: SIGNAL OVERRIDES ─────────────────────────────────────────────
+  // High-value combinations where the signal tells a materially different story
+  // than the state label alone. Evaluated first. First match wins.
+
+  // Two external attempts, still blocked -- institutional protection is the only
+  // explanation that fits.
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
     return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection -- someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
   }
+
+  // Prior external engagement plus a known unmade decision -- the intervention
+  // reached the surface without touching the source.
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'KNOWN') {
     return "A previous external engagement didn't produce lasting change, and there's a decision the organization knows needs to happen but hasn't. Those two facts are usually related. The prior intervention likely addressed the visible dynamic without reaching the source of the blockage.";
   }
-  if (priorAttempt === 'CONVERSATION' && frictionLocation === 'CROSS_FUNCTIONAL') {
-    return "Cross-functional friction that survives a direct conversation is almost never a communication problem. If the conversation happened and nothing changed, the friction is structural -- it lives in how the organization is designed, not in how the people in it are talking to each other.";
-  }
-  if (priorAttempt === 'CONVERSATION' && frictionLocation === 'WITHIN_LEADERSHIP') {
-    return "A leadership team conversation that produced no lasting change usually means the conversation didn't include the person who most needed to be in it -- or that person was in it and the dynamic made honest engagement impossible. The source is still in place.";
-  }
-  if (frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'PREDETERMINED' && priorAttempt === 'EXTERNAL') {
-    return "The previous engagement didn't hold because predetermined outcomes in a leadership team almost always trace back to a single person whose position makes the outcome feel inevitable before the conversation starts. Until that dynamic is named directly, any intervention will work around it rather than through it.";
-  }
+
+  // Leadership friction, no forum, and a known unmade decision -- the silence
+  // is load-bearing. It isn't passive.
   if (frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'NO_FORUM' && resolutionBlockage === 'KNOWN') {
     return "The organization knows what needs to happen and has built -- probably without deciding to -- a culture that makes it impossible to say so out loud. That's not an accident and it's not a coincidence. The absence of a forum and the presence of an unmade decision are the same problem from two different angles.";
   }
-  if (frictionLocation === 'WITHIN_LEADERSHIP' && orgStage === 'LEGACY' && leadershipTenure === 'SEVEN_PLUS') {
-    return "When leadership friction has been present for seven-plus years in a legacy organization with no forum to surface it, the patterns have usually been in place longer than anyone will admit out loud. The people who built them are still in the room. That's not an obstacle to resolution -- it's the resolution. The conversation has to include them directly.";
-  }
-  if (state.label === 'Executive Embargo' && resolutionBlockage === 'KNOWN') {
-    return "The leadership team is both the source of the friction and the reason the resolution can't happen. That's a closed loop -- the people with the authority to make the decision are the same people whose dynamic is preventing it. Getting out of it requires someone outside that loop to name it clearly enough that action becomes possible.";
-  }
-  if (state.label === 'Caffeine Culture' && priorAttempt === 'NONE') {
-    return "This organization has been moving fast enough that it hasn't stopped to name what it's actually running on. Speed is functioning as avoidance here -- not deliberately, but effectively. The cost has been accumulating in the background while the activity level made it easy not to look.";
-  }
-  if (state.label === 'Talent Hemorrhage' && (personnelRisk === 'YES' || personnelRisk === 'LOST')) {
-    return "The institutional state and the personnel risk signal are confirming the same thing: this culture is already selecting against the people it most needs to keep. That's not a retention problem with a recruiting solution. It's an environment problem, and the people with the highest standards for how they want to work are the first ones to act on it.";
-  }
-  if (state.label === 'Brilliant Sabotage' && priorAttempt === 'NONE') {
-    return "High individual performance coexisting with collective dysfunction almost never resolves on its own -- because the person at the center of it is also the person whose output makes it feel too costly to address. The longer it goes unnamed, the more entrenched the dynamic becomes and the more the organization shapes itself around accommodating it.";
-  }
-  if ((industry === 'CONSULTING' || industry === 'FINANCE') && avoidanceMechanism === 'PREDETERMINED') {
-    return "In an organization that runs on analytical rigor, predetermined outcomes in leadership conversations are a specific kind of credibility problem. The analysis is real. The conclusion was decided before it started. The rigor is being used to justify a decision that was made on other grounds -- and the people in the room know it.";
-  }
+
+  // Nonprofit with confirmed personnel loss -- the financial calculation misses
+  // the actual cost entirely.
   if (industry === 'NONPROFIT' && personnelRisk === 'LOST') {
     return "Losing someone to organizational dysfunction in a mission-driven organization carries a specific cost that doesn't appear in any financial calculation. The people who join nonprofits have already made a values-based trade. When the environment fails them, they don't just leave the organization -- they often leave the sector. The mission didn't protect the person serving it.";
   }
+
+  // Media organization with leadership friction and no forum -- creative safety
+  // and leadership safety are different cultures that rarely speak to each other.
   if (industry === 'MEDIA' && frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'NO_FORUM') {
     return "Creative cultures are often psychologically safer for disagreement about the work than for disagreement about the people doing it. The same environment that produces passionate creative debate can be completely silent about the leadership dynamic making that debate harder. The two cultures coexist in the same room and almost never interact.";
   }
+
+  // Tech startup where an external engagement didn't hold -- the founding dynamic
+  // has a half-life longer than any intervention that doesn't name it directly.
   if (industry === 'TECH' && orgStage === 'STARTUP' && priorAttempt === 'EXTERNAL') {
     return "An external engagement that didn't hold in a startup usually means the founding dynamic reasserted itself as soon as the external presence left. That dynamic is the product of the founding relationships -- it predates the organization and it will outlast any intervention that doesn't reach it directly.";
   }
+
+  // ── LAYER 2: STATE-MATCHED BASE OBSERVATIONS ──────────────────────────────
+  // One observation per v5.0 state. Fires when no signal override matches.
+  // Guaranteed non-null return for every diagnosed state.
+
+  if (state.label === 'Total Friction Collapse') {
+    return "The diagnostic isn't projecting a bad outcome. It's confirming one that's already in progress. At this burn rate, the cost of the current situation has exceeded what any structured process can recover incrementally. The window for a deliberate approach has closed. What happens in the next few weeks matters more than what happens in the next quarter.";
+  }
+
+  if (state.label === 'Talent Hemorrhage') {
+    return "The institutional state and the personnel risk signal are confirming the same thing: this culture is already selecting against the people it most needs to keep. That's not a retention problem with a recruiting solution. It's an environment problem, and the people with the highest standards for how they want to work are the first ones to act on it. The ones who stay after that are the ones who couldn't leave.";
+  }
+
+  if (state.label === 'Executive Embargo') {
+    return "The people with the authority to make the decision are the same people whose dynamic is preventing it. That is a closed loop. No amount of process improvement or structural change will resolve something that lives in the leadership team itself. Until that dynamic is named and worked directly, any intervention will work around it rather than through it.";
+  }
+
+  if (state.label === 'Brilliant Sabotage') {
+    return "High individual performance coexisting with collective dysfunction almost never resolves on its own -- because the person at the center of it is also the person whose output makes it feel too costly to address. The organization has been quietly shaping itself around accommodating that dynamic. The longer it goes unnamed, the more expensive naming it becomes.";
+  }
+
+  if (state.label === 'Institutional Rigidity') {
+    return "The system has become too complex to support its own weight, which means it has also become too complex to change without someone willing to name that directly. Truth-averse cultures don't fail dramatically -- they calcify. The decisions that needed to be made two years ago are still pending, and the organization has built workarounds for all of them. The workarounds are now load-bearing.";
+  }
+
+  if (state.label === 'Stalled Hegemony') {
+    return "The capital tied up in initiatives nobody will kill is not just a financial problem -- it's a signal about who has permission to say what out loud. Projects don't survive past their useful life by accident. They survive because someone with influence is still attached to them, and the organization hasn't built a culture where that attachment can be named and worked through. The dead weight is protecting itself.";
+  }
+
+  if (state.label === 'Process Paralysis') {
+    return "The organization is over-governed and under-executed, and the people closest to the work have known it longer than the people approving it. Permission has become the primary product. That's not a systems problem with a systems solution -- it's a trust problem wearing a process disguise. The approvals exist because someone, at some point, stopped trusting the people below them to decide.";
+  }
+
+  if (state.label === 'Silo Isolation') {
+    return "Individual units performing while the connective tissue between them fails is almost always a leadership design problem, not a people problem. The departments aren't failing to communicate because they don't want to. They're failing to communicate because the organization hasn't given them a reason to trust what happens when they do. Information stays inside because sharing it has historically cost more than withholding it.";
+  }
+
+  if (state.label === 'Strategic Drift') {
+    return "The gap between where this organization intended to go and where it's actually heading is a candor problem wearing a strategy disguise. The misses are small enough to explain away individually and large enough to compound collectively. No one is lying. But the honest conversation about the pattern hasn't happened yet, and the pattern is the thing that needs to be addressed -- not the individual misses.";
+  }
+
+  if (state.label === 'Caffeine Culture') {
+    return "This organization has been moving fast enough that it hasn't stopped to name what it's actually running on. Speed is functioning as avoidance here -- not deliberately, but effectively. The cost has been accumulating in the background while the activity level made it easy not to look. Busy and effective are not the same thing, and right now the organization is treating them like they are.";
+  }
+
+  if (state.label === 'Relational Friction') {
+    return "The room is full of people who are too careful with each other. That's not a sign of a respectful culture -- it's a sign of a conflict-averse one. The most important conversations are staying off the agenda because the cost of having them feels higher than the cost of avoiding them. That math is wrong, and this diagnostic is showing what the avoidance is actually costing.";
+  }
+
+  if (state.label === 'Stagnant Stability') {
+    return "Nothing is visibly breaking, which is exactly why this is hard to address. The organization has learned to live around the friction rather than through it. That's not resilience -- it's adaptation to a sub-optimal normal. The cost is real, it's just diffuse enough that no single person owns the urgency to name it. This diagnostic is the first act of doing that.";
+  }
+
+  // Absolute fallback -- should not fire under v5.0 since all 12 states are covered above.
   return null;
 }
 
