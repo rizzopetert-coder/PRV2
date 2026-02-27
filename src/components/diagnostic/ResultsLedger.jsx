@@ -16,30 +16,16 @@ import {
 import DiagnosticGrid from './DiagnosticGrid';
 
 /**
- * ResultsLedger // Principal Resolution v4.1
- * State label sync: IFTTT Multi-Signal Matrix.
- * buildSynthesis updated for sentence-style labels.
- * buildInferredObservation: v4.0 blocks added above legacy blocks.
- * buildRecommendationRationale: Gravity Override added (v4.1).
- * Metric Legend: added (v4.1).
+ * ResultsLedger // Principal Resolution v5.0
+ * V4_LABELS and isV4Label dead code removed.
+ * buildSynthesis uses direct v5.0 label construction.
+ * buildInferredObservation: v5.0 signal-conjunction logic only.
  */
 
 const formatCurrency = (val) =>
   new Intl.NumberFormat('en-US', {
     style: 'currency', currency: 'USD', maximumFractionDigits: 0,
   }).format(val);
-
-// ---------------------------------------------------------------------------
-// NEW STATE LABELS (v4.0) -- must match INSTITUTIONAL_STATES exactly
-// ---------------------------------------------------------------------------
-const V4_LABELS = {
-  INSTITUTIONAL_PROTECTION: "Institutional protection is blocking your path forward.",
-  CULTURE_SELECTING_OUT:    "Culture is currently selecting against high performers.",
-  PROBLEM_AT_THE_TOP:       "The problem is at the top.",
-  STRUCTURAL_NOT_PERSONAL:  "The problem is structural, not personal.",
-  UNKNOWN_UNKNOWN:          "We don't know what we don't know.",
-  HIGH_ACTIVITY_HIGH_BURN:  "High activity is masking high burn.",
-};
 
 function buildSynthesis(summary, inputData) {
   const { state, recommendation, monthlyBurn, total, context } = summary;
@@ -77,11 +63,7 @@ function buildSynthesis(summary, inputData) {
     UNCLEAR:      "It's unclear whether previous efforts addressed the right problem, which is itself a finding.",
   }[inputData.priorAttempt] || "";
 
-  // v4.0 labels are full sentences -- don't embed them in "presenting a X pattern" construction
-  const isV4Label = Object.values(V4_LABELS).includes(state.label);
-  const openingLine = isV4Label
-    ? `This ${stage.toLowerCase()} ${industry} organization: ${state.label}`
-    : `This ${stage.toLowerCase()} ${industry} organization is presenting a ${state.label} pattern.`;
+  const openingLine = `This ${stage.toLowerCase()} ${industry} organization is presenting a ${state.label} pattern.`;
 
   return [
     openingLine,
@@ -108,8 +90,9 @@ function buildInferredObservation(summary, inputData) {
     resolutionBlockage,
   } = inputData;
 
-  // ── v3.0 Legacy State Observations ─────────────────────────────────────────
-  // These fire only when the legacy leakRatio block assigns a state.
+  // ── LAYER 1: SIGNAL OVERRIDES ─────────────────────────────────────────────
+  // High-value combinations where the signal tells a materially different story
+  // than the state label alone. Evaluated first. First match wins.
 
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
     return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection -- someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
@@ -195,7 +178,6 @@ function buildRecommendationRationale(summary, inputData) {
   }
 
   if (tier === 'The Intervention') {
-    // Gravity Override: High-cost structural friction
     if (summary.total > 1000000 && state.label.includes("structural")) {
       return "The Intervention is the right entry point because the financial gravity of this situation has exceeded the window for a standard roadmap. At an annual cost of " + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(summary.total) + ", the roadmap phase represents an additional and unnecessary liability. We recommend moving directly to resolution.";
     }
@@ -323,7 +305,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
       >
         {/* Watermark */}
         <div className="absolute top-10 right-10 font-mono text-[9px] uppercase tracking-institutional opacity-10 rotate-90 origin-top-right text-brand-text font-bold select-none">
-          Confidential // Record v4.1
+          Confidential // Record v5.0
         </div>
 
         <div className="space-y-12">
@@ -431,7 +413,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
           )}
 
           {/* ── DIAGNOSTIC GRID ── */}
-<DiagnosticGrid summary={summary} inputData={inputData} />
+          <DiagnosticGrid summary={summary} inputData={inputData} />
 
           {/* ADVISOR SYNTHESIS */}
           <div className="space-y-4">
