@@ -21,8 +21,6 @@ Font.register({
   fonts: [
     { src: '/fonts/SpaceMono-Regular.ttf', fontWeight: 400, fontStyle: 'normal' },
     { src: '/fonts/SpaceMono-Bold.ttf',    fontWeight: 700, fontStyle: 'normal' },
-    // SpaceMono has no true italic -- alias to satisfy renderer when page-level
-    // fontStyle: 'italic' bleeds into mono nodes.
     { src: '/fonts/SpaceMono-Regular.ttf', fontWeight: 400, fontStyle: 'italic' },
     { src: '/fonts/SpaceMono-Bold.ttf',    fontWeight: 700, fontStyle: 'italic' },
   ],
@@ -34,6 +32,7 @@ Font.register({
     { src: '/fonts/Roboto-Bold.ttf', fontWeight: 700, fontStyle: 'italic' },
   ],
 });
+
 // ── DESIGN TOKENS ────────────────────────────────────────────────────────────
 const T = {
   bg:      '#FAF9F6',
@@ -42,6 +41,7 @@ const T = {
   muted:   '#6B6560',
   border:  '#D0CBC2',
 };
+
 const styles = StyleSheet.create({
   page: {
     backgroundColor: T.bg,
@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
     color: T.muted,
     fontWeight: 700,
     marginBottom: 6,
-  },  // ── verdict ──
+  },
+  // ── verdict ──
   verdictTitle: {
     fontFamily: 'Newsreader',
     fontStyle: 'italic',
@@ -120,9 +121,6 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
     marginBottom: 16,
   },
-  // Gravity Floor: used when totalImpact < $50k.
-  // A low dollar figure next to a serious verdict undermines institutional authority.
-  // This style renders the fallback statement at a readable, non-dominant size.
   costFigureFloor: {
     fontFamily: 'Newsreader',
     fontStyle: 'italic',
@@ -131,7 +129,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
     maxWidth: 400,
     marginBottom: 16,
- },
+  },
   costFigureRow: { flexDirection: 'row', marginTop: 4, flexWrap: 'wrap' },
   costFigureItem: { flexDirection: 'column', marginRight: 32 },
   costFigureValue: {
@@ -146,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: T.text,
   },
-  // ── body text (synthesis / inference / rationale) ──
+  // ── body text ──
   body: {
     fontFamily: 'Newsreader',
     fontStyle: 'italic',
@@ -169,13 +167,13 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     maxWidth: 480,
   },
-  // ── divider row (label + rule) ──
+  // ── divider row (label + rule) -- FIXED: flexDirection, flex ──
   labelRow: {
-    Direction: 'row',
+    flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
   },
-  labelRule: { : 1, borderTopWidth: 0.5, borderTopColor: T.border, marginLeft: 10 },
+  labelRule: { flex: 1, borderTopWidth: 0.5, borderTopColor: T.border, marginLeft: 10 },
   // ── recommended engagement box ──
   engagementBox: {
     borderWidth: 0.75,
@@ -199,21 +197,21 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     lineHeight: 1.5,
   },
-  // ── metric legend ──
+  // ── metric legend -- FIXED: flexDirection, alignItems ──
   legendTable: {
     borderWidth: 0.5,
     borderColor: T.border,
     marginTop: 4,
   },
   legendRow: {
-    Direction: 'row',
-    alignItems: '-start',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     padding: 12,
     borderBottomWidth: 0.5,
     borderBottomColor: T.border,
   },
   legendRowLast: {
-    Direction: 'row',
+    flexDirection: 'row',
     alignItems: 'flex-start',
     padding: 12,
   },
@@ -294,6 +292,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
   },
 });
+
 // ── HELPERS ──────────────────────────────────────────────────────────────────
 const fmt = (val) =>
   new Intl.NumberFormat('en-US', {
@@ -309,32 +308,32 @@ function buildSynthesis(summary, inputData) {
   const stage    = ORG_STAGES[orgStage]?.label || orgStage;
   const tenure   = LEADERSHIP_TENURES[leadershipTenure]?.label || leadershipTenure;
   const friction = FRICTION_LOCATIONS[frictionLocation]?.label?.toLowerCase() || 'an unlocated source';
+
   const avoidanceLine = {
     NO_FORUM:      "The absence of a safe forum means the real conversation has never had a place to happen.",
     PREDETERMINED: "When outcomes feel predetermined, filtered information reaches leadership -- and the real problem stays hidden.",
     COST_TOO_HIGH: "The perceived cost of the conversation is being weighed against the actual cost of avoiding it. The math does not favor avoidance.",
   }[avoidanceMechanism] || "";
+
   const personnelRiskLine = {
     LOST:     "This organization has already lost someone because of this dynamic. That's a confirmed cost, not a projection.",
     YES:      "There is someone in the room this situation is making it harder to keep.",
     POSSIBLY: "There are early signs that this situation is affecting retention.",
   }[inputData.personnelRisk] || "";
+
   const resolutionBlockageLine = {
     ATTEMPTED: "Something is actively preventing a decision the organization knows needs to happen. That blockage is its own compounding liability.",
     KNOWN:     "The organization knows what needs to happen and hasn't been able to act on it. The cost of that gap is included in this assessment.",
     SUSPECTED: "There may be a personnel decision being avoided. Whether or not it's named, the organization is carrying its weight.",
   }[inputData.resolutionBlockage] || "";
+
   const priorAttemptLine = {
     EXTERNAL:     "A previous external engagement didn't hold, which means the resolution needs to go somewhere the last one didn't reach.",
     CONVERSATION: "A prior conversation addressed this without producing change -- a signal that the source hasn't been reached yet.",
     UNCLEAR:      "It's unclear whether previous efforts addressed the right problem, which is itself a finding.",
   }[inputData.priorAttempt] || "";
 
-  // v4.0 labels are full sentences -- don't embed them in "presenting a X pattern" construction
-  const isV4Label = Object.values(V4_LABELS).includes(state.label);
-  const openingLine = isV4Label
-    ? `This ${stage.toLowerCase()} ${industry} organization: ${state.label}`
-    : `This ${stage.toLowerCase()} ${industry} organization is presenting a ${state.label} pattern.`;
+  const openingLine = `This ${stage.toLowerCase()} ${industry} organization is presenting a ${state.label} pattern.`;
 
   return [
     openingLine,
@@ -356,98 +355,63 @@ function buildInferredObservation(summary, inputData) {
   } = inputData;
 
   // ── LAYER 1: SIGNAL OVERRIDES ─────────────────────────────────────────────
-  // High-value combinations where the signal tells a materially different story
-  // than the state label alone. Evaluated first. First match wins.
-
-  // Two external attempts, still blocked -- institutional protection is the only
-  // explanation that fits.
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
     return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection -- someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
   }
-
-  // Prior external engagement plus a known unmade decision -- the intervention
-  // reached the surface without touching the source.
   if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'KNOWN') {
     return "A previous external engagement didn't produce lasting change, and there's a decision the organization knows needs to happen but hasn't. Those two facts are usually related. The prior intervention likely addressed the visible dynamic without reaching the source of the blockage.";
   }
-
-  // Leadership friction, no forum, and a known unmade decision -- the silence
-  // is load-bearing. It isn't passive.
   if (frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'NO_FORUM' && resolutionBlockage === 'KNOWN') {
     return "The organization knows what needs to happen and has built -- probably without deciding to -- a culture that makes it impossible to say so out loud. That's not an accident and it's not a coincidence. The absence of a forum and the presence of an unmade decision are the same problem from two different angles.";
   }
-
-  // Nonprofit with confirmed personnel loss -- the financial calculation misses
-  // the actual cost entirely.
   if (industry === 'NONPROFIT' && personnelRisk === 'LOST') {
     return "Losing someone to organizational dysfunction in a mission-driven organization carries a specific cost that doesn't appear in any financial calculation. The people who join nonprofits have already made a values-based trade. When the environment fails them, they don't just leave the organization -- they often leave the sector. The mission didn't protect the person serving it.";
   }
-
-  // Media organization with leadership friction and no forum -- creative safety
-  // and leadership safety are different cultures that rarely speak to each other.
   if (industry === 'MEDIA' && frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'NO_FORUM') {
     return "Creative cultures are often psychologically safer for disagreement about the work than for disagreement about the people doing it. The same environment that produces passionate creative debate can be completely silent about the leadership dynamic making that debate harder. The two cultures coexist in the same room and almost never interact.";
   }
-
-  // Tech startup where an external engagement didn't hold -- the founding dynamic
-  // has a half-life longer than any intervention that doesn't name it directly.
   if (industry === 'TECH' && orgStage === 'STARTUP' && priorAttempt === 'EXTERNAL') {
     return "An external engagement that didn't hold in a startup usually means the founding dynamic reasserted itself as soon as the external presence left. That dynamic is the product of the founding relationships -- it predates the organization and it will outlast any intervention that doesn't reach it directly.";
   }
 
   // ── LAYER 2: STATE-MATCHED BASE OBSERVATIONS ──────────────────────────────
-  // One observation per v5.0 state. Fires when no signal override matches.
-  // Guaranteed non-null return for every diagnosed state.
-
   if (state.label === 'Total Friction Collapse') {
     return "The diagnostic isn't projecting a bad outcome. It's confirming one that's already in progress. At this burn rate, the cost of the current situation has exceeded what any structured process can recover incrementally. The window for a deliberate approach has closed. What happens in the next few weeks matters more than what happens in the next quarter.";
   }
-
   if (state.label === 'Talent Hemorrhage') {
     return "The institutional state and the personnel risk signal are confirming the same thing: this culture is already selecting against the people it most needs to keep. That's not a retention problem with a recruiting solution. It's an environment problem, and the people with the highest standards for how they want to work are the first ones to act on it. The ones who stay after that are the ones who couldn't leave.";
   }
-
   if (state.label === 'Executive Embargo') {
     return "The people with the authority to make the decision are the same people whose dynamic is preventing it. That is a closed loop. No amount of process improvement or structural change will resolve something that lives in the leadership team itself. Until that dynamic is named and worked directly, any intervention will work around it rather than through it.";
   }
-
   if (state.label === 'Brilliant Sabotage') {
     return "High individual performance coexisting with collective dysfunction almost never resolves on its own -- because the person at the center of it is also the person whose output makes it feel too costly to address. The organization has been quietly shaping itself around accommodating that dynamic. The longer it goes unnamed, the more expensive naming it becomes.";
   }
-
   if (state.label === 'Institutional Rigidity') {
     return "The system has become too complex to support its own weight, which means it has also become too complex to change without someone willing to name that directly. Truth-averse cultures don't fail dramatically -- they calcify. The decisions that needed to be made two years ago are still pending, and the organization has built workarounds for all of them. The workarounds are now load-bearing.";
   }
-
   if (state.label === 'Stalled Hegemony') {
     return "The capital tied up in initiatives nobody will kill is not just a financial problem -- it's a signal about who has permission to say what out loud. Projects don't survive past their useful life by accident. They survive because someone with influence is still attached to them, and the organization hasn't built a culture where that attachment can be named and worked through. The dead weight is protecting itself.";
   }
-
   if (state.label === 'Process Paralysis') {
     return "The organization is over-governed and under-executed, and the people closest to the work have known it longer than the people approving it. Permission has become the primary product. That's not a systems problem with a systems solution -- it's a trust problem wearing a process disguise. The approvals exist because someone, at some point, stopped trusting the people below them to decide.";
   }
-
   if (state.label === 'Silo Isolation') {
     return "Individual units performing while the connective tissue between them fails is almost always a leadership design problem, not a people problem. The departments aren't failing to communicate because they don't want to. They're failing to communicate because the organization hasn't given them a reason to trust what happens when they do. Information stays inside because sharing it has historically cost more than withholding it.";
   }
-
   if (state.label === 'Strategic Drift') {
     return "The gap between where this organization intended to go and where it's actually heading is a candor problem wearing a strategy disguise. The misses are small enough to explain away individually and large enough to compound collectively. No one is lying. But the honest conversation about the pattern hasn't happened yet, and the pattern is the thing that needs to be addressed -- not the individual misses.";
   }
-
   if (state.label === 'Caffeine Culture') {
     return "This organization has been moving fast enough that it hasn't stopped to name what it's actually running on. Speed is functioning as avoidance here -- not deliberately, but effectively. The cost has been accumulating in the background while the activity level made it easy not to look. Busy and effective are not the same thing, and right now the organization is treating them like they are.";
   }
-
   if (state.label === 'Relational Friction') {
     return "The room is full of people who are too careful with each other. That's not a sign of a respectful culture -- it's a sign of a conflict-averse one. The most important conversations are staying off the agenda because the cost of having them feels higher than the cost of avoiding them. That math is wrong, and this diagnostic is showing what the avoidance is actually costing.";
   }
-
   if (state.label === 'Stagnant Stability') {
     return "Nothing is visibly breaking, which is exactly why this is hard to address. The organization has learned to live around the friction rather than through it. That's not resilience -- it's adaptation to a sub-optimal normal. The cost is real, it's just diffuse enough that no single person owns the urgency to name it. This diagnostic is the first act of doing that.";
   }
 
-  // Absolute fallback -- should not fire under v5.0 since all 12 states are covered above.
   return null;
 }
 
@@ -458,6 +422,7 @@ function buildRecommendationRationale(summary, inputData) {
     priorAttempt, personnelRisk, resolutionBlockage, leadershipTenure,
   } = inputData;
   const tier = recommendation.name;
+
   if (tier === 'Stability Support') {
     return "The math has turned on this one. The diagnostic is showing a cost of inaction that exceeds what a structured intervention can address incrementally. What's needed now isn't a plan -- it's immediate stabilization. Stability Support is the right entry point because the window for a deliberate process has closed and what happens in the next few weeks will determine what's possible after that.";
   }
@@ -515,11 +480,11 @@ function buildRecommendationRationale(summary, inputData) {
 // ── DOCUMENT ─────────────────────────────────────────────────────────────────
 export function DiagnosticDocument({ summary, inputData }) {
   const { total: _total, monthlyBurn: _monthlyBurn, executionGap: _executionGap, radiatedImpact: _radiated, confirmedHistoricalLoss: _chl, state, recommendation, resolvedTier, hammerCitation } = summary;
-  const total                  = Number(_total)     || 0;
-  const monthlyBurn            = Number(_monthlyBurn) || 0;
-  const executionGap           = Number(_executionGap) || 0;
-  const radiatedImpact         = Number(_radiated)   || 0;
-  const confirmedHistoricalLoss= Number(_chl)        || 0;
+  const total                   = Number(_total)       || 0;
+  const monthlyBurn             = Number(_monthlyBurn) || 0;
+  const executionGap            = Number(_executionGap) || 0;
+  const radiatedImpact          = Number(_radiated)    || 0;
+  const confirmedHistoricalLoss = Number(_chl)         || 0;
   const synthesis           = buildSynthesis(summary, inputData);
   const inferredObservation = buildInferredObservation(summary, inputData);
   const rationale           = buildRecommendationRationale(summary, inputData);
@@ -528,15 +493,14 @@ export function DiagnosticDocument({ summary, inputData }) {
   const returnMultiple  = recommendation.fee
     ? (annualRecovery / recommendation.fee).toFixed(1)
     : null;
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={{ flex: 1, paddingBottom: 36 }}>
-          {/* ── DIAGNOSTIC GRID ── */}
-<DiagnosticGridPDF summary={summary} inputData={inputData} />
-<View style={styles.divider} />
           {/* Watermark */}
           <Text style={styles.watermark}>Confidential // Record v5.0</Text>
+
           {/* ── 1. VERDICT ── */}
           <View style={styles.section}>
             <Text style={styles.label}>Institutional State</Text>
@@ -544,20 +508,17 @@ export function DiagnosticDocument({ summary, inputData }) {
             <Text style={styles.verdictDesc}>{state.desc || ''}</Text>
           </View>
           <View style={styles.divider} />
+
           {/* ── 2. COST FIGURE ── */}
           <View style={styles.section}>
             <Text style={styles.labelMuted}>Annual Institutional Cost</Text>
-            {/* Gravity Floor: Signal-Conjunction routing can produce high-severity states  */}
-  {/* with low leakRatio. A sub-$50k figure next to Talent Hemorrhage or          */}
-  {/* Executive Embargo reads as a calibration error. It is not -- the math is    */}
-  {/* early-stage. The floor statement preserves diagnostic authority.            */}
-  <View style={{ minHeight: 110 }}>
-    {total >= 50000 ? (
-      <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
-    ) : (
-      <Text style={styles.costFigureFloor}>This is the beginning of an expensive pattern.</Text>
-    )}
-  </View>
+            <View style={{ minHeight: 110 }}>
+              {total >= 50000 ? (
+                <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
+              ) : (
+                <Text style={styles.costFigureFloor}>This is the beginning of an expensive pattern.</Text>
+              )}
+            </View>
             <View style={styles.costFigureRow}>
               <View style={styles.costFigureItem}>
                 <Text style={styles.labelMuted}>Monthly Burn</Text>
@@ -584,12 +545,20 @@ export function DiagnosticDocument({ summary, inputData }) {
             </View>
           </View>
           <View style={styles.divider} />
-          {/* ── 3. ADVISOR SYNTHESIS ── */}
+
+          {/* ── 3. DIAGNOSTIC GRID ── */}
+          <View style={styles.section}>
+            <DiagnosticGridPDF summary={summary} inputData={inputData} />
+          </View>
+          <View style={styles.divider} />
+
+          {/* ── 4. ADVISOR SYNTHESIS ── */}
           <View style={styles.section}>
             <Text style={styles.label}>Advisor Synthesis</Text>
             <Text style={styles.body}>{synthesis}</Text>
           </View>
-          {/* ── 4. ADVISOR INFERENCE (conditional) ── */}
+
+          {/* ── 5. ADVISOR INFERENCE (conditional) ── */}
           {inferredObservation ? (
             <View style={styles.section}>
               <View style={styles.labelRow}>
@@ -600,7 +569,8 @@ export function DiagnosticDocument({ summary, inputData }) {
             </View>
           ) : null}
           <View style={styles.divider} />
-          {/* ── 5. RECOMMENDED ENGAGEMENT ── */}
+
+          {/* ── 6. RECOMMENDED ENGAGEMENT ── */}
           <View style={styles.section}>
             <Text style={styles.label}>Recommended Engagement</Text>
             <View style={styles.engagementBox}>
@@ -608,7 +578,8 @@ export function DiagnosticDocument({ summary, inputData }) {
               <Text style={styles.engagementOutcome}>{recommendation.outcome || ''}</Text>
             </View>
           </View>
-          {/* ── 6. WHY THIS ENGAGEMENT (conditional) ── */}
+
+          {/* ── 7. WHY THIS ENGAGEMENT (conditional) ── */}
           {rationale ? (
             <View style={styles.section}>
               <View style={styles.labelRow}>
@@ -619,7 +590,8 @@ export function DiagnosticDocument({ summary, inputData }) {
             </View>
           ) : null}
           <View style={styles.divider} />
-          {/* ── 7. INSTITUTIONAL BENCHMARKS (conditional) ── */}
+
+          {/* ── 8. INSTITUTIONAL BENCHMARKS (conditional) ── */}
           {hammerCitation ? (
             <View style={styles.section}>
               <View style={styles.labelRow}>
@@ -633,7 +605,8 @@ export function DiagnosticDocument({ summary, inputData }) {
             </View>
           ) : null}
           <View style={styles.divider} />
-          {/* ── 8. HOW THE MATH WORKS (Metric Legend) ── */}
+
+          {/* ── 9. HOW THE MATH WORKS ── */}
           <View style={styles.section}>
             <View style={styles.labelRow}>
               <Text style={styles.label}>How the Math Works</Text>
@@ -652,7 +625,8 @@ export function DiagnosticDocument({ summary, inputData }) {
             </View>
           </View>
           <View style={styles.divider} />
-          {/* ── 8. THE CASE FOR ACTION ── */}
+
+          {/* ── 10. THE CASE FOR ACTION ── */}
           <View style={styles.sectionLast}>
             <Text style={styles.label}>The Case for Action</Text>
             <View style={styles.caseGrid}>
@@ -670,6 +644,7 @@ export function DiagnosticDocument({ summary, inputData }) {
               </View>
             </View>
           </View>
+
         </View>
       </Page>
     </Document>
