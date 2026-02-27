@@ -8,6 +8,8 @@ import {
   AVOIDANCE_MECHANISMS,
   METRIC_LEGEND,
 } from '../../lib/diagnostic-logic';
+import { DiagnosticGridPDF } from './DiagnosticGridPDF';
+
 Font.register({
   family: 'Newsreader',
   fonts: [
@@ -169,11 +171,11 @@ const styles = StyleSheet.create({
   },
   // ── divider row (label + rule) ──
   labelRow: {
-    flexDirection: 'row',
+    Direction: 'row',
     alignItems: 'center',
     marginBottom: 10,
   },
-  labelRule: { flex: 1, borderTopWidth: 0.5, borderTopColor: T.border, marginLeft: 10 },
+  labelRule: { : 1, borderTopWidth: 0.5, borderTopColor: T.border, marginLeft: 10 },
   // ── recommended engagement box ──
   engagementBox: {
     borderWidth: 0.75,
@@ -204,14 +206,14 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   legendRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+    Direction: 'row',
+    alignItems: '-start',
     padding: 12,
     borderBottomWidth: 0.5,
     borderBottomColor: T.border,
   },
   legendRowLast: {
-    flexDirection: 'row',
+    Direction: 'row',
     alignItems: 'flex-start',
     padding: 12,
   },
@@ -530,6 +532,9 @@ export function DiagnosticDocument({ summary, inputData }) {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={{ flex: 1, paddingBottom: 36 }}>
+          {/* ── DIAGNOSTIC GRID ── */}
+<DiagnosticGridPDF summary={summary} inputData={inputData} />
+<View style={styles.divider} />
           {/* Watermark */}
           <Text style={styles.watermark}>Confidential // Record v5.0</Text>
           {/* ── 1. VERDICT ── */}
