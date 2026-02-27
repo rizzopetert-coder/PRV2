@@ -13,6 +13,7 @@ import {
   AVOIDANCE_MECHANISMS,
   METRIC_LEGEND,
 } from '../../lib/diagnostic-logic';
+import DiagnosticGrid from './DiagnosticGrid';
 
 /**
  * ResultsLedger // Principal Resolution v4.1
@@ -106,39 +107,6 @@ function buildInferredObservation(summary, inputData) {
     personnelRisk,
     resolutionBlockage,
   } = inputData;
-
-  // ── v4.0 IFTTT State Observations ──────────────────────────────────────────
-  // Evaluated in same priority order as resolveState in diagnostic-logic.js.
-
-  // Rule 1 -- Institutional Protection
-  if (state.label === V4_LABELS.INSTITUTIONAL_PROTECTION) {
-    return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection -- someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
-  }
-
-  // Rule 2 -- Culture Selecting Out
-  if (state.label === V4_LABELS.CULTURE_SELECTING_OUT) {
-    return "This organization has already lost someone because of this dynamic. That is a confirmed cost, not a projection. The people who have other options are quietly evaluating them -- not because the work isn't interesting, but because the environment isn't honest enough to keep people who have standards for how they want to work. That's a specific and expensive kind of culture problem, and it compounds with time.";
-  }
-
-  // Rule 3 -- Problem at the Top
-  if (state.label === V4_LABELS.PROBLEM_AT_THE_TOP) {
-    return "The people with the authority to make the decision are the same people whose dynamic is preventing it. That is a closed loop. No amount of process improvement or structural change will resolve something that lives in the leadership team itself. Until that dynamic is named and worked directly, any intervention will work around it rather than through it.";
-  }
-
-  // Rule 4 -- Structural Not Personal
-  if (state.label === V4_LABELS.STRUCTURAL_NOT_PERSONAL) {
-    return "Cross-functional friction that survives a direct conversation is almost never a communication problem. If the friction is between departments, it lives in how the organization is designed -- not in how the people in it are talking to each other. Those are different problems with different solutions, and it matters which one you're actually addressing.";
-  }
-
-  // Rule 5 -- Unknown Unknown
-  if (state.label === V4_LABELS.UNKNOWN_UNKNOWN) {
-    return "Not being able to locate the source of organizational friction is a legitimate presenting condition, not a failure of self-awareness. Organizations that can't locate the problem are often the ones closest to it. The diagnostic exists precisely for this -- the first act of resolution is finding out exactly what you're resolving.";
-  }
-
-  // Rule 6 -- High Activity High Burn
-  if (state.label === V4_LABELS.HIGH_ACTIVITY_HIGH_BURN) {
-    return "This organization has been moving fast enough that it hasn't stopped to name what it's actually running on. Speed is functioning as avoidance here -- not deliberately, but effectively. The cost has been accumulating in the background while the activity level made it easy not to look.";
-  }
 
   // ── v3.0 Legacy State Observations ─────────────────────────────────────────
   // These fire only when the legacy leakRatio block assigns a state.
@@ -461,6 +429,9 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
               </p>
             </div>
           )}
+
+          {/* ── DIAGNOSTIC GRID ── */}
+<DiagnosticGrid summary={summary} inputData={inputData} />
 
           {/* ADVISOR SYNTHESIS */}
           <div className="space-y-4">
