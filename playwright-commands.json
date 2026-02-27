@@ -1,0 +1,30 @@
+{
+  "scripts_to_add": {
+    "test:matrix":          "playwright test --config=playwright.config.js",
+    "test:matrix:headed":   "playwright test --config=playwright.config.js --headed",
+    "test:matrix:debug":    "playwright test --config=playwright.config.js --debug",
+    "test:matrix:ui":       "playwright test --config=playwright.config.js --ui",
+    "test:matrix:report":   "playwright show-report"
+  },
+
+  "one_time_setup": [
+    "npx playwright install --with-deps chromium"
+  ],
+
+  "execution_commands": {
+    "headless_all_12":       "npx playwright test --config=playwright.config.js",
+    "headed_all_12":         "npx playwright test --config=playwright.config.js --headed",
+    "single_profile":        "npx playwright test --config=playwright.config.js --grep collapse",
+    "debug_single":          "npx playwright test --config=playwright.config.js --grep collapse --debug",
+    "ui_mode":               "npx playwright test --config=playwright.config.js --ui",
+    "ci_headless":           "CI=true npx playwright test --config=playwright.config.js",
+    "view_last_report":      "npx playwright show-report"
+  },
+
+  "notes": [
+    "Add the scripts_to_add entries to the scripts block in your root package.json.",
+    "Run one_time_setup once to install the Chromium browser binary.",
+    "BASE_URL env var overrides localhost:3000 for staging or production runs.",
+    "Example staging run: BASE_URL=https://staging.principalresolution.com npx playwright test --config=playwright.config.js"
+  ]
+}

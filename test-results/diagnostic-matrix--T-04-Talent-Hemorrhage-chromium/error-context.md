@@ -1,0 +1,356 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: Principal Resolution
+        - button "Direct Inquiry" [ref=e6] [cursor=pointer]:
+          - text: Direct Inquiry
+          - img [ref=e7]
+      - generic [ref=e10]:
+        - generic [ref=e13]: Institutional Diagnostic // 2026
+        - generic [ref=e14]:
+          - heading "We don't fix people." [level=1] [ref=e15]
+          - generic [ref=e16]: We fix what breaks them.
+          - generic [ref=e17]: 25 years. Enough to know what nobody in the building wants to say.
+        - paragraph [ref=e18]: Most organizations have already named the problem. They are waiting for someone with the standing to say it out loud — and the skill to do something about it.
+        - generic [ref=e19]:
+          - button "Price the Friction" [ref=e20] [cursor=pointer]:
+            - text: Price the Friction
+            - img [ref=e21]
+          - button "Speak Directly" [ref=e23] [cursor=pointer]:
+            - text: Speak Directly
+            - img [ref=e24]
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: 70%
+          - generic [ref=e30]: of initiatives fail due to people factors
+        - generic [ref=e31]:
+          - generic [ref=e32]: 25+
+          - generic [ref=e33]: years of institutional field experience
+        - generic [ref=e34]:
+          - generic [ref=e35]: 3×
+          - generic [ref=e36]: performance gap in high-trust teams
+        - generic [ref=e37]:
+          - generic [ref=e38]: "30"
+          - generic [ref=e39]: days to a resolution roadmap
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - generic [ref=e43]: Institutional Diagnostic // 2026
+          - heading "Price the Friction." [level=2] [ref=e44]
+        - generic [ref=e45]:
+          - button "Back" [ref=e46] [cursor=pointer]:
+            - img [ref=e47]
+            - text: Back
+          - button "Reset" [ref=e49] [cursor=pointer]:
+            - img [ref=e50]
+            - text: Reset
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - generic [ref=e58]: Confidential // Record v4.1
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - generic [ref=e61]: Institutional State
+              - heading "Total Friction Collapse" [level=2] [ref=e62]
+              - paragraph [ref=e63]: "The math has turned. The cost of staying the same now exceeds the cost of a complete institutional reset. This isn't a warning -- it's a finding. The diagnostic has confirmed what was probably already suspected: inaction is no longer the safer option."
+            - generic [ref=e64]:
+              - generic [ref=e65]:
+                - generic [ref=e66]: Annual Institutional Cost
+                - generic [ref=e67]: $650,684
+              - generic [ref=e68]:
+                - generic [ref=e69]:
+                  - generic [ref=e70]: Monthly Burn
+                  - generic [ref=e71]: $41,307
+                - generic [ref=e72]:
+                  - generic [ref=e73]: Radiated Impact
+                  - generic [ref=e74]: $32,292
+                - generic [ref=e75]:
+                  - generic [ref=e76]: Confirmed Historical Loss
+                  - generic [ref=e77]: $371,763
+            - generic [ref=e78]:
+              - generic [ref=e79]: Forensic Proof // McKinsey, 2025
+              - paragraph [ref=e80]: "\"In complex roles, high performers are 800% more productive. Losing one is not a 1:1 replacement. It is an institutional collapse of a localized workstream.\""
+            - generic [ref=e81]:
+              - generic [ref=e82]: Advisor Synthesis
+              - paragraph [ref=e83]: This growth (3 to 10 years) Consulting / Agency organization is presenting a Total Friction Collapse pattern. The friction is concentrated between leadership and the team, with leadership in place for 1 to 3 years. When outcomes feel predetermined, filtered information reaches leadership -- and the real problem stays hidden. There is someone in the room this situation is making it harder to keep. The organization knows what needs to happen and hasn't been able to act on it. The cost of that gap is included in this assessment. A prior conversation addressed this without producing change -- a signal that the source hasn't been reached yet. At $41,307 per month, the annual institutional cost is $650,684. Based on this profile, the recommended entry point is Stability Support.
+            - generic [ref=e84]:
+              - generic [ref=e86]: Advisor Inference
+              - paragraph [ref=e89]: In an organization that runs on analytical rigor, predetermined outcomes in leadership conversations are a specific kind of credibility problem. The analysis is real. The conclusion was decided before it started. The rigor is being used to justify a decision that was made on other grounds -- and the people in the room know it.
+            - generic [ref=e90]:
+              - generic [ref=e91]: Recommended Engagement
+              - generic [ref=e92]:
+                - heading "Stability Support" [level=3] [ref=e93]
+                - paragraph [ref=e94]: Your mission stays intact. Your people come through it with more trust in leadership than when the crisis began.
+            - generic [ref=e95]:
+              - generic [ref=e97]: Why This Engagement
+              - paragraph [ref=e100]: The math has turned on this one. The diagnostic is showing a cost of inaction that exceeds what a structured intervention can address incrementally. What's needed now isn't a plan -- it's immediate stabilization. Stability Support is the right entry point because the window for a deliberate process has closed and what happens in the next few weeks will determine what's possible after that.
+            - generic [ref=e101]:
+              - generic [ref=e102]: The Case for Action
+              - generic [ref=e103]:
+                - generic [ref=e104]:
+                  - generic [ref=e105]: Cost of inaction // Per year
+                  - generic [ref=e106]: $650,684
+                  - paragraph [ref=e107]: Confirmed by this diagnostic
+                - generic [ref=e108]:
+                  - generic [ref=e109]: Cost of resolution // Stability Support
+                  - generic [ref=e110]: Quoted at intake
+            - generic [ref=e111]:
+              - generic [ref=e113]: How the Math Works
+              - generic [ref=e115]:
+                - generic [ref=e116]:
+                  - generic [ref=e117]: Institutional Leak
+                  - paragraph [ref=e118]: The monthly hard-dollar cost of time lost to friction. Not an estimate of what might happen -- a calculation of what is already leaving the building every month.
+                - generic [ref=e119]:
+                  - generic [ref=e120]: Coordination Tax
+                  - paragraph [ref=e121]: A weighted multiplier for organizational complexity. Larger organizations pay more per friction event because every misalignment ripples across more people, more meetings, and more decisions.
+                - generic [ref=e122]:
+                  - generic [ref=e123]: Radiated Impact
+                  - paragraph [ref=e124]: Secondary burn on downstream populations waiting for decisions that aren't being made. When friction lives at the top, the people below it absorb a 10% productivity loss while they wait.
+                - generic [ref=e125]:
+                  - generic [ref=e126]: Execution Gap
+                  - paragraph [ref=e127]: The delta between best-case revenue potential and actual results. The space between what this organization could be producing and what it is.
+                - generic [ref=e128]:
+                  - generic [ref=e129]: Confirmed Historical Loss
+                  - paragraph [ref=e130]: Capital already incinerated. The Institutional Leak multiplied by how long the friction has been running. This is a ledger entry, not a projection.
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - generic [ref=e133]: Next Step
+            - heading "You've seen the number. Here's what to do with it." [level=4] [ref=e134]
+            - paragraph [ref=e135]: Download the record and sit with it -- or let's talk about what it means for you specifically.
+          - generic [ref=e136]:
+            - button "Download the Record" [ref=e137] [cursor=pointer]:
+              - img [ref=e138]
+              - text: Download the Record
+            - button "Call us now" [ref=e141] [cursor=pointer]:
+              - text: Call us now
+              - img [ref=e142]
+          - generic [ref=e144]:
+            - generic [ref=e145]:
+              - generic [ref=e146]: Optional
+              - paragraph [ref=e147]: Leave your email to receive this record directly -- and to hear from us when new Intelligence Memos are published.
+            - textbox "Company name (optional)" [ref=e148]
+            - textbox "your@email.com" [ref=e149]
+            - generic [ref=e150]:
+              - generic [ref=e151] [cursor=pointer]:
+                - checkbox "Send me this record" [ref=e152]
+                - generic [ref=e153]: Send me this record
+              - generic [ref=e154] [cursor=pointer]:
+                - checkbox "Keep me informed of new Intelligence Memos" [ref=e155]
+                - generic [ref=e156]: Keep me informed of new Intelligence Memos
+          - button "Run it again with different inputs" [ref=e157] [cursor=pointer]:
+            - img [ref=e158]
+            - text: Run it again with different inputs
+    - generic [ref=e161]:
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]: Engagement // Outcomes
+          - heading "How we work. Why it's different." [level=2] [ref=e166]
+          - paragraph [ref=e167]: The work is always about people. The outcome is always about performance. We don't separate the two.
+        - generic [ref=e168]:
+          - generic [ref=e169]:
+            - img [ref=e171]
+            - generic [ref=e173]: Tier 01
+            - heading "The Roadmap" [level=3] [ref=e174]
+            - paragraph [ref=e175]: 30 days to find out why your team is exhausted. We listen to the people doing the work, not just the people managing it. You get a clear diagnosis and a 30-day plan that addresses the actual problem — not the one on the org chart.
+            - paragraph [ref=e176]: You leave with a diagnosis that names the real problem and a plan your team can actually execute.
+            - button "Start the Roadmap" [ref=e177] [cursor=pointer]:
+              - text: Start the Roadmap
+              - img [ref=e178]
+          - generic [ref=e180]:
+            - img [ref=e182]
+            - generic [ref=e184]: Tier 02
+            - heading "The Intervention" [level=3] [ref=e185]
+            - paragraph [ref=e186]: Direct tactical support for the hard stuff. We step into the room to handle the high-stakes conversations and structural resets that internal teams are too polite to attempt. The result is faster decisions, cleared air, and a team that knows someone finally said what needed to be said.
+            - paragraph [ref=e187]: You leave with resolution. Not a plan to resolve. Not a framework for resolving. The thing itself, done.
+            - button "Bring us in" [ref=e188] [cursor=pointer]:
+              - text: Bring us in
+              - img [ref=e189]
+          - generic [ref=e191]:
+            - img [ref=e193]
+            - generic [ref=e195]: Tier 03
+            - heading "Safe Harbor" [level=3] [ref=e196]
+            - paragraph [ref=e197]: The conversation you can't have with anyone inside the building. We serve the mission, not the politics. No agenda, no allegiance, no filtered feedback. Just the clearest view of your situation you're going to get from anyone in your orbit.
+            - paragraph [ref=e198]: No judgment, no agenda, no clock running. Just the kind of clarity that's only possible when someone is entirely and indefinitely in your corner.
+            - button "Request Safe Harbor" [ref=e199] [cursor=pointer]:
+              - text: Request Safe Harbor
+              - img [ref=e200]
+          - generic [ref=e202]:
+            - img [ref=e204]
+            - generic [ref=e207]: Tier 04
+            - heading "Development" [level=3] [ref=e208]
+            - paragraph [ref=e209]: We develop leaders who make the people around them better — not leaders who make themselves more indispensable. Practical tools, real-world application, and a framework built on the principle that clarity is the highest form of kindness you can offer a team.
+            - paragraph [ref=e210]: You leave with leaders who make the people around them measurably better — and know exactly why that matters.
+            - button "Schedule a Session" [ref=e211] [cursor=pointer]:
+              - text: Schedule a Session
+              - img [ref=e212]
+        - generic [ref=e215] [cursor=pointer]:
+          - generic [ref=e216]:
+            - img [ref=e218]
+            - generic [ref=e223]: Tier 05 // Emergency Stabilization
+            - heading "Stability Support" [level=3] [ref=e224]
+            - paragraph [ref=e225]: When the situation has outrun your internal capacity to manage it. We come in during leadership pivots, mass exits, and organizational trauma to keep the mission intact while you find your footing.
+            - paragraph [ref=e226]: Your mission stays intact. Your people come through it with more trust in leadership than when the crisis began.
+          - generic [ref=e228]:
+            - text: Call us now
+            - img [ref=e229]
+      - generic [ref=e231]:
+        - generic [ref=e232]:
+          - generic [ref=e233]:
+            - generic [ref=e234]: Intelligence Memos
+            - heading "Field Briefings." [level=2] [ref=e235]
+            - paragraph [ref=e236]: Direct analysis of the human variables that dictate how your company actually performs.
+          - button "Request Custom Briefing" [ref=e237] [cursor=pointer]:
+            - text: Request Custom Briefing
+            - img [ref=e238]
+        - generic:
+          - button "Scroll Left" [ref=e240] [cursor=pointer]:
+            - img [ref=e241]
+          - button "Scroll Right" [ref=e243] [cursor=pointer]:
+            - img [ref=e244]
+        - generic [ref=e246]:
+          - generic [ref=e247] [cursor=pointer]:
+            - img [ref=e249]
+            - generic [ref=e252]:
+              - generic [ref=e253]:
+                - generic [ref=e254]: Architecture
+                - img [ref=e255]
+              - heading "Institutional Memory and Drift" [level=3] [ref=e258]
+              - paragraph [ref=e259]: Organizations don't fail all at once. They drift — quietly, gradually — until the mission becomes a memory and the process becomes the point.
+            - generic [ref=e261]: REF // memo-12
+          - generic [ref=e263] [cursor=pointer]:
+            - img [ref=e265]
+            - generic [ref=e268]:
+              - generic [ref=e269]:
+                - generic [ref=e270]: Leadership
+                - img [ref=e271]
+              - heading "The Intellectual Bottleneck" [level=3] [ref=e274]
+              - paragraph [ref=e275]: The smartest person in the room is often the biggest obstacle to the work. Brilliance without delegation is just a very expensive ceiling.
+            - generic [ref=e277]: REF // memo-11
+          - generic [ref=e279] [cursor=pointer]:
+            - img [ref=e281]
+            - generic [ref=e284]:
+              - generic [ref=e285]:
+                - generic [ref=e286]: Culture
+                - img [ref=e287]
+              - heading "The Politeness Tax" [level=3] [ref=e290]
+              - paragraph [ref=e291]: A culture that prioritizes harmony over mission is a culture in decay. Conflict isn't the risk. Silence is.
+            - generic [ref=e293]: REF // memo-10
+          - generic [ref=e295] [cursor=pointer]:
+            - img [ref=e297]
+            - generic [ref=e300]:
+              - generic [ref=e301]:
+                - generic [ref=e302]: Efficiency
+                - img [ref=e303]
+              - heading "The Velocity of Truth" [level=3] [ref=e306]
+              - paragraph [ref=e307]: The gap between knowing something and acting on it is your primary cost driver. Most organizations treat that gap like it's free.
+            - generic [ref=e309]: REF // memo-09
+          - generic [ref=e311] [cursor=pointer]:
+            - img [ref=e313]
+            - generic [ref=e316]:
+              - generic [ref=e317]:
+                - generic [ref=e318]: Intervention
+                - img [ref=e319]
+              - heading "Crisis as a Catalyst for Clarity" [level=3] [ref=e322]
+              - paragraph [ref=e323]: In a collapse you don't need a consultant. You need a resolution. There's a difference and it matters.
+            - generic [ref=e325]: REF // memo-08
+          - generic [ref=e327] [cursor=pointer]:
+            - img [ref=e329]
+            - generic [ref=e332]:
+              - generic [ref=e333]:
+                - generic [ref=e334]: Governance
+                - img [ref=e335]
+              - heading "The Risk of Family Friction" [level=3] [ref=e338]
+              - paragraph [ref=e339]: Growth hits a ceiling when unresolved history dictates strategy. The dinner table and the boardroom need to be different rooms.
+            - generic [ref=e341]: REF // memo-07
+          - generic [ref=e343] [cursor=pointer]:
+            - img [ref=e345]
+            - generic [ref=e348]:
+              - generic [ref=e349]:
+                - generic [ref=e350]: Velocity
+                - img [ref=e351]
+              - heading "The Tax on What Is Not Said" [level=3] [ref=e354]
+              - paragraph [ref=e355]: The biggest drag on your business is the conversation your team is too polite to have. Silence isn't agreement. It's a calculated bet that you're better off not knowing.
+            - generic [ref=e357]: REF // memo-06
+          - generic [ref=e359] [cursor=pointer]:
+            - img [ref=e361]
+            - generic [ref=e364]:
+              - generic [ref=e365]:
+                - generic [ref=e366]: Logic
+                - img [ref=e367]
+              - heading "The Vanity of Being Right" [level=3] [ref=e370]
+              - paragraph [ref=e371]: Being right is a baseline. Being effective is what pays the bills. Most leaders I work with are excellent at one of those.
+            - generic [ref=e373]: REF // memo-05
+          - generic [ref=e375] [cursor=pointer]:
+            - img [ref=e377]
+            - generic [ref=e380]:
+              - generic [ref=e381]:
+                - generic [ref=e382]: Risk
+                - img [ref=e383]
+              - heading "The Cost of Flying Blind" [level=3] [ref=e386]
+              - paragraph [ref=e387]: The risks that will hurt you aren't in your data. They're in the conversations your team has decided not to have with you.
+            - generic [ref=e389]: REF // memo-04
+          - generic [ref=e391] [cursor=pointer]:
+            - img [ref=e393]
+            - generic [ref=e396]:
+              - generic [ref=e397]:
+                - generic [ref=e398]: Strategy
+                - img [ref=e399]
+              - heading "Nice is Not a Strategy" [level=3] [ref=e402]
+              - paragraph [ref=e403]: A polite culture is usually just a culture that's afraid to fight for the mission. That fear has a price.
+            - generic [ref=e405]: REF // memo-03
+          - generic [ref=e407] [cursor=pointer]:
+            - img [ref=e409]
+            - generic [ref=e412]:
+              - generic [ref=e413]:
+                - generic [ref=e414]: Architecture
+                - img [ref=e415]
+              - heading "Effectiveness Dies in Darkness" [level=3] [ref=e418]
+              - paragraph [ref=e419]: Silos aren't just an org chart problem. They're where the truth goes to hide — and where your best opportunities go to die.
+            - generic [ref=e421]: REF // memo-02
+          - generic [ref=e423] [cursor=pointer]:
+            - img [ref=e425]
+            - generic [ref=e428]:
+              - generic [ref=e429]:
+                - generic [ref=e430]: Human Variable
+                - img [ref=e431]
+              - heading "The Anatomy of Resentment" [level=3] [ref=e434]
+              - paragraph [ref=e435]: Conflict doesn't explode overnight. It simmers. By the time you can see it clearly, it's usually been running for a long time.
+            - generic [ref=e437]: REF // memo-01
+    - generic [ref=e440]:
+      - generic [ref=e441]:
+        - generic [ref=e442]:
+          - heading "Resolve the Human Variable." [level=2] [ref=e443]:
+            - text: Resolve the
+            - text: Human Variable.
+          - paragraph [ref=e444]: We do not fix people. We fix the environments that break them. Truth is a kindness and effectiveness is our only metric.
+        - generic [ref=e446]:
+          - generic [ref=e447]: Next Task // Protocol Initiation
+          - generic [ref=e448]:
+            - button "Initiate Resolution Protocol" [ref=e449] [cursor=pointer]: Initiate Resolution Protocol
+            - paragraph [ref=e451]: Strictly Confidential // Board Level Privacy
+      - generic [ref=e452]:
+        - generic [ref=e453]:
+          - generic [ref=e454]: Principal Resolution
+          - generic [ref=e455]:
+            - paragraph [ref=e456]:
+              - text: Direct Partnership for
+              - text: Institutional Performance.
+            - paragraph [ref=e457]: EST. 2026 // Remote First Deployment
+        - generic [ref=e459]:
+          - generic [ref=e460]: Core Pillars
+          - generic [ref=e461]: The Human Variable
+          - generic [ref=e462]: Absolute Candor
+          - generic [ref=e463]: Institutional Effectiveness
+        - generic [ref=e464]:
+          - generic [ref=e465]:
+            - paragraph [ref=e466]: Privacy is Absolute. All data is purged after resolution.
+            - paragraph [ref=e467]: © 2026 Principal Resolution. All Rights Reserved.
+          - generic [ref=e468]:
+            - generic [ref=e469] [cursor=pointer]: Terms of Protocol
+            - generic [ref=e470] [cursor=pointer]: Privacy Clause
+  - button "Expand theme and accessibility controls" [ref=e473] [cursor=pointer]
+  - alert [ref=e478]
+```
