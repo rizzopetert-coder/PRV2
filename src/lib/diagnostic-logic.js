@@ -50,80 +50,95 @@ export const STATES = {
 };
 
 // ─── UI & SCORING ENUMS (v6.0 Sync) ──────────────────────────────────────────
+//
+// Shape rules:
+//   { label: '...' }  — enums rendered via Object.entries + val.label in OptionButton grids
+//   plain string      — enums used in dropdowns (val directly) or display-only
+//
+// DO NOT flatten { label } objects to plain strings without updating AuditSystem.jsx.
+// scoreStates() compares against KEYS only — values/labels are UI display only.
 
 export const INDUSTRY_BENCHMARKS = {
-  TECH: 'Technology', MEDIA: 'Media/Creative', HEALTH: 'Healthcare', 
-  FINANCE: 'Finance', NONPROFIT: 'Non-Profit', GOV: 'Government',
-  MANUFACTURING: 'Manufacturing', RETAIL: 'Retail', ENERGY: 'Energy',
-  CONSULTING: 'Professional Services', CONSTRUCTION: 'Construction',
-  LOGISTICS: 'Logistics/Supply Chain', OTHER: 'Other'
+  TECH:         'Technology',
+  MEDIA:        'Media/Creative',
+  HEALTH:       'Healthcare',
+  FINANCE:      'Finance',
+  NONPROFIT:    'Non-Profit',
+  GOV:          'Government',
+  MANUFACTURING:'Manufacturing',
+  RETAIL:       'Retail',
+  ENERGY:       'Energy',
+  CONSULTING:   'Professional Services',
+  CONSTRUCTION: 'Construction',
+  LOGISTICS:    'Logistics/Supply Chain',
+  OTHER:        'Other',
 };
 
 export const ORG_STAGES = {
-  EARLY: 'Early Stage / Startup',
-  GROWTH: 'Rapid Growth / Scaling',
+  EARLY:       'Early Stage / Startup',
+  GROWTH:      'Rapid Growth / Scaling',
   ESTABLISHED: 'Established / Mature',
-  LEGACY: 'Legacy / Institutional'
+  LEGACY:      'Legacy / Institutional',
 };
 
 export const LEADERSHIP_TENURES = {
   UNDER_ONE: 'Under 1 Year',
-  ONE_3YR: '1–3 Years',
-  FOUR_6YR: '4–6 Years',
-  SEVEN_PLUS: '7+ Years'
+  ONE_3YR:   '1–3 Years',
+  FOUR_6YR:  '4–6 Years',
+  SEVEN_PLUS:'7+ Years',
 };
 
 export const FRICTION_LOCATIONS = {
-  WITHIN_LEADERSHIP: 'Within the Leadership Team',
-  CROSS_FUNCTIONAL: 'Between Departments/Silos',
-  TEAM: 'Within a Specific Team',
-  UNKNOWN: 'I cannot pinpoint the source'
+  WITHIN_LEADERSHIP: { label: 'Within the Leadership Team' },
+  CROSS_FUNCTIONAL:  { label: 'Between Departments/Silos' },
+  TEAM:              { label: 'Within a Specific Team' },
+  UNKNOWN:           { label: 'I cannot pinpoint the source' },
 };
 
 export const AVOIDANCE_MECHANISMS = {
-  NO_FORUM: 'No forum for the conversation',
-  PREDETERMINED: 'Decisions are made before meetings',
-  COST_TOO_HIGH: 'The social cost of speaking up is too high',
-  NOT_AN_ISSUE: 'Leadership denies the problem exists'
+  NO_FORUM:      { label: 'No forum for the conversation' },
+  PREDETERMINED: { label: 'Decisions are made before meetings' },
+  COST_TOO_HIGH: { label: 'The social cost of speaking up is too high' },
+  NOT_AN_ISSUE:  { label: 'Leadership denies the problem exists' },
 };
 
 export const PRIOR_ATTEMPTS = {
-  NONE: 'No formal attempt made',
-  CONVERSATION: 'Internal conversations only',
-  STRUCTURAL: 'Structural/Reporting changes',
-  EXTERNAL: 'Brought in outside help before'
+  NONE:         { label: 'No formal attempt made' },
+  CONVERSATION: { label: 'Internal conversations only' },
+  STRUCTURAL:   { label: 'Structural/Reporting changes' },
+  EXTERNAL:     { label: 'Brought in outside help before' },
 };
 
 export const PERSONNEL_RISK = {
-  NONE: 'No immediate risk',
-  YES: 'Key people are disengaged/looking',
-  LOST: 'We have already lost critical talent'
+  NONE: { label: 'No immediate risk' },
+  YES:  { label: 'Key people are disengaged/looking' },
+  LOST: { label: 'We have already lost critical talent' },
 };
 
 export const RESOLUTION_BLOCKAGE = {
-  NONE: 'Clear path to resolution',
-  KNOWN: 'Known individual/group is blocking',
-  SUSPECTED: 'Suspect a blockage but unconfirmed',
-  ATTEMPTED: 'We tried to resolve it and failed'
+  NONE:      { label: 'Clear path to resolution' },
+  KNOWN:     { label: 'Known individual/group is blocking' },
+  SUSPECTED: { label: 'Suspect a blockage but unconfirmed' },
+  ATTEMPTED: { label: 'We tried to resolve it and failed' },
 };
 
 export const FRICTION_DURATIONS = {
-  UNDER_6MO: 'Under 6 Months',
-  SIX_12MO: '6–12 Months',
-  ONE_2YR: '1–2 Years',
-  OVER_2YR: 'Over 2 Years'
+  UNDER_6MO: { label: 'Under 6 Months' },
+  SIX_12MO:  { label: '6–12 Months' },
+  ONE_2YR:   { label: '1–2 Years' },
+  OVER_2YR:  { label: 'Over 2 Years' },
 };
 
 export const DOWNSTREAM_POPULATIONS = {
-  INDIVIDUAL: 'Individual/Small Team',
-  LARGE: 'Large Department',
-  FULL_ORG: 'The Entire Organization'
+  INDIVIDUAL: { label: 'Individual/Small Team' },
+  LARGE:      { label: 'Large Department' },
+  FULL_ORG:   { label: 'The Entire Organization' },
 };
 
 export const METRIC_LEGEND = {
-  EXECUTION_GAP: 'Leadership Execution Gap',
-  RADIATED_IMPACT: 'Radiated Team Impact',
-  HISTORICAL_LOSS: 'Confirmed Historical Loss'
+  EXECUTION_GAP:    'Leadership Execution Gap',
+  RADIATED_IMPACT:  'Radiated Team Impact',
+  HISTORICAL_LOSS:  'Confirmed Historical Loss',
 };
 
 // ─── INDUSTRY VOLATILITY MULTIPLIERS ─────────────────────────────────────────
