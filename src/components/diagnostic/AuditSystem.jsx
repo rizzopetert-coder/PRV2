@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import {
-  calculateRealitySummary,
+  runDiagnostic,
   INDUSTRY_BENCHMARKS,
   ORG_STAGES,
   LEADERSHIP_TENURES,
@@ -16,25 +16,32 @@ import {
   HEADCOUNT_RANGES,
   FRICTION_DURATIONS,
   DOWNSTREAM_POPULATIONS,
+  METRIC_LEGEND,
 } from '../../lib/diagnostic-logic';
 import { useDiagnosticEngine } from '../../hooks/useDiagnosticEngine';
 import ResultsLedger from './ResultsLedger';
 
 /**
- * AuditSystem // Principal Resolution v4.1
- * Navigation: Back buttons added to each module footer and Results header.
- * State preservation: data is untouched by back navigation.
- * Tenet: Truth (Absolute Candor).
- * v4.1: frictionDuration and downstreamPopulation inputs added to BEHAVIOR module.
+ * AuditSystem // Principal Resolution v6.0
+ *
+ * Changes from v5.0:
+ * - New EMOTION step (between INTRO and CONTEXT) for primaryEmotion signal
+ * - New `decisions` field in BEHAVIOR module
+ * - Engine: runDiagnostic() replaces calculateRealitySummary()
+ * - Summary shape updated to v6.0 (state.id, tier string, toneKey, agencyScore, financials)
+ * - Dispatch payload updated to v6.0 field names
+ * - Display lookup tables preserved for UI rendering
  */
 
+// ── STEPS ─────────────────────────────────────────────────────────────────────
 const STEPS = {
   INTRO:     -1,
-  CONTEXT:    0,
-  PERSONNEL:  1,
-  BEHAVIOR:   2,
-  FINANCIAL:  3,
-  RESULTS:    4,
+  EMOTION:    0,  // new: primaryEmotion — "wade into the waters"
+  CONTEXT:    1,
+  PERSONNEL:  2,
+  BEHAVIOR:   3,
+  FINANCIAL:  4,
+  RESULTS:    5,
 };
 
 const STEP_TITLES = {
@@ -44,17 +51,69 @@ const STEP_TITLES = {
   [STEPS.FINANCIAL]: "Counting the Cost.",
 };
 
+// Module number display (EMOTION is not numbered — it is a pre-module beat)
+const MODULE_NUMBERS = {
+  [STEPS.CONTEXT]:   "Module 01 of 04",
+  [STEPS.PERSONNEL]: "Module 02 of 04",
+  [STEPS.BEHAVIOR]:  "Module 03 of 04",
+  [STEPS.FINANCIAL]: "Module 04 of 04",
+};
+
+// ── PRIMARY EMOTION OPTIONS ───────────────────────────────────────────────────
+// Human-facing labels map to engine enum values.
+// The prospect never sees EXHAUSTION / FRUSTRATION / FEAR / APATHY.
+const EMOTION_OPTIONS = [
+  {
+    value:   'EXHAUSTION',
+    label:   'Tired',
+    subtext: "I've been holding this longer than I should have to.",
+  },
+  {
+    value:   'FRUSTRATION',
+    label:   'Frustrated',
+    subtext: "I can see what needs to happen and it keeps not happening.",
+  },
+  {
+    value:   'FEAR',
+    label:   'Uncertain',
+    subtext: "I'm not sure what naming this out loud will change.",
+  },
+  {
+    value:   'APATHY',
+    label:   'Distant',
+    subtext: "I've stopped expecting this to resolve on its own.",
+  },
+];
+
+// ── DECISIONS OPTIONS ─────────────────────────────────────────────────────────
+const DECISIONS_OPTIONS = {
+  FAST:   { label: "Decisions get made and stay made" },
+  SLOW:   { label: "Decisions require multiple rounds before they land" },
+  STALLED:{ label: "Decisions get deferred or reopened constantly" },
+};
+
+// ── INITIAL DATA ──────────────────────────────────────────────────────────────
 const initialData = {
+  // v6.0 new fields
+  primaryEmotion:        '',
+  decisions:             '',
+
+  // context
   industry:              '',
   orgStage:              '',
   headcountRange:        '',
   headcountDisplay:      '',
+  headcount:             0,
   leadershipTenure:      '',
+
+  // personnel
   personnel: [
     { id: 'EXECUTIVE',    label: 'Executives and Owners',  count: 0 },
     { id: 'MANAGER',      label: 'Managers and Directors', count: 0 },
     { id: 'PROFESSIONAL', label: 'Staff and Specialists',  count: 0 },
   ],
+
+  // behavior
   frictionLocation:      '',
   avoidanceMechanism:    '',
   priorAttempt:          '',
@@ -63,6 +122,8 @@ const initialData = {
   frictionDuration:      '',
   downstreamPopulation:  '',
   resolutionVision:      '',
+
+  // financial
   payroll:               '',
   revenueBest:           '',
   revenueWorst:          '',
@@ -73,7 +134,8 @@ const initialData = {
   execCount:             undefined,
 };
 
-// ── MEMOIZED PERSONNEL INPUT ──────────────────────────────────
+// ── MEMOIZED COMPONENTS ───────────────────────────────────────────────────────
+
 const PersonnelStepper = memo(({ tier, onUpdate }) => (
   <div className="p-8 border border-brand-border hover:border-brand-accent/50 transition-colors duration-300 flex flex-col items-center gap-6">
     <span className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold text-center leading-relaxed">
@@ -97,7 +159,6 @@ const PersonnelStepper = memo(({ tier, onUpdate }) => (
 ));
 PersonnelStepper.displayName = 'PersonnelStepper';
 
-// ── OPTION BUTTON ───────────────────────────────────────────────
 const OptionButton = memo(({ value, current, field, onSelect, children }) => (
   <button
     type="button"
@@ -113,7 +174,6 @@ const OptionButton = memo(({ value, current, field, onSelect, children }) => (
 ));
 OptionButton.displayName = 'OptionButton';
 
-// ── BACK BUTTON -- shared secondary style used in every module footer ──
 const BackButton = ({ onClick }) => (
   <button
     type="button"
@@ -125,10 +185,9 @@ const BackButton = ({ onClick }) => (
   </button>
 );
 
-// ── FLOATING ADVISOR -- defined outside to prevent remount on parent re-render ──
 const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
   <AnimatePresence mode="wait">
-    {step >= 0 && step < 4 && liveInsight && (
+    {step >= STEPS.EMOTION && step < STEPS.RESULTS && liveInsight && (
       <motion.div
         key={insightKey}
         initial={{ opacity: 0, x: 12 }}
@@ -136,8 +195,8 @@ const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
         exit={{ opacity: 0, x: -8 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
         className="fixed z-[150] shadow-2xl pointer-events-auto
-  bottom-0 left-0 right-0
-  md:bottom-8 md:right-8 md:left-auto md:w-80 xl:w-96"
+          bottom-0 left-0 right-0
+          md:bottom-8 md:right-8 md:left-auto md:w-80 xl:w-96"
         style={{ maxWidth: '100vw' }}
       >
         <div className="border-l-4 border-brand-accent bg-brand-text text-brand-bg p-4 md:p-6 relative overflow-hidden max-h-[40vh] md:max-h-none overflow-y-auto">
@@ -168,9 +227,9 @@ const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
               <div
                 key={s}
                 className={`h-0.5 transition-all duration-500 ${
-                  s === step ? 'w-6 bg-brand-accent' :
-                  s < step   ? 'w-3 bg-brand-accent/40' :
-                               'w-3 bg-white/20'
+                  s === (step - 1) ? 'w-6 bg-brand-accent' :
+                  s < (step - 1)  ? 'w-3 bg-brand-accent/40' :
+                                    'w-3 bg-white/20'
                 }`}
               />
             ))}
@@ -181,17 +240,15 @@ const FloatingAdvisor = ({ step, insightKey, liveInsight }) => (
   </AnimatePresence>
 );
 
+// ── MAIN COMPONENT ────────────────────────────────────────────────────────────
 export default function AuditSystem() {
   const [step, setStep]     = useState(STEPS.INTRO);
   const [data, setData]     = useState(initialData);
   const [result, setResult] = useState(null);
   const [dispatchUrl, setDispatchUrl] = useState('');
-  const [showInsight, setShowInsight] = useState(false);
-  const [activeField, setActiveField] = useState(null);
-  const activeFieldRef = useRef(null);
   const sectionRef = useRef(null);
 
-  // ── SCROLL FIX ──────────────────────────────────────────────
+  // Scroll to top of section on step change
   useEffect(() => {
     if (step === STEPS.INTRO) return;
     if (!sectionRef.current) return;
@@ -200,12 +257,6 @@ export default function AuditSystem() {
   }, [step]);
 
   const { liveInsight, insightKey, burnIntensity } = useDiagnosticEngine(step, data);
-
-  useEffect(() => {
-    setShowInsight(false);
-    const timer = setTimeout(() => setShowInsight(true), 700);
-    return () => clearTimeout(timer);
-  }, [insightKey]);
 
   const formatCurrency = useCallback((val) => {
     if (!val || val === 'UNSURE') return '';
@@ -239,46 +290,21 @@ export default function AuditSystem() {
 
   const setField = useCallback((field, value) => {
     setData(prev => ({ ...prev, [field]: value }));
-    setActiveField(field);
   }, []);
 
   const resetAudit = useCallback(() => {
     setData(initialData);
     setResult(null);
     setStep(STEPS.INTRO);
-    setActiveField(null);
   }, []);
 
-  // ── BACK NAVIGATION ──────────────────────────────────────────
   const handleBack = useCallback(() => {
-    setStep(prev => {
-      if (prev === STEPS.CONTEXT) return STEPS.INTRO;
-      return prev - 1;
-    });
+    setStep(prev => Math.max(STEPS.INTRO, prev - 1));
   }, []);
 
-  const handleAudit = () => {
-    const summary = calculateRealitySummary(data);
-    setResult(summary);
-
-    const params = new URLSearchParams({
-      Audit_Verdict:       summary.state.label,
-      Industry:            INDUSTRY_BENCHMARKS[data.industry]?.label || data.industry,
-      Recommended:         summary.recommendation.name,
-      Personnel_Risk:      data.personnelRisk,
-      Resolution_Blockage: data.resolutionBlockage,
-      Prior_Attempt:       data.priorAttempt,
-      Org_Stage:           data.orgStage,
-      Friction:            data.frictionLocation,
-    });
-    const formID = "698e21f6638e90df485f3b60";
-    setDispatchUrl(
-      `https://portal.principalresolution.com/public/form/view/${formID}?${params.toString()}`
-    );
-    setStep(STEPS.RESULTS);
-  };
-
+  // ── PROCEED VALIDATION ────────────────────────────────────────────────────
   const canProceed = () => {
+    if (step === STEPS.EMOTION)   return !!data.primaryEmotion;
     if (step === STEPS.CONTEXT)   return data.industry && data.orgStage && data.leadershipTenure;
     if (step === STEPS.PERSONNEL) return data.headcountRange && data.personnel.reduce((a, p) => a + p.count, 0) > 0;
     if (step === STEPS.BEHAVIOR)  return (
@@ -288,10 +314,98 @@ export default function AuditSystem() {
       data.personnelRisk &&
       data.resolutionBlockage &&
       data.frictionDuration &&
-      data.downstreamPopulation
+      data.downstreamPopulation &&
+      data.decisions
     );
     if (step === STEPS.FINANCIAL) return true;
     return false;
+  };
+
+  // ── GENERATE RESULT ───────────────────────────────────────────────────────
+  const handleAudit = () => {
+    // Build inputs for v6.0 engine
+    const inputs = {
+      // org context
+      industry:             data.industry,
+      orgStage:             data.orgStage,
+      leadershipTenure:     data.leadershipTenure,
+      headcount:            data.headcount || 0,
+
+      // behavioral signals
+      frictionLocation:     data.frictionLocation,
+      avoidanceMechanism:   data.avoidanceMechanism,
+      priorAttempt:         data.priorAttempt,
+      personnelRisk:        data.personnelRisk,
+      resolutionBlockage:   data.resolutionBlockage,
+      frictionDuration:     data.frictionDuration,
+      downstreamPopulation: data.downstreamPopulation,
+      decisions:            data.decisions,
+
+      // copy modifier — zero scoring weight
+      primaryEmotion:       data.primaryEmotion,
+
+      // financial inputs
+      payroll:               Number(data.payroll)               || 0,
+      leadershipHoursLost:   data.meetingHours * 4              || 0, // weekly → monthly
+      avgLeadershipSalary:   deriveAvgSalary(data),
+      teamMultiplier:        deriveTeamMultiplier(data),
+      historicalLoss:        Number(data.stalledProjectCapital)  || 0,
+      monthlyRevenue:        Number(data.revenueBest)            || 0,
+      stalledProjectCapital: Number(data.stalledProjectCapital)  || 0,
+    };
+
+    const diagnostic = runDiagnostic(inputs);
+
+    // Flatten financials into the summary shape ResultsLedger expects
+    const summary = {
+      // state + tier
+      state:        diagnostic.state,
+      tier:         diagnostic.tier,
+      toneKey:      diagnostic.toneKey,
+      agencyScore:  diagnostic.agencyScore,
+      stateScore:   diagnostic.stateScore,
+      signals:      diagnostic.signals,
+
+      // financials (flattened for display compatibility)
+      total:                   diagnostic.financials.total,
+      monthlyBurn:             diagnostic.financials.monthlyBurn,
+      executionGap:            diagnostic.financials.executionGap,
+      radiatedImpact:          diagnostic.financials.radiatedImpact,
+      confirmedHistoricalLoss: diagnostic.financials.confirmedHistoricalLoss,
+      showGravityFloor:        diagnostic.financials.showGravityFloor,
+      leakRatio:               diagnostic.financials.leakRatio,
+
+      // context passthrough for dispatch
+      context: {
+        orgStage:           data.orgStage,
+        leadershipTenure:   data.leadershipTenure,
+        frictionLocation:   data.frictionLocation,
+        avoidanceMechanism: data.avoidanceMechanism,
+      },
+    };
+
+    setResult(summary);
+
+    // Build Dubsado dispatch URL with v6.0 field names
+    const params = new URLSearchParams({
+      Audit_Verdict:       diagnostic.state.label,
+      Audit_Tier:          diagnostic.tier,
+      Industry:            INDUSTRY_BENCHMARKS[data.industry]?.label || data.industry,
+      Personnel_Risk:      data.personnelRisk,
+      Resolution_Blockage: data.resolutionBlockage,
+      Prior_Attempt:       data.priorAttempt,
+      Org_Stage:           data.orgStage,
+      Friction:            data.frictionLocation,
+      Decisions:           data.decisions,
+      Primary_Emotion:     data.primaryEmotion,
+    });
+
+    const formID = "698e21f6638e90df485f3b60";
+    setDispatchUrl(
+      `https://portal.principalresolution.com/public/form/view/${formID}?${params.toString()}`
+    );
+
+    setStep(STEPS.RESULTS);
   };
 
   return (
@@ -328,21 +442,21 @@ export default function AuditSystem() {
 
           {step >= STEPS.CONTEXT && (
             <div className="flex items-center gap-8">
-              {step < STEPS.RESULTS && (
+              {step >= STEPS.CONTEXT && step < STEPS.RESULTS && (
                 <div className="flex gap-2">
                   {[0,1,2,3].map(s => (
                     <div
                       key={s}
                       className={`h-0.5 transition-all duration-500 ${
-                        s === step ? 'w-10 bg-brand-accent' :
-                        s < step   ? 'w-5 bg-brand-accent/40' :
-                                     'w-5 bg-brand-border'
+                        s === (step - 1) ? 'w-10 bg-brand-accent' :
+                        s < (step - 1)  ? 'w-5 bg-brand-accent/40' :
+                                          'w-5 bg-brand-border'
                       }`}
                     />
                   ))}
                 </div>
               )}
-              {step > STEPS.CONTEXT && (
+              {step > STEPS.EMOTION && (
                 <button
                   onClick={handleBack}
                   className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-briefing text-brand-muted hover:text-brand-accent transition-colors group"
@@ -443,7 +557,7 @@ export default function AuditSystem() {
                   </p>
 
                   <button
-                    onClick={() => setStep(STEPS.CONTEXT)}
+                    onClick={() => setStep(STEPS.EMOTION)}
                     className="w-full py-8 bg-brand-accent text-white font-mono text-[13px] uppercase tracking-briefing font-bold hover:bg-brand-text transition-all shadow-xl flex items-center justify-center gap-4 group"
                   >
                     Show Me What This Is Costing
@@ -452,7 +566,77 @@ export default function AuditSystem() {
                 </motion.div>
               )}
 
-              {/* ── STEP 0: CONTEXT ────────────────────────── */}
+              {/* ── EMOTION STEP ────────────────────────────── */}
+              {step === STEPS.EMOTION && (
+                <motion.div
+                  key="step-emotion"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.5 }}
+                  className="space-y-12 max-w-2xl"
+                >
+                  <div className="space-y-6">
+                    <h3
+                      className="font-serif italic tracking-tighter leading-tight text-brand-text"
+                      style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
+                    >
+                      Before we get into the numbers -- how would you describe where you are with this right now?
+                    </h3>
+                    <p
+                      className="font-serif italic text-brand-muted leading-relaxed"
+                      style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)' }}
+                    >
+                      There's no wrong answer here. This helps the advisor speak to your situation rather than just your data.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {EMOTION_OPTIONS.map((opt) => (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => setField('primaryEmotion', opt.value)}
+                        className={`w-full text-left p-6 border transition-all duration-200 space-y-2 ${
+                          data.primaryEmotion === opt.value
+                            ? 'border-brand-accent bg-brand-accent/5'
+                            : 'border-brand-border hover:border-brand-accent/40'
+                        }`}
+                      >
+                        <span
+                          className={`font-serif italic block leading-none ${
+                            data.primaryEmotion === opt.value
+                              ? 'text-brand-accent'
+                              : 'text-brand-text'
+                          }`}
+                          style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)' }}
+                        >
+                          {opt.label}
+                        </span>
+                        <span
+                          className="font-mono text-[11px] uppercase tracking-briefing text-brand-muted font-bold block leading-relaxed"
+                        >
+                          {opt.subtext}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => setStep(STEPS.CONTEXT)}
+                      disabled={!canProceed()}
+                      className="w-full py-7 bg-brand-text text-brand-bg font-mono text-[13px] uppercase tracking-briefing font-bold hover:bg-brand-accent hover:text-white transition-all shadow-xl flex items-center justify-center gap-4 group disabled:opacity-25 disabled:cursor-not-allowed"
+                    >
+                      Continue
+                      <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                    <BackButton onClick={handleBack} />
+                  </div>
+                </motion.div>
+              )}
+
+              {/* ── STEP 1: CONTEXT ────────────────────────── */}
               {step === STEPS.CONTEXT && (
                 <motion.div
                   key="step-context"
@@ -464,7 +648,7 @@ export default function AuditSystem() {
                 >
                   <div>
                     <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
-                      Module 01 of 04
+                      {MODULE_NUMBERS[STEPS.CONTEXT]}
                     </span>
                     <h3
                       className="font-serif italic tracking-tighter leading-none text-brand-text"
@@ -474,7 +658,7 @@ export default function AuditSystem() {
                     </h3>
                   </div>
 
-                  <div className="space-y-3" onFocus={() => setActiveField('industry')}>
+                  <div className="space-y-3">
                     <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                       Sector
                     </label>
@@ -532,11 +716,12 @@ export default function AuditSystem() {
                       Map the Room
                       <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                     </button>
+                    <BackButton onClick={handleBack} />
                   </div>
                 </motion.div>
               )}
 
-              {/* ── STEP 1: PERSONNEL ──────────────────────── */}
+              {/* ── STEP 2: PERSONNEL ──────────────────────── */}
               {step === STEPS.PERSONNEL && (
                 <motion.div
                   key="step-personnel"
@@ -548,7 +733,7 @@ export default function AuditSystem() {
                 >
                   <div>
                     <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
-                      Module 02 of 04
+                      {MODULE_NUMBERS[STEPS.PERSONNEL]}
                     </span>
                     <h3
                       className="font-serif italic tracking-tighter leading-none text-brand-text"
@@ -576,9 +761,9 @@ export default function AuditSystem() {
                           : 'LARGE';
                         setData(prev => ({
                           ...prev,
-                          headcountRange: bucket,
+                          headcountRange:   bucket,
                           headcountDisplay: raw,
-                          headcount: num || 0,
+                          headcount:        num || 0,
                         }));
                       }}
                       className="w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
@@ -622,7 +807,7 @@ export default function AuditSystem() {
                 </motion.div>
               )}
 
-              {/* ── STEP 2: BEHAVIORAL ─────────────────────── */}
+              {/* ── STEP 3: BEHAVIOR ───────────────────────── */}
               {step === STEPS.BEHAVIOR && (
                 <motion.div
                   key="step-behavior"
@@ -634,7 +819,7 @@ export default function AuditSystem() {
                 >
                   <div>
                     <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
-                      Module 03 of 04
+                      {MODULE_NUMBERS[STEPS.BEHAVIOR]}
                     </span>
                     <h3
                       className="font-serif italic tracking-tighter leading-none text-brand-text"
@@ -709,7 +894,6 @@ export default function AuditSystem() {
                     </div>
                   </div>
 
-                  {/* ── NEW: FRICTION DURATION ─────────────────────────────── */}
                   <div className="space-y-3">
                     <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                       How long has this been going on?
@@ -723,7 +907,6 @@ export default function AuditSystem() {
                     </div>
                   </div>
 
-                  {/* ── NEW: DOWNSTREAM POPULATION ────────────────────────── */}
                   <div className="space-y-3">
                     <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
                       Beyond the friction group itself, how many people are waiting on decisions this situation is holding up?
@@ -731,6 +914,20 @@ export default function AuditSystem() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {Object.entries(DOWNSTREAM_POPULATIONS).map(([key, val]) => (
                         <OptionButton key={key} value={key} current={data.downstreamPopulation} field="downstreamPopulation" onSelect={setField}>
+                          {val.label}
+                        </OptionButton>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* ── NEW v6.0: DECISION VELOCITY ──────────────────────── */}
+                  <div className="space-y-3">
+                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
+                      How would you describe the way decisions get made in this organization right now?
+                    </label>
+                    <div className="grid grid-cols-1 gap-2">
+                      {Object.entries(DECISIONS_OPTIONS).map(([key, val]) => (
+                        <OptionButton key={key} value={key} current={data.decisions} field="decisions" onSelect={setField}>
                           {val.label}
                         </OptionButton>
                       ))}
@@ -751,7 +948,7 @@ export default function AuditSystem() {
                 </motion.div>
               )}
 
-              {/* ── STEP 3: FINANCIAL ──────────────────────── */}
+              {/* ── STEP 4: FINANCIAL ──────────────────────── */}
               {step === STEPS.FINANCIAL && (
                 <motion.div
                   key="step-financial"
@@ -763,7 +960,7 @@ export default function AuditSystem() {
                 >
                   <div>
                     <span className="font-mono text-[13px] uppercase tracking-briefing text-brand-accent font-bold block mb-3">
-                      Module 04 of 04
+                      {MODULE_NUMBERS[STEPS.FINANCIAL]}
                     </span>
                     <h3
                       className="font-serif italic tracking-tighter leading-none text-brand-text"
@@ -786,7 +983,6 @@ export default function AuditSystem() {
                         placeholder="Estimate is sufficient"
                         value={data.isUnsurePayroll ? 'USING INDUSTRY ESTIMATE' : formatCurrency(data.payroll)}
                         onChange={(e) => handleNumericInput('payroll', e.target.value)}
-                        onFocus={() => setActiveField('payroll')}
                         className={`w-full bg-transparent border-b-2 border-brand-border py-3 font-serif italic focus:outline-none focus:border-brand-accent transition-colors ${data.isUnsurePayroll ? 'text-brand-accent' : 'text-brand-text'}`}
                         style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
                       />
@@ -808,7 +1004,6 @@ export default function AuditSystem() {
                         placeholder="Optional"
                         value={formatCurrency(data.stalledProjectCapital)}
                         onChange={(e) => handleNumericInput('stalledProjectCapital', e.target.value)}
-                        onFocus={() => setActiveField('stalledCapital')}
                         className="w-full bg-transparent border-b-2 border-brand-border py-3 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
                         style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
                       />
@@ -823,7 +1018,6 @@ export default function AuditSystem() {
                         placeholder="Optional"
                         value={formatCurrency(data.revenueBest)}
                         onChange={(e) => handleNumericInput('revenueBest', e.target.value)}
-                        onFocus={() => setActiveField('revenueBest')}
                         className="w-full bg-transparent border-b-2 border-brand-border py-3 font-serif italic text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
                         style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
                       />
@@ -838,7 +1032,6 @@ export default function AuditSystem() {
                         placeholder="Optional"
                         value={data.isUnsureRevenue ? 'USING SECTOR PROJECTION' : formatCurrency(data.revenueWorst)}
                         onChange={(e) => handleNumericInput('revenueWorst', e.target.value)}
-                        onFocus={() => setActiveField('revenueWorst')}
                         className={`w-full bg-transparent border-b-2 border-brand-border py-3 font-serif italic focus:outline-none focus:border-brand-accent transition-colors ${data.isUnsureRevenue ? 'text-brand-accent' : 'text-brand-text'}`}
                         style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
                       />
@@ -944,4 +1137,46 @@ export default function AuditSystem() {
       />
     </>
   );
+}
+
+// ── FINANCIAL DERIVATION HELPERS ──────────────────────────────────────────────
+// These convert the form inputs into values the v6.0 engine expects.
+// Kept local to AuditSystem — not engine logic, just input translation.
+
+function deriveAvgSalary(data) {
+  // Use payroll / total headcount as a proxy for avg leadership salary
+  // Falls back to industry-typical estimate if payroll not provided
+  const payroll  = Number(data.payroll) || 0;
+  const headcount = data.headcount || 1;
+  if (payroll > 0) return Math.round(payroll / headcount);
+
+  // Industry fallback estimates (annual)
+  const fallbacks = {
+    TECH:         160000,
+    FINANCE:      180000,
+    CONSULTING:   150000,
+    HEALTH:       140000,
+    NONPROFIT:    100000,
+    MEDIA:        120000,
+    MANUFACTURING:110000,
+    RETAIL:       90000,
+    ENERGY:       130000,
+    CONSTRUCTION: 105000,
+    LOGISTICS:    100000,
+    OTHER:        120000,
+  };
+  return fallbacks[data.industry] || 120000;
+}
+
+function deriveTeamMultiplier(data) {
+  // Team multiplier reflects radiated impact beyond the direct friction group
+  const downstream = data.downstreamPopulation;
+  const map = {
+    NONE:     1.0,
+    SMALL:    1.3,
+    MEDIUM:   1.6,
+    LARGE:    2.0,
+    FULL_ORG: 2.5,
+  };
+  return map[downstream] || 1.0;
 }

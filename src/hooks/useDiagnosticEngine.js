@@ -3,17 +3,21 @@
 import { useMemo, useRef } from 'react';
 
 /**
- * Principal Resolution // Diagnostic Engine v4.1
- * Three-tier contextual insight system.
- * Tier 1: Industry (1 of 3, sequence-varied)
- * Tier 2: Stage in context of industry
- * Tier 3: Headcount in context of industry + stage
- * Module 2: Behavioral with Module 1 context carried forward
- * Module 3: Financial with alternate phrasings on common triggers
+ * Principal Resolution // Diagnostic Engine Hook v6.0
+ *
+ * Changes from v4.1:
+ * - Step numbers corrected for v6.0 AuditSystem:
+ *     EMOTION=0, CONTEXT=1, PERSONNEL=2, BEHAVIOR=3, FINANCIAL=4
+ * - Advisor does not fire on EMOTION step (FloatingAdvisor hidden there by design)
+ * - New behavioral signals wired: decisions, frictionDuration, downstreamPopulation
+ * - useMemo dependency array updated to include all three new fields
+ * - frictionDuration progressive reveal added to BEHAVIOR resolver
+ * - decisions field wired with three-path progressive insight
+ * - downstreamPopulation wired as amplifier on behavioral complete state
  * Tenet: Absolute Candor.
  */
 
-// ── TIER 1: INDUSTRY INSIGHTS ────────────────────────────────────
+// ── TIER 1: INDUSTRY INSIGHTS ─────────────────────────────────────────────────
 
 const INDUSTRY_INSIGHTS = {
   TECH: [
@@ -62,7 +66,7 @@ const INDUSTRY_INSIGHTS = {
     "In Construction, scope creep on the job site gets addressed immediately. Scope creep in the leadership dynamic gets accommodated indefinitely. The tolerance levels are exactly backwards.",
   ],
   NONPROFIT: [
-    "Nonprofits carry a specific friction tax: the idea that the mission makes the mindset of 'dysfunction has to be the cost of doing business' acceptable. No it doesn't. And it isn't. And the inspired, uniquely motivated people doing the work feel it harder than anyone.",
+    "Nonprofits carry a specific friction tax: the idea that the mission makes dysfunction the cost of doing business acceptable. It doesn't. And it isn't. And the inspired, motivated people doing the work feel it harder than anyone.",
     "In Nonprofits, the hardest conversations get deferred because the mission feels more urgent. What I've found is that the mission suffers most when the people serving it are least supported.",
     "Nonprofit leadership teams often have the highest emotional investment and the least infrastructure for honest disagreement. That combination is more fragile than it looks.",
   ],
@@ -78,7 +82,7 @@ const INDUSTRY_INSIGHTS = {
   ],
 };
 
-// ── TIER 2: STAGE IN CONTEXT OF INDUSTRY ─────────────────────────
+// ── TIER 2: STAGE IN CONTEXT OF INDUSTRY ──────────────────────────────────────
 
 const STAGE_INSIGHTS = {
   TECH_STARTUP: [
@@ -119,7 +123,7 @@ const STAGE_INSIGHTS = {
     "A legacy healthcare organization is often carrying decades of deferred leadership conversations. The mission made them feel optional. They weren't. They just got more expensive with every year they didn't happen.",
   ],
   NONPROFIT_STARTUP: [
-    "A startup nonprofit is where mission intensity is highest and organizational infrastructure is thinnest. The people are extraordinary. The systems for honest disagreement usually don't exist yet. That combination is more fragile than the energy in the room suggests.",
+    "A startup nonprofit is where mission intensity is highest and organizational infrastructure is thinnest. The people are remarkable. The systems for honest disagreement usually don't exist yet. That combination is more fragile than the energy in the room suggests.",
     "In a nonprofit startup, the founding team's shared belief in the mission often substitutes for the hard conversations that belief can't actually replace. It works until it doesn't, and when it stops working the mission feels like it's at stake. It is.",
   ],
   NONPROFIT_GROWTH: [
@@ -159,66 +163,67 @@ const STAGE_INSIGHTS = {
   ],
 };
 
-// ── TIER 3: HEADCOUNT IN CONTEXT OF INDUSTRY + STAGE ─────────────
+// ── TIER 3: HEADCOUNT IN CONTEXT OF INDUSTRY + STAGE ──────────────────────────
 
 const HEADCOUNT_INSIGHTS = {
-  TECH_STARTUP_SMALL: "A small tech startup is where the founding dynamic is everything. At this size, every unresolved tension between the people at the top is felt by everyone below them within days. There's nowhere for it to go except into the work.",
-  TECH_STARTUP_MID: "This is the size where a tech startup's founding-era friction stops being a personality dynamic and starts being an organizational structure. The patterns formed in the first ten people are now being inherited by fifty. That inheritance is rarely examined and almost never voluntary.",
-  TECH_GROWTH_MID: "Twenty-five to a hundred people is the coordination wall for a growth-stage tech company. This is where the communication that worked informally stops working and the systems to replace it haven't been built yet. The friction in that gap is expensive and almost always gets misdiagnosed as a hiring problem.",
-  TECH_GROWTH_LARGE: "At this size in a growth-stage tech organization, the distance between a leadership decision and its consequences has grown long enough that feedback loops break down. Leadership thinks things are working better than they are. The people closest to the reality have stopped correcting that impression because it stopped feeling safe to do so.",
-  CONSULTING_GROWTH_SMALL: "A small growth-stage consulting firm is carrying a specific tension: the work is scaling but the founding relationships haven't been renegotiated. Who owns what, who decides what, who gets credit for what — those questions are being answered informally every day by people who have never discussed them directly.",
-  CONSULTING_ESTABLISHED_MID: "A mid-size established consulting firm has usually reached the size where the founding partners' relationships with each other are the primary governance structure. That works until it doesn't, and when it stops working the whole organization feels it before anyone names it.",
-  CONSULTING_ESTABLISHED_LARGE: "At this size and stage in a consulting firm, the dysfunction has almost certainly been professionalized. It has a name that isn't its real name, a process that manages it without resolving it, and a shared agreement among leadership not to look at it directly. That agreement is costing the firm more than anyone has calculated.",
-  HEALTH_GROWTH_MID: "A mid-size growth-stage healthcare organization is at the point where the mission can no longer substitute for the infrastructure. The founding team's shared commitment got you here. Getting to the next stage requires organizational honesty that shared commitment alone can't provide.",
-  HEALTH_LEGACY_LARGE: "A large legacy healthcare organization has usually built its leadership dysfunction into the accreditation and compliance structure so thoroughly that it looks like governance. Naming it requires someone willing to separate the regulatory necessity from the organizational choice. Those are different things and they've been allowed to look identical for a long time.",
-  NONPROFIT_STARTUP_SMALL: "At this size and stage, the nonprofit is essentially the founding team's shared belief made organizational. That's beautiful and fragile in equal measure. The honest conversations that feel optional right now are the ones that will determine whether the mission scales or fractures.",
-  NONPROFIT_GROWTH_MID: "A mid-size growth-stage nonprofit is where the gap between the people who started it and the people who are running it becomes undeniable. Navigating that gap well requires a level of organizational candor that most nonprofits haven't built because the mission always felt more urgent. It still is. And this still matters.",
-  NONPROFIT_ESTABLISHED_LARGE: "A large established nonprofit has usually developed a very sophisticated relationship with its own dysfunction. The mission provides cover. The longevity provides legitimacy. And the people doing the most important work feel the cost of the unresolved leadership dynamic more acutely than anyone in the leadership team realizes.",
-  FINANCE_LEGACY_LARGE: "A large legacy financial organization is carrying decades of deferred leadership conversations inside one of the most risk-aware cultures in any industry. The sophistication applied to market risk and regulatory risk almost never gets applied to the risk sitting inside the leadership team. That asymmetry has a price.",
-  FINANCE_ESTABLISHED_MID: "A mid-size established financial organization has usually reached the point where the culture of correctness is self-reinforcing. The people who would challenge it have either left or learned not to. What remains looks like alignment. It functions like a very expensive silence.",
-  MANUFACTURING_GROWTH_MID: "A mid-size growth-stage manufacturing organization is scaling two things simultaneously: production capacity and leadership complexity. The first gets measured precisely and managed carefully. The second gets accommodated and hoped about. The cost of that asymmetry shows up in ways that look like operational problems and are almost always people problems.",
-  MANUFACTURING_LEGACY_LARGE: "A large legacy manufacturing organization has usually built its friction into the shift structure, the department boundaries, and the informal authority networks that everyone understands and nobody has documented. Changing it feels like changing the building. It's actually just a conversation that's overdue.",
-  CONSTRUCTION_ESTABLISHED_MID: "A mid-size established construction firm has usually survived long enough that the founding relationships are now the governance structure. That works on a job site where everyone knows the hierarchy. It gets complicated in a leadership team where the hierarchy and the history are two different things.",
-  CONSTRUCTION_GROWTH_LARGE: "At this size in a growth-stage construction organization, the job site absorbs what the leadership team doesn't resolve. Every unaddressed dynamic at the top shows up as a coordination failure somewhere in the field. The field people know exactly what's causing it. They've just learned that saying so doesn't help.",
-  MEDIA_STARTUP_SMALL: "At this size a media startup is essentially a creative partnership that has added an organizational layer without fully acknowledging that the layer exists. The creative honesty in the room and the organizational honesty in the room are two completely different things, and only one of them is happening.",
-  MEDIA_GROWTH_MID: "A mid-size growth-stage media organization is where the founder's taste has to travel through enough people that it either gets codified or gets diluted. The conversations required to codify it are organizational conversations, not creative ones. Most media cultures are much better at the second kind.",
-  TECH_STARTUP_LARGE: "At 500+ people, the founding culture of a tech startup either becomes a formal operating system or a series of expensive tribal myths. The friction here isn't about the product -- it is about the loss of the high-bandwidth communication that built it.",
-  CONSULTING_GROWTH_MID: "A mid-size growth consulting firm is in the Complexity Trap. You are scaling specialized expertise while using generalized leadership patterns. The friction lives in the space between the partners who sell the work and the teams that execute it.",
-  HEALTH_ESTABLISHED_MID: "At this size and stage, a healthcare organization has usually professionalized its avoidance. The friction has been absorbed into the administrative overhead, and the people closest to patient care are paying the silence tax every day.",
-  NONPROFIT_LEGACY_LARGE: "Large legacy nonprofits carry the heaviest mission tax. The institutional history is used to protect entrenched dynamics that no longer serve the current objective. Resolution requires separating the mission's value from the leadership's habits.",
-  FINANCE_GROWTH_SMALL: "A small growth-stage financial firm is often outgrowing its original risk tolerance. The friction isn't about the market -- it is about the leadership team's inability to decide which old rules no longer apply to the new scale.",
+  TECH_STARTUP_SMALL:              "A small tech startup is where the founding dynamic is everything. At this size, every unresolved tension between the people at the top is felt by everyone below them within days. There's nowhere for it to go except into the work.",
+  TECH_STARTUP_MID:                "This is the size where a tech startup's founding-era friction stops being a personality dynamic and starts being an organizational structure. The patterns formed in the first ten people are now being inherited by fifty. That inheritance is rarely examined and almost never voluntary.",
+  TECH_STARTUP_LARGE:              "At 500+ people, the founding culture of a tech startup either becomes a formal operating system or a series of expensive tribal myths. The friction here isn't about the product -- it is about the loss of the high-frequency, high-trust communication that built it.",
+  TECH_GROWTH_MID:                 "Twenty-five to a hundred people is the coordination wall for a growth-stage tech company. This is where the communication that worked informally stops working and the systems to replace it haven't been built yet. The friction in that gap is expensive and almost always gets misdiagnosed as a hiring problem.",
+  TECH_GROWTH_LARGE:               "At this size in a growth-stage tech organization, the distance between a leadership decision and its consequences has grown long enough that feedback loops break down. Leadership thinks things are working better than they are. The people closest to the reality have stopped correcting that impression because it stopped feeling safe to do so.",
+  CONSULTING_GROWTH_SMALL:         "A small growth-stage consulting firm is carrying a specific tension: the work is scaling but the founding relationships haven't been renegotiated. Who owns what, who decides what, who gets credit for what -- those questions are being answered informally every day by people who have never discussed them directly.",
+  CONSULTING_GROWTH_MID:           "A mid-size growth consulting firm is in the complexity trap. You are scaling specialized expertise while using generalized leadership patterns. The friction lives in the space between the partners who sell the work and the teams that execute it.",
+  CONSULTING_ESTABLISHED_MID:      "A mid-size established consulting firm has usually reached the size where the founding partners' relationships with each other are the primary governance structure. That works until it doesn't, and when it stops working the whole organization feels it before anyone names it.",
+  CONSULTING_ESTABLISHED_LARGE:    "At this size and stage in a consulting firm, the dysfunction has almost certainly been professionalized. It has a name that isn't its real name, a process that manages it without resolving it, and a shared agreement among leadership not to look at it directly. That agreement is costing the firm more than anyone has calculated.",
+  HEALTH_GROWTH_MID:               "A mid-size growth-stage healthcare organization is at the point where the mission can no longer substitute for the infrastructure. The founding team's shared commitment got you here. Getting to the next stage requires organizational honesty that shared commitment alone can't provide.",
+  HEALTH_ESTABLISHED_MID:          "At this size and stage, a healthcare organization has usually professionalized its avoidance. The friction has been absorbed into the administrative overhead, and the people closest to patient care are paying the silence tax every day.",
+  HEALTH_LEGACY_LARGE:             "A large legacy healthcare organization has usually built its leadership dysfunction into the accreditation and compliance structure so thoroughly that it looks like governance. Naming it requires someone willing to separate the regulatory necessity from the organizational choice. Those are different things and they've been allowed to look identical for a long time.",
+  NONPROFIT_STARTUP_SMALL:         "At this size and stage, the nonprofit is essentially the founding team's shared belief made organizational. That's remarkable and fragile in equal measure. The honest conversations that feel optional right now are the ones that will determine whether the mission scales or fractures.",
+  NONPROFIT_GROWTH_MID:            "A mid-size growth-stage nonprofit is where the gap between the people who started it and the people who are running it becomes undeniable. Navigating that gap well requires a level of organizational candor that most nonprofits haven't built because the mission always felt more urgent. It still is. And this still matters.",
+  NONPROFIT_ESTABLISHED_LARGE:     "A large established nonprofit has usually developed a very sophisticated relationship with its own dysfunction. The mission provides cover. The longevity provides legitimacy. And the people doing the most important work feel the cost of the unresolved leadership dynamic more acutely than anyone in the leadership team realizes.",
+  NONPROFIT_LEGACY_LARGE:          "Large legacy nonprofits carry the heaviest mission tax. The institutional history is used to protect entrenched dynamics that no longer serve the current objective. Resolution requires separating the mission's value from the leadership's habits.",
+  FINANCE_GROWTH_SMALL:            "A small growth-stage financial firm is often outgrowing its original risk tolerance. The friction isn't about the market -- it is about the leadership team's inability to decide which old rules no longer apply to the new scale.",
+  FINANCE_ESTABLISHED_MID:         "A mid-size established financial organization has usually reached the point where the culture of correctness is self-reinforcing. The people who would challenge it have either left or learned not to. What remains looks like agreement. It functions like a very expensive silence.",
+  FINANCE_LEGACY_LARGE:            "A large legacy financial organization is carrying decades of deferred leadership conversations inside one of the most risk-aware cultures in any industry. The sophistication applied to market risk and regulatory risk almost never gets applied to the risk sitting inside the leadership team. That asymmetry has a price.",
+  MANUFACTURING_GROWTH_MID:        "A mid-size growth-stage manufacturing organization is scaling two things simultaneously: production capacity and leadership complexity. The first gets measured precisely and managed carefully. The second gets accommodated and hoped about. The cost of that asymmetry shows up in ways that look like operational problems and are almost always people problems.",
+  MANUFACTURING_LEGACY_LARGE:      "A large legacy manufacturing organization has usually built its friction into the shift structure, the department boundaries, and the informal authority networks that everyone understands and nobody has documented. Changing it feels like changing the building. It's actually just a conversation that's overdue.",
+  CONSTRUCTION_ESTABLISHED_MID:    "A mid-size established construction firm has usually survived long enough that the founding relationships are now the governance structure. That works on a job site where everyone knows the hierarchy. It gets complicated in a leadership team where the hierarchy and the history are two different things.",
+  CONSTRUCTION_GROWTH_LARGE:       "At this size in a growth-stage construction organization, the job site absorbs what the leadership team doesn't resolve. Every unaddressed dynamic at the top shows up as a coordination failure somewhere in the field. The field people know exactly what's causing it. They've just learned that saying so doesn't help.",
+  MEDIA_STARTUP_SMALL:             "At this size a media startup is essentially a creative partnership that has added an organizational layer without fully acknowledging that the layer exists. The creative honesty in the room and the organizational honesty in the room are two completely different things, and only one of them is happening.",
+  MEDIA_GROWTH_MID:                "A mid-size growth-stage media organization is where the founder's taste has to travel through enough people that it either gets codified or gets diluted. The conversations required to codify it are organizational conversations, not creative ones. Most media cultures are much better at the second kind.",
 };
-
-// ── PLACEHOLDERS ──────────────────────────────────────────────────
 
 const STAGE_PLACEHOLDER = [
   "The profile is taking shape. The inputs ahead will add the specificity that makes the picture worth acting on.",
   "Every organization at this stage and size is carrying something specific. The questions ahead will surface what that is more precisely than the profile alone can.",
 ];
 
-// ── BEHAVIORAL INSIGHTS (MODULE 2) ───────────────────────────────
+// ── BEHAVIORAL INSIGHTS (STEP 3) ──────────────────────────────────────────────
 // Resolver checks `${frictionLocation}_${avoidanceMechanism}_${industry}` first,
 // then falls back to `${frictionLocation}_${avoidanceMechanism}`.
 
 const BEHAVIORAL_INSIGHTS = {
 
   // WITHIN_LEADERSHIP + NO_FORUM
-  WITHIN_LEADERSHIP_NO_FORUM_TECH:       "A leadership team in a tech organization with no safe place to surface internal friction is a specific kind of problem. The culture that rewards moving fast makes stopping to name the dynamic feel like weakness. It isn't. It's the only thing that actually fixes it.",
+  WITHIN_LEADERSHIP_NO_FORUM_TECH:        "A leadership team in a tech organization with no safe place to surface internal friction is a specific kind of problem. The culture that rewards moving fast makes stopping to name the dynamic feel like weakness. It isn't. It's the only thing that actually fixes it.",
   WITHIN_LEADERSHIP_NO_FORUM_CONSULTING:  "A consulting firm whose leadership team has no safe forum for honest disagreement is selling something internally that it doesn't practice. Your senior people have noticed that gap. They're just professional enough not to say so directly.",
-  WITHIN_LEADERSHIP_NO_FORUM_NONPROFIT:   "A nonprofit leadership team with no forum for honest disagreement is often carrying its dysfunction in the name of the mission — and in the name of each other. The relationships that built something meaningful become the reason nobody will say the hard thing. The people doing the work feel the cost of that more directly than anyone in the leadership team realizes.",
+  WITHIN_LEADERSHIP_NO_FORUM_NONPROFIT:   "A nonprofit leadership team with no forum for honest disagreement is often carrying its dysfunction in the name of the mission -- and in the name of each other. The relationships that built something meaningful become the reason nobody will say the hard thing. The people doing the work feel the cost of that more directly than anyone in the leadership team realizes.",
   WITHIN_LEADERSHIP_NO_FORUM_HEALTH:      "A healthcare leadership team with no safe forum for internal friction is managing the highest-stakes version of this problem. The silence at the top has consequences that travel further than in almost any other sector.",
-  WITHIN_LEADERSHIP_NO_FORUM:             "Friction inside the leadership team with no place to safely surface it is the most expensive combination in this diagnostic. It stays invisible to the organization right up until it isn't — and by then the cheap resolution is long gone.",
+  WITHIN_LEADERSHIP_NO_FORUM:             "Friction inside the leadership team with no place to safely surface it is the most expensive combination in this diagnostic. It stays invisible to the organization right up until it isn't -- and by then the cheap resolution is long gone.",
 
   // WITHIN_LEADERSHIP + PREDETERMINED
   WITHIN_LEADERSHIP_PREDETERMINED_TECH:        "In a fast-moving tech organization, predetermined outcomes in leadership conversations are particularly damaging because speed is supposed to be the advantage. When the answer is decided before the discussion, you're not moving fast. You're just moving confidently in the wrong direction.",
   WITHIN_LEADERSHIP_PREDETERMINED_CONSULTING:  "A consulting firm where leadership outcomes are predetermined before the conversation starts has a credibility problem that goes beyond the internal dynamic. The methodology you sell requires exactly the kind of honest inquiry your leadership team has stopped practicing.",
-  WITHIN_LEADERSHIP_PREDETERMINED:             "When outcomes feel predetermined, people stop bringing their real thinking into the room. What looks like alignment is usually just exhaustion. The organization is making decisions based on a conversation that isn't actually happening.",
+  WITHIN_LEADERSHIP_PREDETERMINED:             "When outcomes feel predetermined, people stop bringing their real thinking into the room. What looks like agreement is usually just exhaustion. The organization is making decisions based on a conversation that isn't actually happening.",
 
   // WITHIN_LEADERSHIP + COST_TOO_HIGH
   WITHIN_LEADERSHIP_COST_TOO_HIGH_FINANCE:     "In an organization whose entire value proposition is analytical rigor, the decision to avoid a leadership conversation because it feels too costly is worth examining on its own terms. The math almost never supports avoidance. Someone has just decided not to run it.",
   WITHIN_LEADERSHIP_COST_TOO_HIGH_CONSULTING:  "In an organization whose entire value proposition is analytical rigor, the decision to avoid a leadership conversation because it feels too costly is worth examining on its own terms. The math almost never supports avoidance. Someone has just decided not to run it.",
   WITHIN_LEADERSHIP_COST_TOO_HIGH_NONPROFIT:   "When the perceived cost of a leadership conversation feels too high in a mission-driven organization, it's usually because the mission is being used as the reason to defer it. That's the friction tax at its most specific.",
   WITHIN_LEADERSHIP_COST_TOO_HIGH:             "The perceived cost of the conversation is being weighed against the actual cost of not having it. That's a calculation your organization is making every day. In my experience, it's almost always getting the answer wrong.",
+
+  // WITHIN_LEADERSHIP + NOT_AN_ISSUE
+  WITHIN_LEADERSHIP_NOT_AN_ISSUE:              "When difficult conversations aren't happening inside a leadership team and it doesn't feel like a problem, it usually means the team has found a working arrangement that keeps the friction invisible. That's worth examining -- not because something must be wrong, but because invisible friction is still friction.",
 
   // CROSS_FUNCTIONAL + NO_FORUM
   CROSS_FUNCTIONAL_NO_FORUM_TECH:          "Cross-functional friction in a scaling tech organization with no forum to surface it is how good products get built by teams that quietly can't stand each other. It works until a decision needs to happen fast across those boundaries. Then it doesn't.",
@@ -229,7 +234,7 @@ const BEHAVIORAL_INSIGHTS = {
   // CROSS_FUNCTIONAL + PREDETERMINED
   CROSS_FUNCTIONAL_PREDETERMINED_CONSULTING: "When cross-functional friction gets managed through predetermined outcomes, each department learns to protect its own narrative rather than contribute to a shared one. That's how organizations end up with excellent departments and a failing enterprise.",
   CROSS_FUNCTIONAL_PREDETERMINED_FINANCE:    "When cross-functional friction gets managed through predetermined outcomes, each department learns to protect its own narrative rather than contribute to a shared one. That's how organizations end up with excellent departments and a failing enterprise.",
-  CROSS_FUNCTIONAL_PREDETERMINED:            "Predetermined outcomes in cross-functional conversations mean each team is optimizing for its own version of winning. The place where all those versions conflict — that's where the real cost lives.",
+  CROSS_FUNCTIONAL_PREDETERMINED:            "Predetermined outcomes in cross-functional conversations mean each team is optimizing for its own version of winning. The place where all those versions conflict -- that's where the real cost lives.",
 
   // TEAM + NO_FORUM
   TEAM_NO_FORUM_MEDIA:     "When friction between leadership and the team has no safe place to surface, the team develops its own culture around the gap. In organizations that run on creative energy or mission commitment, that shadow culture is often more cohesive than the official one. That's a signal worth taking seriously.",
@@ -246,45 +251,71 @@ const BEHAVIORAL_INSIGHTS = {
   UNKNOWN_COST_TOO_HIGH:  "Not knowing where the friction lives is more common than most leaders admit, and it's actually useful information. In my experience, when the source is unclear it usually means it's sitting somewhere nobody has permission to look. The avoidance pattern tends to point directly at it.",
 };
 
-// ── HOOK ──────────────────────────────────────────────────────────
+// ── FRICTION DURATION INSIGHTS ─────────────────────────────────────────────────
+// Surfaced after frictionDuration is selected, before the field is complete.
+
+const DURATION_INSIGHTS = {
+  UNDER_THREE:  "Under three months is early enough that the pattern hasn't fully embedded yet. That's actually the best time to name it -- before the organization builds workarounds that become permanent.",
+  THREE_TO_SIX: "Three to six months is when a friction pattern stops being a rough patch and starts being a dynamic. The people in the room have already started adapting their behavior around it. That adaptation has a cost.",
+  SIX_TO_TWELVE:"Six months to a year is long enough that the organization has normalized the friction. It doesn't feel exceptional anymore -- it feels like how things are here. That normalization is what makes it expensive.",
+  ONE_TO_TWO:   "A year to two years means this has been running long enough that the people who know it best have stopped expecting it to change. That quiet resignation is the most expensive thing in this diagnostic -- and the hardest to name.",
+  TWO_PLUS:     "Two years or more. The friction isn't just embedded -- it's structural. The organization has been built, to some degree, around accommodating it. Resolving it now means deciding what to do with everything that was built on top of it.",
+};
+
+// ── DOWNSTREAM POPULATION AMPLIFIERS ──────────────────────────────────────────
+// Added to behavioral complete-state insight when downstream impact is significant.
+
+const DOWNSTREAM_AMPLIFIERS = {
+  NONE:     null,
+  SMALL:    "The people waiting on decisions from this group aren't passive -- they're watching, and what they see shapes what they're willing to bring forward next time.",
+  MEDIUM:   "The downstream effect here is real. A leadership friction that holds up decisions for twenty-five or more people isn't just an internal problem -- it's a structural one.",
+  LARGE:    "When fifty or more people are waiting on decisions a friction pattern is holding up, the cost is no longer contained to the leadership layer. It's organizational.",
+  FULL_ORG: "When the whole organization is waiting, the leadership friction is the operational bottleneck. That's the most expensive version of this pattern, and it's the one most likely to be misread as an execution problem.",
+};
+
+// ── HOOK ───────────────────────────────────────────────────────────────────────
 
 export function useDiagnosticEngine(step, data) {
-  const sequenceRef  = useRef(0);
+  const sequenceRef    = useRef(0);
   const lastInsightRef = useRef('');
 
   const { insight, insightKey } = useMemo(() => {
-  const text = resolveInsight(step, data, sequenceRef.current);
-  if (text !== lastInsightRef.current) {
-    sequenceRef.current += 1;
-    lastInsightRef.current = text;
-  }
-  return {
-  insight:    text,
-  insightKey: `${step}-${sequenceRef.current}-${text ? text.slice(0, 12) : 'empty'}`,
-};
-}, [
-  step,
-  data.industry,
-  data.orgStage,
-  data.headcountRange,
-  data.leadershipTenure,
-  data.personnel[0]?.count,
-  data.personnel[1]?.count,
-  data.personnel[2]?.count,
-  data.frictionLocation,
-  data.avoidanceMechanism,
-  data.priorAttempt,
-  data.personnelRisk,
-  data.resolutionBlockage,
-  data.payroll,
-  data.stalledProjectCapital,
-  data.revenueBest,
-  data.revenueWorst,
-  data.meetingHours,
-]);
+    const text = resolveInsight(step, data, sequenceRef.current);
+    if (text !== lastInsightRef.current) {
+      sequenceRef.current += 1;
+      lastInsightRef.current = text;
+    }
+    return {
+      insight:    text,
+      insightKey: `${step}-${sequenceRef.current}-${text ? text.slice(0, 12) : 'empty'}`,
+    };
+  }, [
+    step,
+    data.primaryEmotion,          // v6.0 — drives two-beat EMOTION step
+    data.industry,
+    data.orgStage,
+    data.headcountRange,
+    data.leadershipTenure,
+    data.personnel[0]?.count,
+    data.personnel[1]?.count,
+    data.personnel[2]?.count,
+    data.frictionLocation,
+    data.avoidanceMechanism,
+    data.priorAttempt,
+    data.personnelRisk,
+    data.resolutionBlockage,
+    data.frictionDuration,        // v6.0 new
+    data.downstreamPopulation,    // v6.0 new
+    data.decisions,               // v6.0 new
+    data.payroll,
+    data.stalledProjectCapital,
+    data.revenueBest,
+    data.revenueWorst,
+    data.meetingHours,
+  ]);
 
   const burnIntensity = useMemo(() => {
-    const base    = Number(data.payroll) || 0;
+    const base    = Number(data.payroll)              || 0;
     const gap     = (Number(data.revenueBest) - Number(data.revenueWorst)) || 0;
     const stalled = Number(data.stalledProjectCapital) || 0;
     const weight  = gap + stalled + (base * 0.1);
@@ -294,26 +325,46 @@ export function useDiagnosticEngine(step, data) {
   return { liveInsight: insight, insightKey, burnIntensity };
 }
 
-// ── RESOLVER ──────────────────────────────────────────────────────
+// ── RESOLVER ───────────────────────────────────────────────────────────────────
 
 function resolveInsight(step, data, sequence) {
   const {
-  industry, orgStage, headcountRange, leadershipTenure,
-  personnel, frictionLocation, avoidanceMechanism,
-  priorAttempt, personnelRisk, resolutionBlockage,
-  payroll, revenueBest, revenueWorst, stalledProjectCapital, meetingHours,
-} = data;
+    industry, orgStage, headcountRange, leadershipTenure,
+    personnel, frictionLocation, avoidanceMechanism,
+    priorAttempt, personnelRisk, resolutionBlockage,
+    frictionDuration, downstreamPopulation, decisions,
+    payroll, revenueBest, revenueWorst, stalledProjectCapital, meetingHours,
+  } = data;
 
-  // ── STEP 0: CONTEXT ───────────────────────────────────────────
+  // ── STEP 0: EMOTION ─────────────────────────────────────────────────────────
+  // Beat 1: advisor appears immediately on step load, before any selection.
+  // Beat 2: fires when primaryEmotion is selected — responds to what they named.
   if (step === 0) {
+    if (!data.primaryEmotion) {
+      return "This takes about three minutes. The advisor will be reading what you describe the whole way through. Not to judge it, but to tell you what it sees. Be as honest as you can afford to be. That's what makes the picture accurate.";
+    }
+    const responses = {
+      EXHAUSTION:  "That's real, and it matters that you named it. People who've been holding something this long usually have a clearer picture of the problem than they give themselves credit for. Let's find out what it's actually costing.",
+      FRUSTRATION: "Frustration usually means you already know what needs to happen. The question is why it keeps not happening. That's exactly what this instrument is designed to find.",
+      FEAR:        "Naming uncertainty takes more honesty than certainty does. What you're about to see is a picture, not a verdict. You get to decide what to do with it.",
+      APATHY:      "If the energy to expect resolution has run out, that's worth knowing too. Sometimes the most useful thing a diagnostic can do is confirm that the situation is real and that the cost of continuing it is real. Let's see what the numbers say.",
+    };
+    return responses[data.primaryEmotion] || "Good. Let's get into it.";
+  }
 
-    // Tenure-specific checks first (most complete context)
+  // ── STEP 1: CONTEXT ─────────────────────────────────────────────────────────
+  if (step === 1) {
+
+    // Full context + tenure-specific reads
     if (industry && orgStage && headcountRange && leadershipTenure) {
       if (leadershipTenure === 'UNDER_ONE' && orgStage === 'LEGACY') {
-        return "Here's the thing about inheriting a legacy organization — the friction you're dealing with was built by people who are probably still in the room. That's not your fault. But it is your problem now.";
+        return "Here's the thing about inheriting a legacy organization -- the friction you're dealing with was built by people who are probably still in the room. That's not your fault. But it is your problem now.";
       }
       if (leadershipTenure === 'SEVEN_PLUS' && orgStage === 'LEGACY') {
-        return "Seven-plus years in a legacy organization means the patterns here didn't sneak up on anyone. They got normalized. That's actually the harder problem — not because it can't be fixed, but because everyone stopped seeing it as a problem.";
+        return "Seven-plus years in a legacy organization means the patterns here didn't sneak up on anyone. They got normalized. That's actually the harder problem -- not because it can't be fixed, but because everyone stopped seeing it as a problem.";
+      }
+      if (leadershipTenure === 'UNDER_ONE' && orgStage === 'STARTUP') {
+        return "New leadership in a startup means the founding dynamic is either still running the room or actively being worked against. Either way, the first year is when patterns get set that last a decade.";
       }
       if (orgStage === 'STARTUP' && headcountRange === 'MID') {
         return "The thing that got you to 100 people is usually the thing that starts breaking things at 100 people. Founding-era friction doesn't age well. It compounds.";
@@ -329,7 +380,7 @@ function resolveInsight(step, data, sequence) {
 
     // Tier 2: industry + stage
     if (industry && orgStage) {
-      const key = `${industry}_${orgStage}`;
+      const key  = `${industry}_${orgStage}`;
       const pool = STAGE_INSIGHTS[key];
       if (pool) return pool[sequence % pool.length];
       return STAGE_PLACEHOLDER[sequence % STAGE_PLACEHOLDER.length];
@@ -341,43 +392,48 @@ function resolveInsight(step, data, sequence) {
       return pool[sequence % pool.length];
     }
 
-return null;  }
+    return null;
+  }
 
-  // ── STEP 1: PERSONNEL ─────────────────────────────────────────
-  if (step === 1) {
+  // ── STEP 2: PERSONNEL ───────────────────────────────────────────────────────
+  if (step === 2) {
     const execs    = personnel?.find(p => p.id === 'EXECUTIVE')?.count    || 0;
     const managers = personnel?.find(p => p.id === 'MANAGER')?.count      || 0;
     const staff    = personnel?.find(p => p.id === 'PROFESSIONAL')?.count || 0;
     const total    = execs + managers + staff;
 
     if (total === 0)
-      return "Count the room where decisions actually get made — not the full headcount. That's the group we're looking at.";
+      return "Count the room where decisions actually get made -- not the full headcount. That's the group we're looking at.";
     if (execs > 0 && managers === 0 && staff === 0)
       return "An executive-only group is where the most expensive conversations either happen or don't. Every issue that stays in this room unresolved radiates cost downward.";
     if (execs > 5)
-      return "Above five executives, decision latency becomes a real problem. More voices at the top usually means more distance between insight and action — and somebody's paying for that distance.";
+      return "Above five executives, decision latency becomes a real problem. More voices at the top usually means more distance between insight and action -- and somebody's paying for that distance.";
     if (execs > 0 && execs > managers && total > 3)
       return "When executives outnumber managers, the organization tends to move at the speed of its slowest approval. Oversight starts exceeding execution capacity.";
     if (managers > execs * 2 && managers > 4)
-      return "A wide management layer is usually a sign that people are being managed rather than developed. Layers absorb friction — they don't resolve it.";
+      return "A wide management layer is usually a sign that people are being managed rather than developed. Layers absorb friction -- they don't resolve it.";
     if (staff > (execs + managers) * 2 && total > 8)
-      return "With this ratio, small misalignments at the top create large disruptions at the execution level. The friction tax gets amplified across a lot of people.";
+      return "With this ratio, small disconnects at the top create large disruptions at the execution level. The friction tax gets amplified across a lot of people.";
     if (total > 15)
       return "At this size, silence becomes the path of least resistance. Information decays. Candor has to be deliberate or it stops happening.";
     if (total > 0 && total <= 5)
-      return "Small groups have their own version of this problem — familiarity makes the hard conversations easier to avoid. Knowing each other well is not the same as being honest with each other.";
+      return "Small groups have their own version of this problem -- familiarity makes the hard conversations easier to avoid. Knowing each other well is not the same as being honest with each other.";
     return "The composition of this group determines the weighted cost of every conversation that doesn't happen in it.";
   }
 
-  // ── STEP 2: BEHAVIORAL ────────────────────────────────────────
-  if (step === 2) {
+  // ── STEP 3: BEHAVIORAL ──────────────────────────────────────────────────────
+  if (step === 3) {
 
-    // All five behavioral fields complete
-    if (frictionLocation && avoidanceMechanism && priorAttempt && personnelRisk && resolutionBlockage) {
+    // All behavioral fields complete — full picture read
+    if (frictionLocation && avoidanceMechanism && priorAttempt &&
+        personnelRisk && resolutionBlockage && frictionDuration &&
+        downstreamPopulation && decisions) {
 
       // Resolution blockage is the most acute signal
       if (resolutionBlockage === 'ATTEMPTED') {
-        return "Something is actively preventing a decision your organization knows needs to happen. That's the most acute signal in this diagnostic. The financial picture ahead will confirm the cost, but the conversation about what's blocking it is the one that actually moves things.";
+        const downstream = DOWNSTREAM_AMPLIFIERS[downstreamPopulation];
+        const base = "Something is actively preventing a decision your organization knows needs to happen. That's the most acute signal in this diagnostic. The financial picture ahead will confirm the cost, but the conversation about what's blocking it is the one that actually moves things.";
+        return downstream ? `${base} ${downstream}` : base;
       }
       if (resolutionBlockage === 'KNOWN' && personnelRisk === 'YES') {
         return "You know what needs to happen and there's someone valuable at risk of leaving because it hasn't. That's two compounding costs running simultaneously. The longer the gap between knowing and acting, the more expensive both become.";
@@ -386,9 +442,14 @@ return null;  }
         return "Knowing what needs to happen and not being able to act on it is its own kind of friction. The organization is carrying the weight of an unmade decision, and that weight has a daily cost.";
       }
 
+      // Decision velocity — new v6.0 signal
+      if (decisions === 'STALLED') {
+        return "Decisions that get deferred or reopened constantly are one of the most reliable signs that the friction isn't just interpersonal -- it's structural. The organization has lost the ability to make a call and let it stand.";
+      }
+
       // Personnel risk signals
       if (personnelRisk === 'LOST') {
-        return "You've already lost someone because of this. That's not a warning sign — it's a confirmed cost. The question now is whether the dynamic that caused it is still in place.";
+        return "You've already lost someone because of this. That's not a warning sign -- it's a confirmed cost. The question now is whether the dynamic that caused it is still in place.";
       }
       if (personnelRisk === 'YES' && priorAttempt === 'EXTERNAL') {
         return "Someone valuable is at risk of leaving, and a previous external attempt didn't hold. That combination tells me the intervention needs to go deeper than what was tried before.";
@@ -399,7 +460,7 @@ return null;  }
 
       // Prior attempt signals
       if (priorAttempt === 'EXTERNAL') {
-        return "Something was brought in and it didn't hold. That's important context — not because the previous attempt failed, but because it tells us the resolution needs to go somewhere the last one didn't reach.";
+        return "Something was brought in and it didn't hold. That's important context -- not because the previous attempt failed, but because it tells us the resolution needs to go somewhere the last one didn't reach.";
       }
       if (priorAttempt === 'CONVERSATION') {
         return "The conversation happened and nothing changed. That's one of the most common and most expensive patterns in this diagnostic. It usually means the conversation addressed the symptom without reaching the source.";
@@ -408,55 +469,91 @@ return null;  }
         return "Not being sure whether what was tried addressed the right thing is itself a finding. It suggests the organization may have been treating a visible symptom while the actual dynamic continued underneath it.";
       }
 
-      // Full behavioral context with industry
+      // Full behavioral context with industry fallback
       const specific = BEHAVIORAL_INSIGHTS[`${frictionLocation}_${avoidanceMechanism}_${industry}`];
-      const fallback = BEHAVIORAL_INSIGHTS[`${frictionLocation}_${avoidanceMechanism}`];
-      return specific || fallback || "That's the behavioral picture. The financials coming up will put a number on what this pattern is actually costing.";
+      const fallback  = BEHAVIORAL_INSIGHTS[`${frictionLocation}_${avoidanceMechanism}`];
+      const base      = specific || fallback || "That's the behavioral picture. The financials coming up will put a number on what this pattern is actually costing.";
+
+      // Append downstream amplifier if significant
+      const amplifier = DOWNSTREAM_AMPLIFIERS[downstreamPopulation];
+      return amplifier ? `${base} ${amplifier}` : base;
     }
 
-    // Progressive reveal as fields are completed
-    if (frictionLocation && avoidanceMechanism && priorAttempt && personnelRisk && !resolutionBlockage) {
-      return "Last question in this module. Whether there's a decision being avoided tells us whether the organization is in friction or in stasis. Those are different problems.";
+    // Progressive reveal — decisions field (new v6.0)
+    if (frictionLocation && avoidanceMechanism && priorAttempt &&
+        personnelRisk && resolutionBlockage && frictionDuration &&
+        downstreamPopulation && !decisions) {
+      return "One last question in this module. How decisions actually move -- or don't -- is the clearest behavioral signal of whether the friction is interpersonal or structural. Those are different problems with different solutions.";
     }
 
+    // Progressive reveal — downstreamPopulation
+    if (frictionLocation && avoidanceMechanism && priorAttempt &&
+        personnelRisk && resolutionBlockage && frictionDuration &&
+        !downstreamPopulation) {
+      return "Beyond the group we're looking at -- how many people are waiting on decisions this friction is holding up? The answer determines whether this is a contained problem or an organizational one.";
+    }
+
+    // Progressive reveal — frictionDuration (new v6.0)
+    if (frictionLocation && avoidanceMechanism && priorAttempt &&
+        personnelRisk && resolutionBlockage && !frictionDuration) {
+      return "How long this has been going on changes what resolution needs to look like. A pattern three months old and a pattern two years old require different approaches.";
+    }
+
+    // Progressive reveal — resolutionBlockage
+    if (frictionLocation && avoidanceMechanism && priorAttempt &&
+        personnelRisk && !resolutionBlockage) {
+      return "Last question before duration. Whether there's a decision being avoided tells us whether the organization is in friction or in stasis. Those are different problems.";
+    }
+
+    // Progressive reveal — personnelRisk
     if (frictionLocation && avoidanceMechanism && priorAttempt && !personnelRisk) {
-      return "Almost there. Whether someone valuable is at risk of leaving is one of the most direct measures of how much this situation is already costing — beyond what any financial input will show.";
+      return "Almost there. Whether someone valuable is at risk of leaving is one of the most direct measures of how much this situation is already costing -- beyond what any financial input will show.";
     }
 
+    // Progressive reveal — priorAttempt
     if (frictionLocation && avoidanceMechanism && !priorAttempt) {
       return "One thing I always want to know before the financial picture: has this been attempted before? The answer changes what resolution actually needs to look like.";
     }
 
+    // Progressive reveal — avoidanceMechanism
     if (frictionLocation && !avoidanceMechanism) {
       const locationContext = {
         TEAM:             "When the friction lives between leadership and the team, the avoidance pattern tells us whether leadership knows it's happening or not. That distinction matters a lot.",
-        CROSS_FUNCTIONAL: "Cross-functional friction is the hardest kind to self-diagnose — every department thinks it's performing. Tell me why the hard conversations aren't happening and we'll know where to look.",
+        CROSS_FUNCTIONAL: "Cross-functional friction is the hardest kind to self-diagnose -- every department thinks it's performing. Tell me why the hard conversations aren't happening and we'll know where to look.",
         WITHIN_LEADERSHIP:"When it's inside the leadership team, the avoidance is almost always self-protective. That's human. It's also where the cost compounds fastest.",
         UNKNOWN:          "Not knowing where the friction lives is actually useful information. The avoidance pattern usually reveals more than the location would have anyway.",
       };
       return locationContext[frictionLocation] || "Why the hard conversations aren't happening tells us as much as where the friction lives.";
     }
 
-    if (!frictionLocation)
-      return "Where the friction lives shapes the whole conversation. Be as specific as you can — it's okay if the answer is 'I'm not sure.'";
-    if (frictionLocation === 'WITHIN_LEADERSHIP')
-      return "Leadership friction is the most expensive kind — it radiates downward and the organization learns to work around it before anyone at the top acknowledges it.";
-    if (frictionLocation === 'CROSS_FUNCTIONAL')
-      return "Cross-functional friction is sneaky. Each team thinks it's doing its job. The failure lives in the handoff — in the space between departments where nobody has clear ownership.";
-    if (frictionLocation === 'TEAM')
-      return "When the friction is between leadership and the team, the team has usually already adapted around it. That adaptation is often more expensive than the original problem.";
+    // frictionLocation just selected — immediate response
+    if (!avoidanceMechanism) {
+      if (!frictionLocation)
+        return "Where the friction lives shapes the whole conversation. Be as specific as you can -- it's okay if the answer is 'I'm not sure.'";
+      if (frictionLocation === 'WITHIN_LEADERSHIP')
+        return "Leadership friction is the most expensive kind -- it radiates downward and the organization learns to work around it before anyone at the top acknowledges it.";
+      if (frictionLocation === 'CROSS_FUNCTIONAL')
+        return "Cross-functional friction is sneaky. Each team thinks it's doing its job. The failure lives in the handoff -- in the space between departments where nobody has clear ownership.";
+      if (frictionLocation === 'TEAM')
+        return "When the friction is between leadership and the team, the team has usually already adapted around it. That adaptation is often more expensive than the original problem.";
+    }
+
+    // Duration selected — acknowledge it directly
+    if (frictionDuration && !downstreamPopulation) {
+      return DURATION_INSIGHTS[frictionDuration] || "The timeline matters. It shapes what resolution needs to look like.";
+    }
 
     return "The behavioral picture is the layer the financial numbers can't capture on their own. This is where it gets honest.";
   }
 
-  // ── STEP 3: FINANCIAL ─────────────────────────────────────────
-  if (step === 3) {
-    const pRoll   = Number(payroll)      || 0;
-    const best    = Number(revenueBest)  || 0;
-    const worst   = Number(revenueWorst) || 0;
+  // ── STEP 4: FINANCIAL ───────────────────────────────────────────────────────
+  if (step === 4) {
+    const pRoll   = Number(payroll)               || 0;
+    const best    = Number(revenueBest)           || 0;
+    const worst   = Number(revenueWorst)          || 0;
     const gap     = best - worst;
     const stalled = Number(stalledProjectCapital) || 0;
-    const hours   = meetingHours || 0;
+    const hours   = meetingHours                  || 0;
 
     if (pRoll > 0 && gap > 0 && stalled > 0) {
       const totalVisible = (pRoll * 0.1) + gap + stalled;
@@ -465,32 +562,32 @@ return null;  }
       return "That's everything I need. The number coming up will name what your organization has been quietly managing around.";
     }
     if (stalled > 100000)
-      return "Stalled capital is the ghost of decisions that didn't get made. Every month it sits there, it earns a negative return — not just financially, but on the culture that has to work around it.";
+      return "Stalled capital is the ghost of decisions that didn't get made. Every month it sits there, it earns a negative return -- not just financially, but on the culture that has to work around it.";
     if (stalled > 0)
       return "Even a modest amount of stalled capital carries a disproportionate cultural cost. The projects nobody will kill are the ones that define what the organization is willing to tolerate.";
     if (gap > 500000)
       return "A gap that size is rarely a strategy problem. In my experience, it's almost always a people variable wearing a strategy disguise.";
     if (gap > 0) {
       return sequence % 2 === 0
-        ? "The execution gap is where potential and reality part ways. Friction lives in that space — and it compounds every month it goes unaddressed."
+        ? "The execution gap is where potential and reality part ways. Friction lives in that space -- and it compounds every month it goes unaddressed."
         : "That gap between where you expected to be and where you are has a cause. It's rarely the strategy. It's almost always the dynamic inside the room where the strategy gets executed.";
     }
     if (hours > 20)
-      return "Twenty-plus hours a week in meetings isn't a scheduling problem — it's a structural one. The organization is substituting coordination for decision-making.";
+      return "Twenty-plus hours a week in meetings isn't a scheduling problem -- it's a structural one. The organization is substituting coordination for decision-making.";
     if (hours > 10) {
       return sequence % 2 === 0
-        ? "Above ten hours a week, meeting load starts cannibalizing execution capacity. The question worth asking isn't whether the meetings are useful — it's whether they're necessary."
+        ? "Above ten hours a week, meeting load starts consuming execution capacity. The question worth asking isn't whether the meetings are useful -- it's whether they're necessary."
         : "Ten-plus hours a week in meetings usually means the organization has found a way to feel productive without making decisions. Those are different things and they cost differently.";
     }
     if (pRoll > 5000000)
-      return "At this payroll level, a 5% friction rate is a full executive salary — lost every year to conversations that didn't happen. That's not abstract. That's real.";
+      return "At this payroll level, a 5% friction rate is a full executive salary -- lost every year to conversations that didn't happen. That's not abstract. That's real.";
     if (pRoll > 0) {
       return sequence % 2 === 0
         ? "The payroll baseline sets the hourly cost of friction. This is the literal price of every conversation your organization is not having."
         : "Every dollar on that payroll is buying someone's time. The question this diagnostic asks is how much of that time is being spent working around something that could be resolved.";
     }
 
-    return "Estimates are fine here. This doesn't require precision — it requires honesty. Those are different things.";
+    return "Estimates are fine here. This doesn't require precision -- it requires honesty. Those are different things.";
   }
 
   return "Compiling your institutional record...";

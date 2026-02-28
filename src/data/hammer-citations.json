@@ -1,0 +1,201 @@
+{
+  "_schema_version": "1.0.0",
+  "_description": "Principal Resolution — Hammer Citation Index. Each entry provides a validated public data point that supports diagnostic inference for one or more Institutional States.",
+  "_constraints": {
+    "total_target": "100+ entries",
+    "state_ids": [
+      "IS-01", "IS-02", "IS-03", "IS-04", "IS-05", "IS-06",
+      "IS-07", "IS-08", "IS-09", "IS-10", "IS-11", "IS-12"
+    ],
+    "severity_scale": "1 (informational) to 5 (critical indicator)",
+    "source_types": ["academic", "industry-report", "government", "survey", "longitudinal-study"]
+  },
+  "citations": [
+    {
+      "citation_id": "HC-001",
+      "title": "Only 21% of Employees Are Engaged at Work",
+      "source": "Gallup",
+      "publication": "State of the Global Workplace Report",
+      "year": 2023,
+      "url": "https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx",
+      "source_type": "survey",
+      "state_ids": ["IS-03", "IS-07"],
+      "severity": 4,
+      "diagnostic_signal": "engagement_collapse",
+      "advisor_take": "This isn't a motivation problem. When 79% of your people are disengaged, you have a leadership architecture problem. No ping-pong table fixes that.",
+      "tags": ["engagement", "leadership", "culture"]
+    },
+    {
+      "citation_id": "HC-002",
+      "title": "Manager Effectiveness Accounts for 70% of Team Engagement Variance",
+      "source": "Gallup",
+      "publication": "State of the American Manager",
+      "year": 2022,
+      "url": "https://www.gallup.com/services/182138/state-american-manager.aspx",
+      "source_type": "survey",
+      "state_ids": ["IS-02", "IS-05", "IS-07"],
+      "severity": 5,
+      "diagnostic_signal": "manager_accountability_gap",
+      "advisor_take": "Seventy percent. Not culture. Not comp. Not purpose. The manager. If you haven't fixed who you're putting in charge of people, you haven't fixed anything.",
+      "tags": ["management", "engagement", "accountability"]
+    },
+    {
+      "citation_id": "HC-003",
+      "title": "Voluntary Turnover Costs Employers 33% of a Worker's Annual Salary",
+      "source": "Work Institute",
+      "publication": "2023 Retention Report",
+      "year": 2023,
+      "url": "https://workinstitute.com/retention-report/",
+      "source_type": "industry-report",
+      "state_ids": ["IS-04", "IS-06", "IS-08"],
+      "severity": 4,
+      "diagnostic_signal": "retention_cost_bleed",
+      "advisor_take": "Turnover isn't a feelings problem. It's a balance sheet problem. At 33% of annual salary per exit, you're funding your own dysfunction.",
+      "tags": ["turnover", "retention", "cost"]
+    },
+    {
+      "citation_id": "HC-004",
+      "title": "58% of Employees Would Trust a Stranger More Than Their Boss",
+      "source": "Harvard Business Review",
+      "publication": "The Neuroscience of Trust",
+      "year": 2017,
+      "url": "https://hbr.org/2017/01/the-neuroscience-of-trust",
+      "source_type": "academic",
+      "state_ids": ["IS-01", "IS-09", "IS-11"],
+      "severity": 5,
+      "diagnostic_signal": "leadership_trust_deficit",
+      "advisor_take": "When your people trust strangers more than they trust you, the problem isn't communication style. It's a credibility gap that no town hall is going to close.",
+      "tags": ["trust", "leadership", "credibility"]
+    },
+    {
+      "citation_id": "HC-005",
+      "title": "Organizations With Clear Accountability Structures Are 2.5x More Likely to Outperform",
+      "source": "McKinsey",
+      "publication": "Organizational Health Index",
+      "year": 2022,
+      "url": "https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights",
+      "source_type": "industry-report",
+      "state_ids": ["IS-02", "IS-05", "IS-10"],
+      "severity": 4,
+      "diagnostic_signal": "accountability_structure_absence",
+      "advisor_take": "Accountability isn't a culture value. It's a structure. You can't will your way to 2.5x performance. You have to build it.",
+      "tags": ["accountability", "performance", "structure"]
+    },
+    {
+      "citation_id": "HC-006",
+      "title": "Companies Lose $1 Trillion Annually to Voluntary Turnover",
+      "source": "Gallup",
+      "publication": "State of the American Workplace",
+      "year": 2019,
+      "url": "https://www.gallup.com/workplace/247391/fixable-problem-costs-businesses-trillion.aspx",
+      "source_type": "survey",
+      "state_ids": ["IS-04", "IS-06"],
+      "severity": 5,
+      "diagnostic_signal": "systemic_retention_failure",
+      "advisor_take": "Twelve zeros. That's the price tag on avoidable exits. And Gallup calls it 'fixable.' That's the part that should keep you up at night.",
+      "tags": ["turnover", "cost", "retention"]
+    },
+    {
+      "citation_id": "HC-007",
+      "title": "Psychological Safety Is the #1 Predictor of Team Performance",
+      "source": "Google",
+      "publication": "Project Aristotle",
+      "year": 2016,
+      "url": "https://rework.withgoogle.com/guides/understanding-team-effectiveness/steps/introduction/",
+      "source_type": "longitudinal-study",
+      "state_ids": ["IS-01", "IS-03", "IS-09"],
+      "severity": 5,
+      "diagnostic_signal": "psychological_safety_collapse",
+      "advisor_take": "Google ran the numbers across 180 teams. The answer wasn't who was on the team. It was whether people felt safe enough to speak. If they don't, you're flying blind.",
+      "tags": ["psychological-safety", "team-performance", "culture"]
+    },
+    {
+      "citation_id": "HC-008",
+      "title": "Only 40% of Workers Know What Their Company Stands For",
+      "source": "Gallup",
+      "publication": "State of the Workplace",
+      "year": 2022,
+      "url": "https://www.gallup.com/workplace/236366/right-culture-not-employee-satisfaction.aspx",
+      "source_type": "survey",
+      "state_ids": ["IS-10", "IS-11", "IS-12"],
+      "severity": 3,
+      "diagnostic_signal": "mission_diffusion",
+      "advisor_take": "You can't execute a strategy that most of your people can't describe. This isn't a branding problem. It's a leadership communication failure with a measurable cost.",
+      "tags": ["mission", "clarity", "communication"]
+    },
+    {
+      "citation_id": "HC-009",
+      "title": "Employees Who Receive Regular Feedback Are 3x More Engaged",
+      "source": "Gallup",
+      "publication": "Re-Engineering Performance Management",
+      "year": 2021,
+      "url": "https://www.gallup.com/workplace/182796/why-great-managers-rare.aspx",
+      "source_type": "survey",
+      "state_ids": ["IS-02", "IS-07"],
+      "severity": 3,
+      "diagnostic_signal": "feedback_loop_absence",
+      "advisor_take": "Feedback isn't a nicety. It's a performance mechanism. Three times more engaged means three times more output per salary dollar. The silence is costing you.",
+      "tags": ["feedback", "engagement", "management"]
+    },
+    {
+      "citation_id": "HC-010",
+      "title": "Toxic Workplace Culture Is 10.4x More Predictive of Attrition Than Compensation",
+      "source": "MIT Sloan Management Review",
+      "publication": "Toxic Culture Is Driving the Great Resignation",
+      "year": 2022,
+      "url": "https://sloanreview.mit.edu/article/toxic-culture-is-driving-the-great-resignation/",
+      "source_type": "academic",
+      "state_ids": ["IS-01", "IS-04", "IS-08"],
+      "severity": 5,
+      "diagnostic_signal": "culture_toxicity",
+      "advisor_take": "10.4 times. Not comp. Not benefits. Not remote work policy. Culture. When people leave, they're not chasing money. They're escaping something you built.",
+      "tags": ["culture", "attrition", "toxicity"]
+    },
+    {
+      "citation_id": "HC-011",
+      "title": "Burned-Out Employees Are 2.6x More Likely to Leave",
+      "source": "Gallup",
+      "publication": "Employee Burnout: Causes and Cures",
+      "year": 2020,
+      "url": "https://www.gallup.com/workplace/282659/employee-burnout-perspective-paper.aspx",
+      "source_type": "survey",
+      "state_ids": ["IS-06", "IS-08"],
+      "severity": 4,
+      "diagnostic_signal": "burnout_driven_attrition",
+      "advisor_take": "Burnout isn't an individual problem. It's an organizational output. If people are running on empty, you built the system that drained them.",
+      "tags": ["burnout", "attrition", "workload"]
+    },
+    {
+      "citation_id": "HC-012",
+      "title": "High-Trust Organizations Outperform Low-Trust Peers by 286% in Total Return",
+      "source": "Harvard Business Review",
+      "publication": "The Business Case for Purpose",
+      "year": 2020,
+      "url": "https://hbr.org/2020/05/the-trust-crisis",
+      "source_type": "academic",
+      "state_ids": ["IS-01", "IS-09", "IS-12"],
+      "severity": 5,
+      "diagnostic_signal": "trust_premium_gap",
+      "advisor_take": "286%. That's not a soft number. That's compounding. The cost of low trust doesn't show up as a line item. It shows up as everything you left on the table.",
+      "tags": ["trust", "performance", "returns"]
+    }
+  ],
+  "_schema_notes": {
+    "expansion_target": "This seed schema contains 12 entries representing each State. Phase I build-out targets 100+ entries with minimum 6 citations per State ID.",
+    "advisor_take_rules": [
+      "No corporate jargon",
+      "No semicolons",
+      "Contractions use straight quotes",
+      "70% blunt, 30% servant leader",
+      "Each take must name a mechanism, not just a symptom"
+    ],
+    "indexing": "citation_id is stable and permanent. Never reuse or reassign a retired ID.",
+    "severity_guide": {
+      "1": "Supporting context — corroborates but doesn't anchor a diagnosis",
+      "2": "Moderate signal — one of several indicators",
+      "3": "Clear signal — meaningful in conjunction with behavioral data",
+      "4": "Strong signal — near-sufficient alone with corroborating financial data",
+      "5": "Critical indicator — anchor citation for State assignment"
+    }
+  }
+}

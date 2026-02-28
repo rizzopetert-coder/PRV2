@@ -1,0 +1,194 @@
+{
+  "_schema_version": "1.0.0",
+  "_description": "Principal Resolution — Vault Manifest. Maps all content assets to Institutional States. Single source of truth for routing, SEO, and diagnostic linkage.",
+  "institutional_states": [
+    {
+      "state_id": "IS-01",
+      "slug": "trust-deficit",
+      "label": "Trust Deficit",
+      "short_description": "The organization operates under a persistent leadership credibility gap that undermines decision quality and retention.",
+      "severity_tier": "critical",
+      "hammer_citation_ids": ["HC-004", "HC-007", "HC-010", "HC-012"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-1",
+      "seo_meta": {
+        "title": "Trust Deficit — Institutional State IS-01 | Principal Resolution",
+        "description": "Organizations in Trust Deficit show measurable credibility gaps between leadership and workforce. Learn the diagnostic indicators and resolution path.",
+        "canonical": "/vault/lexicon/trust-deficit"
+      }
+    },
+    {
+      "state_id": "IS-02",
+      "slug": "accountability-void",
+      "label": "Accountability Void",
+      "short_description": "Role clarity and consequence structures are absent or inconsistently enforced, producing performance diffusion across teams.",
+      "severity_tier": "critical",
+      "hammer_citation_ids": ["HC-002", "HC-005", "HC-009"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-1",
+      "seo_meta": {
+        "title": "Accountability Void — Institutional State IS-02 | Principal Resolution",
+        "description": "When accountability structures collapse, performance follows. IS-02 maps the indicators and the resolution path.",
+        "canonical": "/vault/lexicon/accountability-void"
+      }
+    },
+    {
+      "state_id": "IS-03",
+      "slug": "engagement-collapse",
+      "label": "Engagement Collapse",
+      "short_description": "Workforce engagement has fallen below functional threshold, producing measurable output and quality degradation.",
+      "severity_tier": "high",
+      "hammer_citation_ids": ["HC-001", "HC-007"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-2",
+      "seo_meta": {
+        "title": "Engagement Collapse — Institutional State IS-03 | Principal Resolution",
+        "description": "Engagement Collapse is a structural failure, not a culture failure. IS-03 defines the signals and the resolution sequence.",
+        "canonical": "/vault/lexicon/engagement-collapse"
+      }
+    },
+    {
+      "state_id": "IS-04",
+      "slug": "attrition-acceleration",
+      "label": "Attrition Acceleration",
+      "short_description": "Voluntary exits are outpacing replacement capacity, creating institutional knowledge loss at compounding velocity.",
+      "severity_tier": "critical",
+      "hammer_citation_ids": ["HC-003", "HC-006", "HC-010"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-1",
+      "seo_meta": {
+        "title": "Attrition Acceleration — Institutional State IS-04 | Principal Resolution",
+        "description": "When exits compound faster than onboarding can absorb, the organization enters Attrition Acceleration. IS-04 maps the cost and the intervention.",
+        "canonical": "/vault/lexicon/attrition-acceleration"
+      }
+    },
+    {
+      "state_id": "IS-05",
+      "slug": "structural-ambiguity",
+      "label": "Structural Ambiguity",
+      "short_description": "Reporting lines, decision rights, and role boundaries are undefined or contested, producing friction at every execution layer.",
+      "severity_tier": "high",
+      "hammer_citation_ids": ["HC-002", "HC-005"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-2",
+      "seo_meta": {
+        "title": "Structural Ambiguity — Institutional State IS-05 | Principal Resolution",
+        "description": "Unclear structure isn't a growing pain. It's a compounding tax on every decision. IS-05 defines the pattern and the path forward.",
+        "canonical": "/vault/lexicon/structural-ambiguity"
+      }
+    },
+    {
+      "state_id": "IS-06",
+      "slug": "burnout-infrastructure",
+      "label": "Burnout Infrastructure",
+      "short_description": "The operational design of the organization systematically produces employee burnout, independent of individual coping capacity.",
+      "severity_tier": "high",
+      "hammer_citation_ids": ["HC-003", "HC-006", "HC-011"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-2",
+      "seo_meta": {
+        "title": "Burnout Infrastructure — Institutional State IS-06 | Principal Resolution",
+        "description": "Burnout Infrastructure means the system itself is the problem. IS-06 identifies the structural causes and intervention points.",
+        "canonical": "/vault/lexicon/burnout-infrastructure"
+      }
+    },
+    {
+      "state_id": "IS-07",
+      "slug": "management-failure",
+      "label": "Management Failure",
+      "short_description": "Frontline and mid-level management is producing measurable team dysfunction through under-development, misalignment, or poor selection.",
+      "severity_tier": "critical",
+      "hammer_citation_ids": ["HC-001", "HC-002", "HC-009"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-1",
+      "seo_meta": {
+        "title": "Management Failure — Institutional State IS-07 | Principal Resolution",
+        "description": "Seventy percent of engagement variance lives in the manager. IS-07 defines when management has failed systemically and what resolution requires.",
+        "canonical": "/vault/lexicon/management-failure"
+      }
+    },
+    {
+      "state_id": "IS-08",
+      "slug": "culture-toxicity",
+      "label": "Culture Toxicity",
+      "short_description": "Behavioral norms within the organization actively undermine psychological safety, fairness, or inclusion in ways that produce measurable exit rates.",
+      "severity_tier": "critical",
+      "hammer_citation_ids": ["HC-010", "HC-011"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-1",
+      "seo_meta": {
+        "title": "Culture Toxicity — Institutional State IS-08 | Principal Resolution",
+        "description": "Culture Toxicity is the leading predictor of attrition — 10.4x more powerful than compensation. IS-08 maps it, measures it, and resolves it.",
+        "canonical": "/vault/lexicon/culture-toxicity"
+      }
+    },
+    {
+      "state_id": "IS-09",
+      "slug": "silence-dynamic",
+      "label": "Silence Dynamic",
+      "short_description": "The organization has developed patterns of suppressed dissent and withheld feedback that degrade decision quality at every level.",
+      "severity_tier": "high",
+      "hammer_citation_ids": ["HC-004", "HC-007", "HC-012"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-2",
+      "seo_meta": {
+        "title": "Silence Dynamic — Institutional State IS-09 | Principal Resolution",
+        "description": "When people stop speaking, organizations stop learning. IS-09 identifies the Silence Dynamic and the structural interventions that break it.",
+        "canonical": "/vault/lexicon/silence-dynamic"
+      }
+    },
+    {
+      "state_id": "IS-10",
+      "slug": "mission-diffusion",
+      "label": "Mission Diffusion",
+      "short_description": "Strategic intent has failed to propagate through the organization, producing misaligned execution and discretionary effort collapse.",
+      "severity_tier": "moderate",
+      "hammer_citation_ids": ["HC-005", "HC-008"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-3",
+      "seo_meta": {
+        "title": "Mission Diffusion — Institutional State IS-10 | Principal Resolution",
+        "description": "When only 40% of your people can describe what the organization stands for, you have a Mission Diffusion problem. IS-10 names it and resolves it.",
+        "canonical": "/vault/lexicon/mission-diffusion"
+      }
+    },
+    {
+      "state_id": "IS-11",
+      "slug": "leadership-isolation",
+      "label": "Leadership Isolation",
+      "short_description": "Senior leadership has lost ground-level signal fidelity, producing strategy-execution gaps that compound with organizational size.",
+      "severity_tier": "high",
+      "hammer_citation_ids": ["HC-004", "HC-008"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-2",
+      "seo_meta": {
+        "title": "Leadership Isolation — Institutional State IS-11 | Principal Resolution",
+        "description": "Leadership Isolation isn't arrogance. It's an information architecture failure. IS-11 defines the pattern and the reconnection sequence.",
+        "canonical": "/vault/lexicon/leadership-isolation"
+      }
+    },
+    {
+      "state_id": "IS-12",
+      "slug": "identity-fracture",
+      "label": "Identity Fracture",
+      "short_description": "The organization's stated values and operational behaviors have diverged to a degree that produces cynicism, disengagement, and reputational risk.",
+      "severity_tier": "high",
+      "hammer_citation_ids": ["HC-008", "HC-012"],
+      "intelligence_memo_ids": [],
+      "service_tier_recommendation": "Tier-2",
+      "seo_meta": {
+        "title": "Identity Fracture — Institutional State IS-12 | Principal Resolution",
+        "description": "When what you say and what you do no longer match, the organization is in Identity Fracture. IS-12 defines the gap and the repair.",
+        "canonical": "/vault/lexicon/identity-fracture"
+      }
+    }
+  ],
+  "_manifest_notes": {
+    "intelligence_memo_ids": "These arrays are empty at Phase I launch. Memos are added via the editorial pipeline and linked here on publish.",
+    "service_tier_guide": {
+      "Tier-1": "Full diagnostic engagement — high severity, multi-system dysfunction",
+      "Tier-2": "Targeted advisory — contained dysfunction with clear intervention point",
+      "Tier-3": "Diagnostic review + roadmap — early-stage or single-domain friction"
+    }
+  }
+}

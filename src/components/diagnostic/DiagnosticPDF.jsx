@@ -1,14 +1,28 @@
 import React from 'react';
 import { Document, Page, View, Text, StyleSheet, Font } from '@react-pdf/renderer';
 import {
-  INDUSTRY_BENCHMARKS,
-  ORG_STAGES,
-  LEADERSHIP_TENURES,
-  FRICTION_LOCATIONS,
-  AVOIDANCE_MECHANISMS,
+  STATES,
+  TIERS,
+  TIER_META,
   METRIC_LEGEND,
 } from '../../lib/diagnostic-logic';
-import { DiagnosticGridPDF } from './DiagnosticGridPDF';
+import {
+  STATE_GLOSSARY,
+  getSynthesis,
+  getInference,
+  getPathToVerdict,
+  buildRecommendationRationale,
+} from './ResultsLedger';
+import { SignalMatrixPDF } from './SignalMatrixPDF';
+
+/**
+ * DiagnosticPDF // Principal Resolution v6.0
+ * Triple-File Sync: strings sourced from ResultsLedger.jsx string tables.
+ * Retired: hammerCitation / Forensic Proof block (relocated to Vault)
+ * Retired: v5.0 buildSynthesis / buildInferredObservation / buildRecommendationRationale
+ * New: Path to Verdict section
+ * New: Glossary as a final PDF page (fine-print supplement register)
+ */
 
 Font.register({
   family: 'Newsreader',
@@ -33,479 +47,425 @@ Font.register({
   ],
 });
 
-// ── DESIGN TOKENS ────────────────────────────────────────────────────────────
+// ── DESIGN TOKENS ─────────────────────────────────────────────────────────────
 const T = {
-  bg:      '#FAF9F6',
-  text:    '#1C1C1C',
-  accent:  '#FF4500',
-  muted:   '#6B6560',
-  border:  '#D0CBC2',
+  bg:     '#FAF9F6',
+  text:   '#1C1C1C',
+  accent: '#FF4500',
+  muted:  '#6B6560',
+  border: '#D0CBC2',
 };
 
 const styles = StyleSheet.create({
+
+  // ── PAGE ──
   page: {
     backgroundColor: T.bg,
     paddingTop:        36,
     paddingBottom:     36,
     paddingHorizontal: 52,
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    color: T.text,
+    fontFamily:  'Newsreader',
+    fontStyle:   'italic',
+    color:       T.text,
   },
-  // ── watermark ──
+  // Glossary page uses same padding but smaller type scale
+  glossaryPage: {
+    backgroundColor: T.bg,
+    paddingTop:        48,
+    paddingBottom:     48,
+    paddingHorizontal: 52,
+    fontFamily:  'Newsreader',
+    fontStyle:   'italic',
+    color:       T.text,
+  },
+
+  // ── WATERMARK ──
   watermark: {
-    position: 'absolute',
-    top: 40,
-    right: 32,
-    fontSize: 7,
-    fontFamily: 'SpaceMono',
-    color: T.text,
-    opacity: 0.08,
+    position:      'absolute',
+    top:           40,
+    right:         32,
+    fontSize:      7,
+    fontFamily:    'SpaceMono',
+    color:         T.text,
+    opacity:       0.08,
     letterSpacing: 2,
     textTransform: 'uppercase',
   },
-  // ── section spacing ──
-  section: { marginBottom: 32 },
+
+  // ── SECTION SPACING ──
+  section:     { marginBottom: 32 },
   sectionLast: { marginBottom: 0 },
-  // ── label / eyebrow ──
+  sectionSm:   { marginBottom: 20 },
+
+  // ── LABEL / EYEBROW ──
   label: {
-    fontFamily: 'SpaceMono',
-    fontSize: 8,
+    fontFamily:    'SpaceMono',
+    fontSize:      8,
     letterSpacing: 2,
     textTransform: 'uppercase',
-    color: T.accent,
-    fontWeight: 700,
-    marginBottom: 8,
+    color:         T.accent,
+    fontWeight:    700,
+    marginBottom:  8,
   },
   labelMuted: {
-    fontFamily: 'SpaceMono',
-    fontSize: 8,
+    fontFamily:    'SpaceMono',
+    fontSize:      8,
     letterSpacing: 2,
     textTransform: 'uppercase',
-    color: T.muted,
-    fontWeight: 700,
-    marginBottom: 6,
+    color:         T.muted,
+    fontWeight:    700,
+    marginBottom:  6,
   },
-  // ── verdict ──
+
+  // ── VERDICT ──
   verdictTitle: {
     fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 52,
-    color: T.text,
+    fontStyle:  'italic',
+    fontSize:   52,
+    color:      T.text,
     lineHeight: 1,
     marginBottom: 14,
   },
   verdictDesc: {
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 12,
-    color: T.muted,
-    lineHeight: 1.6,
+    fontFamily:      'Newsreader',
+    fontStyle:       'italic',
+    fontSize:        12,
+    color:           T.muted,
+    lineHeight:      1.6,
     borderLeftWidth: 3,
     borderLeftColor: T.accent,
-    paddingLeft: 14,
-    maxWidth: 480,
+    paddingLeft:     14,
+    maxWidth:        480,
   },
-  // ── divider ──
+
+  // ── DIVIDER ──
   divider: {
-    borderTopWidth: 0.5,
-    borderTopColor: T.border,
-    marginVertical: 24,
+    borderTopWidth:  0.5,
+    borderTopColor:  T.border,
+    marginVertical:  24,
   },
-  // ── cost figure ──
+  dividerSm: {
+    borderTopWidth:  0.5,
+    borderTopColor:  T.border,
+    marginVertical:  16,
+  },
+
+  // ── COST FIGURE ──
   costFigureLarge: {
-    fontFamily: 'Roboto',
-    fontWeight: 700,
-    fontSize: 48,
-    color: T.text,
-    lineHeight: 1.4,
+    fontFamily:   'Roboto',
+    fontWeight:   700,
+    fontSize:     48,
+    color:        T.text,
+    lineHeight:   1.4,
     marginBottom: 16,
   },
   costFigureFloor: {
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 18,
-    color: T.accent,
-    lineHeight: 1.4,
-    maxWidth: 400,
+    fontFamily:   'Newsreader',
+    fontStyle:    'italic',
+    fontSize:     18,
+    color:        T.accent,
+    lineHeight:   1.4,
+    maxWidth:     400,
     marginBottom: 16,
   },
-  costFigureRow: { flexDirection: 'row', marginTop: 4, flexWrap: 'wrap' },
-  costFigureItem: { flexDirection: 'column', marginRight: 32 },
-  costFigureValue: {
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 22,
-    color: T.accent,
-  },
-  costFigureValueNeutral: {
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 22,
-    color: T.text,
-  },
-  // ── body text ──
+  costFigureRow:          { flexDirection: 'row', marginTop: 4, flexWrap: 'wrap' },
+  costFigureItem:         { flexDirection: 'column', marginRight: 32 },
+  costFigureValue:        { fontFamily: 'Newsreader', fontStyle: 'italic', fontSize: 22, color: T.accent },
+  costFigureValueNeutral: { fontFamily: 'Newsreader', fontStyle: 'italic', fontSize: 22, color: T.text },
+
+  // ── BODY TEXT ──
   body: {
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 11,
-    color: T.text,
-    lineHeight: 1.65,
+    fontFamily:      'Newsreader',
+    fontStyle:       'italic',
+    fontSize:        11,
+    color:           T.text,
+    lineHeight:      1.65,
     borderLeftWidth: 1.5,
     borderLeftColor: T.accent,
-    paddingLeft: 14,
-    maxWidth: 480,
+    paddingLeft:     14,
+    maxWidth:        480,
   },
   bodyMuted: {
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 10.5,
-    color: T.muted,
-    lineHeight: 1.65,
+    fontFamily:      'Newsreader',
+    fontStyle:       'italic',
+    fontSize:        10.5,
+    color:           T.muted,
+    lineHeight:      1.65,
     borderLeftWidth: 2.5,
     borderLeftColor: T.border,
-    paddingLeft: 14,
-    maxWidth: 480,
+    paddingLeft:     14,
+    maxWidth:        480,
   },
-  // ── divider row (label + rule) -- FIXED: flexDirection, flex ──
+  bodyPath: {
+    fontFamily:      'Newsreader',
+    fontStyle:       'italic',
+    fontSize:        10,
+    color:           T.muted,
+    lineHeight:      1.65,
+    borderLeftWidth: 1,
+    borderLeftColor: T.border,
+    paddingLeft:     14,
+    maxWidth:        480,
+  },
+
+  // ── LABEL ROW (label + rule) ──
   labelRow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
+    alignItems:    'center',
+    marginBottom:  10,
   },
   labelRule: { flex: 1, borderTopWidth: 0.5, borderTopColor: T.border, marginLeft: 10 },
-  // ── recommended engagement box ──
+
+  // ── RECOMMENDED ENGAGEMENT BOX ──
   engagementBox: {
-    borderWidth: 0.75,
-    borderColor: T.accent,
-    padding: 20,
-    marginTop: 4,
+    borderWidth:  0.75,
+    borderColor:  T.accent,
+    padding:      20,
+    marginTop:    4,
   },
   engagementName: {
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 22,
-    color: T.text,
+    fontFamily:   'Newsreader',
+    fontStyle:    'italic',
+    fontSize:     22,
+    color:        T.text,
     marginBottom: 8,
   },
   engagementOutcome: {
-    fontFamily: 'SpaceMono',
-    fontSize: 7.5,
+    fontFamily:    'SpaceMono',
+    fontSize:      7.5,
     letterSpacing: 1,
     textTransform: 'uppercase',
-    color: T.accent,
-    fontWeight: 700,
-    lineHeight: 1.5,
+    color:         T.accent,
+    fontWeight:    700,
+    lineHeight:    1.5,
   },
-  // ── metric legend -- FIXED: flexDirection, alignItems ──
+
+  // ── METRIC LEGEND ──
   legendTable: {
-    borderWidth: 0.5,
-    borderColor: T.border,
-    marginTop: 4,
+    borderWidth:  0.5,
+    borderColor:  T.border,
+    marginTop:    4,
   },
   legendRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    padding: 12,
+    flexDirection:     'row',
+    alignItems:        'flex-start',
+    padding:           12,
     borderBottomWidth: 0.5,
     borderBottomColor: T.border,
   },
   legendRowLast: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    padding: 12,
+    alignItems:    'flex-start',
+    padding:       12,
   },
   legendTerm: {
-    fontFamily: 'SpaceMono',
-    fontSize: 7,
+    fontFamily:    'SpaceMono',
+    fontSize:      7,
     letterSpacing: 1.5,
     textTransform: 'uppercase',
-    color: T.accent,
-    fontWeight: 700,
-    width: 110,
-    marginRight: 16,
-    paddingTop: 1,
+    color:         T.accent,
+    fontWeight:    700,
+    width:         110,
+    marginRight:   16,
+    paddingTop:    1,
   },
   legendDefinition: {
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 9.5,
-    color: T.muted,
-    lineHeight: 1.55,
-    flex: 1,
+    fontFamily:  'Newsreader',
+    fontStyle:   'italic',
+    fontSize:    9.5,
+    color:       T.muted,
+    lineHeight:  1.55,
+    flex:        1,
   },
-  // ── benchmark block ──
-  benchmarkBlock: {
-    backgroundColor: T.text,
-    padding: 20,
-    marginTop: 4,
-  },
-  benchmarkLabel: {
-    fontFamily: 'SpaceMono',
-    fontSize: 7.5,
-    letterSpacing: 1.5,
-    textTransform: 'uppercase',
-    color: T.accent,
-    fontWeight: 700,
-    marginBottom: 8,
-  },
-  benchmarkQuote: {
-    fontFamily: 'Newsreader',
-    fontStyle: 'italic',
-    fontSize: 11,
-    color: T.bg,
-    lineHeight: 1.65,
-  },
-  // ── case for action grid ──
-  caseGrid: {
-    borderWidth: 0.5,
-    borderColor: T.border,
-    marginTop: 4,
-  },
-  caseCell: { padding: 20 },
+
+  // ── CASE FOR ACTION ──
+  caseGrid:    { borderWidth: 0.5, borderColor: T.border, marginTop: 4 },
+  caseCell:    { padding: 20 },
   caseCellBottom: {
-    padding: 20,
-    borderTopWidth: 0.5,
-    borderTopColor: T.border,
-    backgroundColor: '#FFF5F0',
+    padding:           20,
+    borderTopWidth:    0.5,
+    borderTopColor:    T.border,
+    backgroundColor:   '#FFF5F0',
   },
   caseCostNeutral: {
-    fontFamily: 'SpaceMono',
-    fontWeight: 700,
-    fontSize: 28,
-    color: T.text,
-    lineHeight: 1,
+    fontFamily:  'SpaceMono',
+    fontWeight:  700,
+    fontSize:    28,
+    color:       T.text,
+    lineHeight:  1,
   },
   caseCostAccent: {
-    fontFamily: 'SpaceMono',
-    fontWeight: 700,
-    fontSize: 28,
-    color: T.accent,
-    lineHeight: 1,
+    fontFamily:  'SpaceMono',
+    fontWeight:  700,
+    fontSize:    28,
+    color:       T.accent,
+    lineHeight:  1,
   },
   caseNote: {
-    fontFamily: 'SpaceMono',
-    fontSize: 7.5,
+    fontFamily:    'SpaceMono',
+    fontSize:      7.5,
     letterSpacing: 1,
     textTransform: 'uppercase',
-    color: T.muted,
-    fontWeight: 700,
+    color:         T.muted,
+    fontWeight:    700,
+  },
+
+  // ── GLOSSARY PAGE ──
+  glossaryHeader: {
+    fontFamily:    'SpaceMono',
+    fontSize:      9,
+    letterSpacing: 2,
+    textTransform: 'uppercase',
+    color:         T.muted,
+    fontWeight:    700,
+    marginBottom:  4,
+  },
+  glossarySubhead: {
+    fontFamily:  'Newsreader',
+    fontStyle:   'italic',
+    fontSize:    9,
+    color:       T.muted,
+    lineHeight:  1.5,
+    marginBottom: 20,
+    maxWidth:    420,
+  },
+  glossaryTable: {
+    borderWidth:  0.5,
+    borderColor:  T.border,
+  },
+  glossaryRow: {
+    flexDirection:     'row',
+    alignItems:        'flex-start',
+    padding:           10,
+    borderBottomWidth: 0.5,
+    borderBottomColor: T.border,
+  },
+  glossaryRowLast: {
+    flexDirection: 'row',
+    alignItems:    'flex-start',
+    padding:       10,
+  },
+  glossaryRowActive: {
+    flexDirection:     'row',
+    alignItems:        'flex-start',
+    padding:           10,
+    borderBottomWidth: 0.5,
+    borderBottomColor: T.border,
+    backgroundColor:   '#FFF5F0',
+    borderLeftWidth:   2,
+    borderLeftColor:   T.accent,
+  },
+  glossaryLabel: {
+    fontFamily:    'SpaceMono',
+    fontSize:      7,
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+    color:         T.muted,
+    fontWeight:    700,
+    width:         110,
+    marginRight:   16,
+    paddingTop:    1,
+    opacity:       0.6,
+  },
+  glossaryLabelActive: {
+    fontFamily:    'SpaceMono',
+    fontSize:      7,
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+    color:         T.accent,
+    fontWeight:    700,
+    width:         110,
+    marginRight:   16,
+    paddingTop:    1,
+  },
+  glossaryDefinition: {
+    fontFamily:  'Newsreader',
+    fontStyle:   'italic',
+    fontSize:    9,
+    color:       T.muted,
+    lineHeight:  1.55,
+    flex:        1,
+    opacity:     0.6,
+  },
+  glossaryDefinitionActive: {
+    fontFamily:  'Newsreader',
+    fontStyle:   'italic',
+    fontSize:    9,
+    color:       T.text,
+    lineHeight:  1.55,
+    flex:        1,
+  },
+  glossaryFooter: {
+    fontFamily:    'SpaceMono',
+    fontSize:      7,
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+    color:         T.muted,
+    fontWeight:    700,
+    marginTop:     20,
+    opacity:       0.5,
   },
 });
 
-// ── HELPERS ──────────────────────────────────────────────────────────────────
+// ── HELPERS ───────────────────────────────────────────────────────────────────
 const fmt = (val) =>
   new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+    style:              'currency',
+    currency:           'USD',
     maximumFractionDigits: 0,
   }).format(val);
 
-function buildSynthesis(summary, inputData) {
-  const { state, recommendation, monthlyBurn, total, context } = summary;
-  const { orgStage, leadershipTenure, frictionLocation, avoidanceMechanism } = context;
-  const industry = INDUSTRY_BENCHMARKS[inputData.industry]?.label || inputData.industry;
-  const stage    = ORG_STAGES[orgStage]?.label || orgStage;
-  const tenure   = LEADERSHIP_TENURES[leadershipTenure]?.label || leadershipTenure;
-  const friction = FRICTION_LOCATIONS[frictionLocation]?.label?.toLowerCase() || 'an unlocated source';
-
-  const avoidanceLine = {
-    NO_FORUM:      "The absence of a safe forum means the real conversation has never had a place to happen.",
-    PREDETERMINED: "When outcomes feel predetermined, filtered information reaches leadership -- and the real problem stays hidden.",
-    COST_TOO_HIGH: "The perceived cost of the conversation is being weighed against the actual cost of avoiding it. The math does not favor avoidance.",
-  }[avoidanceMechanism] || "";
-
-  const personnelRiskLine = {
-    LOST:     "This organization has already lost someone because of this dynamic. That's a confirmed cost, not a projection.",
-    YES:      "There is someone in the room this situation is making it harder to keep.",
-    POSSIBLY: "There are early signs that this situation is affecting retention.",
-  }[inputData.personnelRisk] || "";
-
-  const resolutionBlockageLine = {
-    ATTEMPTED: "Something is actively preventing a decision the organization knows needs to happen. That blockage is its own compounding liability.",
-    KNOWN:     "The organization knows what needs to happen and hasn't been able to act on it. The cost of that gap is included in this assessment.",
-    SUSPECTED: "There may be a personnel decision being avoided. Whether or not it's named, the organization is carrying its weight.",
-  }[inputData.resolutionBlockage] || "";
-
-  const priorAttemptLine = {
-    EXTERNAL:     "A previous external engagement didn't hold, which means the resolution needs to go somewhere the last one didn't reach.",
-    CONVERSATION: "A prior conversation addressed this without producing change -- a signal that the source hasn't been reached yet.",
-    UNCLEAR:      "It's unclear whether previous efforts addressed the right problem, which is itself a finding.",
-  }[inputData.priorAttempt] || "";
-
-  const openingLine = `This ${stage.toLowerCase()} ${industry} organization is presenting a ${state.label} pattern.`;
-
-  return [
-    openingLine,
-    `The friction is concentrated ${friction}, with leadership in place for ${tenure.toLowerCase()}.`,
-    avoidanceLine,
-    personnelRiskLine,
-    resolutionBlockageLine,
-    priorAttemptLine,
-    `At ${fmt(monthlyBurn)} per month, the annual institutional cost is ${fmt(total)}.`,
-    `Based on this profile, the recommended entry point is ${recommendation.name}.`,
-  ].filter(Boolean).join(' ');
-}
-
-function buildInferredObservation(summary, inputData) {
-  const { state } = summary;
-  const {
-    industry, orgStage, leadershipTenure, frictionLocation,
-    avoidanceMechanism, priorAttempt, personnelRisk, resolutionBlockage,
-  } = inputData;
-
-  // ── LAYER 1: SIGNAL OVERRIDES ─────────────────────────────────────────────
-  if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
-    return "Two attempts at resolution and something keeps getting in the way. In my experience, that pattern almost always means the blockage has institutional protection -- someone or something with enough influence to survive the intervention. The next engagement needs to reach that layer directly.";
-  }
-  if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'KNOWN') {
-    return "A previous external engagement didn't produce lasting change, and there's a decision the organization knows needs to happen but hasn't. Those two facts are usually related. The prior intervention likely addressed the visible dynamic without reaching the source of the blockage.";
-  }
-  if (frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'NO_FORUM' && resolutionBlockage === 'KNOWN') {
-    return "The organization knows what needs to happen and has built -- probably without deciding to -- a culture that makes it impossible to say so out loud. That's not an accident and it's not a coincidence. The absence of a forum and the presence of an unmade decision are the same problem from two different angles.";
-  }
-  if (industry === 'NONPROFIT' && personnelRisk === 'LOST') {
-    return "Losing someone to organizational dysfunction in a mission-driven organization carries a specific cost that doesn't appear in any financial calculation. The people who join nonprofits have already made a values-based trade. When the environment fails them, they don't just leave the organization -- they often leave the sector. The mission didn't protect the person serving it.";
-  }
-  if (industry === 'MEDIA' && frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'NO_FORUM') {
-    return "Creative cultures are often psychologically safer for disagreement about the work than for disagreement about the people doing it. The same environment that produces passionate creative debate can be completely silent about the leadership dynamic making that debate harder. The two cultures coexist in the same room and almost never interact.";
-  }
-  if (industry === 'TECH' && orgStage === 'STARTUP' && priorAttempt === 'EXTERNAL') {
-    return "An external engagement that didn't hold in a startup usually means the founding dynamic reasserted itself as soon as the external presence left. That dynamic is the product of the founding relationships -- it predates the organization and it will outlast any intervention that doesn't reach it directly.";
-  }
-
-  // ── LAYER 2: STATE-MATCHED BASE OBSERVATIONS ──────────────────────────────
-  if (state.label === 'Total Friction Collapse') {
-    return "The diagnostic isn't projecting a bad outcome. It's confirming one that's already in progress. At this burn rate, the cost of the current situation has exceeded what any structured process can recover incrementally. The window for a deliberate approach has closed. What happens in the next few weeks matters more than what happens in the next quarter.";
-  }
-  if (state.label === 'Talent Hemorrhage') {
-    return "The institutional state and the personnel risk signal are confirming the same thing: this culture is already selecting against the people it most needs to keep. That's not a retention problem with a recruiting solution. It's an environment problem, and the people with the highest standards for how they want to work are the first ones to act on it. The ones who stay after that are the ones who couldn't leave.";
-  }
-  if (state.label === 'Executive Embargo') {
-    return "The people with the authority to make the decision are the same people whose dynamic is preventing it. That is a closed loop. No amount of process improvement or structural change will resolve something that lives in the leadership team itself. Until that dynamic is named and worked directly, any intervention will work around it rather than through it.";
-  }
-  if (state.label === 'Brilliant Sabotage') {
-    return "High individual performance coexisting with collective dysfunction almost never resolves on its own -- because the person at the center of it is also the person whose output makes it feel too costly to address. The organization has been quietly shaping itself around accommodating that dynamic. The longer it goes unnamed, the more expensive naming it becomes.";
-  }
-  if (state.label === 'Institutional Rigidity') {
-    return "The system has become too complex to support its own weight, which means it has also become too complex to change without someone willing to name that directly. Truth-averse cultures don't fail dramatically -- they calcify. The decisions that needed to be made two years ago are still pending, and the organization has built workarounds for all of them. The workarounds are now load-bearing.";
-  }
-  if (state.label === 'Stalled Hegemony') {
-    return "The capital tied up in initiatives nobody will kill is not just a financial problem -- it's a signal about who has permission to say what out loud. Projects don't survive past their useful life by accident. They survive because someone with influence is still attached to them, and the organization hasn't built a culture where that attachment can be named and worked through. The dead weight is protecting itself.";
-  }
-  if (state.label === 'Process Paralysis') {
-    return "The organization is over-governed and under-executed, and the people closest to the work have known it longer than the people approving it. Permission has become the primary product. That's not a systems problem with a systems solution -- it's a trust problem wearing a process disguise. The approvals exist because someone, at some point, stopped trusting the people below them to decide.";
-  }
-  if (state.label === 'Silo Isolation') {
-    return "Individual units performing while the connective tissue between them fails is almost always a leadership design problem, not a people problem. The departments aren't failing to communicate because they don't want to. They're failing to communicate because the organization hasn't given them a reason to trust what happens when they do. Information stays inside because sharing it has historically cost more than withholding it.";
-  }
-  if (state.label === 'Strategic Drift') {
-    return "The gap between where this organization intended to go and where it's actually heading is a candor problem wearing a strategy disguise. The misses are small enough to explain away individually and large enough to compound collectively. No one is lying. But the honest conversation about the pattern hasn't happened yet, and the pattern is the thing that needs to be addressed -- not the individual misses.";
-  }
-  if (state.label === 'Caffeine Culture') {
-    return "This organization has been moving fast enough that it hasn't stopped to name what it's actually running on. Speed is functioning as avoidance here -- not deliberately, but effectively. The cost has been accumulating in the background while the activity level made it easy not to look. Busy and effective are not the same thing, and right now the organization is treating them like they are.";
-  }
-  if (state.label === 'Relational Friction') {
-    return "The room is full of people who are too careful with each other. That's not a sign of a respectful culture -- it's a sign of a conflict-averse one. The most important conversations are staying off the agenda because the cost of having them feels higher than the cost of avoiding them. That math is wrong, and this diagnostic is showing what the avoidance is actually costing.";
-  }
-  if (state.label === 'Stagnant Stability') {
-    return "Nothing is visibly breaking, which is exactly why this is hard to address. The organization has learned to live around the friction rather than through it. That's not resilience -- it's adaptation to a sub-optimal normal. The cost is real, it's just diffuse enough that no single person owns the urgency to name it. This diagnostic is the first act of doing that.";
-  }
-
-  return null;
-}
-
-function buildRecommendationRationale(summary, inputData) {
-  const { state, recommendation } = summary;
-  const {
-    industry, orgStage, frictionLocation, avoidanceMechanism,
-    priorAttempt, personnelRisk, resolutionBlockage, leadershipTenure,
-  } = inputData;
-  const tier = recommendation.name;
-
-  if (tier === 'Stability Support') {
-    return "The math has turned on this one. The diagnostic is showing a cost of inaction that exceeds what a structured intervention can address incrementally. What's needed now isn't a plan -- it's immediate stabilization. Stability Support is the right entry point because the window for a deliberate process has closed and what happens in the next few weeks will determine what's possible after that.";
-  }
-  if (tier === 'Safe Harbor') {
-    if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
-      return "Safe Harbor is the right entry point here because two prior attempts at resolution haven't held, which tells us the source of the blockage has institutional protection. What's needed isn't another structured engagement -- it's a sustained, confidential relationship that can operate outside the dynamics that have protected the problem so far.";
-    }
-    if (leadershipTenure === 'UNDER_ONE') {
-      return "Safe Harbor is the right entry point because you're navigating a problem you inherited, not one you created. The friction predates your tenure and the people who built it are probably still in the room. What you need isn't an intervention -- it's a confidential relationship with someone who can help you see the landscape clearly and move through it without the constraints that come with a formal engagement.";
-    }
-    if (frictionLocation === 'WITHIN_LEADERSHIP' && avoidanceMechanism === 'PREDETERMINED') {
-      return "Safe Harbor is the right entry point because predetermined outcomes in a leadership team almost always trace back to a single dynamic that a structured intervention can work around but rarely reaches directly. What's needed is the kind of relationship where that dynamic can be named without consequence and addressed without the political weight that comes with a formal process.";
-    }
-    if (personnelRisk === 'LOST' || resolutionBlockage === 'ATTEMPTED') {
-      return "Safe Harbor is the right entry point because this situation has already produced consequences -- and something is actively preventing the resolution the organization knows it needs. A structured engagement alone won't reach that. What's needed is a sustained, confidential presence that can operate where the formal process can't.";
-    }
-    return "Safe Harbor is the right entry point because what this profile describes isn't a situation that a time-bound structured engagement will resolve. The friction is too embedded, the stakes are too specific, and what's needed is an indefinite confidential relationship -- not a project with a deliverable at the end.";
-  }
-  if (tier === 'The Intervention') {
-    if (summary.total > 1000000 && state.label.includes("structural")) {
-      return "The Intervention is the right entry point because the financial gravity of this situation has exceeded the window for a standard roadmap. At an annual cost of " + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(summary.total) + ", the roadmap phase represents an additional and unnecessary liability. We recommend moving directly to resolution.";
-    }
-    if (personnelRisk === 'YES' && resolutionBlockage === 'KNOWN') {
-      return `Based on what this diagnostic describes -- ${state.label.replace(/\.$/, '').toLowerCase()} in a ${INDUSTRY_BENCHMARKS[industry]?.label || industry} organization, with someone at risk of leaving and a decision the organization knows needs to happen -- The Intervention is the right entry point. The situation is already in motion. What's needed isn't a roadmap for addressing it. It's someone in the room to move it through.`;
-    }
-    if (priorAttempt === 'CONVERSATION') {
-      return "The Intervention is the right entry point because a prior conversation addressed this without producing change -- which means the source hasn't been reached yet. The Roadmap assumes a level of organizational readiness to act on its findings that this profile suggests isn't fully in place. The Intervention goes where the conversation didn't.";
-    }
-    if (priorAttempt === 'EXTERNAL') {
-      return "A previous external engagement didn't hold, which tells us the resolution needs to go somewhere the last one didn't reach. The Intervention is the right entry point because it doesn't produce a plan for your organization to execute -- it produces the resolution directly, in the room, with the people who need to be part of it.";
-    }
-    if (frictionLocation === 'WITHIN_LEADERSHIP' && personnelRisk !== 'NONE') {
-      return "The Intervention is the right entry point because the friction is inside the leadership team and there's already a personnel consequence in play. At that combination, a diagnostic and roadmap phase delays the resolution the organization actually needs. We come in, we address it directly, and you leave with the thing done -- not a plan to do it.";
-    }
-    if (orgStage === 'LEGACY' && leadershipTenure === 'SEVEN_PLUS') {
-      return "The Intervention is the right entry point because what this profile describes has been in place long enough that a roadmap phase would spend its time documenting what everyone already knows. The patterns are established, the cost is confirmed, and the organization needs someone to move it -- not map it.";
-    }
-    return "The Intervention is the right entry point based on this profile. The pattern combined with the behavioral signals this diagnostic has surfaced indicates that what's needed is resolution, not a plan for resolution. The Roadmap is the right entry point when the organization needs clarity on what to address. This organization already has that clarity. What it needs now is someone to address it.";
-  }
-  if (tier === 'The Roadmap') {
-    if (priorAttempt === 'NONE') {
-      return "The Roadmap is the right entry point because this is the first structured look at what's happening and what it's costing. Before bringing someone in to resolve it, it's worth getting a precise diagnosis of where the friction lives, what's sustaining it, and what resolution actually needs to look like for this specific organization. The Roadmap produces that -- and a plan your team can execute on.";
-    }
-    if (frictionLocation === 'CROSS_FUNCTIONAL') {
-      return "Cross-functional friction is the hardest kind to resolve without first mapping it precisely -- because what looks like a relationship problem is almost always a structural one. The Roadmap is the right entry point because it will identify whether the friction is in the design of the organization or in the dynamics between the people in it. Those are different problems with different solutions, and the distinction is worth getting right before bringing someone in to address it.";
-    }
-    if (frictionLocation === 'TEAM') {
-      return "The Roadmap is the right entry point because friction between leadership and the team almost always has a specific origin point that a diagnostic phase will surface. Going straight to intervention without that clarity risks addressing the symptom rather than the source. The Roadmap gives you the precise picture and a structured path forward.";
-    }
-    return "The Roadmap is the right entry point based on this profile. The friction is real and the cost is confirmed -- but the profile indicates this organization is in a position to address it deliberately rather than urgently. The Roadmap will name the source precisely, build the case internally, and give your team a structured path to resolution that doesn't require an external presence to execute.";
-  }
-  return null;
-}
-
-// ── DOCUMENT ─────────────────────────────────────────────────────────────────
+// ── DOCUMENT ──────────────────────────────────────────────────────────────────
 export function DiagnosticDocument({ summary, inputData }) {
-  const { total: _total, monthlyBurn: _monthlyBurn, executionGap: _executionGap, radiatedImpact: _radiated, confirmedHistoricalLoss: _chl, state, recommendation, resolvedTier, hammerCitation } = summary;
-  const total                   = Number(_total)       || 0;
-  const monthlyBurn             = Number(_monthlyBurn) || 0;
-  const executionGap            = Number(_executionGap) || 0;
-  const radiatedImpact          = Number(_radiated)    || 0;
-  const confirmedHistoricalLoss = Number(_chl)         || 0;
-  const synthesis           = buildSynthesis(summary, inputData);
-  const inferredObservation = buildInferredObservation(summary, inputData);
-  const rationale           = buildRecommendationRationale(summary, inputData);
+  const {
+    state,
+    tier,
+    toneKey,
+    agencyScore,
+    showGravityFloor,
+  } = summary;
+
+  const total                   = Number(summary.total)                   || 0;
+  const monthlyBurn             = Number(summary.monthlyBurn)             || 0;
+  const executionGap            = Number(summary.executionGap)            || 0;
+  const radiatedImpact          = Number(summary.radiatedImpact)          || 0;
+  const confirmedHistoricalLoss = Number(summary.confirmedHistoricalLoss) || 0;
+
+  const tierMeta = TIER_META[tier] || {};
+
+  const synthesis     = getSynthesis(state.id, toneKey);
+  const inference     = getInference(state.id, toneKey);
+  const pathToVerdict = getPathToVerdict(state.id);
+  const rationale     = buildRecommendationRationale(tier, state, agencyScore, inputData);
+
   const monthlyRecovery = Math.round(monthlyBurn * 0.10);
   const annualRecovery  = monthlyRecovery * 12;
-  const returnMultiple  = recommendation.fee
-    ? (annualRecovery / recommendation.fee).toFixed(1)
+  const returnMultiple  = tierMeta.fee
+    ? (annualRecovery / tierMeta.fee).toFixed(1)
     : null;
+
+  // Glossary definition for current state
+  const stateGlossaryEntry = STATE_GLOSSARY.find(s => s.id === state.id);
 
   return (
     <Document>
+
+      {/* ══════════════════════════════════════════════════════
+          PAGE 1 — THE DIAGNOSTIC RECORD
+      ══════════════════════════════════════════════════════ */}
       <Page size="A4" style={styles.page}>
         <View style={{ flex: 1, paddingBottom: 36 }}>
+
           {/* Watermark */}
-          <Text style={styles.watermark}>Confidential // Record v5.0</Text>
+          <Text style={styles.watermark}>Confidential // Record v6.0</Text>
 
           {/* ── 1. VERDICT ── */}
           <View style={styles.section}>
             <Text style={styles.label}>Institutional State</Text>
             <Text style={styles.verdictTitle}>{state.label}</Text>
-            <Text style={styles.verdictDesc}>{state.desc || ''}</Text>
+            {stateGlossaryEntry && (
+              <Text style={styles.verdictDesc}>{stateGlossaryEntry.definition}</Text>
+            )}
           </View>
           <View style={styles.divider} />
 
@@ -513,10 +473,12 @@ export function DiagnosticDocument({ summary, inputData }) {
           <View style={styles.section}>
             <Text style={styles.labelMuted}>Annual Institutional Cost</Text>
             <View style={{ minHeight: 110 }}>
-              {total >= 50000 ? (
-                <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
+              {showGravityFloor ? (
+                <Text style={styles.costFigureFloor}>
+                  This is the beginning of an expensive pattern.
+                </Text>
               ) : (
-                <Text style={styles.costFigureFloor}>This is the beginning of an expensive pattern.</Text>
+                <Text style={styles.costFigureLarge}>{fmt(total)}</Text>
               )}
             </View>
             <View style={styles.costFigureRow}>
@@ -546,9 +508,9 @@ export function DiagnosticDocument({ summary, inputData }) {
           </View>
           <View style={styles.divider} />
 
-          {/* ── 3. DIAGNOSTIC GRID ── */}
+          {/* ── 3. SIGNAL MATRIX ── */}
           <View style={styles.section}>
-            <DiagnosticGridPDF summary={summary} inputData={inputData} />
+            <SignalMatrixPDF summary={summary} inputData={inputData} />
           </View>
           <View style={styles.divider} />
 
@@ -559,27 +521,38 @@ export function DiagnosticDocument({ summary, inputData }) {
           </View>
 
           {/* ── 5. ADVISOR INFERENCE (conditional) ── */}
-          {inferredObservation ? (
+          {inference ? (
             <View style={styles.section}>
               <View style={styles.labelRow}>
                 <Text style={styles.label}>Advisor Inference</Text>
                 <View style={styles.labelRule} />
               </View>
-              <Text style={styles.bodyMuted}>{inferredObservation}</Text>
+              <Text style={styles.bodyMuted}>{inference}</Text>
+            </View>
+          ) : null}
+
+          {/* ── 6. PATH TO VERDICT (conditional) ── */}
+          {pathToVerdict ? (
+            <View style={styles.section}>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>Path to Verdict</Text>
+                <View style={styles.labelRule} />
+              </View>
+              <Text style={styles.bodyPath}>{pathToVerdict}</Text>
             </View>
           ) : null}
           <View style={styles.divider} />
 
-          {/* ── 6. RECOMMENDED ENGAGEMENT ── */}
+          {/* ── 7. RECOMMENDED ENGAGEMENT ── */}
           <View style={styles.section}>
             <Text style={styles.label}>Recommended Engagement</Text>
             <View style={styles.engagementBox}>
-              <Text style={styles.engagementName}>{recommendation.name}</Text>
-              <Text style={styles.engagementOutcome}>{recommendation.outcome || ''}</Text>
+              <Text style={styles.engagementName}>{tier}</Text>
+              <Text style={styles.engagementOutcome}>{tierMeta.outcomeStatement || ''}</Text>
             </View>
           </View>
 
-          {/* ── 7. WHY THIS ENGAGEMENT (conditional) ── */}
+          {/* ── 8. WHY THIS ENGAGEMENT (conditional) ── */}
           {rationale ? (
             <View style={styles.section}>
               <View style={styles.labelRow}>
@@ -587,21 +560,6 @@ export function DiagnosticDocument({ summary, inputData }) {
                 <View style={styles.labelRule} />
               </View>
               <Text style={styles.body}>{rationale}</Text>
-            </View>
-          ) : null}
-          <View style={styles.divider} />
-
-          {/* ── 8. INSTITUTIONAL BENCHMARKS (conditional) ── */}
-          {hammerCitation ? (
-            <View style={styles.section}>
-              <View style={styles.labelRow}>
-                <Text style={styles.label}>Institutional Benchmarks</Text>
-                <View style={styles.labelRule} />
-              </View>
-              <View style={styles.benchmarkBlock}>
-                <Text style={styles.benchmarkLabel}>{hammerCitation.source}</Text>
-                <Text style={styles.benchmarkQuote}>"{hammerCitation.text}"</Text>
-              </View>
             </View>
           ) : null}
           <View style={styles.divider} />
@@ -632,14 +590,18 @@ export function DiagnosticDocument({ summary, inputData }) {
             <View style={styles.caseGrid}>
               <View style={styles.caseCell}>
                 <Text style={styles.labelMuted}>Cost of Inaction // Per Year</Text>
-                <Text style={styles.caseCostNeutral}>{fmt(total)}</Text>
+                <Text style={styles.caseCostNeutral}>
+                  {showGravityFloor ? 'Compounding' : fmt(total)}
+                </Text>
                 <Text style={styles.caseNote}>Confirmed by this diagnostic</Text>
               </View>
               <View style={styles.caseCellBottom}>
-                <Text style={styles.labelMuted}>Cost of Resolution // {recommendation.name}</Text>
-                <Text style={styles.caseCostAccent}>{recommendation.feeLabel || ''}</Text>
+                <Text style={styles.labelMuted}>Cost of Resolution // {tier}</Text>
+                <Text style={styles.caseCostAccent}>{tierMeta.feeLabel || ''}</Text>
                 {returnMultiple ? (
-                  <Text style={styles.caseNote}>{returnMultiple}x return on a 10% friction reduction</Text>
+                  <Text style={styles.caseNote}>
+                    {returnMultiple}x return on a 10% friction reduction
+                  </Text>
                 ) : null}
               </View>
             </View>
@@ -647,6 +609,54 @@ export function DiagnosticDocument({ summary, inputData }) {
 
         </View>
       </Page>
+
+      {/* ══════════════════════════════════════════════════════
+          PAGE 2 — INSTITUTIONAL STATE GLOSSARY
+          Fine-print supplement register. Visually subordinate
+          to the record. Your result is highlighted.
+      ══════════════════════════════════════════════════════ */}
+      <Page size="A4" style={styles.glossaryPage}>
+
+        {/* Watermark */}
+        <Text style={styles.watermark}>Confidential // Record v6.0</Text>
+
+        <Text style={styles.glossaryHeader}>
+          Institutional State Glossary
+        </Text>
+        <Text style={styles.glossarySubhead}>
+          The twelve patterns this instrument is designed to identify. Your result appears highlighted below.
+        </Text>
+
+        <View style={styles.glossaryTable}>
+          {STATE_GLOSSARY.map((entry, i) => {
+            const isActive   = entry.id === state.id;
+            const isLast     = i === STATE_GLOSSARY.length - 1;
+
+            const rowStyle = isActive
+              ? styles.glossaryRowActive
+              : isLast
+                ? styles.glossaryRowLast
+                : styles.glossaryRow;
+
+            return (
+              <View key={entry.id} style={rowStyle}>
+                <Text style={isActive ? styles.glossaryLabelActive : styles.glossaryLabel}>
+                  {entry.label}
+                </Text>
+                <Text style={isActive ? styles.glossaryDefinitionActive : styles.glossaryDefinition}>
+                  {entry.definition}
+                </Text>
+              </View>
+            );
+          })}
+        </View>
+
+        <Text style={styles.glossaryFooter}>
+          Principal Resolution // Confidential Diagnostic Record // principalresolution.com
+        </Text>
+
+      </Page>
+
     </Document>
   );
 }

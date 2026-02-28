@@ -36,50 +36,50 @@
         - generic [ref=e37]:
           - generic [ref=e38]: "30"
           - generic [ref=e39]: days to a resolution roadmap
-    - generic [ref=e43]:
-      - generic [ref=e46]: A Word // Before You Begin
-      - paragraph [ref=e48]: Most assessments tell you what you already suspected. This one tells you what it's been costing you -- precisely, personally, and in plain language. It takes three minutes. Most people find it unsettling in the best possible way.
-      - paragraph [ref=e50]: We built this because the conversation most organizations need to have doesn't have a safe place to start. Consider this the safe place.
-      - generic [ref=e53]: "-- PR"
-    - generic [ref=e54]:
-      - generic [ref=e55]:
-        - generic [ref=e56]:
-          - generic [ref=e57]: Institutional Diagnostic // 2026
-          - heading "Price the Friction." [level=2] [ref=e58]
-        - generic [ref=e59]:
-          - button "Back" [ref=e60] [cursor=pointer]:
-            - img [ref=e61]
+    - generic [ref=e42]:
+      - generic [ref=e45]: A Word // Before You Begin
+      - paragraph [ref=e47]: Most assessments tell you what you already suspected. This one tells you what it's been costing you -- precisely, personally, and in plain language. It takes three minutes. Most people find it unsettling in the best possible way.
+      - paragraph [ref=e49]: We built this because the conversation most organizations need to have doesn't have a safe place to start. Consider this the safe place.
+      - generic [ref=e52]: "-- PR"
+    - generic [ref=e53]:
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - generic [ref=e56]: Institutional Diagnostic // 2026
+          - heading "Price the Friction." [level=2] [ref=e57]
+        - generic [ref=e58]:
+          - button "Back" [ref=e59] [cursor=pointer]:
+            - img [ref=e60]
             - text: Back
-          - button "Reset" [ref=e63] [cursor=pointer]:
-            - img [ref=e64]
+          - button "Reset" [ref=e62] [cursor=pointer]:
+            - img [ref=e63]
             - text: Reset
-      - generic [ref=e70]:
-        - generic [ref=e71]:
-          - generic [ref=e72]: Confidential // Record v5.0
-          - generic [ref=e73]:
-            - generic [ref=e74]:
-              - generic [ref=e75]: Institutional State
-              - heading "Caffeine Culture" [level=2] [ref=e76]
-              - paragraph [ref=e77]: High activity is masking high burn. The organization is moving fast -- a lot of that energy is being spent overcoming internal friction rather than market challenges. Busy and effective are not the same thing, and right now they're being treated like they are.
-            - generic [ref=e78]:
-              - generic [ref=e79]:
-                - generic [ref=e80]: Annual Institutional Cost
-                - generic [ref=e81]: $539,155
-              - generic [ref=e82]:
-                - generic [ref=e83]:
-                  - generic [ref=e84]: Monthly Burn
-                  - generic [ref=e85]: $19,930
-                - generic [ref=e86]:
-                  - generic [ref=e87]: Confirmed Historical Loss
-                  - generic [ref=e88]: $89,683
-            - generic [ref=e89]:
-              - generic [ref=e90]: Forensic Proof // Deloitte, 2026
-              - paragraph [ref=e91]: "\"Friction in organizational navigation now accounts for $1.3 trillion in lost economic value annually across the Fortune 500.\""
-            - generic [ref=e92]:
-              - generic [ref=e94]: Diagnostic Position
-              - generic [ref=e96]:
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - generic [ref=e71]: Confidential // Record v5.0
+          - generic [ref=e72]:
+            - generic [ref=e73]:
+              - generic [ref=e74]: Institutional State
+              - heading "Caffeine Culture" [level=2] [ref=e75]
+              - paragraph [ref=e76]: High activity is masking high burn. The organization is moving fast -- a lot of that energy is being spent overcoming internal friction rather than market challenges. Busy and effective are not the same thing, and right now they're being treated like they are.
+            - generic [ref=e77]:
+              - generic [ref=e78]:
+                - generic [ref=e79]: Annual Institutional Cost
+                - generic [ref=e80]: $539,155
+              - generic [ref=e81]:
+                - generic [ref=e82]:
+                  - generic [ref=e83]: Monthly Burn
+                  - generic [ref=e84]: $19,930
+                - generic [ref=e85]:
+                  - generic [ref=e86]: Confirmed Historical Loss
+                  - generic [ref=e87]: $89,683
+            - generic [ref=e88]:
+              - generic [ref=e89]: Forensic Proof // Deloitte, 2026
+              - paragraph [ref=e90]: "\"Friction in organizational navigation now accounts for $1.3 trillion in lost economic value annually across the Fortune 500.\""
+            - generic [ref=e91]:
+              - generic [ref=e93]: Diagnostic Position
+              - generic [ref=e95]:
                 - generic: Behavioral Complexity →
-                - application [ref=e100]:
+                - application [ref=e99]:
                   - generic [ref=e116]:
                     - generic [ref=e117]:
                       - generic [ref=e119]: "0"
@@ -242,153 +242,148 @@
           - button "Request Custom Briefing" [ref=e312] [cursor=pointer]:
             - text: Request Custom Briefing
             - img [ref=e313]
-        - generic:
-          - button "Scroll Left" [ref=e315] [cursor=pointer]:
-            - img [ref=e316]
-          - button "Scroll Right" [ref=e318] [cursor=pointer]:
-            - img [ref=e319]
-        - generic [ref=e321]:
-          - generic [ref=e322] [cursor=pointer]:
-            - img [ref=e324]
-            - generic [ref=e327]:
-              - generic [ref=e328]:
-                - generic [ref=e329]: Architecture
-                - img [ref=e330]
-              - heading "Institutional Memory and Drift" [level=3] [ref=e333]
-              - paragraph [ref=e334]: Organizations don't fail all at once. They drift — quietly, gradually — until the mission becomes a memory and the process becomes the point.
-            - generic [ref=e336]: REF // memo-12
-          - generic [ref=e338] [cursor=pointer]:
-            - img [ref=e340]
-            - generic [ref=e343]:
-              - generic [ref=e344]:
-                - generic [ref=e345]: Leadership
-                - img [ref=e346]
-              - heading "The Intellectual Bottleneck" [level=3] [ref=e349]
-              - paragraph [ref=e350]: The smartest person in the room is often the biggest obstacle to the work. Brilliance without delegation is just a very expensive ceiling.
-            - generic [ref=e352]: REF // memo-11
-          - generic [ref=e354] [cursor=pointer]:
-            - img [ref=e356]
-            - generic [ref=e359]:
-              - generic [ref=e360]:
-                - generic [ref=e361]: Culture
-                - img [ref=e362]
-              - heading "The Politeness Tax" [level=3] [ref=e365]
-              - paragraph [ref=e366]: A culture that prioritizes harmony over mission is a culture in decay. Conflict isn't the risk. Silence is.
-            - generic [ref=e368]: REF // memo-10
-          - generic [ref=e370] [cursor=pointer]:
-            - img [ref=e372]
-            - generic [ref=e375]:
-              - generic [ref=e376]:
-                - generic [ref=e377]: Efficiency
-                - img [ref=e378]
-              - heading "The Velocity of Truth" [level=3] [ref=e381]
-              - paragraph [ref=e382]: The gap between knowing something and acting on it is your primary cost driver. Most organizations treat that gap like it's free.
-            - generic [ref=e384]: REF // memo-09
-          - generic [ref=e386] [cursor=pointer]:
-            - img [ref=e388]
-            - generic [ref=e391]:
-              - generic [ref=e392]:
-                - generic [ref=e393]: Intervention
-                - img [ref=e394]
-              - heading "Crisis as a Catalyst for Clarity" [level=3] [ref=e397]
-              - paragraph [ref=e398]: In a collapse you don't need a consultant. You need a resolution. There's a difference and it matters.
-            - generic [ref=e400]: REF // memo-08
-          - generic [ref=e402] [cursor=pointer]:
-            - img [ref=e404]
-            - generic [ref=e407]:
-              - generic [ref=e408]:
-                - generic [ref=e409]: Governance
-                - img [ref=e410]
-              - heading "The Risk of Family Friction" [level=3] [ref=e413]
-              - paragraph [ref=e414]: Growth hits a ceiling when unresolved history dictates strategy. The dinner table and the boardroom need to be different rooms.
-            - generic [ref=e416]: REF // memo-07
-          - generic [ref=e418] [cursor=pointer]:
-            - img [ref=e420]
-            - generic [ref=e423]:
-              - generic [ref=e424]:
-                - generic [ref=e425]: Velocity
-                - img [ref=e426]
-              - heading "The Tax on What Is Not Said" [level=3] [ref=e429]
-              - paragraph [ref=e430]: The biggest drag on your business is the conversation your team is too polite to have. Silence isn't agreement. It's a calculated bet that you're better off not knowing.
-            - generic [ref=e432]: REF // memo-06
-          - generic [ref=e434] [cursor=pointer]:
-            - img [ref=e436]
-            - generic [ref=e439]:
-              - generic [ref=e440]:
-                - generic [ref=e441]: Logic
-                - img [ref=e442]
-              - heading "The Vanity of Being Right" [level=3] [ref=e445]
-              - paragraph [ref=e446]: Being right is a baseline. Being effective is what pays the bills. Most leaders I work with are excellent at one of those.
-            - generic [ref=e448]: REF // memo-05
-          - generic [ref=e450] [cursor=pointer]:
-            - img [ref=e452]
-            - generic [ref=e455]:
-              - generic [ref=e456]:
-                - generic [ref=e457]: Risk
-                - img [ref=e458]
-              - heading "The Cost of Flying Blind" [level=3] [ref=e461]
-              - paragraph [ref=e462]: The risks that will hurt you aren't in your data. They're in the conversations your team has decided not to have with you.
-            - generic [ref=e464]: REF // memo-04
-          - generic [ref=e466] [cursor=pointer]:
-            - img [ref=e468]
-            - generic [ref=e471]:
-              - generic [ref=e472]:
-                - generic [ref=e473]: Strategy
-                - img [ref=e474]
-              - heading "Nice is Not a Strategy" [level=3] [ref=e477]
-              - paragraph [ref=e478]: A polite culture is usually just a culture that's afraid to fight for the mission. That fear has a price.
-            - generic [ref=e480]: REF // memo-03
-          - generic [ref=e482] [cursor=pointer]:
-            - img [ref=e484]
-            - generic [ref=e487]:
-              - generic [ref=e488]:
-                - generic [ref=e489]: Architecture
-                - img [ref=e490]
-              - heading "Effectiveness Dies in Darkness" [level=3] [ref=e493]
-              - paragraph [ref=e494]: Silos aren't just an org chart problem. They're where the truth goes to hide — and where your best opportunities go to die.
-            - generic [ref=e496]: REF // memo-02
-          - generic [ref=e498] [cursor=pointer]:
-            - img [ref=e500]
-            - generic [ref=e503]:
-              - generic [ref=e504]:
-                - generic [ref=e505]: Human Variable
-                - img [ref=e506]
-              - heading "The Anatomy of Resentment" [level=3] [ref=e509]
-              - paragraph [ref=e510]: Conflict doesn't explode overnight. It simmers. By the time you can see it clearly, it's usually been running for a long time.
-            - generic [ref=e512]: REF // memo-01
-    - generic [ref=e515]:
-      - generic [ref=e516]:
-        - generic [ref=e517]:
-          - heading "Resolve the Human Variable." [level=2] [ref=e518]:
+        - generic [ref=e315]:
+          - generic [ref=e316] [cursor=pointer]:
+            - img [ref=e318]
+            - generic [ref=e321]:
+              - generic [ref=e322]:
+                - generic [ref=e323]: Architecture
+                - img [ref=e324]
+              - heading "Institutional Memory and Drift" [level=3] [ref=e327]
+              - paragraph [ref=e328]: Organizations don't fail all at once. They drift — quietly, gradually — until the mission becomes a memory and the process becomes the point.
+            - generic [ref=e330]: REF // memo-12
+          - generic [ref=e332] [cursor=pointer]:
+            - img [ref=e334]
+            - generic [ref=e337]:
+              - generic [ref=e338]:
+                - generic [ref=e339]: Leadership
+                - img [ref=e340]
+              - heading "The Intellectual Bottleneck" [level=3] [ref=e343]
+              - paragraph [ref=e344]: The smartest person in the room is often the biggest obstacle to the work. Brilliance without delegation is just a very expensive ceiling.
+            - generic [ref=e346]: REF // memo-11
+          - generic [ref=e348] [cursor=pointer]:
+            - img [ref=e350]
+            - generic [ref=e353]:
+              - generic [ref=e354]:
+                - generic [ref=e355]: Culture
+                - img [ref=e356]
+              - heading "The Politeness Tax" [level=3] [ref=e359]
+              - paragraph [ref=e360]: A culture that prioritizes harmony over mission is a culture in decay. Conflict isn't the risk. Silence is.
+            - generic [ref=e362]: REF // memo-10
+          - generic [ref=e364] [cursor=pointer]:
+            - img [ref=e366]
+            - generic [ref=e369]:
+              - generic [ref=e370]:
+                - generic [ref=e371]: Efficiency
+                - img [ref=e372]
+              - heading "The Velocity of Truth" [level=3] [ref=e375]
+              - paragraph [ref=e376]: The gap between knowing something and acting on it is your primary cost driver. Most organizations treat that gap like it's free.
+            - generic [ref=e378]: REF // memo-09
+          - generic [ref=e380] [cursor=pointer]:
+            - img [ref=e382]
+            - generic [ref=e385]:
+              - generic [ref=e386]:
+                - generic [ref=e387]: Intervention
+                - img [ref=e388]
+              - heading "Crisis as a Catalyst for Clarity" [level=3] [ref=e391]
+              - paragraph [ref=e392]: In a collapse you don't need a consultant. You need a resolution. There's a difference and it matters.
+            - generic [ref=e394]: REF // memo-08
+          - generic [ref=e396] [cursor=pointer]:
+            - img [ref=e398]
+            - generic [ref=e401]:
+              - generic [ref=e402]:
+                - generic [ref=e403]: Governance
+                - img [ref=e404]
+              - heading "The Risk of Family Friction" [level=3] [ref=e407]
+              - paragraph [ref=e408]: Growth hits a ceiling when unresolved history dictates strategy. The dinner table and the boardroom need to be different rooms.
+            - generic [ref=e410]: REF // memo-07
+          - generic [ref=e412] [cursor=pointer]:
+            - img [ref=e414]
+            - generic [ref=e417]:
+              - generic [ref=e418]:
+                - generic [ref=e419]: Velocity
+                - img [ref=e420]
+              - heading "The Tax on What Is Not Said" [level=3] [ref=e423]
+              - paragraph [ref=e424]: The biggest drag on your business is the conversation your team is too polite to have. Silence isn't agreement. It's a calculated bet that you're better off not knowing.
+            - generic [ref=e426]: REF // memo-06
+          - generic [ref=e428] [cursor=pointer]:
+            - img [ref=e430]
+            - generic [ref=e433]:
+              - generic [ref=e434]:
+                - generic [ref=e435]: Logic
+                - img [ref=e436]
+              - heading "The Vanity of Being Right" [level=3] [ref=e439]
+              - paragraph [ref=e440]: Being right is a baseline. Being effective is what pays the bills. Most leaders I work with are excellent at one of those.
+            - generic [ref=e442]: REF // memo-05
+          - generic [ref=e444] [cursor=pointer]:
+            - img [ref=e446]
+            - generic [ref=e449]:
+              - generic [ref=e450]:
+                - generic [ref=e451]: Risk
+                - img [ref=e452]
+              - heading "The Cost of Flying Blind" [level=3] [ref=e455]
+              - paragraph [ref=e456]: The risks that will hurt you aren't in your data. They're in the conversations your team has decided not to have with you.
+            - generic [ref=e458]: REF // memo-04
+          - generic [ref=e460] [cursor=pointer]:
+            - img [ref=e462]
+            - generic [ref=e465]:
+              - generic [ref=e466]:
+                - generic [ref=e467]: Strategy
+                - img [ref=e468]
+              - heading "Nice is Not a Strategy" [level=3] [ref=e471]
+              - paragraph [ref=e472]: A polite culture is usually just a culture that's afraid to fight for the mission. That fear has a price.
+            - generic [ref=e474]: REF // memo-03
+          - generic [ref=e476] [cursor=pointer]:
+            - img [ref=e478]
+            - generic [ref=e481]:
+              - generic [ref=e482]:
+                - generic [ref=e483]: Architecture
+                - img [ref=e484]
+              - heading "Effectiveness Dies in Darkness" [level=3] [ref=e487]
+              - paragraph [ref=e488]: Silos aren't just an org chart problem. They're where the truth goes to hide — and where your best opportunities go to die.
+            - generic [ref=e490]: REF // memo-02
+          - generic [ref=e492] [cursor=pointer]:
+            - img [ref=e494]
+            - generic [ref=e497]:
+              - generic [ref=e498]:
+                - generic [ref=e499]: Human Variable
+                - img [ref=e500]
+              - heading "The Anatomy of Resentment" [level=3] [ref=e503]
+              - paragraph [ref=e504]: Conflict doesn't explode overnight. It simmers. By the time you can see it clearly, it's usually been running for a long time.
+            - generic [ref=e506]: REF // memo-01
+    - generic [ref=e509]:
+      - generic [ref=e510]:
+        - generic [ref=e511]:
+          - heading "Resolve the Human Variable." [level=2] [ref=e512]:
             - text: Resolve the
             - text: Human Variable.
-          - paragraph [ref=e519]: We do not fix people. We fix the environments that break them. Truth is a kindness and effectiveness is our only metric.
-        - generic [ref=e521]:
-          - generic [ref=e522]: Next Task // Protocol Initiation
-          - generic [ref=e523]:
-            - button "Initiate Resolution Protocol" [ref=e524] [cursor=pointer]: Initiate Resolution Protocol
-            - paragraph [ref=e526]: Strictly Confidential // Board Level Privacy
-      - generic [ref=e527]:
-        - generic [ref=e528]:
-          - generic [ref=e529]: Principal Resolution
-          - generic [ref=e530]:
-            - paragraph [ref=e531]:
+          - paragraph [ref=e513]: We do not fix people. We fix the environments that break them. Truth is a kindness and effectiveness is our only metric.
+        - generic [ref=e515]:
+          - generic [ref=e516]: Next Task // Protocol Initiation
+          - generic [ref=e517]:
+            - button "Initiate Resolution Protocol" [ref=e518] [cursor=pointer]: Initiate Resolution Protocol
+            - paragraph [ref=e520]: Strictly Confidential // Board Level Privacy
+      - generic [ref=e521]:
+        - generic [ref=e522]:
+          - generic [ref=e523]: Principal Resolution
+          - generic [ref=e524]:
+            - paragraph [ref=e525]:
               - text: Direct Partnership for
               - text: Institutional Performance.
-            - paragraph [ref=e532]: EST. 2026 // Remote First Deployment
-        - generic [ref=e534]:
-          - generic [ref=e535]: Core Pillars
-          - generic [ref=e536]: The Human Variable
-          - generic [ref=e537]: Absolute Candor
-          - generic [ref=e538]: Institutional Effectiveness
-        - generic [ref=e539]:
-          - generic [ref=e540]:
-            - paragraph [ref=e541]: Privacy is Absolute. All data is purged after resolution.
-            - paragraph [ref=e542]: © 2026 Principal Resolution. All Rights Reserved.
-          - generic [ref=e543]:
-            - generic [ref=e544] [cursor=pointer]: Terms of Protocol
-            - generic [ref=e545] [cursor=pointer]: Privacy Clause
-  - button "Expand theme and accessibility controls" [ref=e548] [cursor=pointer]
-  - alert [ref=e553]
-  - generic [ref=e554]: "0"
+            - paragraph [ref=e526]: EST. 2026 // Remote First Deployment
+        - generic [ref=e528]:
+          - generic [ref=e529]: Core Pillars
+          - generic [ref=e530]: The Human Variable
+          - generic [ref=e531]: Absolute Candor
+          - generic [ref=e532]: Institutional Effectiveness
+        - generic [ref=e533]:
+          - generic [ref=e534]:
+            - paragraph [ref=e535]: Privacy is Absolute. All data is purged after resolution.
+            - paragraph [ref=e536]: © 2026 Principal Resolution. All Rights Reserved.
+          - generic [ref=e537]:
+            - generic [ref=e538] [cursor=pointer]: Terms of Protocol
+            - generic [ref=e539] [cursor=pointer]: Privacy Clause
+  - button "Expand theme and accessibility controls" [ref=e542] [cursor=pointer]
+  - alert [ref=e547]
+  - generic [ref=e548]: "0"
 ```
