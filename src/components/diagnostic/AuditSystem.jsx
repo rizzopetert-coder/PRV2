@@ -174,6 +174,59 @@ const OptionButton = memo(({ value, current, field, onSelect, children }) => (
 ));
 OptionButton.displayName = 'OptionButton';
 
+const CustomSelect = memo(({ value, options, field, onSelect, placeholder }) => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [open]);
+
+  const selectedLabel = value ? options[value]?.label : null;
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className={`w-full text-left border-b-2 py-4 font-mono text-[12px] uppercase tracking-briefing font-bold not-italic transition-colors flex items-center justify-between gap-4
+          ${open ? 'border-brand-accent' : 'border-brand-border hover:border-brand-accent/40'}
+          ${selectedLabel ? 'text-brand-text' : 'text-brand-muted'}`}
+      >
+        <span>{selectedLabel || placeholder}</span>
+        <span className={`text-brand-muted transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
+          ▾
+        </span>
+      </button>
+
+      {open && (
+        <div className="absolute left-0 right-0 top-full z-50 border border-brand-border bg-brand-bg shadow-2xl max-h-72 overflow-y-auto">
+          {Object.entries(options).map(([key, val]) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => { onSelect(field, key); setOpen(false); }}
+              className={`w-full text-left px-5 py-4 font-mono text-[12px] uppercase tracking-briefing font-bold transition-all duration-150 border-b border-brand-border/40 last:border-0
+                ${value === key
+                  ? 'text-brand-accent bg-brand-accent/5'
+                  : 'text-brand-muted hover:text-brand-text hover:bg-brand-accent/5'
+                }`}
+            >
+              {val.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+});
+CustomSelect.displayName = 'CustomSelect';
+
 const BackButton = ({ onClick }) => (
   <button
     type="button"
@@ -659,27 +712,17 @@ export default function AuditSystem() {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
-                      Sector
-                    </label>
-                    <select
-                      value={data.industry}
-                      onChange={(e) => setField('industry', e.target.value)}
-                      className={`w-full bg-transparent border-b-2 border-brand-border py-4 font-serif italic focus:outline-none focus:border-brand-accent appearance-none cursor-pointer transition-colors ${
-                        data.industry ? 'text-brand-text' : 'text-brand-accent'
-                      }`}
-                      style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
-                    >
-                      <option value="" disabled className="bg-brand-bg text-brand-muted font-sans text-base">
-                        Select your sector
-                      </option>
-                      {Object.entries(INDUSTRY_BENCHMARKS).map(([key, val]) => (
-                        <option key={key} value={key} className="bg-brand-bg text-brand-text font-sans text-base">
-                          {val.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+  <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">
+    Sector
+  </label>
+  <CustomSelect
+    value={data.industry}
+    options={INDUSTRY_BENCHMARKS}
+    field="industry"
+    onSelect={setField}
+    placeholder="Select your sector"
+  />
+</div>
 
                   <div className="space-y-3">
                     <label className="font-mono text-[12px] uppercase tracking-briefing text-brand-muted font-bold block">

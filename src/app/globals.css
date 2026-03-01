@@ -18,7 +18,7 @@
   /* 02: ARCHIVE (Deep Forest & Copper) */
   --brand-bg: #121F1F;
   --brand-text: #FAF9F6;
-  --brand-text-muted: #8A9A9A;
+  --brand-muted: #8A9A9A;
   --brand-accent: #B87333; /* Copper */
   --brand-border: rgba(184, 115, 51, 0.2);
   --brand-card-bg: rgba(26, 46, 46, 0.8);
@@ -28,7 +28,7 @@
   /* 03: BRIEFING (Burgundy & Decisive Red) */
   --brand-bg: #2D0B0B;
   --brand-text: #FAF9F6;
-  --brand-text-muted: #A38080;
+  --brand-muted: #A38080;
   --brand-accent: #D32F2F; /* High-Stakes Red */
   --brand-border: rgba(211, 47, 47, 0.2);
   --brand-card-bg: rgba(61, 18, 18, 0.8);
@@ -38,7 +38,7 @@
   /* 04: TERMINAL (Obsidian & Cyan) */
   --brand-bg: #0A0A0A;
   --brand-text: #FAF9F6;
-  --brand-text-muted: #808080;
+  --brand-muted: #808080;
   --brand-accent: #00E5FF; /* Cyan Intelligence */
   --brand-border: rgba(0, 229, 255, 0.2);
   --brand-card-bg: rgba(20, 20, 20, 0.9);
@@ -48,7 +48,7 @@
   /* 05: BOARDROOM (Slate) */
   --brand-bg: #1C1C1C;
   --brand-text: #FAF9F6;
-  --brand-text-muted: #A8A29E;
+  --brand-muted: #A8A29E;
   --brand-accent: #FF5733;
   --brand-border: rgba(250, 249, 246, 0.1);
   --brand-card-bg: rgba(255, 255, 255, 0.03);
