@@ -3,8 +3,6 @@
 import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, RotateCcw } from 'lucide-react';
-import { pdf } from '@react-pdf/renderer';
-import { DiagnosticDocument } from './DiagnosticPDF';
 import {
   STATES,
   TIERS,
@@ -396,9 +394,11 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
   };
 
   const downloadPDF = async () => {
-    const blob = await pdf(
-      <DiagnosticDocument summary={summary} inputData={inputData} />
-    ).toBlob();
+  const { pdf } = await import('@react-pdf/renderer');
+  const { DiagnosticDocument } = await import('./DiagnosticPDF');
+  const blob = await pdf(
+    <DiagnosticDocument summary={summary} inputData={inputData} />
+  ).toBlob();
     const url  = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href     = url;

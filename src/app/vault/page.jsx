@@ -1,9 +1,103 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import SocialTokenTrigger from "@/components/vault/SocialTokenTrigger";
-import { MEMOS, SIGNAL_LABELS, IMPACT_LABELS } from "@/data/vaultMemos";
+
+// ─── Auth Trigger (Suspense boundary required for useSearchParams) ─────────────
+// Next.js App Router requires any component using useSearchParams() to be wrapped
+// in <Suspense> during static generation. Isolating the hook here keeps the
+// static shell of VaultPage clean and avoids a full-page Suspense boundary.
+
+function VaultAuthTrigger() {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams?.get("auth_trigger") !== "true") return;
+
+    const attemptedPath = searchParams.get("attempted_path") ?? "/secure/vault";
+    const mode = attemptedPath.includes("exec") ? "inquiry" : "token";
+
+    window.dispatchEvent(
+      new CustomEvent("PR_TRIGGER_UNLOCK", {
+        detail: { mode, href: attemptedPath, source: "middleware_redirect" },
+        bubbles: true,
+      })
+    );
+
+    const clean = new URL(window.location.href);
+    clean.searchParams.delete("auth_trigger");
+    clean.searchParams.delete("attempted_path");
+    window.history.replaceState({}, "", clean.toString());
+  }, [searchParams]);
+
+  return null;
+}
+
+// ─── Intelligence Memo seed data (Batch 01) ───────────────────────────────────
+
+const MEMOS = [
+  {
+    id: "MEMO-01",
+    title: "The Anatomy of Resentment",
+    state_tag: "KID_GLOVES",
+    signal_tag: "AVOIDANCE",
+    impact_tag: "LEAK_RATIO",
+    teaser:
+      "Resentment isn't a personality problem. It's an organizational output. This memo maps how conflict avoidance builds into institutional rot -- and what the financial signature looks like before the exits start.",
+    slug: "anatomy-of-resentment",
+    published: "2026-02-01",
+    gated: true,
+  },
+  {
+    id: "MEMO-02",
+    title: "Effectiveness Dies in Darkness",
+    state_tag: "SILOSOLATION",
+    signal_tag: "DECISIONS",
+    impact_tag: "OPPORTUNITY_COST",
+    teaser:
+      "Silos don't form because people are selfish. They form because information routing breaks down and self-preservation fills the vacuum. This memo names the structural conditions and the cost of leaving them intact.",
+    slug: "effectiveness-dies-in-darkness",
+    published: "2026-02-08",
+    gated: true,
+  },
+  {
+    id: "MEMO-03",
+    title: "Nice is Not a Strategy",
+    state_tag: "KID_GLOVES",
+    signal_tag: "CULTURAL_AVOIDANCE",
+    impact_tag: "PERSONNEL_RISK",
+    teaser:
+      "Organizations that confuse warmth with effectiveness don't lose their people in blowups. They lose them quietly, over time, as the most capable employees conclude that nothing will ever change.",
+    slug: "nice-is-not-a-strategy",
+    published: "2026-02-15",
+    gated: true,
+  },
+  {
+    id: "MEMO-04",
+    title: "The Cost of Flying Blind",
+    state_tag: "BROKEN_COMPASS",
+    signal_tag: "STALLED_DECISIONS",
+    impact_tag: "RADIATED_IMPACT",
+    teaser:
+      "Stalled decisions don't stay contained. They radiate. Every week a direction isn't set, a team re-routes around the void -- burning capacity, losing confidence, and making bets leadership didn't authorize.",
+    slug: "cost-of-flying-blind",
+    published: "2026-02-22",
+    gated: true,
+  },
+  {
+    id: "MEMO-05",
+    title: "The Vanity of Being Right",
+    state_tag: "SACRED_COW",
+    signal_tag: "RESOLUTION_BLOCKAGE",
+    impact_tag: "EXECUTION_GAP",
+    teaser:
+      "The Sacred Cow persists not because leadership doesn't know. It persists because admitting the problem means admitting the decision that created it. This memo is about what that protection costs.",
+    slug: "vanity-of-being-right",
+    published: "2026-02-27",
+    gated: true,
+  },
+];
 
 // ─── Tag label maps ───────────────────────────────────────────────────────────
 
@@ -12,6 +106,22 @@ const STATE_LABELS = {
   SILOSOLATION:   "Silosolation",
   BROKEN_COMPASS: "Broken Compass",
   SACRED_COW:     "The Sacred Cow",
+};
+
+const SIGNAL_LABELS = {
+  AVOIDANCE:           "Avoidance",
+  CULTURAL_AVOIDANCE:  "Cultural Avoidance",
+  DECISIONS:           "Slow Decisions",
+  STALLED_DECISIONS:   "Stalled Decisions",
+  RESOLUTION_BLOCKAGE: "Resolution Blockage",
+};
+
+const IMPACT_LABELS = {
+  LEAK_RATIO:      "Leak Ratio",
+  OPPORTUNITY_COST:"Opportunity Cost",
+  PERSONNEL_RISK:  "Personnel Risk",
+  RADIATED_IMPACT: "Radiated Impact",
+  EXECUTION_GAP:   "Execution Gap",
 };
 
 // ─── MemoCard ─────────────────────────────────────────────────────────────────
@@ -74,30 +184,14 @@ function MemoCard({ memo, onUnlock }) {
 
 export default function VaultPage() {
   const [selectedMemo, setSelectedMemo] = useState(null);
-  const searchParams = useSearchParams();
-
-  // ── Middleware auth_trigger handshake ──────────────────────────────────────
-  useEffect(() => {
-    if (searchParams?.get("auth_trigger") !== "true") return;
-
-    const attemptedPath = searchParams.get("attempted_path") ?? "/secure/vault";
-    const mode = attemptedPath.includes("exec") ? "inquiry" : "token";
-
-    window.dispatchEvent(
-      new CustomEvent("PR_TRIGGER_UNLOCK", {
-        detail: { mode, href: attemptedPath, source: "middleware_redirect" },
-        bubbles: true,
-      })
-    );
-
-    const clean = new URL(window.location.href);
-    clean.searchParams.delete("auth_trigger");
-    clean.searchParams.delete("attempted_path");
-    window.history.replaceState({}, "", clean.toString());
-  }, [searchParams]);
 
   return (
     <main className="bg-brand-bg min-h-screen">
+
+      {/* ── Auth trigger — isolated Suspense boundary for useSearchParams ── */}
+      <Suspense fallback={null}>
+        <VaultAuthTrigger />
+      </Suspense>
 
       {/* ── Hero ── */}
       <section className="border-b border-brand-border px-6 pt-20 pb-16">
@@ -337,7 +431,7 @@ export default function VaultPage() {
             </a>
           </div>
           <p className="font-mono text-[9px] tracking-widest uppercase text-brand-muted">
-            Principal Resolution // The Vault v2.0
+            Principal Resolution // The Vault v1.0
           </p>
         </div>
       </section>

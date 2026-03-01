@@ -49,6 +49,98 @@ export const STATES = {
   UNLIT_ROOM:        { id: 'UNLIT_ROOM',         label: 'The Unlit Room',    severity: SEVERITY.LOW,  naturalTier: TIERS.DEVELOPMENT },
 };
 
+// ─── UI & SCORING ENUMS (v6.0 Sync) ──────────────────────────────────────────
+//
+// Shape rules:
+//   { label: '...' }  — enums rendered via Object.entries + val.label in OptionButton grids
+//   plain string      — enums used in dropdowns (val directly) or display-only
+//
+// DO NOT flatten { label } objects to plain strings without updating AuditSystem.jsx.
+// scoreStates() compares against KEYS only — values/labels are UI display only.
+
+export const INDUSTRY_BENCHMARKS = {
+  TECH:         'Technology',
+  MEDIA:        'Media/Creative',
+  HEALTH:       'Healthcare',
+  FINANCE:      'Finance',
+  NONPROFIT:    'Non-Profit',
+  GOV:          'Government',
+  MANUFACTURING:'Manufacturing',
+  RETAIL:       'Retail',
+  ENERGY:       'Energy',
+  CONSULTING:   'Professional Services',
+  CONSTRUCTION: 'Construction',
+  LOGISTICS:    'Logistics/Supply Chain',
+  OTHER:        'Other',
+};
+
+export const ORG_STAGES = {
+  EARLY:       'Early Stage / Startup',
+  GROWTH:      'Rapid Growth / Scaling',
+  ESTABLISHED: 'Established / Mature',
+  LEGACY:      'Legacy / Institutional',
+};
+
+export const LEADERSHIP_TENURES = {
+  UNDER_ONE: 'Under 1 Year',
+  ONE_3YR:   '1–3 Years',
+  FOUR_6YR:  '4–6 Years',
+  SEVEN_PLUS:'7+ Years',
+};
+
+export const FRICTION_LOCATIONS = {
+  WITHIN_LEADERSHIP: { label: 'Within the Leadership Team' },
+  CROSS_FUNCTIONAL:  { label: 'Between Departments/Silos' },
+  TEAM:              { label: 'Within a Specific Team' },
+  UNKNOWN:           { label: 'I cannot pinpoint the source' },
+};
+
+export const AVOIDANCE_MECHANISMS = {
+  NO_FORUM:      { label: 'No forum for the conversation' },
+  PREDETERMINED: { label: 'Decisions are made before meetings' },
+  COST_TOO_HIGH: { label: 'The social cost of speaking up is too high' },
+  NOT_AN_ISSUE:  { label: 'Leadership denies the problem exists' },
+};
+
+export const PRIOR_ATTEMPTS = {
+  NONE:         { label: 'No formal attempt made' },
+  CONVERSATION: { label: 'Internal conversations only' },
+  STRUCTURAL:   { label: 'Structural/Reporting changes' },
+  EXTERNAL:     { label: 'Brought in outside help before' },
+};
+
+export const PERSONNEL_RISK = {
+  NONE: { label: 'No immediate risk' },
+  YES:  { label: 'Key people are disengaged/looking' },
+  LOST: { label: 'We have already lost critical talent' },
+};
+
+export const RESOLUTION_BLOCKAGE = {
+  NONE:      { label: 'Clear path to resolution' },
+  KNOWN:     { label: 'Known individual/group is blocking' },
+  SUSPECTED: { label: 'Suspect a blockage but unconfirmed' },
+  ATTEMPTED: { label: 'We tried to resolve it and failed' },
+};
+
+export const FRICTION_DURATIONS = {
+  UNDER_6MO: { label: 'Under 6 Months' },
+  SIX_12MO:  { label: '6–12 Months' },
+  ONE_2YR:   { label: '1–2 Years' },
+  OVER_2YR:  { label: 'Over 2 Years' },
+};
+
+export const DOWNSTREAM_POPULATIONS = {
+  INDIVIDUAL: { label: 'Individual/Small Team' },
+  LARGE:      { label: 'Large Department' },
+  FULL_ORG:   { label: 'The Entire Organization' },
+};
+
+export const METRIC_LEGEND = {
+  EXECUTION_GAP:    'Leadership Execution Gap',
+  RADIATED_IMPACT:  'Radiated Team Impact',
+  HISTORICAL_LOSS:  'Confirmed Historical Loss',
+};
+
 // ─── INDUSTRY VOLATILITY MULTIPLIERS ─────────────────────────────────────────
 
 const INDUSTRY_MULTIPLIER = {
@@ -246,7 +338,7 @@ function scoreStates(inputs, financials) {
   // Core: orgStage === GROWTH AND frictionDuration === OVER_2YR
   if (orgStage === 'GROWTH' && frictionDuration === 'OVER_2YR') {
     let score = 0;
-    if (decisions === 'SLOW')                      score += 40; // reactive, not fast
+    if (decisions === 'SLOW')                      score += 40;
     if (leadershipTenure === 'UNDER_ONE')          score += 30;
     scores.push({ state: STATES.RUNAWAY_TREADMILL, score: score * industryMult });
   }
@@ -265,7 +357,7 @@ function scoreStates(inputs, financials) {
   // Core: headcount > 50 AND frictionLocation === CROSS_FUNCTIONAL
   if (headcount > 50 && frictionLocation === 'CROSS_FUNCTIONAL') {
     let score = 0;
-    if (cTax > 1.2)                                score += 40; // coordination tax corroborates
+    if (cTax > 1.2)                                score += 40;
     if (frictionLocation === 'TEAM')               score += 30;
     if (orgStage === 'ESTABLISHED')                score += 30;
     if (decisions === 'SLOW')                      score += 20;
@@ -550,11 +642,11 @@ function buildSignalSummary(inputs, financials) {
 export function assignState(inputs) {
   const result = runDiagnostic(inputs);
   return {
-    label:      result.state.label,
-    id:         result.state.id,
-    tier:       result.tier,
-    severity:   result.state.severity,
-    toneKey:    result.toneKey,
+    label:       result.state.label,
+    id:          result.state.id,
+    tier:        result.tier,
+    severity:    result.state.severity,
+    toneKey:     result.toneKey,
     agencyScore: result.agencyScore,
   };
 }
@@ -563,130 +655,28 @@ export function assignState(inputs) {
 
 export const TIER_META = {
   [TIERS.STABILITY_SUPPORT]: {
-    feeLabel:        'Quoted at intake',
-    cta:             'Call us now',
+    feeLabel:         'Quoted at intake',
+    cta:              'Call us now',
     outcomeStatement: 'Emergency stabilization during leadership pivots, mass exits, or organizational trauma.',
   },
   [TIERS.EXECUTIVE_COUNSEL]: {
-    feeLabel:        'Custom arrangement',
-    cta:             'Request Executive Counsel',
+    feeLabel:         'Custom arrangement',
+    cta:              'Request Executive Counsel',
     outcomeStatement: 'A confidential ongoing relationship for leaders navigating situations they cannot discuss with anyone inside the building.',
   },
   [TIERS.INTERVENTION]: {
-    feeLabel:        'From $29,500',
-    cta:             'Bring us in',
+    feeLabel:         'From $29,500',
+    cta:              'Bring us in',
     outcomeStatement: 'Direct tactical engagement. We step into the room and handle the high-stakes conversations the internal team cannot.',
   },
   [TIERS.ROADMAP]: {
-    feeLabel:        'From $12,500',
-    cta:             'Start the Roadmap',
+    feeLabel:         'From $12,500',
+    cta:              'Start the Roadmap',
     outcomeStatement: 'Thirty days. A structured diagnosis and prioritized plan the organization can execute.',
   },
   [TIERS.DEVELOPMENT]: {
-    feeLabel:        'Pricing at intake',
-    cta:             'Start the conversation',
+    feeLabel:         'Pricing at intake',
+    cta:              'Start the conversation',
     outcomeStatement: 'Leadership development for individuals and teams. Practical tools, real-world application.',
   },
-};
-// ─── UI CONFIGURATION EXPORTS ────────────────────────────────────────────────
-//
-// These constants are the single source of truth for all dropdown/select options
-// rendered in AuditSystem.jsx. ResultsLedger.jsx and DiagnosticPDF.jsx import
-// METRIC_LEGEND from here as well.
-//
-// Triple-File Sync rule: change labels here only. Never define these inline
-// in any component.
-
-export const INDUSTRY_BENCHMARKS = [
-  { id: 'TECH',         label: 'Technology / SaaS' },
-  { id: 'MEDIA',        label: 'Media / Advertising' },
-  { id: 'HEALTH',       label: 'Healthcare / Biotech' },
-  { id: 'FINANCE',      label: 'Financial Services' },
-  { id: 'NONPROFIT',    label: 'Non-Profit / Foundation' },
-  { id: 'GOV',          label: 'Government / Public Sector' },
-  { id: 'MANUFACTURING',label: 'Manufacturing' },
-  { id: 'RETAIL',       label: 'Retail / Hospitality' },
-  { id: 'ENERGY',       label: 'Energy / Utilities' },
-  { id: 'CONSULTING',   label: 'Professional Services' },
-  { id: 'CONSTRUCTION', label: 'Construction / Real Estate' },
-  { id: 'LOGISTICS',    label: 'Logistics / Supply Chain' },
-  { id: 'OTHER',        label: 'Other' },
-];
-
-export const ORG_STAGES = [
-  { id: 'EARLY',       label: 'Early / Seed' },
-  { id: 'GROWTH',      label: 'High Growth / Scale' },
-  { id: 'ESTABLISHED', label: 'Established / Mature' },
-  { id: 'LEGACY',      label: 'Legacy / Transitioning' },
-];
-
-export const LEADERSHIP_TENURES = [
-  { id: 'UNDER_ONE', label: 'Under 1 Year' },
-  { id: 'ONE_THREE', label: '1 - 3 Years' },
-  { id: 'FOUR_SIX',  label: '4 - 6 Years' },
-  { id: 'SEVEN_PLUS',label: '7+ Years' },
-];
-
-export const FRICTION_LOCATIONS = [
-  { id: 'WITHIN_LEADERSHIP', label: 'Within Leadership Team' },
-  { id: 'CROSS_FUNCTIONAL',  label: 'Between Departments (Cross-functional)' },
-  { id: 'TEAM',              label: 'Within a Single Team' },
-  { id: 'BOARD',             label: 'Between Board and Leadership' },
-  { id: 'UNKNOWN',           label: 'Unclear / Hard to Locate' },
-];
-
-export const AVOIDANCE_MECHANISMS = [
-  { id: 'NO_FORUM',      label: 'No forum exists to discuss it' },
-  { id: 'PREDETERMINED', label: 'Decisions are made before meetings start' },
-  { id: 'COST_TOO_HIGH', label: 'The social/professional cost of naming it is too high' },
-  { id: 'NOT_AN_ISSUE',  label: 'The organization does not acknowledge it as a problem' },
-];
-
-export const PRIOR_ATTEMPTS = [
-  { id: 'NONE',         label: 'No formal attempt' },
-  { id: 'CONVERSATION', label: 'Internal conversations only' },
-  { id: 'EXTERNAL',     label: 'Prior external consultants/trainers' },
-];
-
-export const PERSONNEL_RISK = [
-  { id: 'NONE', label: 'No immediate flight risk' },
-  { id: 'YES',  label: 'Key talent is actively disengaged/looking' },
-  { id: 'LOST', label: 'Critical departures have already occurred' },
-];
-
-export const RESOLUTION_BLOCKAGE = [
-  { id: 'NONE',      label: 'Unblocked / Ready for resolution' },
-  { id: 'SUSPECTED', label: 'Suspected resistance at leadership level' },
-  { id: 'KNOWN',     label: 'Known intentional blockage' },
-  { id: 'ATTEMPTED', label: 'Prior resolution attempts were actively derailed' },
-];
-
-export const FRICTION_DURATIONS = [
-  { id: 'UNDER_6MO', label: 'Under 6 Months' },
-  { id: 'SIX_12MO',  label: '6 - 12 Months' },
-  { id: 'ONE_2YR',   label: '1 - 2 Years' },
-  { id: 'OVER_2YR',  label: 'Over 2 Years' },
-];
-
-export const DOWNSTREAM_POPULATIONS = [
-  { id: 'SMALL',    label: 'Minimal / Localized' },
-  { id: 'MID',      label: 'Moderate / Departmental' },
-  { id: 'LARGE',    label: 'Significant / Multi-department' },
-  { id: 'FULL_ORG', label: 'Full Organization' },
-];
-
-export const DECISION_VELOCITY = [
-  { id: 'FAST',    label: 'Decisions are made and stick' },
-  { id: 'SLOW',    label: 'Decisions are delayed or debated excessively' },
-  { id: 'STALLED', label: 'Decisions are not being made at all' },
-];
-
-// NOTE: The internal engine uses `decisions` as the field key (not DECISION_VELOCITY).
-// This export is for UI rendering only. Map DECISION_VELOCITY[].id → inputs.decisions.
-
-export const METRIC_LEGEND = {
-  LEAK_RATIO:        'The percentage of your leadership payroll lost to friction.',
-  EXECUTION_GAP:     'The direct financial cost of lost leadership hours.',
-  RADIATED_IMPACT:   'The downstream cost of leadership friction on the broader team.',
-  TOTAL_ANNUAL_BURN: 'The projected yearly cost of the current state if left unresolved.',
 };
