@@ -163,8 +163,7 @@ const OptionButton = memo(({ value, current, field, onSelect, children }) => (
   <button
     type="button"
     onClick={() => onSelect(field, value)}
-    className={`w-full text-left p-5 border font-mono text-[12px] uppercase tracking-briefing font-bold transition-all duration-200
-      ${current === value
+className={`w-full text-left p-5 min-h-[3.5rem] border font-mono text-[12px] uppercase tracking-briefing font-bold transition-all duration-200      ${current === value
         ? 'border-brand-accent text-brand-accent bg-brand-accent/5'
         : 'border-brand-border text-brand-muted hover:border-brand-accent/40 hover:text-brand-text'
       }`}
