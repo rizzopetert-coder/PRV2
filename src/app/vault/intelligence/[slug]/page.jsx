@@ -1,247 +1,150 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { MEMOS, SIGNAL_LABELS, IMPACT_LABELS } from "@/data/vaultMemos";
-import { strategicBriefings } from "@/data/memos";
-
 /**
- * src/app/vault/intelligence/[slug]/page.jsx
- * Principal Resolution // Intelligence Memo Reader
+ * src/app/vault/intelligence/page.jsx
+ * Principal Resolution // Intelligence Memo Index
  *
- * Join logic:
- *   1. Find metadata in vaultMemos.js by slug → gets id, state_tag, signal_tag, etc.
- *   2. Use MEMO-XX id to match title → find full content in memos.js (strategicBriefings)
- *
- * Auth gate:
- *   Reads pr_vault_token cookie client-side on mount.
- *   If missing → redirects to /vault?auth_trigger=true&attempted_path=[current]
- *   This mirrors the middleware.ts Phase I contract for public routes.
+ * Public index. No cookie required.
+ * Teasers visible to all visitors to drive unlock behavior.
+ * Gated memos link to reader — auth wall fires there if no cookie.
  */
 
-// ─── Cookie reader ────────────────────────────────────────────────────────────
+import Link from 'next/link';
+import { MEMOS, SIGNAL_LABELS, IMPACT_LABELS } from '@/data/vaultMemos';
+import { Lock } from 'lucide-react';
 
-function getVaultCookie() {
-  if (typeof document === "undefined") return null;
-  const match = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("pr_vault_token="));
-  return match ? decodeURIComponent(match.split("=")[1]) : null;
-}
-
-// ─── State labels (local — only 5 memos so keeping inline) ───────────────────
-
-const STATE_DISPLAY = {
-  KID_GLOVES:     "Kid Gloves",
-  SILOSOLATION:   "Silosolation",
-  BROKEN_COMPASS: "Broken Compass",
-  SACRED_COW:     "The Sacred Cow",
-  LAST_LEG:       "Last Leg",
-  DEAD_CALM:      "Dead Calm",
-  CRACKED_MIRROR: "Cracked Mirror",
-  FOSSIL_SYSTEM:  "The Fossil System",
-  EXIT_PATTERN:   "The Exit Pattern",
-  RUNAWAY_TREADMILL: "Runaway Treadmill",
-  ANCHOR:         "The Anchor",
-  UNLIT_ROOM:     "The Unlit Room",
+export const metadata = {
+  title: 'Intelligence | Principal Resolution Vault',
+  description:
+    'Institutional intelligence memos from Principal Resolution. Sector observations, signal analysis, and advisory perspective on organizational friction.',
 };
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+export default function IntelligencePage() {
+  return (
+    <main className="min-h-screen bg-brand-bg text-brand-text transition-colors duration-700">
+      <div className="max-w-5xl mx-auto px-6 lg:px-12 py-24">
 
-export default function MemoReaderPage({ params }) {
-  const { slug } = params;
-  const router = useRouter();
+        {/* HEADER */}
+        <div className="mb-20 max-w-3xl">
+          <span className="font-mono text-[10px] uppercase tracking-briefing text-brand-accent font-bold block mb-6">
+            Vault // Intelligence
+          </span>
 
-  const [authStatus, setAuthStatus] = useState("checking"); // checking | granted | denied
+          <h1
+            className="font-serif italic tracking-tighter leading-none mb-8"
+            style={{ fontSize: 'clamp(2.4rem, 5vw, 4rem)' }}
+          >
+            Intelligence Memos
+          </h1>
 
-  // Auth gate — check cookie on mount
-  useEffect(() => {
-    const token = getVaultCookie();
-    if (token && token.trim() !== "") {
-      setAuthStatus("granted");
-    } else {
-      setAuthStatus("denied");
-      const currentPath = `/vault/intelligence/${slug}`;
-      router.replace(
-        `/vault?auth_trigger=true&attempted_path=${encodeURIComponent(currentPath)}`
-      );
-    }
-  }, [slug, router]);
+          <p
+            className="font-serif italic text-brand-muted leading-relaxed border-l-2 border-brand-accent/50 pl-6 py-1"
+            style={{ fontSize: 'clamp(0.95rem, 1.8vw, 1.2rem)' }}
+          >
+            Sector observations and advisory perspective on organizational friction.
+            Each memo is tied to a diagnostic state. If you've run the audit,
+            you'll know which ones apply.
+          </p>
+        </div>
 
-  // ── Data join ──────────────────────────────────────────────────────────────
-  const metadata = MEMOS.find((m) => m.slug === slug);
-  const content = metadata
-    ? strategicBriefings.find((b) => b.title === metadata.title)
-    : null;
-
-  // ── Loading / auth states ──────────────────────────────────────────────────
-  if (authStatus === "checking") {
-    return (
-      <main className="bg-brand-bg min-h-screen flex items-center justify-center">
-        <div className="flex gap-1.5">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-pulse"
-              style={{ animationDelay: `${i * 150}ms` }}
-            />
+        {/* MEMO LIST */}
+        <div className="divide-y divide-brand-border/50 border-y border-brand-border/50">
+          {MEMOS.map((memo, index) => (
+            <MemoCard key={memo.id} memo={memo} index={index} />
           ))}
         </div>
-      </main>
-    );
-  }
 
-  if (authStatus === "denied") {
-    return (
-      <main className="bg-brand-bg min-h-screen flex items-center justify-center">
-        <p className="font-mono text-xs text-brand-muted">Redirecting...</p>
-      </main>
-    );
-  }
-
-  // ── Not found ──────────────────────────────────────────────────────────────
-  if (!metadata || !content) {
-    return (
-      <main className="bg-brand-bg min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-sm text-center">
-          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-brand-muted mb-4">
-            Principal Resolution // 404
+        {/* FOOTER NOTE */}
+        <div className="mt-16 pt-8 border-t border-brand-border/30">
+          <p className="font-mono text-brand-muted text-[10px] uppercase tracking-briefing leading-relaxed max-w-xl">
+            <span className="text-brand-accent font-bold">Note // </span>
+            Seven additional memos are in development. Coverage expands as diagnostic
+            state data accumulates. If your state has no linked memo yet, it will.
           </p>
-          <p
-            className="text-2xl text-brand-text mb-6"
-            style={{ fontFamily: "'Sorts Mill Goudy', Georgia, serif", fontStyle: "italic" }}
-          >
-            Memo not found.
-          </p>
-          <a
-            href="/vault/intelligence"
-            className="font-mono text-[10px] tracking-widest uppercase text-brand-accent hover:text-brand-text transition-colors"
-          >
-            ← Return to Intelligence
-          </a>
         </div>
-      </main>
-    );
-  }
 
-  // ── Full render ────────────────────────────────────────────────────────────
+      </div>
+    </main>
+  );
+}
+
+function MemoCard({ memo, index }) {
+  const signalLabel = SIGNAL_LABELS[memo.signal_tag] ?? memo.signal_tag;
+  const impactLabel = IMPACT_LABELS[memo.impact_tag] ?? memo.impact_tag;
+
+  const formattedDate = new Date(memo.published).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
   return (
-    <main className="bg-brand-bg min-h-screen">
+    <Link
+      href={`/vault/intelligence/${memo.slug}`}
+      className="group block py-10 hover:bg-brand-accent/3 transition-colors duration-500 px-2 -mx-2"
+    >
+      <div className="flex flex-col md:flex-row md:items-start gap-8">
 
-      {/* ── Header ── */}
-      <section className="border-b border-brand-border px-6 pt-16 pb-12">
-        <div className="max-w-3xl mx-auto">
+        {/* Index number */}
+        <div className="shrink-0 w-12">
+          <span className="font-mono text-[11px] text-brand-muted opacity-50">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+        </div>
 
-          {/* Nav */}
-          <a
-            href="/vault/intelligence"
-            className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-muted hover:text-brand-accent transition-colors flex items-center gap-4 mb-16 group"
-          >
-            <div className="w-8 h-px bg-brand-border group-hover:w-16 group-hover:bg-brand-accent transition-all duration-500" />
-            Return to Intelligence
-          </a>
+        {/* Main content */}
+        <div className="flex-grow min-w-0">
 
-          {/* Eyebrow */}
-          <div className="flex items-center gap-4 mb-6">
-            <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-brand-accent font-bold">
-              {content.category} // Intelligence Memo
+          {/* Tags row */}
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <span className="font-mono text-[9px] uppercase tracking-briefing border border-cyan-600 text-cyan-600 px-2 py-0.5">
+              {signalLabel}
             </span>
-            <div className="h-px flex-1 bg-brand-border/40" />
-            <span className="font-mono text-[9px] tracking-widest uppercase text-brand-muted">
-              {metadata.id}
+            <span className="font-mono text-[9px] uppercase tracking-briefing border border-red-600 text-red-600 px-2 py-0.5">
+              {impactLabel}
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted opacity-50">
+              {memo.state_tag.replace(/_/g, ' ')}
             </span>
           </div>
 
           {/* Title */}
-          <h1
-            className="text-4xl md:text-6xl leading-tight text-brand-text mb-8"
-            style={{ fontFamily: "'Sorts Mill Goudy', Georgia, serif", fontStyle: "italic" }}
+          <h2
+            className="font-serif italic text-brand-text tracking-tight leading-tight mb-4 group-hover:text-brand-accent transition-colors duration-300"
+            style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.6rem)' }}
           >
-            {metadata.title}
-          </h1>
+            {memo.title}
+          </h2>
 
-          {/* Meta row */}
-          <div className="flex flex-wrap items-center gap-6 pb-8 border-b border-brand-border/40">
-            <div>
-              <p className="font-mono text-[9px] tracking-widest uppercase text-brand-muted mb-1">Published</p>
-              <p className="font-mono text-xs text-brand-text">{metadata.published}</p>
-            </div>
-            <div className="w-px h-8 bg-brand-border" />
-            <div>
-              <p className="font-mono text-[9px] tracking-widest uppercase text-brand-muted mb-1">State</p>
-              <a
-                href={`/vault/lexicon/${metadata.state_tag.toLowerCase().replace(/_/g, "-")}`}
-                className="font-mono text-xs text-brand-accent hover:text-brand-text transition-colors uppercase tracking-wider"
-              >
-                {STATE_DISPLAY[metadata.state_tag] || metadata.state_tag}
-              </a>
-            </div>
-            <div className="w-px h-8 bg-brand-border" />
-            <div className="flex gap-1.5">
-              <span className="font-mono text-[9px] tracking-widest uppercase border border-cyan-600 text-cyan-600 px-1.5 py-0.5">
-                {SIGNAL_LABELS[metadata.signal_tag] || metadata.signal_tag}
-              </span>
-              <span className="font-mono text-[9px] tracking-widest uppercase border border-red-600 text-red-600 px-1.5 py-0.5">
-                {IMPACT_LABELS[metadata.impact_tag] || metadata.impact_tag}
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Body ── */}
-      <section className="px-6 py-16">
-        <div className="max-w-3xl mx-auto">
-
-          {/* Excerpt / lede */}
+          {/* Teaser */}
           <p
-            className="text-2xl md:text-3xl leading-relaxed text-brand-muted mb-16 border-l-4 border-brand-accent pl-8 py-2"
-            style={{ fontFamily: "'Sorts Mill Goudy', Georgia, serif", fontStyle: "italic" }}
+            className="font-serif italic text-brand-muted leading-relaxed mb-6 max-w-2xl"
+            style={{ fontSize: 'clamp(0.875rem, 1.4vw, 1rem)' }}
           >
-            {content.excerpt}
+            {memo.teaser}
           </p>
 
-          {/* Full content */}
-          <div
-            className="text-xl md:text-2xl leading-relaxed text-brand-text space-y-10 whitespace-pre-wrap"
-            style={{ fontFamily: "'Sorts Mill Goudy', Georgia, serif", fontStyle: "italic" }}
-          >
-            {content.content}
+          {/* Meta row */}
+          <div className="flex items-center gap-6">
+            <span className="font-mono text-[9px] uppercase tracking-briefing text-brand-muted opacity-50">
+              {formattedDate}
+            </span>
+
+            {memo.gated && (
+              <span className="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-briefing text-brand-muted opacity-60">
+                <Lock size={9} />
+                Unlock required
+              </span>
+            )}
           </div>
         </div>
-      </section>
 
-      {/* ── Footer CTA ── */}
-      <section className="border-t border-brand-border px-6 py-16">
-        <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div>
-            <p className="font-mono text-[9px] tracking-widest uppercase text-brand-muted mb-2">
-              End of Memo // {metadata.id}
-            </p>
-            <p
-              className="text-xl text-brand-text"
-              style={{ fontFamily: "'Sorts Mill Goudy', Georgia, serif", fontStyle: "italic" }}
-            >
-              Immediate action required?
-            </p>
-          </div>
-          <div className="flex gap-4">
-            <a
-              href={`/vault/lexicon/${metadata.state_tag.toLowerCase().replace(/_/g, "-")}`}
-              className="font-mono text-[10px] tracking-widest uppercase border border-brand-border text-brand-muted px-6 py-4 hover:border-brand-text hover:text-brand-text transition-all duration-200 whitespace-nowrap"
-            >
-              View State Dossier →
-            </a>
-            <a
-              href="/contact"
-              className="font-mono text-[10px] tracking-widest uppercase border border-brand-text text-brand-text px-6 py-4 hover:bg-brand-text hover:text-brand-bg transition-all duration-200 whitespace-nowrap"
-            >
-              Initiate Resolution →
-            </a>
-          </div>
+        {/* Arrow */}
+        <div className="shrink-0 self-center md:self-start md:pt-2">
+          <span className="font-mono text-[10px] text-brand-muted group-hover:text-brand-accent transition-colors duration-300 group-hover:translate-x-1 inline-block transition-transform">
+            →
+          </span>
         </div>
-      </section>
 
-    </main>
+      </div>
+    </Link>
   );
 }
