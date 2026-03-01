@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Newsreader, Space_Mono, Fjalla_One } from 'next/font/google';
+import { Newsreader, Space_Mono, Fjalla_One, Sorts_Mill_Goudy } from 'next/font/google';
 import Script from 'next/script';
 import StewardshipPanel from "../components/StewardshipPanel";
 
@@ -25,6 +25,14 @@ const fjallaOne = Fjalla_One({
   weight: ['400'],
   style: ['normal'],
   variable: '--font-fjalla',
+  display: 'swap',
+});
+
+const sortsMill = Sorts_Mill_Goudy({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  variable: '--font-sorts-mill',
   display: 'swap',
 });
 
@@ -87,6 +95,7 @@ export default function RootLayout({ children }) {
         ${instrumentSerif.variable}
         ${spaceMono.variable}
         ${fjallaOne.variable}
+        ${sortsMill.variable}
         font-sans antialiased
       `}>
         {/* Prevents white flash on theme load */}

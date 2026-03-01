@@ -13,7 +13,7 @@ import {
   getPathToVerdict,
   buildRecommendationRationale,
 } from './ResultsLedger';
-import { SignalMatrixPDF } from './SignalMatrixPDF';
+import { SignalMatrixPDF } from './SignalMatrixPDF.jsx';
 
 /**
  * DiagnosticPDF // Principal Resolution v6.0

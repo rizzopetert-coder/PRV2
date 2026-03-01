@@ -21,7 +21,7 @@ export default function VaultLayout({ children }) {
   return (
     <>
       <VaultNav />
-      <main>{children}</main>
+      {children}
     </>
   );
 }

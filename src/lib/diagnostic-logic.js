@@ -588,3 +588,105 @@ export const TIER_META = {
     outcomeStatement: 'Leadership development for individuals and teams. Practical tools, real-world application.',
   },
 };
+// ─── UI CONFIGURATION EXPORTS ────────────────────────────────────────────────
+//
+// These constants are the single source of truth for all dropdown/select options
+// rendered in AuditSystem.jsx. ResultsLedger.jsx and DiagnosticPDF.jsx import
+// METRIC_LEGEND from here as well.
+//
+// Triple-File Sync rule: change labels here only. Never define these inline
+// in any component.
+
+export const INDUSTRY_BENCHMARKS = [
+  { id: 'TECH',         label: 'Technology / SaaS' },
+  { id: 'MEDIA',        label: 'Media / Advertising' },
+  { id: 'HEALTH',       label: 'Healthcare / Biotech' },
+  { id: 'FINANCE',      label: 'Financial Services' },
+  { id: 'NONPROFIT',    label: 'Non-Profit / Foundation' },
+  { id: 'GOV',          label: 'Government / Public Sector' },
+  { id: 'MANUFACTURING',label: 'Manufacturing' },
+  { id: 'RETAIL',       label: 'Retail / Hospitality' },
+  { id: 'ENERGY',       label: 'Energy / Utilities' },
+  { id: 'CONSULTING',   label: 'Professional Services' },
+  { id: 'CONSTRUCTION', label: 'Construction / Real Estate' },
+  { id: 'LOGISTICS',    label: 'Logistics / Supply Chain' },
+  { id: 'OTHER',        label: 'Other' },
+];
+
+export const ORG_STAGES = [
+  { id: 'EARLY',       label: 'Early / Seed' },
+  { id: 'GROWTH',      label: 'High Growth / Scale' },
+  { id: 'ESTABLISHED', label: 'Established / Mature' },
+  { id: 'LEGACY',      label: 'Legacy / Transitioning' },
+];
+
+export const LEADERSHIP_TENURES = [
+  { id: 'UNDER_ONE', label: 'Under 1 Year' },
+  { id: 'ONE_THREE', label: '1 - 3 Years' },
+  { id: 'FOUR_SIX',  label: '4 - 6 Years' },
+  { id: 'SEVEN_PLUS',label: '7+ Years' },
+];
+
+export const FRICTION_LOCATIONS = [
+  { id: 'WITHIN_LEADERSHIP', label: 'Within Leadership Team' },
+  { id: 'CROSS_FUNCTIONAL',  label: 'Between Departments (Cross-functional)' },
+  { id: 'TEAM',              label: 'Within a Single Team' },
+  { id: 'BOARD',             label: 'Between Board and Leadership' },
+  { id: 'UNKNOWN',           label: 'Unclear / Hard to Locate' },
+];
+
+export const AVOIDANCE_MECHANISMS = [
+  { id: 'NO_FORUM',      label: 'No forum exists to discuss it' },
+  { id: 'PREDETERMINED', label: 'Decisions are made before meetings start' },
+  { id: 'COST_TOO_HIGH', label: 'The social/professional cost of naming it is too high' },
+  { id: 'NOT_AN_ISSUE',  label: 'The organization does not acknowledge it as a problem' },
+];
+
+export const PRIOR_ATTEMPTS = [
+  { id: 'NONE',         label: 'No formal attempt' },
+  { id: 'CONVERSATION', label: 'Internal conversations only' },
+  { id: 'EXTERNAL',     label: 'Prior external consultants/trainers' },
+];
+
+export const PERSONNEL_RISK = [
+  { id: 'NONE', label: 'No immediate flight risk' },
+  { id: 'YES',  label: 'Key talent is actively disengaged/looking' },
+  { id: 'LOST', label: 'Critical departures have already occurred' },
+];
+
+export const RESOLUTION_BLOCKAGE = [
+  { id: 'NONE',      label: 'Unblocked / Ready for resolution' },
+  { id: 'SUSPECTED', label: 'Suspected resistance at leadership level' },
+  { id: 'KNOWN',     label: 'Known intentional blockage' },
+  { id: 'ATTEMPTED', label: 'Prior resolution attempts were actively derailed' },
+];
+
+export const FRICTION_DURATIONS = [
+  { id: 'UNDER_6MO', label: 'Under 6 Months' },
+  { id: 'SIX_12MO',  label: '6 - 12 Months' },
+  { id: 'ONE_2YR',   label: '1 - 2 Years' },
+  { id: 'OVER_2YR',  label: 'Over 2 Years' },
+];
+
+export const DOWNSTREAM_POPULATIONS = [
+  { id: 'SMALL',    label: 'Minimal / Localized' },
+  { id: 'MID',      label: 'Moderate / Departmental' },
+  { id: 'LARGE',    label: 'Significant / Multi-department' },
+  { id: 'FULL_ORG', label: 'Full Organization' },
+];
+
+export const DECISION_VELOCITY = [
+  { id: 'FAST',    label: 'Decisions are made and stick' },
+  { id: 'SLOW',    label: 'Decisions are delayed or debated excessively' },
+  { id: 'STALLED', label: 'Decisions are not being made at all' },
+];
+
+// NOTE: The internal engine uses `decisions` as the field key (not DECISION_VELOCITY).
+// This export is for UI rendering only. Map DECISION_VELOCITY[].id → inputs.decisions.
+
+export const METRIC_LEGEND = {
+  LEAK_RATIO:        'The percentage of your leadership payroll lost to friction.',
+  EXECUTION_GAP:     'The direct financial cost of lost leadership hours.',
+  RADIATED_IMPACT:   'The downstream cost of leadership friction on the broader team.',
+  TOTAL_ANNUAL_BURN: 'The projected yearly cost of the current state if left unresolved.',
+};

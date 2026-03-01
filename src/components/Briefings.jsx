@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, ArrowUpRight, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-import { strategicBriefings } from '../data/briefingData';
+import { strategicBriefings } from '../data/memos';
 import BriefingDrawer from './BriefingDrawer';
 
 /**
