@@ -150,7 +150,7 @@ const STRINGS = {
     },
     inference: "No prior attempt to resolve this means the problem has not been named yet -- or it has been named privately and not collectively. Either way, the organization is waiting for someone with standing to call the question in a room where everyone already knows the answer. That is not a leadership failure. It is a structural one. The forum for resolution either does not exist or has not been convened by someone with enough authority to make the outcome stick.",
     inferenceMod: {},
-    pathToVerdict: "We arrived at Dead Calm because decisions are stalled and the avoidance pattern is structural -- there is no forum where the real conversation can happen, or the forum exists and the outcome is predetermined. Those two signals together describe a specific kind of organizational freeze. We ruled out Cracked Mirror because the friction is not traceable to one person's position -- it is collective. We ruled out Silosolation because the fracture here is at the leadership level, not between functions. The absence of any prior attempt confirmed that the problem has not been engaged directly yet.",
+pathToVerdict: "The prior attempt signal corroborated this finding. Prior attempts, where present, stopped at the conversation level -- producing discussion but not resolution. Where no prior attempt was recorded, the problem has not yet been engaged directly. Either way, the organization is not moving.",
   },
 
   SILOSOLATION: {
@@ -215,7 +215,7 @@ const STRINGS = {
     },
     inference: "At this size, coordination tax is predictable -- it is a function of headcount and cross-functional complexity, not of effort or intent. What makes it a diagnostic finding rather than a normal growth cost is when it outpaces the organization's ability to absorb it. The friction is cross-functional, which means it is sitting at the seams between teams rather than within any single one. That is where the audit needs to go first -- not into the teams themselves, but into the connective tissue between them.",
     inferenceMod: {},
-    pathToVerdict: "We arrived at The Anchor because headcount has crossed the threshold where coordination tax becomes a structural reality, and the friction is cross-functional -- sitting at the seams rather than within any single team. We ruled out Silosolation because the units have not stopped communicating entirely -- the drag is slowing them, not isolating them. We ruled out Runaway Treadmill because the problem here is not misdirected speed. It is friction consuming the output of directed effort.",
+pathToVerdict: "Runaway Treadmill was evaluated and ruled out at this step in the diagnostic sequence. The coordination drag here is cross-functional and structural -- a function of scale, not pace. The organization may be growing, but speed is not what is making coordination expensive.",
   },
 
   BROKEN_COMPASS: {
