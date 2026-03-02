@@ -56,7 +56,7 @@ const SIGNALS = [
     id:       'startup_stage',
     label:    'Startup Stage',
     category: 'context',
-    fired:    ({ inputData }) => inputData.orgStage === 'STARTUP',
+    fired: ({ inputData }) => inputData.orgStage === 'EARLY',
   },
 
   // ── ROW 2: Friction location + avoidance ─────────────────────────────────
@@ -140,13 +140,13 @@ const SIGNALS = [
     id:       'duration_long',
     label:    'Long Duration',
     category: 'duration',
-    fired:    ({ inputData }) => ['ONE_TO_TWO', 'TWO_PLUS'].includes(inputData.frictionDuration),
+    fired: ({ inputData }) => ['ONE_2YR', 'OVER_2YR'].includes(inputData.frictionDuration),
   },
   {
     id:       'duration_mid',
     label:    'Mid Duration',
     category: 'duration',
-    fired:    ({ inputData }) => ['SIX_TO_TWELVE', 'THREE_TO_SIX'].includes(inputData.frictionDuration),
+    fired: ({ inputData }) => ['SIX_12MO', 'UNDER_6MO'].includes(inputData.frictionDuration),
   },
   {
     id:       'downstream_large',
@@ -158,7 +158,7 @@ const SIGNALS = [
     id:       'downstream_medium',
     label:    'Mid Downstream',
     category: 'downstream',
-    fired:    ({ inputData }) => inputData.downstreamPopulation === 'MEDIUM',
+    fired: ({ inputData }) => inputData.downstreamPopulation === 'INDIVIDUAL',
   },
   {
     id:       'decisions_stalled',
@@ -202,7 +202,7 @@ const SIGNALS = [
     id:       'high_severity',
     label:    'High Severity',
     category: 'severity',
-    fired:    ({ summary }) => summary.state?.severity >= 4,
+    fired: ({ summary }) => summary.state?.severity === 'high',
   },
   {
     id:       'agency_constrained',
