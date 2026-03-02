@@ -278,3 +278,13 @@ export function getMemosByRelatedState(stateId) {
     .filter((m) => m.relatedState === stateId)
     .sort((a, b) => a.published.localeCompare(b.published));
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// getMemoBySlug(slug)
+// Returns a single memo object by slug, or null if not found.
+// Used by the memo reader page. Joins on slug, not ID — avoids
+// the uppercase/lowercase ID mismatch between vaultMemos.js and memos.js.
+// ─────────────────────────────────────────────────────────────────────────────
+export function getMemoBySlug(slug) {
+  return MEMOS.find((m) => m.slug === slug) ?? null;
+}
