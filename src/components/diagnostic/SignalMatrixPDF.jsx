@@ -132,12 +132,13 @@ export function SignalMatrixPDF({ summary, inputData }) {
         gap:              10,
       }}>
         <Text style={{
-          fontFamily: 'SortsMillGoudy-Italic',
-          fontSize:   16,
-          color:      T.accent,
-          lineHeight: 1,
-        }}>
-          {summary.state?.label}
+        fontFamily: 'Newsreader',
+        fontStyle:  'italic',
+        fontSize:   16,
+        color:      T.accent,
+        lineHeight: 1,
+      }}>
+        {summary.state?.label}
         </Text>
         <Text style={{
           fontFamily:    'SpaceMono',
