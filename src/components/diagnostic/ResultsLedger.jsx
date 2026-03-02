@@ -7,7 +7,6 @@ import {
   STATES,
   TIERS,
   TIER_META,
-  METRIC_LEGEND,
 } from '../../lib/diagnostic-logic';
 import SignalMatrix from './SignalMatrix';
 
@@ -91,6 +90,29 @@ export const STATE_GLOSSARY = [
     id:         'UNLIT_ROOM',
     label:      'The Unlit Room',
     definition: 'The organization is early enough or healthy enough that the friction is real but not yet compounding. The leader has the will and the agency to act. What is missing is clarity on where to start.',
+  },
+];
+
+const METRIC_LEGEND_DISPLAY = [
+  {
+    term: 'Leadership Execution Gap',
+    definition: 'The monthly cost of leadership hours consumed by friction rather than productive work, calculated from your meeting burden and salary inputs.',
+  },
+  {
+    term: 'Radiated Team Impact',
+    definition: 'The downstream cost applied to the broader team, weighted by the size of the population waiting on decisions this friction is holding up.',
+  },
+  {
+    term: 'Confirmed Historical Loss',
+    definition: 'Capital tied up in stalled initiatives -- projects that cannot move forward because the decisions required to advance them have not been made.',
+  },
+  {
+    term: 'Monthly Burn',
+    definition: 'The combined monthly cost of all active friction signals -- execution gap, radiated impact, and confirmed historical loss -- running simultaneously.',
+  },
+  {
+    term: 'Annual Institutional Cost',
+    definition: 'Monthly burn annualized. The total cost this organization is absorbing each year as a direct result of the friction pattern identified in this diagnostic.',
   },
 ];
 
