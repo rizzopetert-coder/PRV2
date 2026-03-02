@@ -216,15 +216,15 @@ const SIGNALS = [
 const CATEGORY_CONFIG = {
   context:    { color: '#6B6560', label: 'Context'    },
   friction:   { color: '#FF4500', label: 'Friction'   },
-  avoidance:  { color: '#B45309', label: 'Avoidance'  },
-  personnel:  { color: '#FF4500', label: 'Personnel'  },
-  blockage:   { color: '#FF4500', label: 'Blockage'   },
-  history:    { color: '#B45309', label: 'History'    },
-  duration:   { color: '#4B6B8A', label: 'Duration'   },
-  downstream: { color: '#4B6B8A', label: 'Downstream' },
-  decisions:  { color: '#B45309', label: 'Decisions'  },
-  financial:  { color: '#4B6B8A', label: 'Financial'  },
-  severity:   { color: '#FF4500', label: 'Severity'   },
+  personnel:  { color: '#CC2200', label: 'Personnel'  },
+  blockage:   { color: '#FF6B6B', label: 'Blockage'   },
+  severity:   { color: '#991A00', label: 'Severity'   },
+  avoidance:  { color: '#2D6A4F', label: 'Avoidance'  },
+  history:    { color: '#52B788', label: 'History'    },
+  decisions:  { color: '#95D5B2', label: 'Decisions'  },
+  duration:   { color: '#1B4F72', label: 'Duration'   },
+  downstream: { color: '#2E86AB', label: 'Downstream' },
+  financial:  { color: '#7EC8E3', label: 'Financial'  },
 };
 
 // ── SIGNAL CELL ───────────────────────────────────────────────────────────────
