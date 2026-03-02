@@ -59,33 +59,32 @@ export const STATES = {
 // scoreStates() compares against KEYS only — values/labels are UI display only.
 
 export const INDUSTRY_BENCHMARKS = {
-  TECH:         'Technology',
-  MEDIA:        'Media/Creative',
-  HEALTH:       'Healthcare',
-  FINANCE:      'Finance',
-  NONPROFIT:    'Non-Profit',
-  GOV:          'Government',
-  MANUFACTURING:'Manufacturing',
-  RETAIL:       'Retail',
-  ENERGY:       'Energy',
-  CONSULTING:   'Professional Services',
-  CONSTRUCTION: 'Construction',
-  LOGISTICS:    'Logistics/Supply Chain',
-  OTHER:        'Other',
+  TECH:         { label: 'Technology' },
+  FINANCE:      { label: 'Finance & Insurance' },
+  CONSULTING:   { label: 'Consulting & Professional Services' },
+  HEALTH:       { label: 'Healthcare & Life Sciences' },
+  NONPROFIT:    { label: 'Nonprofit & Social Enterprise' },
+  MEDIA:        { label: 'Media & Communications' },
+  MANUFACTURING:{ label: 'Manufacturing & Industrial' },
+  RETAIL:       { label: 'Retail & Consumer Goods' },
+  ENERGY:       { label: 'Energy & Utilities' },
+  CONSTRUCTION: { label: 'Construction & Real Estate' },
+  LOGISTICS:    { label: 'Logistics & Supply Chain' },
+  OTHER:        { label: 'Other' },
 };
 
 export const ORG_STAGES = {
-  EARLY:       'Early Stage / Startup',
-  GROWTH:      'Rapid Growth / Scaling',
-  ESTABLISHED: 'Established / Mature',
-  LEGACY:      'Legacy / Institutional',
+  EARLY:       { label: 'Early Stage — under 3 years or pre-revenue' },
+  GROWTH:      { label: 'Growth Stage — scaling, headcount increasing' },
+  ESTABLISHED: { label: 'Established — stable, defined structure' },
+  LEGACY:      { label: 'Legacy — long-tenured, entrenched patterns' },
 };
 
 export const LEADERSHIP_TENURES = {
-  UNDER_ONE: 'Under 1 Year',
-  ONE_3YR:   '1–3 Years',
-  FOUR_6YR:  '4–6 Years',
-  SEVEN_PLUS:'7+ Years',
+  UNDER_ONE: { label: 'Under 1 year' },
+  ONE_3YR:   { label: '1 to 3 years' },
+  FOUR_6YR:  { label: '4 to 6 years' },
+  SEVEN_PLUS:{ label: '7 years or more' },
 };
 
 export const FRICTION_LOCATIONS = {
