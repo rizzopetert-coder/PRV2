@@ -4,7 +4,6 @@ import {
   STATES,
   TIERS,
   TIER_META,
-  METRIC_LEGEND,
 } from '../../lib/diagnostic-logic';
 import {
   STATE_GLOSSARY,
@@ -415,6 +414,29 @@ const fmt = (val) =>
     maximumFractionDigits: 0,
   }).format(val);
 
+const METRIC_LEGEND_DISPLAY = [
+  {
+    term: 'Leadership Execution Gap',
+    definition: 'The monthly cost of leadership hours consumed by friction rather than productive work, calculated from your meeting burden and salary inputs.',
+  },
+  {
+    term: 'Radiated Team Impact',
+    definition: 'The downstream cost applied to the broader team, weighted by the size of the population waiting on decisions this friction is holding up.',
+  },
+  {
+    term: 'Confirmed Historical Loss',
+    definition: 'Capital tied up in stalled initiatives -- projects that cannot move forward because the decisions required to advance them have not been made.',
+  },
+  {
+    term: 'Monthly Burn',
+    definition: 'The combined monthly cost of all active friction signals -- execution gap, radiated impact, and confirmed historical loss -- running simultaneously.',
+  },
+  {
+    term: 'Annual Institutional Cost',
+    definition: 'Monthly burn annualized. The total cost this organization is absorbing each year as a direct result of the friction pattern identified in this diagnostic.',
+  },
+];
+
 // ── DOCUMENT ──────────────────────────────────────────────────────────────────
 export function DiagnosticDocument({ summary, inputData }) {
   const {
@@ -571,10 +593,10 @@ export function DiagnosticDocument({ summary, inputData }) {
               <View style={styles.labelRule} />
             </View>
             <View style={styles.legendTable}>
-              {METRIC_LEGEND.map((item, i) => (
+              {METRIC_LEGEND_DISPLAY.map((item, i) => (
                 <View
                   key={item.term}
-                  style={i < METRIC_LEGEND.length - 1 ? styles.legendRow : styles.legendRowLast}
+                  style={i < METRIC_LEGEND_DISPLAY.length - 1 ? styles.legendRow : styles.legendRowLast}
                 >
                   <Text style={styles.legendTerm}>{item.term}</Text>
                   <Text style={styles.legendDefinition}>{item.definition}</Text>
