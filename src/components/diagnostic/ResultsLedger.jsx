@@ -684,10 +684,10 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
               <div className="flex-1 h-px bg-brand-border" />
             </div>
             <div className="space-y-0 border border-brand-border/40">
-              {METRIC_LEGEND.map((item, i) => (
+              {METRIC_LEGEND_DISPLAY.map((item, i) => (
                 <div
                   key={item.term}
-                  className={`p-4 md:p-6 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6${i < METRIC_LEGEND.length - 1 ? ' border-b border-brand-border/40' : ''}`}
+                  className={`p-4 md:p-6 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6${i < METRIC_LEGEND_DISPLAY.length - 1 ? ' border-b border-brand-border/40' : ''}`}
                 >
                   <span className="font-mono text-[10px] uppercase tracking-briefing text-brand-accent font-bold shrink-0 sm:w-44 pt-0.5">
                     {item.term}
