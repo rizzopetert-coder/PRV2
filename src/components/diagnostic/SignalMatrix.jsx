@@ -21,210 +21,210 @@ import { motion } from 'framer-motion';
 // that returns true if the signal fired given inputData + summary.
 
 const SIGNALS = [
-  // ── ROW 1: Organizational context ────────────────────────────────────────
+  // ── ROW 1: Organizational structure ──────────────────────────────────────
   {
     id:       'leadership_tenure',
-    label:    'Long Tenure',
-    category: 'context',
+    label:    'Entrenched Leadership',
+    category: 'structure',
     fired:    ({ inputData }) => inputData.leadershipTenure === 'SEVEN_PLUS',
   },
   {
     id:       'legacy_stage',
-    label:    'Legacy Stage',
-    category: 'context',
+    label:    'Institutional Inertia',
+    category: 'structure',
     fired:    ({ inputData }) => inputData.orgStage === 'LEGACY',
   },
   {
     id:       'large_headcount',
-    label:    'Large Org',
-    category: 'context',
+    label:    'Coordination Overhead',
+    category: 'structure',
     fired:    ({ inputData }) => inputData.headcount >= 100,
   },
   {
     id:       'new_leadership',
-    label:    'New Leadership',
-    category: 'context',
+    label:    'Transitional Instability',
+    category: 'structure',
     fired:    ({ inputData }) => inputData.leadershipTenure === 'UNDER_ONE',
   },
   {
     id:       'growth_stage',
-    label:    'Growth Stage',
-    category: 'context',
+    label:    'Scaling Pressure',
+    category: 'structure',
     fired:    ({ inputData }) => inputData.orgStage === 'GROWTH',
   },
   {
     id:       'startup_stage',
-    label:    'Startup Stage',
-    category: 'context',
-    fired: ({ inputData }) => inputData.orgStage === 'EARLY',
+    label:    'Structural Immaturity',
+    category: 'structure',
+    fired:    ({ inputData }) => inputData.orgStage === 'EARLY',
   },
 
-  // ── ROW 2: Friction location + avoidance ─────────────────────────────────
+  // ── ROW 2: Conflict location + evasion ───────────────────────────────────
   {
     id:       'within_leadership',
-    label:    'Leadership Friction',
-    category: 'friction',
+    label:    'Authority Conflict',
+    category: 'conflict',
     fired:    ({ inputData }) => inputData.frictionLocation === 'WITHIN_LEADERSHIP',
   },
   {
     id:       'cross_functional',
-    label:    'Cross-Functional',
-    category: 'friction',
+    label:    'Siloed Execution',
+    category: 'conflict',
     fired:    ({ inputData }) => inputData.frictionLocation === 'CROSS_FUNCTIONAL',
   },
   {
     id:       'team_friction',
-    label:    'Team Friction',
-    category: 'friction',
+    label:    'Surface-Level Friction',
+    category: 'conflict',
     fired:    ({ inputData }) => inputData.frictionLocation === 'TEAM',
   },
   {
     id:       'no_forum',
-    label:    'No Forum',
-    category: 'avoidance',
+    label:    'No Resolution Path',
+    category: 'evasion',
     fired:    ({ inputData }) => inputData.avoidanceMechanism === 'NO_FORUM',
   },
   {
     id:       'predetermined',
-    label:    'Predetermined',
-    category: 'avoidance',
+    label:    'Outcome Fixed in Advance',
+    category: 'evasion',
     fired:    ({ inputData }) => inputData.avoidanceMechanism === 'PREDETERMINED',
   },
   {
     id:       'cost_too_high',
-    label:    'Cost Perceived High',
-    category: 'avoidance',
+    label:    'Conflict Avoidance Active',
+    category: 'evasion',
     fired:    ({ inputData }) => inputData.avoidanceMechanism === 'COST_TOO_HIGH',
   },
 
-  // ── ROW 3: Personnel + blockage ───────────────────────────────────────────
+  // ── ROW 3: People risk + obstruction ─────────────────────────────────────
   {
     id:       'personnel_lost',
-    label:    'Personnel Lost',
-    category: 'personnel',
+    label:    'Talent Already Gone',
+    category: 'people_risk',
     fired:    ({ inputData }) => inputData.personnelRisk === 'LOST',
   },
   {
     id:       'personnel_at_risk',
-    label:    'Personnel at Risk',
-    category: 'personnel',
+    label:    'Departure Risk Active',
+    category: 'people_risk',
     fired:    ({ inputData }) => inputData.personnelRisk === 'YES',
   },
   {
     id:       'active_blockage',
-    label:    'Active Blockage',
-    category: 'blockage',
+    label:    'Resolution Actively Blocked',
+    category: 'obstruction',
     fired:    ({ inputData }) => inputData.resolutionBlockage === 'ATTEMPTED',
   },
   {
     id:       'known_blockage',
-    label:    'Known Blockage',
-    category: 'blockage',
+    label:    'Known Obstacle, No Movement',
+    category: 'obstruction',
     fired:    ({ inputData }) => inputData.resolutionBlockage === 'KNOWN',
   },
   {
     id:       'prior_external',
-    label:    'Prior External Attempt',
-    category: 'history',
+    label:    'Outside Help Already Failed',
+    category: 'prior_attempts',
     fired:    ({ inputData }) => inputData.priorAttempt === 'EXTERNAL',
   },
   {
     id:       'prior_conversation',
-    label:    'Prior Conversation',
-    category: 'history',
+    label:    'Conversation Didn\'t Hold',
+    category: 'prior_attempts',
     fired:    ({ inputData }) => inputData.priorAttempt === 'CONVERSATION',
   },
 
-  // ── ROW 4: Duration + downstream + decisions ──────────────────────────────
+  // ── ROW 4: Time in pattern + exposure + velocity ──────────────────────────
   {
     id:       'duration_long',
-    label:    'Long Duration',
-    category: 'duration',
-    fired: ({ inputData }) => ['ONE_2YR', 'OVER_2YR'].includes(inputData.frictionDuration),
+    label:    'Friction Compounding',
+    category: 'time_in_pattern',
+    fired:    ({ inputData }) => ['ONE_2YR', 'OVER_2YR'].includes(inputData.frictionDuration),
   },
   {
     id:       'duration_mid',
-    label:    'Mid Duration',
-    category: 'duration',
-    fired: ({ inputData }) => ['SIX_12MO', 'UNDER_6MO'].includes(inputData.frictionDuration),
+    label:    'Pattern Established',
+    category: 'time_in_pattern',
+    fired:    ({ inputData }) => ['SIX_12MO', 'UNDER_6MO'].includes(inputData.frictionDuration),
   },
   {
     id:       'downstream_large',
-    label:    'Wide Downstream',
-    category: 'downstream',
+    label:    'Organization-Wide Exposure',
+    category: 'exposure',
     fired:    ({ inputData }) => ['LARGE', 'FULL_ORG'].includes(inputData.downstreamPopulation),
   },
   {
     id:       'downstream_medium',
-    label:    'Mid Downstream',
-    category: 'downstream',
-    fired: ({ inputData }) => inputData.downstreamPopulation === 'INDIVIDUAL',
+    label:    'Team-Level Exposure',
+    category: 'exposure',
+    fired:    ({ inputData }) => inputData.downstreamPopulation === 'INDIVIDUAL',
   },
   {
     id:       'decisions_stalled',
-    label:    'Decisions Stalled',
-    category: 'decisions',
+    label:    'Decisions Stopped',
+    category: 'velocity',
     fired:    ({ inputData }) => inputData.decisions === 'STALLED',
   },
   {
     id:       'decisions_slow',
-    label:    'Decisions Slow',
-    category: 'decisions',
+    label:    'Decision Velocity Low',
+    category: 'velocity',
     fired:    ({ inputData }) => inputData.decisions === 'SLOW',
   },
 
-  // ── ROW 5: Financial signals ──────────────────────────────────────────────
+  // ── ROW 5: Cost signals ───────────────────────────────────────────────────
   {
     id:       'high_leak_ratio',
-    label:    'High Leak Ratio',
-    category: 'financial',
+    label:    'Capital Bleeding',
+    category: 'cost_signals',
     fired:    ({ summary }) => (parseFloat(summary.leakRatio) || 0) >= 0.06,
   },
   {
     id:       'gravity_floor',
-    label:    'Gravity Floor',
-    category: 'financial',
+    label:    'Cost Too Low to Quantify',
+    category: 'cost_signals',
     fired:    ({ summary }) => !!summary.showGravityFloor,
   },
   {
     id:       'execution_gap',
-    label:    'Execution Gap',
-    category: 'financial',
+    label:    'Leadership Hours Lost',
+    category: 'cost_signals',
     fired:    ({ summary }) => (summary.executionGap || 0) > 0,
   },
   {
     id:       'stalled_capital',
-    label:    'Stalled Capital',
-    category: 'financial',
+    label:    'Capital Tied to Friction',
+    category: 'cost_signals',
     fired:    ({ summary }) => (summary.confirmedHistoricalLoss || 0) > 0,
   },
   {
     id:       'high_severity',
-    label:    'High Severity',
-    category: 'severity',
-    fired: ({ summary }) => summary.state?.severity === 'high',
+    label:    'State: Critical',
+    category: 'risk_level',
+    fired:    ({ summary }) => summary.state?.severity === 'high',
   },
   {
     id:       'agency_constrained',
-    label:    'Agency Constrained',
-    category: 'severity',
+    label:    'Resolution Capacity Low',
+    category: 'risk_level',
     fired:    ({ summary }) => (summary.agencyScore || 0) < 40,
   },
 ];
 
 // ── CATEGORY COLORS ────────────────────────────────────────────────────────────
 const CATEGORY_CONFIG = {
-  context:    { color: '#6B6560', label: 'Context'    },
-  friction:   { color: '#FF4500', label: 'Friction'   },
-  personnel:  { color: '#CC2200', label: 'Personnel'  },
-  blockage:   { color: '#FF6B6B', label: 'Blockage'   },
-  severity:   { color: '#991A00', label: 'Severity'   },
-  avoidance:  { color: '#2D6A4F', label: 'Avoidance'  },
-  history:    { color: '#52B788', label: 'History'    },
-  decisions:  { color: '#95D5B2', label: 'Decisions'  },
-  duration:   { color: '#1B4F72', label: 'Duration'   },
-  downstream: { color: '#2E86AB', label: 'Downstream' },
-  financial:  { color: '#7EC8E3', label: 'Financial'  },
+  structure:       { color: '#6B6560', label: 'Structure'       },
+  conflict:        { color: '#FF4500', label: 'Conflict'        },
+  people_risk:     { color: '#CC2200', label: 'People Risk'     },
+  obstruction:     { color: '#FF6B6B', label: 'Obstruction'     },
+  risk_level:      { color: '#991A00', label: 'Risk Level'      },
+  evasion:         { color: '#2D6A4F', label: 'Evasion'         },
+  prior_attempts:  { color: '#52B788', label: 'Prior Attempts'  },
+  velocity:        { color: '#95D5B2', label: 'Velocity'        },
+  time_in_pattern: { color: '#1B4F72', label: 'Time in Pattern' },
+  exposure:        { color: '#2E86AB', label: 'Exposure'        },
+  cost_signals:    { color: '#7EC8E3', label: 'Cost Signals'    },
 };
 
 // ── SIGNAL CELL ───────────────────────────────────────────────────────────────
@@ -319,8 +319,6 @@ export default function SignalMatrix({ summary, inputData }) {
   const totalCount = evaluated.length;
 
   // Stagger delay — fired cells get priority sequencing
-  // Each cell gets a base delay based on index, fired cells get a slight
-  // extra pulse after the initial reveal
   const getDelay = (index, fired) => {
     const base = 0.04 * index;
     return fired ? base : base + 0.02;
@@ -381,14 +379,13 @@ export default function SignalMatrix({ summary, inputData }) {
         ))}
       </div>
 
-      {/* Row labels — category markers along the left */}
+      {/* Category legend */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: revealed ? 1 : 0 }}
         transition={{ delay: 2.0, duration: 0.5 }}
         className="flex flex-wrap gap-x-5 gap-y-1.5 pt-1"
       >
-        {/* Deduplicated category legend */}
         {Array.from(new Set(SIGNALS.map(s => s.category))).map(cat => {
           const cfg    = CATEGORY_CONFIG[cat];
           const active = evaluated.some(s => s.category === cat && s.hasFired);
