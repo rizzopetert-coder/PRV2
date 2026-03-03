@@ -29,10 +29,10 @@ class AuditPage {
   // Step 0 -- Emotion
   async fillEmotion(inputs) {
     const emotionLabels = {
-      EXHAUSTION:  'Exhaustion',
-      FRUSTRATION: 'Frustration',
-      FEAR:        'Uncertainty',
-      APATHY:      'Apathy',
+      EXHAUSTION:  'Tired',
+      FRUSTRATION: 'Frustrated',
+      FEAR:        'Uncertain',
+      APATHY:      'Distant',
     };
     await this.selectOption(emotionLabels[inputs.primaryEmotion]);
   }
