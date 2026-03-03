@@ -1,163 +1,262 @@
 [
   {
     "id": "T-01",
-    "name": "Total Friction Collapse",
-    "engine_path": "Rule 0: leakRatio=22.37% >= 7% Red Line. personnelRisk LOST fires TALENT_ARSON citation.",
+    "name": "Last Leg (Structural Crisis)",
     "inputs": {
+      "primaryEmotion": "EXHAUSTION",
       "industry": "TECH",
-      "orgStage": "ESTABLISHED",
-      "leadershipTenure": "THREE_SEVEN",
-      "headcount": 50,
-      "payroll": "5000000",
+      "orgStage": "LEGACY",
+      "leadershipTenure": "SEVEN_PLUS",
+      "headcount": 100,
+      "payroll": "12000000",
       "frictionLocation": "WITHIN_LEADERSHIP",
-      "avoidanceMechanism": "NO_FORUM",
+      "avoidanceMechanism": "PREDETERMINED",
       "priorAttempt": "EXTERNAL",
       "personnelRisk": "LOST",
       "resolutionBlockage": "ATTEMPTED",
       "frictionDuration": "OVER_2YR",
       "downstreamPopulation": "FULL_ORG",
-      "meetingHours": 25,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
+      "decisions": "STALLED",
+      "meetingHours": 25
     },
     "expected": {
-      "verdict": "Total Friction Collapse",
-      "tier": "Stability Support",
-      "forceTag": "TALENT_ARSON"
+      "verdict": "Last Leg",
+      "tier": "Stability Support"
     }
   },
   {
     "id": "T-02",
-    "name": "Executive Embargo",
-    "engine_path": "Rule 3: frictionLocation WITHIN_LEADERSHIP + leakRatio=6.86% >= 0.02. personnelRisk NONE clears rule 2. EXECUTIVE_EMBARGO fires. Tier: SAFE_HARBOR via stateKey.",
+    "name": "Sacred Cow (Individual Protection)",
     "inputs": {
+      "primaryEmotion": "FRUSTRATION",
       "industry": "FINANCE",
       "orgStage": "ESTABLISHED",
-      "leadershipTenure": "THREE_SEVEN",
-      "headcount": 40,
-      "payroll": "7400000",
+      "leadershipTenure": "FOUR_6YR",
+      "headcount": 50,
+      "payroll": "8000000",
       "frictionLocation": "WITHIN_LEADERSHIP",
-      "avoidanceMechanism": "COST_TOO_HIGH",
-      "priorAttempt": "NONE",
-      "personnelRisk": "NONE",
-      "resolutionBlockage": "NONE",
-      "frictionDuration": "THREE_6",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 15,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
+      "avoidanceMechanism": "PREDETERMINED",
+      "priorAttempt": "CONVERSATION",
+      "personnelRisk": "YES",
+      "resolutionBlockage": "KNOWN",
+      "frictionDuration": "ONE_2YR",
+      "downstreamPopulation": "LARGE",
+      "decisions": "SLOW",
+      "meetingHours": 15
     },
     "expected": {
-      "verdict": "Executive Embargo",
-      "tier": "Safe Harbor",
-      "forceTag": "FINANCIAL_GRAVITY"
+      "verdict": "The Sacred Cow",
+      "tier": "Executive Counsel"
     }
   },
   {
     "id": "T-03",
-    "name": "Institutional Rigidity",
-    "engine_path": "Rule 5: cTax=1.400 > 1.3. personnelRisk NONE clears rule 2. frictionLocation CROSS_FUNCTIONAL clears rule 3. INSTITUTIONAL_RIGIDITY fires. Tier: SAFE_HARBOR via stateKey. frictionDuration ONE_2YR fires CULTURAL_SCARRING citation.",
+    "name": "Cracked Mirror (Distorted Feedback)",
     "inputs": {
-      "industry": "MANUFACTURING",
-      "orgStage": "LEGACY",
+      "primaryEmotion": "FRUSTRATION",
+      "industry": "CONSULTING",
+      "orgStage": "ESTABLISHED",
       "leadershipTenure": "SEVEN_PLUS",
-      "headcount": 100,
-      "payroll": "9500000",
-      "frictionLocation": "CROSS_FUNCTIONAL",
-      "avoidanceMechanism": "COST_TOO_HIGH",
-      "priorAttempt": "NONE",
-      "personnelRisk": "NONE",
-      "resolutionBlockage": "NONE",
-      "frictionDuration": "ONE_2YR",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 8,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
+      "headcount": 75,
+      "payroll": "9000000",
+      "frictionLocation": "WITHIN_LEADERSHIP",
+      "avoidanceMechanism": "PREDETERMINED",
+      "priorAttempt": "CONVERSATION",
+      "personnelRisk": "YES",
+      "resolutionBlockage": "KNOWN",
+      "frictionDuration": "OVER_2YR",
+      "downstreamPopulation": "LARGE",
+      "decisions": "SLOW",
+      "meetingHours": 20
     },
     "expected": {
-      "verdict": "Institutional Rigidity",
-      "tier": "Safe Harbor",
-      "forceTag": "CULTURAL_SCARRING"
+      "verdict": "Cracked Mirror",
+      "tier": "Executive Counsel"
     }
   },
   {
     "id": "T-04",
-    "name": "Talent Hemorrhage",
-    "engine_path": "Rule 2: personnelRisk YES fires immediately. leakRatio=2.33% stays under 7% Red Line and under 3% Safe Harbor threshold. Tier: INTERVENTION via stateKey. TALENT_ARSON citation fires.",
+    "name": "Exit Pattern (Talent Departure)",
     "inputs": {
-      "industry": "CONSULTING",
+      "primaryEmotion": "FEAR",
+      "industry": "TECH",
       "orgStage": "GROWTH",
-      "leadershipTenure": "THREE_SEVEN",
-      "headcount": 20,
-      "payroll": "3100000",
-      "frictionLocation": "UNKNOWN",
-      "avoidanceMechanism": "NOT_AN_ISSUE",
-      "priorAttempt": "NONE",
-      "personnelRisk": "YES",
-      "resolutionBlockage": "NONE",
-      "frictionDuration": "SIX_12",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 4,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
+      "leadershipTenure": "FOUR_6YR",
+      "headcount": 60,
+      "payroll": "7000000",
+      "frictionLocation": "WITHIN_LEADERSHIP",
+      "avoidanceMechanism": "NO_FORUM",
+      "priorAttempt": "CONVERSATION",
+      "personnelRisk": "LOST",
+      "resolutionBlockage": "KNOWN",
+      "frictionDuration": "ONE_2YR",
+      "downstreamPopulation": "LARGE",
+      "decisions": "SLOW",
+      "meetingHours": 15
     },
     "expected": {
-      "verdict": "Talent Hemorrhage",
-      "tier": "The Intervention",
-      "forceTag": "TALENT_ARSON"
+      "verdict": "The Exit Pattern",
+      "tier": "The Intervention"
     }
   },
   {
     "id": "T-05",
-    "name": "Brilliant Sabotage",
-    "engine_path": "Rule 4: avoidanceMechanism PREDETERMINED + execCount=5 (Hidden Bridge) >= 4. personnelRisk NONE clears rule 2. frictionLocation clears rule 3. cTax=1.295 clears rule 5. BRILLIANT_SABOTAGE fires. leakRatio=6.38% >= 0.03 escalates tier to SAFE_HARBOR. FINANCIAL_GRAVITY citation fires.",
+    "name": "Dead Calm (Structural Paralysis)",
     "inputs": {
-      "industry": "MEDIA",
-      "orgStage": "GROWTH",
-      "leadershipTenure": "THREE_SEVEN",
-      "headcount": 30,
-      "execCount": 5,
-      "payroll": "6000000",
-      "frictionLocation": "TEAM",
-      "avoidanceMechanism": "PREDETERMINED",
+      "primaryEmotion": "APATHY",
+      "industry": "FINANCE",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "FOUR_6YR",
+      "headcount": 40,
+      "payroll": "5000000",
+      "frictionLocation": "WITHIN_LEADERSHIP",
+      "avoidanceMechanism": "NO_FORUM",
       "priorAttempt": "NONE",
       "personnelRisk": "NONE",
       "resolutionBlockage": "NONE",
-      "frictionDuration": "THREE_6",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 8,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
+      "frictionDuration": "ONE_2YR",
+      "downstreamPopulation": "LARGE",
+      "decisions": "STALLED",
+      "meetingHours": 15
     },
     "expected": {
-      "verdict": "Brilliant Sabotage",
-      "tier": "Safe Harbor",
-      "forceTag": "FINANCIAL_GRAVITY"
+      "verdict": "Dead Calm",
+      "tier": "The Intervention"
     }
   },
   {
     "id": "T-06",
-    "name": "Relational Friction",
-    "engine_path": "Rule 11: avoidanceMechanism COST_TOO_HIGH. meetingHours=4 clears rule 10 (not >= 8). personnelRisk NONE clears rule 2. No WITHIN_LEADERSHIP. cTax=1.260 clears rule 5. RELATIONAL_FRICTION fires. leakRatio=2.33% >= 0.01 escalates to INTERVENTION. No tag signal -- FALLBACK citation.",
+    "name": "Silosolation (Cross-Functional Breakdown)",
     "inputs": {
+      "primaryEmotion": "FRUSTRATION",
+      "industry": "MANUFACTURING",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "FOUR_6YR",
+      "headcount": 120,
+      "payroll": "10000000",
+      "frictionLocation": "CROSS_FUNCTIONAL",
+      "avoidanceMechanism": "NO_FORUM",
+      "priorAttempt": "CONVERSATION",
+      "personnelRisk": "YES",
+      "resolutionBlockage": "KNOWN",
+      "frictionDuration": "ONE_2YR",
+      "downstreamPopulation": "FULL_ORG",
+      "decisions": "SLOW",
+      "meetingHours": 18
+    },
+    "expected": {
+      "verdict": "Silosolation",
+      "tier": "The Intervention"
+    }
+  },
+  {
+    "id": "T-07",
+    "name": "Runaway Treadmill (Growth Outpacing Infrastructure)",
+    "inputs": {
+      "primaryEmotion": "EXHAUSTION",
+      "industry": "TECH",
+      "orgStage": "GROWTH",
+      "leadershipTenure": "ONE_3YR",
+      "headcount": 80,
+      "payroll": "8000000",
+      "frictionLocation": "CROSS_FUNCTIONAL",
+      "avoidanceMechanism": "NO_FORUM",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "OVER_2YR",
+      "downstreamPopulation": "FULL_ORG",
+      "decisions": "SLOW",
+      "meetingHours": 20
+    },
+    "expected": {
+      "verdict": "Runaway Treadmill",
+      "tier": "The Roadmap"
+    }
+  },
+  {
+    "id": "T-08",
+    "name": "Fossil System (Outdated Operating Model)",
+    "inputs": {
+      "primaryEmotion": "APATHY",
+      "industry": "MANUFACTURING",
+      "orgStage": "LEGACY",
+      "leadershipTenure": "SEVEN_PLUS",
+      "headcount": 150,
+      "payroll": "11000000",
+      "frictionLocation": "CROSS_FUNCTIONAL",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "STRUCTURAL",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "OVER_2YR",
+      "downstreamPopulation": "FULL_ORG",
+      "decisions": "SLOW",
+      "meetingHours": 12
+    },
+    "expected": {
+      "verdict": "The Fossil System",
+      "tier": "The Roadmap"
+    }
+  },
+  {
+    "id": "T-09",
+    "name": "Anchor (Organizational Health)",
+    "inputs": {
+      "primaryEmotion": "EXHAUSTION",
+      "industry": "CONSULTING",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "FOUR_6YR",
+      "headcount": 30,
+      "payroll": "4000000",
+      "frictionLocation": "CROSS_FUNCTIONAL",
+      "avoidanceMechanism": "NO_FORUM",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "SIX_12MO",
+      "downstreamPopulation": "INDIVIDUAL",
+      "decisions": "FAST",
+      "meetingHours": 5
+    },
+    "expected": {
+      "verdict": "The Anchor",
+      "tier": "The Roadmap"
+    }
+  },
+  {
+    "id": "T-10",
+    "name": "Broken Compass (Strategic Misalignment)",
+    "inputs": {
+      "primaryEmotion": "FRUSTRATION",
+      "industry": "HEALTH",
+      "orgStage": "GROWTH",
+      "leadershipTenure": "ONE_3YR",
+      "headcount": 45,
+      "payroll": "5500000",
+      "frictionLocation": "WITHIN_LEADERSHIP",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "CONVERSATION",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "SUSPECTED",
+      "frictionDuration": "SIX_12MO",
+      "downstreamPopulation": "LARGE",
+      "decisions": "SLOW",
+      "meetingHours": 10
+    },
+    "expected": {
+      "verdict": "Broken Compass",
+      "tier": "The Roadmap"
+    }
+  },
+  {
+    "id": "T-11",
+    "name": "Kid Gloves (Conflict Avoidance)",
+    "inputs": {
+      "primaryEmotion": "APATHY",
       "industry": "NONPROFIT",
       "orgStage": "ESTABLISHED",
-      "leadershipTenure": "THREE_SEVEN",
+      "leadershipTenure": "ONE_3YR",
       "headcount": 20,
       "payroll": "2000000",
       "frictionLocation": "TEAM",
@@ -165,179 +264,24 @@
       "priorAttempt": "NONE",
       "personnelRisk": "NONE",
       "resolutionBlockage": "NONE",
-      "frictionDuration": "THREE_6",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 4,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
+      "frictionDuration": "SIX_12MO",
+      "downstreamPopulation": "INDIVIDUAL",
+      "decisions": "SLOW",
+      "meetingHours": 6
     },
     "expected": {
-      "verdict": "Relational Friction",
-      "tier": "The Intervention",
-      "forceTag": "FALLBACK"
-    }
-  },
-  {
-    "id": "T-07",
-    "name": "Stalled Hegemony",
-    "engine_path": "Rule 6: stalledProjectCapital=300000 >= 10% of payroll(3M). headcount=30 keeps cTax=1.295 below 1.3 to clear rule 5. personnelRisk NONE clears rule 2. STALLED_HEGEMONY fires. Tier: INTERVENTION via stateKey. frictionDuration ONE_2YR fires CULTURAL_SCARRING citation.",
-    "inputs": {
-      "industry": "TECH",
-      "orgStage": "ESTABLISHED",
-      "leadershipTenure": "THREE_SEVEN",
-      "headcount": 30,
-      "payroll": "3000000",
-      "frictionLocation": "CROSS_FUNCTIONAL",
-      "avoidanceMechanism": "COST_TOO_HIGH",
-      "priorAttempt": "NONE",
-      "personnelRisk": "NONE",
-      "resolutionBlockage": "NONE",
-      "frictionDuration": "ONE_2YR",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 4,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "300000",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
-    },
-    "expected": {
-      "verdict": "Stalled Hegemony",
-      "tier": "The Intervention",
-      "forceTag": "CULTURAL_SCARRING"
-    }
-  },
-  {
-    "id": "T-08",
-    "name": "Caffeine Culture",
-    "engine_path": "Rule 10: meetingHours=8 >= 8 AND leakRatio=3.99% >= 0.01. personnelRisk NONE clears rule 2. cTax=1.295 clears rule 5. No stalled capital clears rule 6. CAFFEINE_CULTURE fires. leakRatio=3.99% >= 0.03 escalates tier to SAFE_HARBOR. frictionDuration ONE_2YR fires CULTURAL_SCARRING citation.",
-    "inputs": {
-      "industry": "TECH",
-      "orgStage": "STARTUP",
-      "leadershipTenure": "ONE_THREE",
-      "headcount": 30,
-      "payroll": "3300000",
-      "frictionLocation": "TEAM",
-      "avoidanceMechanism": "NOT_AN_ISSUE",
-      "priorAttempt": "NONE",
-      "personnelRisk": "NONE",
-      "resolutionBlockage": "NONE",
-      "frictionDuration": "ONE_2YR",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 8,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
-    },
-    "expected": {
-      "verdict": "Caffeine Culture",
-      "tier": "Safe Harbor",
-      "forceTag": "CULTURAL_SCARRING"
-    }
-  },
-  {
-    "id": "T-09",
-    "name": "Process Paralysis",
-    "engine_path": "Rule 7: cTax=1.295 > 1.2 AND frictionLocation UNKNOWN. headcount=30 keeps cTax below 1.3 to clear rule 5. personnelRisk NONE clears rule 2. No stalled capital clears rule 6. PROCESS_PARALYSIS fires. leakRatio=1.00% >= 0.01 escalates to INTERVENTION. No tag signal -- FALLBACK citation.",
-    "inputs": {
-      "industry": "HEALTH",
-      "orgStage": "ESTABLISHED",
-      "leadershipTenure": "THREE_SEVEN",
-      "headcount": 30,
-      "payroll": "4350000",
-      "frictionLocation": "UNKNOWN",
-      "avoidanceMechanism": "NOT_AN_ISSUE",
-      "priorAttempt": "NONE",
-      "personnelRisk": "NONE",
-      "resolutionBlockage": "NONE",
-      "frictionDuration": "UNDER_3",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 2,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
-    },
-    "expected": {
-      "verdict": "Process Paralysis",
-      "tier": "The Intervention",
-      "forceTag": "FALLBACK"
-    }
-  },
-  {
-    "id": "T-10",
-    "name": "Silo Isolation",
-    "engine_path": "Rule 8: frictionLocation CROSS_FUNCTIONAL. cTax=1.200 NOT > 1.2 so rule 7 clears. personnelRisk NONE clears rule 2. SILO_ISOLATION fires. leakRatio=0.83% < 0.01 so no escalation. Tier: ROADMAP via fallback. No tag signal -- FALLBACK citation.",
-    "inputs": {
-      "industry": "LOGISTICS",
-      "orgStage": "GROWTH",
-      "leadershipTenure": "ONE_THREE",
-      "headcount": 10,
-      "payroll": "1000000",
-      "frictionLocation": "CROSS_FUNCTIONAL",
-      "avoidanceMechanism": "NOT_AN_ISSUE",
-      "priorAttempt": "NONE",
-      "personnelRisk": "NONE",
-      "resolutionBlockage": "NONE",
-      "frictionDuration": "UNDER_3",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 1,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
-    },
-    "expected": {
-      "verdict": "Silo Isolation",
-      "tier": "The Roadmap",
-      "forceTag": "FALLBACK"
-    }
-  },
-  {
-    "id": "T-11",
-    "name": "Strategic Drift",
-    "engine_path": "Rule 9: orgStage LEGACY + leadershipTenure SEVEN_PLUS. personnelRisk NONE clears rule 2. frictionLocation TEAM clears rules 3, 7, 8. cTax=1.200 clears rule 5. STRATEGIC_DRIFT fires. leakRatio=0.83% < 0.01 so no escalation. Tier: ROADMAP via fallback. No tag signal -- FALLBACK citation.",
-    "inputs": {
-      "industry": "ENERGY",
-      "orgStage": "LEGACY",
-      "leadershipTenure": "SEVEN_PLUS",
-      "headcount": 10,
-      "payroll": "1350000",
-      "frictionLocation": "TEAM",
-      "avoidanceMechanism": "NOT_AN_ISSUE",
-      "priorAttempt": "NONE",
-      "personnelRisk": "NONE",
-      "resolutionBlockage": "NONE",
-      "frictionDuration": "UNDER_3",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 1,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
-    },
-    "expected": {
-      "verdict": "Strategic Drift",
-      "tier": "The Roadmap",
-      "forceTag": "FALLBACK"
+      "verdict": "Kid Gloves",
+      "tier": "Development"
     }
   },
   {
     "id": "T-12",
-    "name": "Stagnant Stability",
-    "engine_path": "Rule 12: Absolute fallback. All 11 rules clear. personnelRisk NONE, frictionLocation TEAM, avoidanceMechanism NOT_AN_ISSUE, orgStage ESTABLISHED + leadershipTenure ONE_THREE skips rule 9. STAGNANT_STABILITY fires. leakRatio=0.83% < 0.01 so no escalation. Tier: ROADMAP. No tag signal -- FALLBACK citation.",
+    "name": "Unlit Room (Early Warning)",
     "inputs": {
+      "primaryEmotion": "APATHY",
       "industry": "RETAIL",
       "orgStage": "ESTABLISHED",
-      "leadershipTenure": "ONE_THREE",
+      "leadershipTenure": "ONE_3YR",
       "headcount": 10,
       "payroll": "850000",
       "frictionLocation": "TEAM",
@@ -345,19 +289,14 @@
       "priorAttempt": "NONE",
       "personnelRisk": "NONE",
       "resolutionBlockage": "NONE",
-      "frictionDuration": "UNDER_3",
-      "downstreamPopulation": "NONE",
-      "meetingHours": 1,
-      "revenueBest": "",
-      "revenueWorst": "",
-      "stalledProjectCapital": "",
-      "isUnsurePayroll": false,
-      "isUnsureRevenue": false
+      "frictionDuration": "UNDER_6MO",
+      "downstreamPopulation": "INDIVIDUAL",
+      "decisions": "FAST",
+      "meetingHours": 2
     },
     "expected": {
-      "verdict": "Stagnant Stability",
-      "tier": "The Roadmap",
-      "forceTag": "FALLBACK"
+      "verdict": "The Unlit Room",
+      "tier": "Development"
     }
   }
 ]
