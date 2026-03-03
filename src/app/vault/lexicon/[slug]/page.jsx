@@ -20,11 +20,10 @@ import { MEMOS, SIGNAL_LABELS, IMPACT_LABELS } from "@/data/vaultMemos";
 function resolveAdvisorTake(advisorTake, advisorTakeSource) {
   if (advisorTakeSource === "manifest" && advisorTake) return advisorTake;
   if (advisorTakeSource?.startsWith("MEMO-")) {
-    const vaultMemo = MEMOS.find((m) => m.id === advisorTakeSource);
-    if (vaultMemo) {
-      const briefing = strategicBriefings.find((b) => b.title === vaultMemo.title);
-      if (briefing) return briefing.excerpt;
-    }
+    const briefing = strategicBriefings.find(
+      (b) => b.id.toLowerCase() === advisorTakeSource.toLowerCase()
+    );
+    if (briefing) return briefing.excerpt;
   }
   return null;
 }
