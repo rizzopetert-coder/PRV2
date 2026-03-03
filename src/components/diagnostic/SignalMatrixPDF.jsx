@@ -67,7 +67,7 @@ const SIGNALS = [
   { id: 'gravity_floor',        label: 'Gravity Floor',         category: 'financial',  fired: ({ s }) => !!s.showGravityFloor },
   { id: 'execution_gap',        label: 'Execution Gap',         category: 'financial',  fired: ({ s }) => (s.executionGap || 0) > 0 },
   { id: 'stalled_capital',      label: 'Stalled Capital',       category: 'financial',  fired: ({ s }) => (s.confirmedHistoricalLoss || 0) > 0 },
-  { id: 'high_severity',        label: 'High Severity',         category: 'severity',   fired: ({ s }) => (s.state?.severity || 0) >= 4 },
+  { id: 'high_severity',        label: 'High Severity',         category: 'severity',   fired: ({ s }) => s.state?.severity === 'high' },
   { id: 'agency_constrained',   label: 'Agency Constrained',    category: 'severity',   fired: ({ s }) => (s.agencyScore || 0) < 40 },
 ];
 
