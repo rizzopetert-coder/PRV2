@@ -224,6 +224,8 @@ const BEHAVIORAL_INSIGHTS = {
 
   // WITHIN_LEADERSHIP + NOT_AN_ISSUE
   WITHIN_LEADERSHIP_NOT_AN_ISSUE:              "When difficult conversations aren't happening inside a leadership team and it doesn't feel like a problem, it usually means the team has found a working arrangement that keeps the friction invisible. That's worth examining -- not because something must be wrong, but because invisible friction is still friction.",
+  TEAM_NOT_AN_ISSUE: "When friction between leadership and the team isn't registering as a problem, it usually means the team stopped surfacing it. That's not resolution -- that's accommodation. The team has calculated that raising the issue costs more than absorbing it. That calculation has a price, and it tends to show up in retention before it shows up anywhere else.",
+  CROSS_FUNCTIONAL_NOT_AN_ISSUE: "When cross-functional friction isn't visible as a problem, it's usually because each department has built workarounds that make the friction livable. Those workarounds look like process. They function like permanent overhead. The coordination cost doesn't disappear -- it gets normalized into how the organization operates, and nobody remembers that it wasn't always this expensive.",
 
   // CROSS_FUNCTIONAL + NO_FORUM
   CROSS_FUNCTIONAL_NO_FORUM_TECH:          "Cross-functional friction in a scaling tech organization with no forum to surface it is how good products get built by teams that quietly can't stand each other. It works until a decision needs to happen fast across those boundaries. Then it doesn't.",
@@ -255,11 +257,10 @@ const BEHAVIORAL_INSIGHTS = {
 // Surfaced after frictionDuration is selected, before the field is complete.
 
 const DURATION_INSIGHTS = {
-  UNDER_THREE:  "Under three months is early enough that the pattern hasn't fully embedded yet. That's actually the best time to name it -- before the organization builds workarounds that become permanent.",
-  THREE_TO_SIX: "Three to six months is when a friction pattern stops being a rough patch and starts being a dynamic. The people in the room have already started adapting their behavior around it. That adaptation has a cost.",
-  SIX_TO_TWELVE:"Six months to a year is long enough that the organization has normalized the friction. It doesn't feel exceptional anymore -- it feels like how things are here. That normalization is what makes it expensive.",
-  ONE_TO_TWO:   "A year to two years means this has been running long enough that the people who know it best have stopped expecting it to change. That quiet resignation is the most expensive thing in this diagnostic -- and the hardest to name.",
-  TWO_PLUS:     "Two years or more. The friction isn't just embedded -- it's structural. The organization has been built, to some degree, around accommodating it. Resolving it now means deciding what to do with everything that was built on top of it.",
+  UNDER_6MO:  "Under six months is early enough that the pattern hasn't fully embedded yet. That's actually the best time to name it -- before the organization builds workarounds that become permanent.",
+  SIX_12MO:   "Six months to a year is when a friction pattern stops being a rough patch and starts being a dynamic. The people in the room have already started adapting their behavior around it. That adaptation has a cost.",
+  ONE_2YR:    "A year to two years means this has been running long enough that the organization has normalized the friction. It doesn't feel exceptional anymore -- it feels like how things are here. That normalization is what makes it expensive.",
+  OVER_2YR:   "Two years or more. The friction isn't just embedded -- it's structural. The organization has been built, to some degree, around accommodating it. Resolving it now means deciding what to do with everything that was built on top of it.",
 };
 
 // ── DOWNSTREAM POPULATION AMPLIFIERS ──────────────────────────────────────────
