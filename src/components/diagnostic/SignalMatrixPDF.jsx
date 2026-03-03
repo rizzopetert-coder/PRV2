@@ -24,51 +24,51 @@ const T = {
 
 // ── CATEGORY COLORS ────────────────────────────────────────────────────────────
 const CATEGORY_CONFIG = {
-  context:    { color: '#6B6560', label: 'Context'    },
-  friction:   { color: '#FF4500', label: 'Friction'   },
-  personnel:  { color: '#CC2200', label: 'Personnel'  },
-  blockage:   { color: '#FF6B6B', label: 'Blockage'   },
-  severity:   { color: '#991A00', label: 'Severity'   },
-  avoidance:  { color: '#2D6A4F', label: 'Avoidance'  },
-  history:    { color: '#52B788', label: 'History'    },
-  decisions:  { color: '#95D5B2', label: 'Decisions'  },
-  duration:   { color: '#1B4F72', label: 'Duration'   },
-  downstream: { color: '#2E86AB', label: 'Downstream' },
-  financial:  { color: '#7EC8E3', label: 'Financial'  },
+  structure:       { color: '#6B6560', label: 'Structure'       },
+  conflict:        { color: '#FF4500', label: 'Conflict'        },
+  people_risk:     { color: '#CC2200', label: 'People Risk'     },
+  obstruction:     { color: '#FF6B6B', label: 'Obstruction'     },
+  risk_level:      { color: '#991A00', label: 'Risk Level'      },
+  evasion:         { color: '#2D6A4F', label: 'Evasion'         },
+  prior_attempts:  { color: '#52B788', label: 'Prior Attempts'  },
+  velocity:        { color: '#95D5B2', label: 'Velocity'        },
+  time_in_pattern: { color: '#1B4F72', label: 'Time in Pattern' },
+  exposure:        { color: '#2E86AB', label: 'Exposure'        },
+  cost_signals:    { color: '#7EC8E3', label: 'Cost Signals'    },
 };
 
 // ── SIGNAL DEFINITIONS (mirrored from SignalMatrix.jsx) ───────────────────────
 const SIGNALS = [
-  { id: 'leadership_tenure',    label: 'Long Tenure',           category: 'context',    fired: ({ i }) => i.leadershipTenure === 'SEVEN_PLUS' },
-  { id: 'legacy_stage',         label: 'Legacy Stage',          category: 'context',    fired: ({ i }) => i.orgStage === 'LEGACY' },
-  { id: 'large_headcount',      label: 'Large Org',             category: 'context',    fired: ({ i }) => i.headcount >= 100 },
-  { id: 'new_leadership',       label: 'New Leadership',        category: 'context',    fired: ({ i }) => i.leadershipTenure === 'UNDER_ONE' },
-  { id: 'growth_stage',         label: 'Growth Stage',          category: 'context',    fired: ({ i }) => i.orgStage === 'GROWTH' },
-  { id: 'startup_stage',        label: 'Startup Stage',         category: 'context',    fired: ({ i }) => i.orgStage === 'EARLY'},
-  { id: 'within_leadership',    label: 'Leadership Friction',   category: 'friction',   fired: ({ i }) => i.frictionLocation === 'WITHIN_LEADERSHIP' },
-  { id: 'cross_functional',     label: 'Cross-Functional',      category: 'friction',   fired: ({ i }) => i.frictionLocation === 'CROSS_FUNCTIONAL' },
-  { id: 'team_friction',        label: 'Team Friction',         category: 'friction',   fired: ({ i }) => i.frictionLocation === 'TEAM' },
-  { id: 'no_forum',             label: 'No Forum',              category: 'avoidance',  fired: ({ i }) => i.avoidanceMechanism === 'NO_FORUM' },
-  { id: 'predetermined',        label: 'Predetermined',         category: 'avoidance',  fired: ({ i }) => i.avoidanceMechanism === 'PREDETERMINED' },
-  { id: 'cost_too_high',        label: 'Cost Perceived High',   category: 'avoidance',  fired: ({ i }) => i.avoidanceMechanism === 'COST_TOO_HIGH' },
-  { id: 'personnel_lost',       label: 'Personnel Lost',        category: 'personnel',  fired: ({ i }) => i.personnelRisk === 'LOST' },
-  { id: 'personnel_at_risk',    label: 'Personnel at Risk',     category: 'personnel',  fired: ({ i }) => i.personnelRisk === 'YES' },
-  { id: 'active_blockage',      label: 'Active Blockage',       category: 'blockage',   fired: ({ i }) => i.resolutionBlockage === 'ATTEMPTED' },
-  { id: 'known_blockage',       label: 'Known Blockage',        category: 'blockage',   fired: ({ i }) => i.resolutionBlockage === 'KNOWN' },
-  { id: 'prior_external',       label: 'Prior External',        category: 'history',    fired: ({ i }) => i.priorAttempt === 'EXTERNAL' },
-  { id: 'prior_conversation',   label: 'Prior Conversation',    category: 'history',    fired: ({ i }) => i.priorAttempt === 'CONVERSATION' },
-  { id: 'duration_long',        label: 'Long Duration',         category: 'duration',   fired: ({ i }) => ['ONE_2YR','OVER_2YR'].includes(i.frictionDuration) },
-  { id: 'duration_mid',         label: 'Mid Duration',          category: 'duration',   fired: ({ i }) => ['SIX_12MO','UNDER_6MO'].includes(i.frictionDuration) },
-  { id: 'downstream_large',     label: 'Wide Downstream',       category: 'downstream', fired: ({ i }) => ['LARGE','FULL_ORG'].includes(i.downstreamPopulation) },
-  { id: 'downstream_medium',    label: 'Mid Downstream',        category: 'downstream', fired: ({ i }) => i.downstreamPopulation === 'INDIVIDUAL' },
-  { id: 'decisions_stalled',    label: 'Decisions Stalled',     category: 'decisions',  fired: ({ i }) => i.decisions === 'STALLED' },
-  { id: 'decisions_slow',       label: 'Decisions Slow',        category: 'decisions',  fired: ({ i }) => i.decisions === 'SLOW' },
-  { id: 'high_leak_ratio',      label: 'High Leak Ratio',       category: 'financial',  fired: ({ s }) => (parseFloat(s.leakRatio) || 0) >= 0.06 },
-  { id: 'gravity_floor',        label: 'Gravity Floor',         category: 'financial',  fired: ({ s }) => !!s.showGravityFloor },
-  { id: 'execution_gap',        label: 'Execution Gap',         category: 'financial',  fired: ({ s }) => (s.executionGap || 0) > 0 },
-  { id: 'stalled_capital',      label: 'Stalled Capital',       category: 'financial',  fired: ({ s }) => (s.confirmedHistoricalLoss || 0) > 0 },
-  { id: 'high_severity',        label: 'High Severity',         category: 'severity',   fired: ({ s }) => s.state?.severity === 'high' },
-  { id: 'agency_constrained',   label: 'Agency Constrained',    category: 'severity',   fired: ({ s }) => (s.agencyScore || 0) < 40 },
+  { id: 'leadership_tenure',  label: 'Entrenched Leadership',      category: 'structure',       fired: ({ i }) => i.leadershipTenure === 'SEVEN_PLUS' },
+  { id: 'legacy_stage',       label: 'Institutional Inertia',      category: 'structure',       fired: ({ i }) => i.orgStage === 'LEGACY' },
+  { id: 'large_headcount',    label: 'Coordination Overhead',      category: 'structure',       fired: ({ i }) => i.headcount >= 100 },
+  { id: 'new_leadership',     label: 'Transitional Instability',   category: 'structure',       fired: ({ i }) => i.leadershipTenure === 'UNDER_ONE' },
+  { id: 'growth_stage',       label: 'Scaling Pressure',           category: 'structure',       fired: ({ i }) => i.orgStage === 'GROWTH' },
+  { id: 'startup_stage',      label: 'Structural Immaturity',      category: 'structure',       fired: ({ i }) => i.orgStage === 'EARLY' },
+  { id: 'within_leadership',  label: 'Authority Conflict',         category: 'conflict',        fired: ({ i }) => i.frictionLocation === 'WITHIN_LEADERSHIP' },
+  { id: 'cross_functional',   label: 'Siloed Execution',           category: 'conflict',        fired: ({ i }) => i.frictionLocation === 'CROSS_FUNCTIONAL' },
+  { id: 'team_friction',      label: 'Surface-Level Friction',     category: 'conflict',        fired: ({ i }) => i.frictionLocation === 'TEAM' },
+  { id: 'no_forum',           label: 'No Resolution Path',         category: 'evasion',         fired: ({ i }) => i.avoidanceMechanism === 'NO_FORUM' },
+  { id: 'predetermined',      label: 'Outcome Fixed in Advance',   category: 'evasion',         fired: ({ i }) => i.avoidanceMechanism === 'PREDETERMINED' },
+  { id: 'cost_too_high',      label: 'Conflict Avoidance Active',  category: 'evasion',         fired: ({ i }) => i.avoidanceMechanism === 'COST_TOO_HIGH' },
+  { id: 'personnel_lost',     label: 'Talent Already Gone',        category: 'people_risk',     fired: ({ i }) => i.personnelRisk === 'LOST' },
+  { id: 'personnel_at_risk',  label: 'Departure Risk Active',      category: 'people_risk',     fired: ({ i }) => i.personnelRisk === 'YES' },
+  { id: 'active_blockage',    label: 'Resolution Actively Blocked',category: 'obstruction',     fired: ({ i }) => i.resolutionBlockage === 'ATTEMPTED' },
+  { id: 'known_blockage',     label: 'Known Obstacle, No Movement',category: 'obstruction',     fired: ({ i }) => i.resolutionBlockage === 'KNOWN' },
+  { id: 'prior_external',     label: 'Outside Help Already Failed',category: 'prior_attempts',  fired: ({ i }) => i.priorAttempt === 'EXTERNAL' },
+  { id: 'prior_conversation', label: "Conversation Didn't Hold",   category: 'prior_attempts',  fired: ({ i }) => i.priorAttempt === 'CONVERSATION' },
+  { id: 'duration_long',      label: 'Friction Compounding',       category: 'time_in_pattern', fired: ({ i }) => ['ONE_2YR','OVER_2YR'].includes(i.frictionDuration) },
+  { id: 'duration_mid',       label: 'Pattern Established',        category: 'time_in_pattern', fired: ({ i }) => ['SIX_12MO','UNDER_6MO'].includes(i.frictionDuration) },
+  { id: 'downstream_large',   label: 'Organization-Wide Exposure', category: 'exposure',        fired: ({ i }) => ['LARGE','FULL_ORG'].includes(i.downstreamPopulation) },
+  { id: 'downstream_medium',  label: 'Team-Level Exposure',        category: 'exposure',        fired: ({ i }) => i.downstreamPopulation === 'INDIVIDUAL' },
+  { id: 'decisions_stalled',  label: 'Decisions Stopped',          category: 'velocity',        fired: ({ i }) => i.decisions === 'STALLED' },
+  { id: 'decisions_slow',     label: 'Decision Velocity Low',      category: 'velocity',        fired: ({ i }) => i.decisions === 'SLOW' },
+  { id: 'high_leak_ratio',    label: 'Capital Bleeding',           category: 'cost_signals',    fired: ({ s }) => (parseFloat(s.leakRatio) || 0) >= 0.06 },
+  { id: 'gravity_floor',      label: 'Cost Too Low to Quantify',   category: 'cost_signals',    fired: ({ s }) => !!s.showGravityFloor },
+  { id: 'execution_gap',      label: 'Leadership Hours Lost',      category: 'cost_signals',    fired: ({ s }) => (s.executionGap || 0) > 0 },
+  { id: 'stalled_capital',    label: 'Capital Tied to Friction',   category: 'cost_signals',    fired: ({ s }) => (s.confirmedHistoricalLoss || 0) > 0 },
+  { id: 'high_severity',      label: 'State: Critical',            category: 'risk_level',      fired: ({ s }) => s.state?.severity === 'high' },
+  { id: 'agency_constrained', label: 'Resolution Capacity Low',    category: 'risk_level',      fired: ({ s }) => (s.agencyScore || 0) < 40 },
 ];
 
 // ── SVG GRID CONSTANTS ────────────────────────────────────────────────────────
@@ -90,11 +90,6 @@ export function SignalMatrixPDF({ summary, inputData }) {
 
   const firedCount = evaluated.filter(s => s.hasFired).length;
   const totalCount = evaluated.length;
-
-  // Unique categories that fired
-  const activeCategories = Array.from(
-    new Set(evaluated.filter(s => s.hasFired).map(s => s.category))
-  );
 
   return (
     <View>
@@ -132,13 +127,13 @@ export function SignalMatrixPDF({ summary, inputData }) {
         gap:              10,
       }}>
         <Text style={{
-        fontFamily: 'Newsreader',
-        fontStyle:  'italic',
-        fontSize:   16,
-        color:      T.accent,
-        lineHeight: 1,
-      }}>
-        {summary.state?.label}
+          fontFamily: 'Newsreader',
+          fontStyle:  'italic',
+          fontSize:   16,
+          color:      T.accent,
+          lineHeight: 1,
+        }}>
+          {summary.state?.label}
         </Text>
         <Text style={{
           fontFamily:    'SpaceMono',
@@ -160,7 +155,6 @@ export function SignalMatrixPDF({ summary, inputData }) {
           const y     = row * (CELL_H + CELL_GAP);
           const cfg   = CATEGORY_CONFIG[signal.category];
           const color = signal.hasFired ? cfg.color : T.border;
-          const bgAlpha = signal.hasFired ? '15' : '00'; // hex alpha
 
           return (
             <G key={signal.id}>
