@@ -1,7 +1,11 @@
 "use client";
 
 import React from 'react';
-import { ArrowRight, Map, Zap, Shield, BookOpen, HeartHandshake } from 'lucide-react';
+import { ArrowRight, Map, Zap, Shield, BookOpen, HeartHandshake, Briefcase } from 'lucide-react';
+
+let BriefcaseBusiness;
+try { BriefcaseBusiness = require('lucide-react').BriefcaseBusiness; } catch (_) {}
+const CounselIcon = BriefcaseBusiness || Briefcase;
 
 /**
  * Capabilities // Principal Resolution
@@ -29,11 +33,11 @@ const tiers = [
   },
   {
     id: "03",
-    name: "Safe Harbor",
-    icon: <Shield size={24} />,
-    description: "The conversation you can't have with anyone inside the building. We serve the mission, not the politics. No agenda, no allegiance, no filtered feedback. Just the clearest view of your situation you're going to get from anyone in your orbit.",
-    outcome: "No judgment, no agenda, no clock running. Just the kind of clarity that's only possible when someone is entirely and indefinitely in your corner.",
-    cta: "Request Safe Harbor",
+    name: "Executive Counsel",
+    icon: <CounselIcon size={24} />,
+    description: "The ongoing advisory relationship for the conversations that cannot happen inside the building. No agenda, no allegiance, no filtered feedback. Principal-level access, monthly cadence, on-call between sessions. This is the consigliere arrangement -- for leaders who need a trusted outside voice in the room on an ongoing basis.",
+    outcome: "You leave every session with clarity you couldn't have gotten from anyone inside the organization. That's the arrangement.",
+    cta: "Inquire about Executive Counsel",
   },
   {
     id: "04",
