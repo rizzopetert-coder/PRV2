@@ -1,9 +1,8 @@
-"use client";
-
 import { notFound } from "next/navigation";
 import { getStateBySlug } from "@/lib/vaultAssets";
 import { strategicBriefings } from "@/data/memos";
 import { MEMOS, SIGNAL_LABELS, IMPACT_LABELS } from "@/data/vaultMemos";
+import hammerCitations from "@/data/hammer-citations.json";
 
 /**
  * src/app/vault/lexicon/[slug]/page.jsx
@@ -137,8 +136,9 @@ function LexiconMemoCard({ memo }) {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function LexiconStatePage({ params }) {
-  const assets = getStateBySlug(params.slug);
+export default async function LexiconStatePage({ params }) {
+  const { slug } = await params;
+  const assets = getStateBySlug(slug);
   if (!assets?.found) notFound();
 
   const {
@@ -150,12 +150,8 @@ export default function LexiconStatePage({ params }) {
 
   const advisorTake = resolveAdvisorTake(advisor_take, advisor_take_source);
 
-  let allCitations = [];
-  try {
-    const raw = require("@/data/hammer-citations.json");
-    const list = Array.isArray(raw) ? raw : raw.citations ?? [];
-    allCitations = list.filter((c) => hammer_citation_ids.includes(c.citation_id));
-  } catch { /* graceful degradation */ }
+  const list = Array.isArray(hammerCitations) ? hammerCitations : hammerCitations.citations ?? [];
+  const allCitations = list.filter((c) => hammer_citation_ids.includes(c.citation_id));
 
   return (
     <main className="bg-brand-bg min-h-screen">
