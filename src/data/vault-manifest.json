@@ -30,7 +30,7 @@
         "HC-095",
         "HC-096"
       ],
-      "intelligence_memo_ids": [],
+      "intelligence_memo_ids": ["MEMO-08"],
       "resolution_playbook_ids": [],
       "seo_meta": {
         "title": "Last Leg \u2014 Institutional State | Principal Resolution",
@@ -65,9 +65,7 @@
         "HC-094",
         "HC-097"
       ],
-      "intelligence_memo_ids": [
-        "MEMO-05"
-      ],
+      "intelligence_memo_ids": ["MEMO-05"],
       "resolution_playbook_ids": [],
       "seo_meta": {
         "title": "The Sacred Cow \u2014 Institutional State | Principal Resolution",
@@ -217,9 +215,7 @@
         "HC-085",
         "HC-091"
       ],
-      "intelligence_memo_ids": [
-        "MEMO-02"
-      ],
+      "intelligence_memo_ids": ["MEMO-02"],
       "resolution_playbook_ids": [],
       "seo_meta": {
         "title": "Silosolation \u2014 Institutional State | Principal Resolution",
@@ -253,7 +249,7 @@
         "HC-085",
         "HC-086"
       ],
-      "intelligence_memo_ids": [],
+      "intelligence_memo_ids": ["MEMO-10"],
       "resolution_playbook_ids": [],
       "seo_meta": {
         "title": "Runaway Treadmill \u2014 Institutional State | Principal Resolution",
@@ -295,7 +291,7 @@
         "HC-092",
         "HC-100"
       ],
-      "intelligence_memo_ids": [],
+      "intelligence_memo_ids": ["MEMO-07", "MEMO-12"],
       "resolution_playbook_ids": [],
       "seo_meta": {
         "title": "The Fossil System \u2014 Institutional State | Principal Resolution",
@@ -331,7 +327,7 @@
         "HC-099",
         "HC-100"
       ],
-      "intelligence_memo_ids": [],
+      "intelligence_memo_ids": ["MEMO-14"],
       "resolution_playbook_ids": [],
       "seo_meta": {
         "title": "The Anchor \u2014 Institutional State | Principal Resolution",
@@ -370,9 +366,7 @@
         "HC-092",
         "HC-094"
       ],
-      "intelligence_memo_ids": [
-        "MEMO-04"
-      ],
+      "intelligence_memo_ids": ["MEMO-04"],
       "resolution_playbook_ids": [],
       "seo_meta": {
         "title": "Broken Compass \u2014 Institutional State | Principal Resolution",
@@ -411,10 +405,7 @@
         "HC-084",
         "HC-098"
       ],
-      "intelligence_memo_ids": [
-        "MEMO-01",
-        "MEMO-03"
-      ],
+      "intelligence_memo_ids": ["MEMO-01", "MEMO-03"],
       "resolution_playbook_ids": [],
       "seo_meta": {
         "title": "Kid Gloves \u2014 Institutional State | Principal Resolution",
@@ -447,7 +438,7 @@
         "HC-097",
         "HC-098"
       ],
-      "intelligence_memo_ids": [],
+      "intelligence_memo_ids": ["MEMO-06"],
       "resolution_playbook_ids": [],
       "seo_meta": {
         "title": "The Unlit Room \u2014 Institutional State | Principal Resolution",
