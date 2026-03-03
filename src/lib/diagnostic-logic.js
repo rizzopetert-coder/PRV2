@@ -63,6 +63,7 @@ export const INDUSTRY_BENCHMARKS = {
   FINANCE:      { label: 'Finance & Insurance' },
   CONSULTING:   { label: 'Consulting & Professional Services' },
   HEALTH:       { label: 'Healthcare & Life Sciences' },
+  GOV:          { label: 'Government & Public Sector' },
   NONPROFIT:    { label: 'Nonprofit & Social Enterprise' },
   MEDIA:        { label: 'Media & Communications' },
   MANUFACTURING:{ label: 'Manufacturing & Industrial' },
