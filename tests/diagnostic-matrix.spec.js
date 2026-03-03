@@ -185,7 +185,7 @@ class AuditPage {
 
     // Hidden bridge: execCount override bypasses 5% headcount formula
     if (inputs.execCount) {
-      await this.page.locator('#execcount-override').evaluate(
+      await this.page.locator('#execCount-override').evaluate(
         (el, val) => {
           const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
             window.HTMLInputElement.prototype, 'value'
