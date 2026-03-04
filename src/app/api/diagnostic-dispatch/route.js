@@ -4,14 +4,10 @@
  * Purpose: Receives diagnostic results post-download,
  * forwards structured payload to Zapier webhook -> Dubsado.
  * Fires silently -- never interrupts the user experience.
- * v5.0: audit_verdict and audit_tier are now split fields.
- *       verdict = state.label (e.g. "Talent Hemorrhage")
- *       tier    = resolvedTier enum (e.g. "SAFE_HARBOR")
- *       Recommended = recommendation.name (e.g. "Safe Harbor")
- *       All three are sent. Zapier triggers on audit_verdict.
- *       Dubsado engagement mapping uses Recommended.
- * v4.5: Forensic Layer fields added (hammerCitation, confirmedHistoricalLoss,
- *        radiatedImpact, frictionDurationMonths).
+ * v6.0: Full field alignment with v6.0 engine output and Dubsado custom fields.
+ *       Forensic Layer (v4.5) fields retired.
+ *       Decisions and Primary_Emotion added.
+ *       All payload keys use PascalCase to match Dubsado field names.
  */
 import { NextResponse } from 'next/server';
 
@@ -29,17 +25,11 @@ export async function POST(request) {
       context             = {},
       email               = null,
       companyName         = '',
-      optSendRecord       = false,
-      optIntelligence     = false,
       prior_attempt       = '',
       personnel_risk      = '',
       resolution_blockage = '',
-      resolution_vision   = '',
-      // ── v4.5 Forensic Layer ──────────────────────────────
-      hammerCitation          = null,
-      confirmedHistoricalLoss = null,
-      radiatedImpact          = null,
-      frictionDurationMonths  = null,
+      decisions           = '',
+      primary_emotion     = '',
     } = body;
 
     // Validate minimum required fields
@@ -50,23 +40,13 @@ export async function POST(request) {
       );
     }
 
-    // Structure the Zapier payload
-    // Field names match what Zapier expects to forward to Dubsado.
-    // Dubsado custom fields use Spaces (e.g. "Audit Verdict").
-    // Zapier template variables use Underscores (e.g. audit_verdict).
+    // Structure the Zapier payload.
+    // All keys use PascalCase to match Dubsado custom field names.
+    // Zapier maps these directly into the Create Project action.
     const zapierPayload = {
-      // ── v5.0 Split Verdict/Tier Fields ──────────────────
-      // audit_verdict: the Institutional State label (e.g. "Talent Hemorrhage")
-      // audit_tier:    the resolvedTier enum (e.g. "SAFE_HARBOR")
-      // These two are now independent. A Talent Hemorrhage can sit in Safe Harbor.
-      // Zapier should trigger separately on each -- do not conflate them.
-      audit_verdict:       verdict,
-      audit_tier:          tier,
-
-      // Legacy field -- kept for backward compatibility with existing Zap steps.
-      // Maps to recommendation.name (e.g. "Safe Harbor", "The Intervention").
-      // Do not remove until Dubsado field audit confirms it is unused.
+      // Verdict and tier
       Audit_Verdict:       verdict,
+      Audit_Tier:          tier,
       Recommended:         tier,
 
       // Core financial
@@ -79,33 +59,22 @@ export async function POST(request) {
       Leadership_Tenure:   context.leadershipTenure   || 'Unknown',
       Friction:            context.frictionLocation   || 'Unknown',
       Avoidance:           context.avoidanceMechanism || 'Unknown',
+
+      // Behavioral signals
       Prior_Attempt:       prior_attempt              || 'Unknown',
       Personnel_Risk:      personnel_risk             || 'Unknown',
       Resolution_Blockage: resolution_blockage        || 'Unknown',
-      Resolution_Vision:   resolution_vision          || '',
-      Exec_Count:          context.execCount          || 0,
-      Leak_Ratio:          context.leakRatio          || '0.000',
-
-      // ── v4.5 Forensic Layer ──────────────────────────────
-      // Underscore naming per Dubsado Handshake protocol.
-      // Null fallbacks on all -- incomplete audits must not fail the Zap.
-      hammer_citation_text:       hammerCitation?.text   || null,
-      hammer_citation_source:     hammerCitation?.source || null,
-      confirmed_historical_loss:  confirmedHistoricalLoss        || null,
-      radiated_impact:            radiatedImpact                 || null,
-      friction_duration_months:   frictionDurationMonths         || null,
+      Decisions:           decisions                  || 'Unknown',
+      Primary_Emotion:     primary_emotion            || 'Unknown',
 
       // Identity -- optional, provided only if prospect submitted email
       Client_Email:        email || 'diagnostic@principalresolution.com',
-      Opt_Send_Record:     optSendRecord,
-      Opt_In_Memos:        optIntelligence,
 
       // Metadata
       Timestamp:           new Date().toISOString(),
       Source:              'diagnostic-tool',
 
       // Dubsado project fields
-      // These map directly to the Create Project action in Zapier
       Project_Workflow:    'Diagnostic Follow-Up',
       Project_Title:       `Diagnostic Audit: ${verdict}`,
       Client_Company:      companyName || 'Unknown -- see RB2B',
