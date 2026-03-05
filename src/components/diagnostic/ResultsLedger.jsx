@@ -401,12 +401,18 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
           total,
           email,
           companyName:         resolvedCompany,
-          optSendRecord,
-          optIntelligence,
           prior_attempt:       inputData.priorAttempt,
           personnel_risk:      inputData.personnelRisk,
           resolution_blockage: inputData.resolutionBlockage,
-          resolution_vision:   inputData.resolutionVision,
+          decisions:           inputData.decisions,
+          primary_emotion:     inputData.primaryEmotion,
+          context: {
+            industry:           inputData.industry,
+            orgStage:           inputData.orgStage,
+            leadershipTenure:   inputData.leadershipTenure,
+            frictionLocation:   inputData.frictionLocation,
+            avoidanceMechanism: inputData.avoidanceMechanism,
+          },
         }),
       });
       setDispatched(true);
@@ -425,8 +431,29 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
     const link = document.createElement('a');
     link.href     = url;
     link.download = `Principal_Resolution_Record_${Date.now()}.pdf`;
-    link.click();
-    URL.revokeObjectURL(url);
+    link.click()// Silent dispatch to Zapier on PDF download -- primary CRM trigger
+    fetch('/api/diagnostic-dispatch', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        verdict:             state.label,
+        tier,
+        monthlyBurn,
+        total,
+        prior_attempt:       inputData.priorAttempt,
+        personnel_risk:      inputData.personnelRisk,
+        resolution_blockage: inputData.resolutionBlockage,
+        decisions:           inputData.decisions,
+        primary_emotion:     inputData.primaryEmotion,
+        context: {
+          industry:           inputData.industry,
+          orgStage:           inputData.orgStage,
+          leadershipTenure:   inputData.leadershipTenure,
+          frictionLocation:   inputData.frictionLocation,
+          avoidanceMechanism: inputData.avoidanceMechanism,
+        },
+      }),
+    }).catch(() => {});
 
     if (dispatchUrl) {
       fetch('/api/diagnostic-dispatch', {
