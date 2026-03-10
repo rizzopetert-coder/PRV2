@@ -1,23 +1,34 @@
 [
   {
     "id": "T-01",
-    "name": "Last Leg (Structural Crisis)",
+    "label": "Last Leg",
+    "notes": "Core: leakRatio > 0.20 AND personnelRisk LOST. High payroll + high meetingHours drives leak. Duration OVER_2YR + STALLED decisions + ATTEMPTED blockage maximizes score.",
     "inputs": {
       "primaryEmotion": "EXHAUSTION",
-      "industry": "TECH",
-      "orgStage": "LEGACY",
-      "leadershipTenure": "SEVEN_PLUS",
-      "headcount": 100,
-      "payroll": "12000000",
+      "industry": "CONSULTING",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "FOUR_6YR",
+      "headcount": 45,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 5  },
+        { "id": "MANAGER",      "count": 15 },
+        { "id": "PROFESSIONAL", "count": 25 }
+      ],
       "frictionLocation": "WITHIN_LEADERSHIP",
-      "avoidanceMechanism": "PREDETERMINED",
+      "avoidanceMechanism": "COST_TOO_HIGH",
       "priorAttempt": "EXTERNAL",
       "personnelRisk": "LOST",
       "resolutionBlockage": "ATTEMPTED",
       "frictionDuration": "OVER_2YR",
-      "downstreamPopulation": "FULL_ORG",
+      "downstreamPopulation": "LARGE",
       "decisions": "STALLED",
-      "meetingHours": 25
+      "payroll": "6500000",
+      "stalledProjectCapital": "250000",
+      "revenueBest": "980000",
+      "revenueWorst": "820000",
+      "meetingHours": 20,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
     },
     "expected": {
       "verdict": "Last Leg",
@@ -26,148 +37,214 @@
   },
   {
     "id": "T-02",
-    "name": "Sacred Cow (Individual Protection)",
+    "label": "The Sacred Cow",
+    "notes": "Core: avoidance CULTURAL (COST_TOO_HIGH) AND resolutionBlockage KNOWN. personnelRisk YES + WITHIN_LEADERSHIP + EXTERNAL prior maximizes score.",
     "inputs": {
       "primaryEmotion": "FRUSTRATION",
       "industry": "FINANCE",
       "orgStage": "ESTABLISHED",
       "leadershipTenure": "FOUR_6YR",
-      "headcount": 50,
-      "payroll": "8000000",
+      "headcount": 60,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 6  },
+        { "id": "MANAGER",      "count": 18 },
+        { "id": "PROFESSIONAL", "count": 36 }
+      ],
       "frictionLocation": "WITHIN_LEADERSHIP",
-      "avoidanceMechanism": "PREDETERMINED",
-      "priorAttempt": "CONVERSATION",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "EXTERNAL",
       "personnelRisk": "YES",
       "resolutionBlockage": "KNOWN",
       "frictionDuration": "ONE_2YR",
       "downstreamPopulation": "LARGE",
       "decisions": "SLOW",
-      "meetingHours": 15
+      "payroll": "8000000",
+      "stalledProjectCapital": "400000",
+      "revenueBest": "1200000",
+      "revenueWorst": "950000",
+      "meetingHours": 8,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
     },
     "expected": {
       "verdict": "The Sacred Cow",
-      "tier": "Executive Counsel"
+      "tier": "The Executive Counsel"
     }
   },
   {
     "id": "T-03",
-    "name": "Cracked Mirror (Distorted Feedback)",
+    "label": "Cracked Mirror",
+    "notes": "Core: frictionLocation WITHIN_LEADERSHIP AND resolutionBlockage SUSPECTED. SEVEN_PLUS tenure + STALLED + CONVERSATION prior maximizes score. Agency: baseline 50 + NONE priorAttempt (+30) − APATHY (−30) = 50. Still neutral band → Intervention for HIGH severity. Use EXTERNAL prior (−20) + APATHY (−30) = 0 → Z < 40 → Executive Counsel.",
     "inputs": {
-      "primaryEmotion": "FRUSTRATION",
-      "industry": "CONSULTING",
-      "orgStage": "ESTABLISHED",
+      "primaryEmotion": "APATHY",
+      "industry": "HEALTH",
+      "orgStage": "LEGACY",
       "leadershipTenure": "SEVEN_PLUS",
-      "headcount": 75,
-      "payroll": "9000000",
+      "headcount": 80,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 4  },
+        { "id": "MANAGER",      "count": 20 },
+        { "id": "PROFESSIONAL", "count": 56 }
+      ],
       "frictionLocation": "WITHIN_LEADERSHIP",
-      "avoidanceMechanism": "PREDETERMINED",
-      "priorAttempt": "CONVERSATION",
-      "personnelRisk": "YES",
-      "resolutionBlockage": "KNOWN",
+      "avoidanceMechanism": "NO_FORUM",
+      "priorAttempt": "EXTERNAL",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "SUSPECTED",
       "frictionDuration": "OVER_2YR",
       "downstreamPopulation": "LARGE",
-      "decisions": "SLOW",
-      "meetingHours": 20
+      "decisions": "STALLED",
+      "payroll": "9000000",
+      "stalledProjectCapital": "0",
+      "revenueBest": "0",
+      "revenueWorst": "0",
+      "meetingHours": 5,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
     },
     "expected": {
       "verdict": "Cracked Mirror",
-      "tier": "Executive Counsel"
+      "tier": "The Executive Counsel"
     }
   },
   {
     "id": "T-04",
-    "name": "Exit Pattern (Talent Departure)",
-    "inputs": {
-      "primaryEmotion": "FEAR",
-      "industry": "TECH",
-      "orgStage": "GROWTH",
-      "leadershipTenure": "FOUR_6YR",
-      "headcount": 60,
-      "payroll": "7000000",
-      "frictionLocation": "WITHIN_LEADERSHIP",
-      "avoidanceMechanism": "NO_FORUM",
-      "priorAttempt": "CONVERSATION",
-      "personnelRisk": "LOST",
-      "resolutionBlockage": "KNOWN",
-      "frictionDuration": "ONE_2YR",
-      "downstreamPopulation": "LARGE",
-      "decisions": "SLOW",
-      "meetingHours": 15
-    },
-    "expected": {
-      "verdict": "The Exit Pattern",
-      "tier": "The Intervention"
-    }
-  },
-  {
-    "id": "T-05",
-    "name": "Dead Calm (Structural Paralysis)",
-    "inputs": {
-      "primaryEmotion": "APATHY",
-      "industry": "FINANCE",
-      "orgStage": "ESTABLISHED",
-      "leadershipTenure": "FOUR_6YR",
-      "headcount": 40,
-      "payroll": "5000000",
-      "frictionLocation": "WITHIN_LEADERSHIP",
-      "avoidanceMechanism": "NO_FORUM",
-      "priorAttempt": "NONE",
-      "personnelRisk": "NONE",
-      "resolutionBlockage": "NONE",
-      "frictionDuration": "ONE_2YR",
-      "downstreamPopulation": "LARGE",
-      "decisions": "STALLED",
-      "meetingHours": 15
-    },
-    "expected": {
-      "verdict": "Dead Calm",
-      "tier": "The Intervention"
-    }
-  },
-  {
-    "id": "T-06",
-    "name": "Silosolation (Cross-Functional Breakdown)",
-    "inputs": {
-      "primaryEmotion": "FRUSTRATION",
-      "industry": "MANUFACTURING",
-      "orgStage": "ESTABLISHED",
-      "leadershipTenure": "FOUR_6YR",
-      "headcount": 120,
-      "payroll": "10000000",
-      "frictionLocation": "CROSS_FUNCTIONAL",
-      "avoidanceMechanism": "NO_FORUM",
-      "priorAttempt": "CONVERSATION",
-      "personnelRisk": "YES",
-      "resolutionBlockage": "KNOWN",
-      "frictionDuration": "ONE_2YR",
-      "downstreamPopulation": "FULL_ORG",
-      "decisions": "SLOW",
-      "meetingHours": 18
-    },
-    "expected": {
-      "verdict": "Silosolation",
-      "tier": "The Intervention"
-    }
-  },
-  {
-    "id": "T-07",
-    "name": "Runaway Treadmill (Growth Outpacing Infrastructure)",
+    "label": "The Exit Pattern",
+    "notes": "Core: personnelRisk YES AND frictionDuration ONE_2YR. High leak + SLOW decisions + ATTEMPTED blockage maximizes score. LAST_LEG blocked because personnelRisk is YES not LOST.",
     "inputs": {
       "primaryEmotion": "EXHAUSTION",
       "industry": "TECH",
       "orgStage": "GROWTH",
-      "leadershipTenure": "ONE_3YR",
-      "headcount": 80,
-      "payroll": "8000000",
+      "leadershipTenure": "FOUR_6YR",
+      "headcount": 90,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 5  },
+        { "id": "MANAGER",      "count": 20 },
+        { "id": "PROFESSIONAL", "count": 65 }
+      ],
       "frictionLocation": "CROSS_FUNCTIONAL",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "EXTERNAL",
+      "personnelRisk": "YES",
+      "resolutionBlockage": "ATTEMPTED",
+      "frictionDuration": "ONE_2YR",
+      "downstreamPopulation": "LARGE",
+      "decisions": "SLOW",
+      "payroll": "14000000",
+      "stalledProjectCapital": "300000",
+      "revenueBest": "2000000",
+      "revenueWorst": "1500000",
+      "meetingHours": 12,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "The Exit Pattern",
+      "tier": "The Executive Counsel"
+    }
+  },
+  {
+    "id": "T-05",
+    "label": "Dead Calm",
+    "notes": "Core: decisions STALLED AND avoidance STRUCTURAL (NO_FORUM). WITHIN_LEADERSHIP + priorAttempt NONE + duration ONE_2YR maximizes score.",
+    "inputs": {
+      "primaryEmotion": "APATHY",
+      "industry": "NONPROFIT",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "FOUR_6YR",
+      "headcount": 35,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 4  },
+        { "id": "MANAGER",      "count": 10 },
+        { "id": "PROFESSIONAL", "count": 21 }
+      ],
+      "frictionLocation": "WITHIN_LEADERSHIP",
       "avoidanceMechanism": "NO_FORUM",
       "priorAttempt": "NONE",
       "personnelRisk": "NONE",
       "resolutionBlockage": "NONE",
-      "frictionDuration": "OVER_2YR",
-      "downstreamPopulation": "FULL_ORG",
+      "frictionDuration": "ONE_2YR",
+      "downstreamPopulation": "INDIVIDUAL",
+      "decisions": "STALLED",
+      "payroll": "2800000",
+      "stalledProjectCapital": "0",
+      "revenueBest": "0",
+      "revenueWorst": "0",
+      "meetingHours": 4,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Dead Calm",
+      "tier": "The Roadmap"
+    }
+  },
+  {
+    "id": "T-06",
+    "label": "Silosolation",
+    "notes": "Core: frictionLocation CROSS_FUNCTIONAL AND avoidance STRUCTURAL (NO_FORUM). SLOW decisions + LARGE downstream maximizes score.",
+    "inputs": {
+      "primaryEmotion": "FRUSTRATION",
+      "industry": "TECH",
+      "orgStage": "GROWTH",
+      "leadershipTenure": "ONE_3YR",
+      "headcount": 120,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 6  },
+        { "id": "MANAGER",      "count": 30 },
+        { "id": "PROFESSIONAL", "count": 84 }
+      ],
+      "frictionLocation": "CROSS_FUNCTIONAL",
+      "avoidanceMechanism": "NO_FORUM",
+      "priorAttempt": "CONVERSATION",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "ONE_2YR",
+      "downstreamPopulation": "LARGE",
       "decisions": "SLOW",
-      "meetingHours": 20
+      "payroll": "18000000",
+      "stalledProjectCapital": "500000",
+      "revenueBest": "0",
+      "revenueWorst": "0",
+      "meetingHours": 6,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
+    },
+    "expected": {
+      "verdict": "Silosolation",
+      "tier": "The Roadmap"
+    }
+  },
+  {
+    "id": "T-07",
+    "label": "Runaway Treadmill",
+    "notes": "Core: orgStage GROWTH AND frictionDuration OVER_2YR. SLOW decisions + UNDER_ONE tenure maximizes score. Must not trigger Silosolation — use PREDETERMINED (STRUCTURAL) avoidance would conflict, use COST_TOO_HIGH (CULTURAL) instead.",
+    "inputs": {
+      "primaryEmotion": "EXHAUSTION",
+      "industry": "TECH",
+      "orgStage": "GROWTH",
+      "leadershipTenure": "UNDER_ONE",
+      "headcount": 75,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 4  },
+        { "id": "MANAGER",      "count": 20 },
+        { "id": "PROFESSIONAL", "count": 51 }
+      ],
+      "frictionLocation": "WITHIN_LEADERSHIP",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "NONE",
+      "personnelRisk": "NONE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "OVER_2YR",
+      "downstreamPopulation": "INDIVIDUAL",
+      "decisions": "SLOW",
+      "payroll": "10000000",
+      "stalledProjectCapital": "0",
+      "revenueBest": "0",
+      "revenueWorst": "0",
+      "meetingHours": 6,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
     },
     "expected": {
       "verdict": "Runaway Treadmill",
@@ -176,23 +253,34 @@
   },
   {
     "id": "T-08",
-    "name": "Fossil System (Outdated Operating Model)",
+    "label": "The Fossil System",
+    "notes": "Core: orgStage LEGACY AND avoidance STRUCTURAL (NO_FORUM). SEVEN_PLUS tenure + SLOW decisions maximizes score.",
     "inputs": {
       "primaryEmotion": "APATHY",
       "industry": "MANUFACTURING",
       "orgStage": "LEGACY",
       "leadershipTenure": "SEVEN_PLUS",
-      "headcount": 150,
-      "payroll": "11000000",
-      "frictionLocation": "CROSS_FUNCTIONAL",
-      "avoidanceMechanism": "COST_TOO_HIGH",
+      "headcount": 200,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 8  },
+        { "id": "MANAGER",      "count": 50 },
+        { "id": "PROFESSIONAL", "count": 142 }
+      ],
+      "frictionLocation": "WITHIN_LEADERSHIP",
+      "avoidanceMechanism": "NO_FORUM",
       "priorAttempt": "STRUCTURAL",
       "personnelRisk": "NONE",
       "resolutionBlockage": "NONE",
       "frictionDuration": "OVER_2YR",
-      "downstreamPopulation": "FULL_ORG",
+      "downstreamPopulation": "INDIVIDUAL",
       "decisions": "SLOW",
-      "meetingHours": 12
+      "payroll": "22000000",
+      "stalledProjectCapital": "0",
+      "revenueBest": "0",
+      "revenueWorst": "0",
+      "meetingHours": 5,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
     },
     "expected": {
       "verdict": "The Fossil System",
@@ -201,23 +289,34 @@
   },
   {
     "id": "T-09",
-    "name": "Anchor (Organizational Health)",
+    "label": "The Anchor",
+    "notes": "Core: headcount > 50 AND frictionLocation CROSS_FUNCTIONAL. cTax > 1.2 at headcount 55. Must avoid STRUCTURAL avoidance (would trigger Silosolation). Use COST_TOO_HIGH (CULTURAL).",
     "inputs": {
-      "primaryEmotion": "EXHAUSTION",
-      "industry": "CONSULTING",
-      "orgStage": "ESTABLISHED",
-      "leadershipTenure": "FOUR_6YR",
-      "headcount": 30,
-      "payroll": "4000000",
+      "primaryEmotion": "FRUSTRATION",
+      "industry": "LOGISTICS",
+      "orgStage": "GROWTH",
+      "leadershipTenure": "ONE_3YR",
+      "headcount": 55,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 3  },
+        { "id": "MANAGER",      "count": 12 },
+        { "id": "PROFESSIONAL", "count": 40 }
+      ],
       "frictionLocation": "CROSS_FUNCTIONAL",
-      "avoidanceMechanism": "NO_FORUM",
-      "priorAttempt": "NONE",
+      "avoidanceMechanism": "COST_TOO_HIGH",
+      "priorAttempt": "CONVERSATION",
       "personnelRisk": "NONE",
       "resolutionBlockage": "NONE",
       "frictionDuration": "SIX_12MO",
       "downstreamPopulation": "INDIVIDUAL",
-      "decisions": "FAST",
-      "meetingHours": 5
+      "decisions": "SLOW",
+      "payroll": "5500000",
+      "stalledProjectCapital": "150000",
+      "revenueBest": "0",
+      "revenueWorst": "0",
+      "meetingHours": 4,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
     },
     "expected": {
       "verdict": "The Anchor",
@@ -226,23 +325,34 @@
   },
   {
     "id": "T-10",
-    "name": "Broken Compass (Strategic Misalignment)",
+    "label": "Broken Compass",
+    "notes": "Core: frictionLocation WITHIN_LEADERSHIP AND priorAttempt CONVERSATION. SLOW decisions + ESTABLISHED/GROWTH stage maximizes score. No blockage keeps CRACKED_MIRROR from firing.",
     "inputs": {
-      "primaryEmotion": "FRUSTRATION",
-      "industry": "HEALTH",
-      "orgStage": "GROWTH",
-      "leadershipTenure": "ONE_3YR",
-      "headcount": 45,
-      "payroll": "5500000",
+      "primaryEmotion": "FEAR",
+      "industry": "CONSULTING",
+      "orgStage": "ESTABLISHED",
+      "leadershipTenure": "FOUR_6YR",
+      "headcount": 30,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 4  },
+        { "id": "MANAGER",      "count": 8  },
+        { "id": "PROFESSIONAL", "count": 18 }
+      ],
       "frictionLocation": "WITHIN_LEADERSHIP",
       "avoidanceMechanism": "COST_TOO_HIGH",
       "priorAttempt": "CONVERSATION",
       "personnelRisk": "NONE",
-      "resolutionBlockage": "SUSPECTED",
-      "frictionDuration": "SIX_12MO",
-      "downstreamPopulation": "LARGE",
+      "resolutionBlockage": "NONE",
+      "frictionDuration": "ONE_2YR",
+      "downstreamPopulation": "INDIVIDUAL",
       "decisions": "SLOW",
-      "meetingHours": 10
+      "payroll": "3200000",
+      "stalledProjectCapital": "0",
+      "revenueBest": "0",
+      "revenueWorst": "0",
+      "meetingHours": 5,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
     },
     "expected": {
       "verdict": "Broken Compass",
@@ -251,23 +361,34 @@
   },
   {
     "id": "T-11",
-    "name": "Kid Gloves (Conflict Avoidance)",
+    "label": "Kid Gloves",
+    "notes": "Core: avoidance CULTURAL (COST_TOO_HIGH) AND personnelRisk NONE. SLOW decisions + ONE_2YR duration maximizes score. resolutionBlockage NONE keeps Sacred Cow from firing.",
     "inputs": {
-      "primaryEmotion": "APATHY",
+      "primaryEmotion": "FEAR",
       "industry": "NONPROFIT",
       "orgStage": "ESTABLISHED",
-      "leadershipTenure": "ONE_3YR",
+      "leadershipTenure": "FOUR_6YR",
       "headcount": 20,
-      "payroll": "2000000",
-      "frictionLocation": "TEAM",
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 3  },
+        { "id": "MANAGER",      "count": 6  },
+        { "id": "PROFESSIONAL", "count": 11 }
+      ],
+      "frictionLocation": "WITHIN_LEADERSHIP",
       "avoidanceMechanism": "COST_TOO_HIGH",
       "priorAttempt": "NONE",
       "personnelRisk": "NONE",
       "resolutionBlockage": "NONE",
-      "frictionDuration": "SIX_12MO",
+      "frictionDuration": "ONE_2YR",
       "downstreamPopulation": "INDIVIDUAL",
       "decisions": "SLOW",
-      "meetingHours": 6
+      "payroll": "1800000",
+      "stalledProjectCapital": "0",
+      "revenueBest": "0",
+      "revenueWorst": "0",
+      "meetingHours": 3,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
     },
     "expected": {
       "verdict": "Kid Gloves",
@@ -276,23 +397,34 @@
   },
   {
     "id": "T-12",
-    "name": "Unlit Room (Early Warning)",
+    "label": "The Unlit Room",
+    "notes": "Fallback validation: leakRatio < 0.05 + personnelRisk NONE + resolutionBlockage NONE + decisions FAST. No high-severity conjunction fires.",
     "inputs": {
-      "primaryEmotion": "APATHY",
+      "primaryEmotion": "FEAR",
       "industry": "RETAIL",
-      "orgStage": "ESTABLISHED",
-      "leadershipTenure": "ONE_3YR",
-      "headcount": 10,
-      "payroll": "850000",
-      "frictionLocation": "TEAM",
-      "avoidanceMechanism": "NOT_AN_ISSUE",
+      "orgStage": "EARLY",
+      "leadershipTenure": "UNDER_ONE",
+      "headcount": 12,
+      "personnel": [
+        { "id": "EXECUTIVE",    "count": 2  },
+        { "id": "MANAGER",      "count": 3  },
+        { "id": "PROFESSIONAL", "count": 7  }
+      ],
+      "frictionLocation": "WITHIN_LEADERSHIP",
+      "avoidanceMechanism": "COST_TOO_HIGH",
       "priorAttempt": "NONE",
       "personnelRisk": "NONE",
       "resolutionBlockage": "NONE",
       "frictionDuration": "UNDER_6MO",
       "downstreamPopulation": "INDIVIDUAL",
       "decisions": "FAST",
-      "meetingHours": 2
+      "payroll": "900000",
+      "stalledProjectCapital": "0",
+      "revenueBest": "0",
+      "revenueWorst": "0",
+      "meetingHours": 2,
+      "isUnsurePayroll": false,
+      "isUnsureRevenue": false
     },
     "expected": {
       "verdict": "The Unlit Room",

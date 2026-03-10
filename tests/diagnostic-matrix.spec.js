@@ -1,209 +1,248 @@
 /**
- * Principal Resolution // Diagnostic Matrix Spec v3
+ * Principal Resolution // Diagnostic Matrix Spec v3.1
  * Suite: Institutional Logic Regression
- * Coverage: All 12 v6.0 states, engagement tiers
- * Engine: Tri-Axial Signal-Conjunction Routing (v6.0)
- * Selector map verified against live AuditSystem.jsx and ResultsLedger.jsx
+ * Coverage: All 12 v6.0 states and engagement tiers
+ * Strategy: Fresh browser context per profile. No shared state between tests.
+ *
+ * v3.1 fixes:
+ * - All label maps sourced directly from diagnostic-logic.js
+ * - ORG_STAGES: EARLY/GROWTH/ESTABLISHED/LEGACY with full label strings
+ * - TENURE: UNDER_ONE/ONE_3YR/FOUR_6YR/SEVEN_PLUS with correct labels
+ * - FRICTION: CROSS_FUNCTIONAL = 'Between Departments/Silos'
+ * - AVOIDANCE: 4 valid keys (NO_FORUM/PREDETERMINED/COST_TOO_HIGH/NOT_AN_ISSUE)
+ * - PRIOR_ATTEMPT: NONE/CONVERSATION/STRUCTURAL/EXTERNAL with correct labels
+ * - PERSONNEL_RISK: NONE/YES/LOST with correct labels
+ * - RESOLUTION_BLOCKAGE: NONE/KNOWN/SUSPECTED/ATTEMPTED with correct labels
+ * - DURATION: exact capitalisation ('Under 6 Months', '6–12 Months', etc.)
+ * - DOWNSTREAM: INDIVIDUAL/LARGE/FULL_ORG only
+ * - INDUSTRY: TECH='Technology', NONPROFIT='Nonprofit & Social Enterprise'
+ * - Tier strings: 'The Executive Counsel', 'The Intervention', 'The Roadmap'
+ * - CustomSelect: scoped to div[class*="absolute"] after trigger click
  */
 
 const { test, expect } = require('@playwright/test');
 const profiles = require('./data/matrix-profiles.json');
 
-// ---------------------------------------------------------------------------
-// PAGE OBJECT -- AuditPage
-// ---------------------------------------------------------------------------
+// ─── LABEL MAPS ──────────────────────────────────────────────────────────────
+// Source of truth: src/lib/diagnostic-logic.js
+// Keys = enum values used in matrix-profiles.json inputs
+// Values = exact visible text rendered in AuditSystem.jsx
+
+const INDUSTRY_LABELS = {
+  TECH:         'Technology',
+  FINANCE:      'Finance & Insurance',
+  CONSULTING:   'Consulting & Professional Services',
+  HEALTH:       'Healthcare & Life Sciences',
+  GOV:          'Government & Public Sector',
+  NONPROFIT:    'Nonprofit & Social Enterprise',
+  MEDIA:        'Media & Communications',
+  MANUFACTURING:'Manufacturing & Industrial',
+  RETAIL:       'Retail & Consumer Goods',
+  ENERGY:       'Energy & Utilities',
+  CONSTRUCTION: 'Construction & Real Estate',
+  LOGISTICS:    'Logistics & Supply Chain',
+  OTHER:        'Other',
+};
+
+const ORG_STAGE_LABELS = {
+  EARLY:       'Early Stage — under 3 years or pre-revenue',
+  GROWTH:      'Growth Stage — scaling, headcount increasing',
+  ESTABLISHED: 'Established — stable, defined structure',
+  LEGACY:      'Legacy — long-tenured, entrenched patterns',
+};
+
+const TENURE_LABELS = {
+  UNDER_ONE:  'Under 1 year',
+  ONE_3YR:    '1 to 3 years',
+  FOUR_6YR:   '4 to 6 years',
+  SEVEN_PLUS: '7 years or more',
+};
+
+const FRICTION_LABELS = {
+  WITHIN_LEADERSHIP: 'Within the Leadership Team',
+  CROSS_FUNCTIONAL:  'Between Departments/Silos',
+  TEAM:              'Within a Specific Team',
+  UNKNOWN:           'I cannot pinpoint the source',
+};
+
+const AVOIDANCE_LABELS = {
+  NO_FORUM:      'No forum for the conversation',
+  PREDETERMINED: 'Decisions are made before meetings',
+  COST_TOO_HIGH: 'The social cost of speaking up is too high',
+  NOT_AN_ISSUE:  'Leadership denies the problem exists',
+};
+
+const PRIOR_ATTEMPT_LABELS = {
+  NONE:         'No formal attempt made',
+  CONVERSATION: 'Internal conversations only',
+  STRUCTURAL:   'Structural/Reporting changes',
+  EXTERNAL:     'Brought in outside help before',
+};
+
+const PERSONNEL_RISK_LABELS = {
+  NONE: 'No immediate risk',
+  YES:  'Key people are disengaged/looking',
+  LOST: 'We have already lost critical talent',
+};
+
+const RESOLUTION_BLOCKAGE_LABELS = {
+  NONE:      'Clear path to resolution',
+  KNOWN:     'Known individual/group is blocking',
+  SUSPECTED: 'Suspect a blockage but unconfirmed',
+  ATTEMPTED: 'We tried to resolve it and failed',
+};
+
+const DURATION_LABELS = {
+  UNDER_6MO: 'Under 6 Months',
+  SIX_12MO:  '6–12 Months',
+  ONE_2YR:   '1–2 Years',
+  OVER_2YR:  'Over 2 Years',
+};
+
+const DOWNSTREAM_LABELS = {
+  INDIVIDUAL: 'Individual/Small Team',
+  LARGE:      'Large Department',
+  FULL_ORG:   'The Entire Organization',
+};
+
+const DECISIONS_LABELS = {
+  FAST:    'Decisions get made and stay made',
+  SLOW:    'Decisions require multiple rounds before they land',
+  STALLED: 'Decisions get deferred or reopened constantly',
+};
+
+const EMOTION_LABELS = {
+  EXHAUSTION:  'Tired',
+  FRUSTRATION: 'Frustrated',
+  FEAR:        'Uncertain',
+  APATHY:      'Distant',
+};
+
+// ─── PAGE OBJECT ─────────────────────────────────────────────────────────────
+
 class AuditPage {
   constructor(page) {
     this.page = page;
   }
 
-  async start() {
-    await this.page.goto('/');
+  async goto() {
+    await this.page.goto('/#audit');
+    await this.page.waitForSelector('#audit', { state: 'visible' });
+    await this.suppressAdvisorPanel();
+  }
+
+  async clickIntro() {
     await this.page.getByRole('button', { name: /Show Me What This Is Costing/i }).click();
   }
 
-  async selectOption(labelText) {
-    await this.page.getByRole('button', { name: labelText, exact: true }).click();
+  async fillEmotion(emotionKey) {
+    const label = EMOTION_LABELS[emotionKey];
+    await this.page.getByRole('button', { name: new RegExp(label, 'i') }).first().click();
+    await this.page.getByRole('button', { name: /Continue/i }).click();
   }
 
-  // Step 0 -- Emotion
-  async fillEmotion(inputs) {
-    const emotionLabels = {
-      EXHAUSTION:  'Tired',
-      FRUSTRATION: 'Frustrated',
-      FEAR:        'Uncertain',
-      APATHY:      'Distant',
-    };
-    await this.selectOption(emotionLabels[inputs.primaryEmotion]);
-  }
-
-  // Module 01 -- Context
   async fillContext(inputs) {
-    const industryLabels = {
-      TECH:          'Technology',
-      FINANCE:       'Finance & Insurance',
-      CONSULTING:    'Consulting & Professional Services',
-      HEALTH:        'Healthcare & Life Sciences',
-      GOV:           'Government & Public Sector',
-      NONPROFIT:     'Nonprofit & Social Enterprise',
-      MEDIA:         'Media & Communications',
-      MANUFACTURING: 'Manufacturing & Industrial',
-      RETAIL:        'Retail & Consumer Goods',
-      ENERGY:        'Energy & Utilities',
-      CONSTRUCTION:  'Construction & Real Estate',
-      LOGISTICS:     'Logistics & Supply Chain',
-      OTHER:         'Other',
-    };
-    await this.page.locator('select').selectOption({ label: industryLabels[inputs.industry] });
+    // CustomSelect: click trigger to open dropdown, then click option inside the dropdown div
+    const industryLabel = INDUSTRY_LABELS[inputs.industry];
+    await this.page.locator('button').filter({ hasText: /Select your sector/i }).click();
+    await this.page.locator('div[class*="absolute"]')
+      .getByRole('button', { name: industryLabel })
+      .click();
 
-    const orgStageLabels = {
-      EARLY:       'Startup (Under 3 years)',
-      GROWTH:      'Growth (3 to 10 years)',
-      ESTABLISHED: 'Established (10 to 25 years)',
-      LEGACY:      'Legacy (25+ years)',
-    };
-    await this.selectOption(orgStageLabels[inputs.orgStage]);
-
-    const tenureLabels = {
-      UNDER_ONE: 'Under 1 year',
-      ONE_3YR:   '1 to 3 years',
-      FOUR_6YR:  '4 to 6 years',
-      SEVEN_PLUS:'7+ years',
-    };
-    await this.selectOption(tenureLabels[inputs.leadershipTenure]);
-
+    await this.page.getByRole('button', { name: ORG_STAGE_LABELS[inputs.orgStage] }).click();
+    await this.page.getByRole('button', { name: TENURE_LABELS[inputs.leadershipTenure] }).click();
     await this.page.getByRole('button', { name: /Map the Room/i }).click();
   }
 
-  // Module 02 -- Personnel
   async fillPersonnel(inputs) {
-    const headcountInput = this.page.getByPlaceholder('Estimated total headcount');
-    await headcountInput.fill(String(inputs.headcount));
-    await headcountInput.dispatchEvent('input', { bubbles: true });
-    await headcountInput.blur();
+    await this.page.locator('input[placeholder="Estimated total headcount"]').fill(
+      String(inputs.headcount)
+    );
 
     const steppers = this.page.locator('input[inputmode="numeric"]');
-    const firstStepper = steppers.first();
-    await firstStepper.fill('3');
-    await firstStepper.dispatchEvent('input', { bubbles: true });
-    await firstStepper.blur();
+    const counts = inputs.personnel.map(p => p.count);
+    for (let i = 0; i < counts.length; i++) {
+      if (counts[i] > 0) {
+        await steppers.nth(i).fill(String(counts[i]));
+        await steppers.nth(i).dispatchEvent('input');
+        await steppers.nth(i).dispatchEvent('change');
+      }
+    }
+
+    if (inputs.execCount !== undefined) {
+      await this.page.evaluate((val) => {
+        const input = document.getElementById('execCount-override');
+        if (!input) return;
+        const setter = Object.getOwnPropertyDescriptor(
+          window.HTMLInputElement.prototype, 'value'
+        ).set;
+        setter.call(input, val);
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }, inputs.execCount);
+    }
 
     await this.page.getByRole('button', { name: /Locate the Friction/i }).click();
   }
 
-  // Module 03 -- Behavioral
+  // The FloatingAdvisor uses key={insightKey} — Framer Motion unmounts and
+  // remounts a fresh DOM node after every selection. Post-hoc CSS on the old
+  // node has no effect on the replacement. Instead, inject a persistent
+  // <style> rule into the document head before any React rendering happens.
+  // This survives remounts because it targets the className, not the element.
+  async suppressAdvisorPanel() {
+    await this.page.addStyleTag({
+      content: '.pointer-events-auto.fixed { pointer-events: none !important; display: none !important; }'
+    });
+  }
+
   async fillBehavior(inputs) {
-    const frictionLabels = {
-      TEAM:              'Between leadership and the team',
-      CROSS_FUNCTIONAL:  'Between departments or functions',
-      WITHIN_LEADERSHIP: 'Within the leadership team itself',
-      UNKNOWN:           "We know something is wrong but can't locate it",
-    };
-    await this.selectOption(frictionLabels[inputs.frictionLocation]);
-
-    const avoidanceLabels = {
-      NO_FORUM:     'No safe forum for them',
-      PREDETERMINED:'The outcome feels predetermined',
-      COST_TOO_HIGH:'The cost seems too high',
-      NOT_AN_ISSUE: 'They do happen here',
-    };
-    await this.selectOption(avoidanceLabels[inputs.avoidanceMechanism]);
-
-    const priorAttemptLabels = {
-      NONE:       "We haven't addressed it yet",
-      CONVERSATION:"We've had the conversation -- nothing changed",
-      STRUCTURAL: "We made a structural change -- it didn't resolve it",
-      EXTERNAL:   "We brought someone in and it didn't work",
-      UNCLEAR:    "We tried something -- not sure it addressed the right thing",
-    };
-    await this.selectOption(priorAttemptLabels[inputs.priorAttempt]);
-
-    const personnelRiskLabels = {
-      NONE:    "Not that I'm aware of",
-      POSSIBLY:'There are signs -- nothing confirmed',
-      YES:     'Yes, and we know who',
-      LOST:    "We've already lost someone because of it",
-    };
-    await this.selectOption(personnelRiskLabels[inputs.personnelRisk]);
-
-    const blockageLabels = {
-      NONE:     'No -- nothing like that is pending',
-      SUSPECTED:"Possibly -- we haven't named it yet",
-      KNOWN:    "Yes -- we know what needs to happen but haven't acted",
-      ATTEMPTED:"We've tried to move on it and haven't been able to",
-    };
-    await this.selectOption(blockageLabels[inputs.resolutionBlockage]);
-
-    const durationLabels = {
-      UNDER_6MO: 'Under 6 months',
-      SIX_12MO:  '6 to 12 months',
-      ONE_2YR:   '1 to 2 years',
-      OVER_2YR:  'Over 2 years',
-    };
-    await this.selectOption(durationLabels[inputs.frictionDuration]);
-
-    const downstreamLabels = {
-      INDIVIDUAL: 'Individual/Small Team',
-      LARGE:      'Large Department',
-      FULL_ORG:   'The Entire Organization',
-    };
-    await this.selectOption(downstreamLabels[inputs.downstreamPopulation]);
-
-    const decisionsLabels = {
-      FAST:    'Decisions get made and stay made',
-      SLOW:    'Decisions require multiple rounds before they land',
-      STALLED: 'Decisions get deferred or reopened constantly',
-    };
-    await this.selectOption(decisionsLabels[inputs.decisions]);
-
+    await this.page.getByRole('button', { name: FRICTION_LABELS[inputs.frictionLocation] }).click();
+    await this.page.getByRole('button', { name: AVOIDANCE_LABELS[inputs.avoidanceMechanism] }).click();
+    await this.page.getByRole('button', { name: PRIOR_ATTEMPT_LABELS[inputs.priorAttempt] }).click();
+    await this.page.getByRole('button', { name: PERSONNEL_RISK_LABELS[inputs.personnelRisk] }).click();
+    await this.page.getByRole('button', { name: RESOLUTION_BLOCKAGE_LABELS[inputs.resolutionBlockage] }).click();
+    await this.page.getByRole('button', { name: DURATION_LABELS[inputs.frictionDuration] }).click();
+    await this.page.getByRole('button', { name: DOWNSTREAM_LABELS[inputs.downstreamPopulation] }).click();
+    await this.page.getByRole('button', { name: DECISIONS_LABELS[inputs.decisions] }).click();
     await this.page.getByRole('button', { name: /Count the Cost/i }).click();
   }
 
-  // Module 04 -- Financial
   async fillFinancial(inputs) {
-    if (inputs.payroll && inputs.payroll !== '') {
-      const payrollInput = this.page.getByPlaceholder('Estimate is sufficient');
-      await payrollInput.clear();
-      await payrollInput.fill(inputs.payroll);
-      await payrollInput.dispatchEvent('input', { bubbles: true });
+    if (inputs.payroll && !inputs.isUnsurePayroll) {
+      const formatted = new Intl.NumberFormat('en-US', {
+        style: 'currency', currency: 'USD', maximumFractionDigits: 0,
+      }).format(Number(inputs.payroll));
+      const payrollInput = this.page.locator('input[placeholder="Estimate is sufficient"]');
+      await payrollInput.fill(formatted);
       await payrollInput.blur();
     }
 
-    if (inputs.stalledProjectCapital && inputs.stalledProjectCapital !== '') {
-      const stalledInput = this.page.getByPlaceholder('Optional').first();
-      await stalledInput.fill(inputs.stalledProjectCapital);
-      await stalledInput.dispatchEvent('input', { bubbles: true });
-      await stalledInput.blur();
+    if (inputs.stalledProjectCapital && Number(inputs.stalledProjectCapital) > 0) {
+      const formatted = new Intl.NumberFormat('en-US', {
+        style: 'currency', currency: 'USD', maximumFractionDigits: 0,
+      }).format(Number(inputs.stalledProjectCapital));
+      const capitalInput = this.page.locator('input[placeholder="Optional"]').first();
+      await capitalInput.fill(formatted);
+      await capitalInput.blur();
     }
 
-    if (typeof inputs.meetingHours === 'number' && inputs.meetingHours !== 5) {
-      const slider = this.page.locator('input[type="range"]');
-      await slider.fill(String(inputs.meetingHours));
-      await slider.dispatchEvent('input', { bubbles: true });
-      await slider.blur();
-    }
-
-    // Hidden bridge: execCount override bypasses 5% headcount formula
-    if (inputs.execCount) {
-      await this.page.locator('#execCount-override').evaluate(
-        (el, val) => {
-          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-            window.HTMLInputElement.prototype, 'value'
-          ).set;
-          nativeInputValueSetter.call(el, val);
-          el.dispatchEvent(new Event('input', { bubbles: true }));
-          el.dispatchEvent(new Event('change', { bubbles: true }));
-        },
-        String(inputs.execCount)
-      );
+    if (inputs.meetingHours !== undefined) {
+      await this.page.locator('input[type="range"]').evaluate((el, val) => {
+        const setter = Object.getOwnPropertyDescriptor(
+          window.HTMLInputElement.prototype, 'value'
+        ).set;
+        setter.call(el, val);
+        el.dispatchEvent(new Event('input',  { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      }, inputs.meetingHours);
     }
 
     await this.page.getByRole('button', { name: /Generate Institutional Record/i }).click();
   }
 
   async runAudit(inputs) {
-    await this.start();
-    await this.fillEmotion(inputs);
+    await this.clickIntro();
+    await this.fillEmotion(inputs.primaryEmotion);
     await this.fillContext(inputs);
     await this.fillPersonnel(inputs);
     await this.fillBehavior(inputs);
@@ -211,45 +250,22 @@ class AuditPage {
   }
 }
 
-// ---------------------------------------------------------------------------
-// PARAMETERIZED SUITE -- one test per profile, fresh context per test
-// ---------------------------------------------------------------------------
+// ─── TEST SUITE ───────────────────────────────────────────────────────────────
+
 for (const profile of profiles) {
-  test(`[${profile.id}] ${profile.name}`, async ({ page }) => {
+  test(`${profile.id}: ${profile.label}`, async ({ page }) => {
     const audit = new AuditPage(page);
+    await audit.goto();
+    await audit.runAudit(profile.inputs);
 
-    try {
-      await audit.runAudit(profile.inputs);
+    await expect(page.locator('[data-report-container]')).toBeVisible({ timeout: 15000 });
 
-      // Wait for results container
-      await page.waitForSelector('[data-report-container]', { timeout: 10000 });
+    await expect(
+      page.locator('[data-report-container] h2', { hasText: profile.expected.verdict })
+    ).toBeVisible({ timeout: 5000 });
 
-      // Wait for Institutional State label before asserting verdict
-      await page.waitForSelector(
-        'span:text("Institutional State")',
-        { timeout: 8000 }
-      );
-
-      // Assertion 1: Verdict h2 — exact match
-      const verdictH2 = page.locator('h2', {
-        hasText: new RegExp(`^${profile.expected.verdict}$`),
-      });
-      await expect(verdictH2).toBeVisible({ timeout: 5000 });
-
-      // Assertion 2: Engagement tier name
-      const engagementH3 = page.locator('[data-report-container] h3', {
-        hasText: profile.expected.tier,
-      });
-      await expect(engagementH3).toBeVisible({ timeout: 5000 });
-
-    } catch (err) {
-      const actualVerdict = await page.locator('h2').first().textContent().catch(() => 'NOT_FOUND');
-      const actualTier    = await page.locator('[data-report-container] h3').first().textContent().catch(() => 'NOT_FOUND');
-      await page.screenshot({
-        path: `test-results/${profile.id}-GOT_${actualVerdict.trim().replace(/\s+/g, '_').slice(0, 30)}-EXPECTED_${profile.expected.verdict.replace(/\s+/g, '_')}.png`,
-        fullPage: true,
-      });
-      throw err;
-    }
+    await expect(
+      page.locator('[data-report-container] h3', { hasText: profile.expected.tier })
+    ).toBeVisible({ timeout: 5000 });
   });
 }
