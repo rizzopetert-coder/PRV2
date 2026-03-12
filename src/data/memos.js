@@ -31,7 +31,7 @@ I act as the external anchor. We strip away the process debt and get your team f
     id: "memo-11",
     category: "Leadership",
     title: "The Intellectual Bottleneck",
-    excerpt: "The smartest person in the room is often the biggest obstacle to the work. Brilliance without delegation is just a very expensive ceiling.",
+    excerpt: "The smartest person in the room is often the biggest obstacle to the work. Brilliance without delegation is a very expensive ceiling — and the longer someone holds that position, the less accurately they read the friction they're creating.",
     content: `Some of the most impressive leaders I've worked with are also the most difficult to work for. Brilliant individually. Mediocre at letting go. They treat their leadership team like a collection of high-level assistants rather than autonomous peers, and every decision has to pass through a single mind before it moves.
 
 If you're the only one allowed to be right, your organization will never grow beyond the limits of your own capacity. That's not a leadership style. That's a ceiling.
@@ -113,7 +113,7 @@ I help you identify where the Silence Tax is being paid and make it genuinely sa
     id: "memo-05",
     category: "Logic",
     title: "The Vanity of Being Right",
-    excerpt: "Being right is a baseline. Being effective is what pays the bills. Most leaders I work with are excellent at one of those.",
+    excerpt: "The Sacred Cow persists not because leadership doesn't know. It persists because admitting the problem means admitting the decision that created it. Sutton put a number on it: the individual who outperforms while corroding everyone around them is a net-negative asset. This memo is about what that protection actually costs.",
     content: `Some of the most stuck organizations I've walked into have leaders who are logically correct about almost everything. The plan is airtight. The reasoning is sound. And six months later the needle hasn't moved.
 
 Here's the thing: correctness is a baseline. Effectiveness is the mission. If you'd rather be right than get the job done, you're not leading. You're performing.
@@ -127,7 +127,7 @@ What I help leaders do is trade the perfect plan for a winning execution. Those 
     id: "memo-04",
     category: "Risk",
     title: "The Cost of Flying Blind",
-    excerpt: "The risks that will hurt you aren't in your data. They're in the conversations your team has decided not to have with you.",
+    excerpt: "Stalled decisions don't stay contained. They radiate. And the leaders most responsible for setting direction are often the least equipped to see it — because the defensive routines that protect their certainty are the same ones blocking the root-cause conversation.",
     content: `For most leaders, silence from the team isn't agreement. It's a sign that your people have decided it's safer to protect their jobs than to protect the company. They've quietly concluded that letting you walk into a wall is a better personal bet than being the one who told you it was there.
 
 I've seen this pattern end companies. The crises that feel sudden were visible to everyone else for months. By the time the fire reaches your desk, the cheap resolution is long gone.
