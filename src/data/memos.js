@@ -17,26 +17,26 @@ export const strategicBriefings = [
     id: "memo-12",
     category: "Architecture",
     title: "Institutional Memory and Drift",
-    excerpt: "Organizations don't fail all at once. They drift — quietly, gradually — until the mission becomes a memory and the process becomes the point.",
+    excerpt: "Organizations don't fail all at once. They drift, quietly and gradually, until the mission becomes a memory and the process becomes the point.",
     content: `Here's something I've watched happen to good organizations more times than I'd like: the work of doing the work becomes more important than the result of the work. You start hiring for cultural fit instead of mission alignment. You build departments to manage other departments. The original fire that built the company gets buried under a thick layer of administrative insulation.
 
 The hard part is that it looks like progress from the inside. It looks like professionalization. It looks like growth.
 
 But on the balance sheet it shows up as a declining return on effort. You're working harder than ever and the needle is moving less. The organization has quietly become truth-averse, because the truth would require dismantling the comfortable processes everyone spent years building.
 
-I act as the external anchor. We strip away the process debt and get your team focused back on what actually matters. We remind the organization why it exists. That conversation is usually overdue by the time I'm in the room.`,
+I act as the fixed point. We strip away the process debt and get your team focused back on what actually matters. We remind the organization why it exists. That conversation is usually overdue by the time I'm in the room.`,
     featured: false,
   },
   {
     id: "memo-11",
     category: "Leadership",
     title: "The Intellectual Bottleneck",
-    excerpt: "The smartest person in the room is often the biggest obstacle to the work. Brilliance without delegation is a very expensive ceiling — and the longer someone holds that position, the less accurately they read the friction they're creating.",
+    excerpt: "The smartest person in the room is often the biggest obstacle to the work. Brilliance without delegation is a very expensive ceiling, and the longer someone holds that position, the less accurately they read the friction they're creating.",
     content: `Some of the most impressive leaders I've worked with are also the most difficult to work for. Brilliant individually. Mediocre at letting go. They treat their leadership team like a collection of high-level assistants rather than autonomous peers, and every decision has to pass through a single mind before it moves.
 
 If you're the only one allowed to be right, your organization will never grow beyond the limits of your own capacity. That's not a leadership style. That's a ceiling.
 
-What happens next is predictable. Your best people stop thinking because they've learned you'll overwrite their work anyway. They become order-takers instead of problem-solvers. You end up exhausted and they end up disengaged. High-potential leaders don't stay in rooms where their agency is capped by someone else's need to be the smartest one there.
+What compounds it is this: the longer someone holds that position, the less accurately they read the friction they're generating. Dacher Keltner's research shows the brain literally stops attending to social feedback over time. Your best people stopped pushing back months ago. You've been reading that as agreement. It's not. It's the sound of capable people deciding you're not worth the argument.
 
 The work I do here is about transitioning you from a genius with a thousand helpers to a leader of a high-performance collective. Those are very different things. Only one of them scales.`,
     featured: false,
@@ -66,7 +66,7 @@ When a manager waits until the weekly meeting to share a failure, they've effect
 
 And the thing is, that delay is rarely about laziness. It's about safety. Your people are calculating the social cost of being the bearer of bad news. If your culture punishes the messenger, they'll wait until the last possible second to speak. By then the cheap fix is gone and you're looking at a crisis that costs five times as much to resolve.
 
-Speed requires a baseline of absolute candor where truth moves faster than the hierarchy. I help you identify where the information is getting stuck and establish the kind of environment where your team would rather tell you early than protect themselves by telling you late.`,
+Speed requires a baseline of absolute candor where truth moves faster than the hierarchy. I help you identify where the information is getting stuck and make it safer for your team to tell you early than to protect themselves by telling you late.`,
     featured: false,
   },
   {
@@ -118,7 +118,9 @@ I help you identify where the Silence Tax is being paid and make it genuinely sa
 
 Here's the thing: correctness is a baseline. Effectiveness is the mission. If you'd rather be right than get the job done, you're not leading. You're performing.
 
-The obsession with being right is usually a way to manage the fear of failure. If the plan was perfect and execution failed, the plan stays protected. But a strategy that ignores how people actually behave isn't a strategy. It's a wish.
+The obsession with being right is usually a way to manage the fear of failure. If the plan was perfect and execution failed, the plan stays protected. But a strategy that ignores how people actually behave isn't a strategy. It's a wish.  
+
+Robert Sutton put a number on it. His research on the total cost of a difficult high-performer accounts for the time leadership spends managing them, the output suppressed in the people they corrode, and the departures they accelerate. The individual is profitable on paper and net-negative in practice. That's the Sacred Cow's balance sheet. The protection isn't free. It just gets charged to a line item nobody is watching.
 
 What I help leaders do is trade the perfect plan for a winning execution. Those are different skills and they require different postures. One of them requires you to be less attached to your own correctness and more committed to the actual result. That's a harder shift than it sounds, and it's almost always worth making.`,
     featured: false,
@@ -127,12 +129,14 @@ What I help leaders do is trade the perfect plan for a winning execution. Those 
     id: "memo-04",
     category: "Risk",
     title: "The Cost of Flying Blind",
-    excerpt: "Stalled decisions don't stay contained. They radiate. And the leaders most responsible for setting direction are often the least equipped to see it — because the defensive routines that protect their certainty are the same ones blocking the root-cause conversation.",
+    excerpt: "Stalled decisions don't stay contained. They radiate. And the leaders most responsible for setting direction are often the least equipped to see it, because the defensive routines that protect their certainty are the same ones blocking the root-cause conversation.",
     content: `For most leaders, silence from the team isn't agreement. It's a sign that your people have decided it's safer to protect their jobs than to protect the company. They've quietly concluded that letting you walk into a wall is a better personal bet than being the one who told you it was there.
 
 I've seen this pattern end companies. The crises that feel sudden were visible to everyone else for months. By the time the fire reaches your desk, the cheap resolution is long gone.
 
-What I bring is the unfiltered perspective your internal team is too invested or too cautious to share. Not because they don't care. Because the organizational dynamics make honesty feel risky. My job is to make sure the truth reaches you before the damage is permanent, and then to help you build an environment where that's no longer something that has to come from outside the building.`,
+Argyris called the mechanism single-loop learning: when something goes wrong, the people most responsible for fixing it loop back to blame the context instead of examining their own role. The defensive routine protects their certainty and blocks the root-cause conversation. That's a pattern, not a character flaw.  It runs hardest in exactly the leaders whose direction the organization most needs.
+
+What I bring is the unfiltered perspective your internal team is too invested or too cautious to share. Not because they don't care. Because the organizational dynamics make honesty feel risky. My job is to make sure the truth reaches you before the damage is permanent, and then to help you build the kind of environment where that no longer has to come from outside.`,
     featured: true,
   },
   {
@@ -153,7 +157,7 @@ What I help you build instead is accountability. Not conflict for its own sake, 
     id: "memo-02",
     category: "Architecture",
     title: "Effectiveness Dies in Darkness",
-    excerpt: "Silos aren't just an org chart problem. They're where the truth goes to hide — and where your best opportunities go to die.",
+    excerpt: "Silos aren't just an org chart problem. They're where the truth goes to hide, and where your best opportunities go to die.",
     content: `The biggest bottleneck in most high-growth companies isn't talent or capital. It's the friction created by internal boundaries. When a VP cares more about their department's win than the company's mission, the whole enterprise is at risk. And the thing is, the org chart usually makes this worse, not better.
 
 The point of failure is almost always the handoff. The place where Sales meets Ops. Where Finance meets Strategy. Where the information that one team has never quite makes it to the team that needs it.
