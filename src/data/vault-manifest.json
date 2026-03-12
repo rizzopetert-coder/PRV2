@@ -63,7 +63,8 @@
         "HC-089",
         "HC-093",
         "HC-094",
-        "HC-097"
+        "HC-097",
+        "HC-104"
       ],
       "intelligence_memo_ids": ["MEMO-05"],
       "resolution_playbook_ids": [],
@@ -99,7 +100,8 @@
         "HC-075",
         "HC-079",
         "HC-080",
-        "HC-093"
+        "HC-093",
+        "HC-103"
       ],
       "intelligence_memo_ids": ["MEMO-11"],
       "resolution_playbook_ids": [],
@@ -325,7 +327,8 @@
         "HC-088",
         "HC-093",
         "HC-099",
-        "HC-100"
+        "HC-100",
+        "HC-101"
       ],
       "intelligence_memo_ids": ["MEMO-14"],
       "resolution_playbook_ids": [],
@@ -334,7 +337,7 @@
         "description": "The Anchor is not the absence of friction \u2014 it's the active management of it. This is the diagnostic profile for organizational health and what it takes to hold it.",
         "canonical": "/vault/lexicon/anchor"
       },
-      "advisor_take": "This isn't the finish line. It's the baseline. Organizational health degrades without deliberate maintenance \u2014 the conditions that produced it don't sustain themselves. The work here is protection, not celebration.",
+      "advisor_take": "This isn't the finish line. It's the baseline. Organizational health degrades without deliberate maintenance — the conditions that produced it don't sustain themselves. Brooks showed that coordination cost scales faster than team size. The work here is protection, not celebration — and part of that protection is knowing when to stop adding people to something that's working.",
       "advisor_take_source": "manifest"
     },
     {
@@ -364,7 +367,8 @@
         "HC-090",
         "HC-091",
         "HC-092",
-        "HC-094"
+        "HC-094",
+        "HC-102"
       ],
       "intelligence_memo_ids": ["MEMO-04"],
       "resolution_playbook_ids": [],
