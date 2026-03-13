@@ -1,26 +1,223 @@
-{
-  "question_set_id": "IQ-ROADMAP-CORE",
-  "tier": "ROADMAP",
-  "state_id": null,
-  "type": "core",
-  "questions": [
-    {
-      "id": "IQ-ROADMAP-CORE-01",
-      "question": "",
-      "intent": ""
-    }
-  ]
-}
-{
-  "question_set_id": "IQ-BROKEN_COMPASS",
-  "tier": "ROADMAP",
-  "state_id": "BROKEN_COMPASS",
-  "type": "state",
-  "questions": [
-    {
-      "id": "IQ-BROKEN_COMPASS-01",
-      "question": "",
-      "intent": ""
-    }
-  ]
-}
+[
+  {
+    "question_set_id": "IQ-STABILITY_SUPPORT-CORE",
+    "tier": "STABILITY_SUPPORT",
+    "state_id": null,
+    "type": "core",
+    "questions": [
+      {
+        "id": "IQ-STABILITY_SUPPORT-CORE-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-EXECUTIVE_COUNSEL-CORE",
+    "tier": "EXECUTIVE_COUNSEL",
+    "state_id": null,
+    "type": "core",
+    "questions": [
+      {
+        "id": "IQ-EXECUTIVE_COUNSEL-CORE-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-INTERVENTION-CORE",
+    "tier": "INTERVENTION",
+    "state_id": null,
+    "type": "core",
+    "questions": [
+      {
+        "id": "IQ-INTERVENTION-CORE-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-ROADMAP-CORE",
+    "tier": "ROADMAP",
+    "state_id": null,
+    "type": "core",
+    "questions": [
+      {
+        "id": "IQ-ROADMAP-CORE-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-DEVELOPMENT-CORE",
+    "tier": "DEVELOPMENT",
+    "state_id": null,
+    "type": "core",
+    "questions": [
+      {
+        "id": "IQ-DEVELOPMENT-CORE-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-LAST_LEG",
+    "tier": "STABILITY_SUPPORT",
+    "state_id": "LAST_LEG",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-LAST_LEG-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-SACRED_COW",
+    "tier": "EXECUTIVE_COUNSEL",
+    "state_id": "SACRED_COW",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-SACRED_COW-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-CRACKED_MIRROR",
+    "tier": "EXECUTIVE_COUNSEL",
+    "state_id": "CRACKED_MIRROR",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-CRACKED_MIRROR-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-EXIT_PATTERN",
+    "tier": "INTERVENTION",
+    "state_id": "EXIT_PATTERN",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-EXIT_PATTERN-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-DEAD_CALM",
+    "tier": "INTERVENTION",
+    "state_id": "DEAD_CALM",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-DEAD_CALM-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-SILOSOLATION",
+    "tier": "INTERVENTION",
+    "state_id": "SILOSOLATION",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-SILOSOLATION-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-RUNAWAY_TREADMILL",
+    "tier": "ROADMAP",
+    "state_id": "RUNAWAY_TREADMILL",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-RUNAWAY_TREADMILL-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-FOSSIL_SYSTEM",
+    "tier": "ROADMAP",
+    "state_id": "FOSSIL_SYSTEM",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-FOSSIL_SYSTEM-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-ANCHOR",
+    "tier": "ROADMAP",
+    "state_id": "ANCHOR",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-ANCHOR-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-BROKEN_COMPASS",
+    "tier": "ROADMAP",
+    "state_id": "BROKEN_COMPASS",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-BROKEN_COMPASS-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-KID_GLOVES",
+    "tier": "DEVELOPMENT",
+    "state_id": "KID_GLOVES",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-KID_GLOVES-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  },
+  {
+    "question_set_id": "IQ-UNLIT_ROOM",
+    "tier": "DEVELOPMENT",
+    "state_id": "UNLIT_ROOM",
+    "type": "state",
+    "questions": [
+      {
+        "id": "IQ-UNLIT_ROOM-01",
+        "question": "",
+        "intent": ""
+      }
+    ]
+  }
+]
