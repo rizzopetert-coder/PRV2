@@ -242,7 +242,7 @@ class AuditPage {
 
   async downloadPDF() {
   await this.page.getByRole('button', { name: /Download the Record/i }).click();
-}
+  }
 
   async runAudit(inputs) {
     await this.clickIntro();
