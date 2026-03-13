@@ -1,0 +1,26 @@
+{
+  "question_set_id": "IQ-ROADMAP-CORE",
+  "tier": "ROADMAP",
+  "state_id": null,
+  "type": "core",
+  "questions": [
+    {
+      "id": "IQ-ROADMAP-CORE-01",
+      "question": "",
+      "intent": ""
+    }
+  ]
+}
+{
+  "question_set_id": "IQ-BROKEN_COMPASS",
+  "tier": "ROADMAP",
+  "state_id": "BROKEN_COMPASS",
+  "type": "state",
+  "questions": [
+    {
+      "id": "IQ-BROKEN_COMPASS-01",
+      "question": "",
+      "intent": ""
+    }
+  ]
+}
