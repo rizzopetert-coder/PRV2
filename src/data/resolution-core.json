@@ -1,0 +1,37 @@
+{
+  "state_id": "BROKEN_COMPASS",
+  "tier": "ROADMAP",
+
+  "engagement_premise": "",
+
+  "entry_point": {
+    "format": "",
+    "client_ask": "",
+    "pete_objective": ""
+  },
+
+  "method": {
+    "phases": [
+      {
+        "label": "",
+        "description": "",
+        "duration": ""
+      }
+    ]
+  },
+
+  "intake_question_ids": {
+    "core": "IQ-ROADMAP-CORE",
+    "state": "IQ-BROKEN_COMPASS"
+  },
+
+  "output": {
+    "format": "",
+    "contains": "",
+    "leads_to": ""
+  },
+
+  "failure_modes": [],
+
+  "resolution_condition": ""
+}
