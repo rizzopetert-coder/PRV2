@@ -32,7 +32,8 @@
     },
     "expected": {
       "verdict": "Last Leg",
-      "tier": "Stability Support"
+      "tier": "Stability Support",
+      "playbookId": "PB-001"
     }
   },
   {
@@ -68,7 +69,8 @@
     },
     "expected": {
       "verdict": "The Sacred Cow",
-      "tier": "The Executive Counsel"
+      "tier": "The Executive Counsel",
+      "playbookId": "PB-002"
     }
   },
   {
@@ -104,7 +106,8 @@
     },
     "expected": {
       "verdict": "Cracked Mirror",
-      "tier": "The Executive Counsel"
+      "tier": "The Executive Counsel",
+      "playbookId": "PB-003"
     }
   },
   {
@@ -140,7 +143,8 @@
     },
     "expected": {
       "verdict": "The Exit Pattern",
-      "tier": "The Executive Counsel"
+      "tier": "The Executive Counsel",
+      "playbookId": "PB-004"
     }
   },
   {
@@ -176,7 +180,8 @@
     },
     "expected": {
       "verdict": "Dead Calm",
-      "tier": "The Roadmap"
+      "tier": "The Roadmap",
+      "playbookId": "PB-005"
     }
   },
   {
@@ -212,7 +217,8 @@
     },
     "expected": {
       "verdict": "Silosolation",
-      "tier": "The Roadmap"
+      "tier": "The Roadmap",
+      "playbookId": "PB-006"
     }
   },
   {
@@ -248,7 +254,8 @@
     },
     "expected": {
       "verdict": "Runaway Treadmill",
-      "tier": "The Roadmap"
+      "tier": "The Roadmap",
+      "playbookId": "PB-007"
     }
   },
   {
@@ -284,7 +291,8 @@
     },
     "expected": {
       "verdict": "The Fossil System",
-      "tier": "The Roadmap"
+      "tier": "The Roadmap",
+      "playbookId": "PB-008"
     }
   },
   {
@@ -320,7 +328,8 @@
     },
     "expected": {
       "verdict": "The Anchor",
-      "tier": "The Roadmap"
+      "tier": "The Roadmap",
+      "playbookId": "PB-009"
     }
   },
   {
@@ -356,7 +365,8 @@
     },
     "expected": {
       "verdict": "Broken Compass",
-      "tier": "The Roadmap"
+      "tier": "The Roadmap",
+      "playbookId": "PB-010"
     }
   },
   {
@@ -392,7 +402,8 @@
     },
     "expected": {
       "verdict": "Kid Gloves",
-      "tier": "Development"
+      "tier": "Development",
+      "playbookId": "PB-011"
     }
   },
   {
@@ -428,7 +439,8 @@
     },
     "expected": {
       "verdict": "The Unlit Room",
-      "tier": "Development"
+      "tier": "Development",
+      "playbookId": "PB-012"
     }
   }
 ]
