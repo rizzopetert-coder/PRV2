@@ -306,7 +306,7 @@ export default async function LexiconStatePage({ params }) {
           {/* Playbook entry point — renders when playbook is linked */}
           {resolution_playbook_ids?.length > 0 && (
             <a
-              href={`/vault/lexicon/${assets.slug}/playbook`}
+              href={`/vault/lexicon/${slug}/playbook`}
               className="block border border-brand-border px-8 py-8 mb-6 hover:border-brand-accent transition-colors duration-200 group"
             >
               <p className="font-mono text-[9px] tracking-widest uppercase text-brand-accent mb-3">
