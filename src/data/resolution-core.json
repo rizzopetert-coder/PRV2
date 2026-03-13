@@ -1,37 +1,362 @@
-{
-  "state_id": "BROKEN_COMPASS",
-  "tier": "ROADMAP",
-
-  "engagement_premise": "",
-
-  "entry_point": {
-    "format": "",
-    "client_ask": "",
-    "pete_objective": ""
+[
+  {
+    "state_id": "LAST_LEG",
+    "tier": "STABILITY_SUPPORT",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-STABILITY_SUPPORT-CORE",
+      "state": "IQ-LAST_LEG"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
   },
-
-  "method": {
-    "phases": [
-      {
-        "label": "",
-        "description": "",
-        "duration": ""
-      }
-    ]
+  {
+    "state_id": "SACRED_COW",
+    "tier": "EXECUTIVE_COUNSEL",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-EXECUTIVE_COUNSEL-CORE",
+      "state": "IQ-SACRED_COW"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
   },
-
-  "intake_question_ids": {
-    "core": "IQ-ROADMAP-CORE",
-    "state": "IQ-BROKEN_COMPASS"
+  {
+    "state_id": "CRACKED_MIRROR",
+    "tier": "EXECUTIVE_COUNSEL",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-EXECUTIVE_COUNSEL-CORE",
+      "state": "IQ-CRACKED_MIRROR"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
   },
-
-  "output": {
-    "format": "",
-    "contains": "",
-    "leads_to": ""
+  {
+    "state_id": "EXIT_PATTERN",
+    "tier": "INTERVENTION",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-INTERVENTION-CORE",
+      "state": "IQ-EXIT_PATTERN"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
   },
-
-  "failure_modes": [],
-
-  "resolution_condition": ""
-}
+  {
+    "state_id": "DEAD_CALM",
+    "tier": "INTERVENTION",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-INTERVENTION-CORE",
+      "state": "IQ-DEAD_CALM"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
+  },
+  {
+    "state_id": "SILOSOLATION",
+    "tier": "INTERVENTION",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-INTERVENTION-CORE",
+      "state": "IQ-SILOSOLATION"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
+  },
+  {
+    "state_id": "RUNAWAY_TREADMILL",
+    "tier": "ROADMAP",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-ROADMAP-CORE",
+      "state": "IQ-RUNAWAY_TREADMILL"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
+  },
+  {
+    "state_id": "FOSSIL_SYSTEM",
+    "tier": "ROADMAP",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-ROADMAP-CORE",
+      "state": "IQ-FOSSIL_SYSTEM"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
+  },
+  {
+    "state_id": "ANCHOR",
+    "tier": "ROADMAP",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-ROADMAP-CORE",
+      "state": "IQ-ANCHOR"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
+  },
+  {
+    "state_id": "BROKEN_COMPASS",
+    "tier": "ROADMAP",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-ROADMAP-CORE",
+      "state": "IQ-BROKEN_COMPASS"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
+  },
+  {
+    "state_id": "KID_GLOVES",
+    "tier": "DEVELOPMENT",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-DEVELOPMENT-CORE",
+      "state": "IQ-KID_GLOVES"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
+  },
+  {
+    "state_id": "UNLIT_ROOM",
+    "tier": "DEVELOPMENT",
+    "engagement_premise": "",
+    "entry_point": {
+      "format": "",
+      "client_ask": "",
+      "pete_objective": ""
+    },
+    "method": {
+      "phases": [
+        {
+          "label": "",
+          "description": "",
+          "duration": ""
+        }
+      ]
+    },
+    "intake_question_ids": {
+      "core": "IQ-DEVELOPMENT-CORE",
+      "state": "IQ-UNLIT_ROOM"
+    },
+    "output": {
+      "format": "",
+      "contains": "",
+      "leads_to": ""
+    },
+    "failure_modes": [],
+    "resolution_condition": ""
+  }
+]
