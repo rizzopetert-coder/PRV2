@@ -30,7 +30,8 @@ export async function POST(request) {
       resolution_blockage = '',
       decisions           = '',
       primary_emotion     = '',
-    } = body;
+      playbookId          = null,
+      } = body;
 
     // Validate minimum required fields
     if (!verdict || !tier) {
@@ -66,6 +67,7 @@ export async function POST(request) {
       Resolution_Blockage: resolution_blockage        || 'Unknown',
       Decisions:           decisions                  || 'Unknown',
       Primary_Emotion:     primary_emotion            || 'Unknown',
+      Playbook_ID:         playbookId                 || '',
 
       // Identity -- optional, provided only if prospect submitted email
       Client_Email:        email || 'diagnostic@principalresolution.com',
