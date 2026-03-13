@@ -1,5 +1,5 @@
 /**
- * Principal Resolution // Diagnostic Matrix Spec v3.1
+ * Principal Resolution // Diagnostic Matrix Spec v3.2
  * Suite: Institutional Logic Regression
  * Coverage: All 12 v6.0 states and engagement tiers
  * Strategy: Fresh browser context per profile. No shared state between tests.
@@ -240,6 +240,10 @@ class AuditPage {
     await this.page.getByRole('button', { name: /Generate Institutional Record/i }).click();
   }
 
+  async downloadPDF() {
+  await this.page.getByRole('button', { name: /Download the Record/i }).click();
+}
+
   async runAudit(inputs) {
     await this.clickIntro();
     await this.fillEmotion(inputs.primaryEmotion);
@@ -255,9 +259,23 @@ class AuditPage {
 for (const profile of profiles) {
   test(`${profile.id}: ${profile.label}`, async ({ page }) => {
     const audit = new AuditPage(page);
+
+    // Register dispatch interceptor before navigation so it is in place
+    // when downloadPDF() fires the fetch to /api/diagnostic-dispatch.
+    let capturedDispatch = null;
+    await page.route('**/api/diagnostic-dispatch', async route => {
+      try {
+        capturedDispatch = JSON.parse(route.request().postData() || '{}');
+      } catch (_) {
+        capturedDispatch = {};
+      }
+      await route.continue();
+    });
+
     await audit.goto();
     await audit.runAudit(profile.inputs);
 
+    // ── UI assertions ──────────────────────────────────────────────────────
     await expect(page.locator('[data-report-container]')).toBeVisible({ timeout: 15000 });
 
     await expect(
@@ -267,5 +285,17 @@ for (const profile of profiles) {
     await expect(
       page.locator('[data-report-container] h3', { hasText: profile.expected.tier })
     ).toBeVisible({ timeout: 5000 });
+
+    // ── Dispatch assertion ─────────────────────────────────────────────────
+    // Click download to trigger the primary dispatch path.
+    // page.route() is already registered above — it will capture the POST body.
+    await audit.downloadPDF();
+
+    await expect
+      .poll(() => capturedDispatch?.playbookId, {
+        timeout: 10000,
+        message: `[${profile.id}] Expected dispatch playbookId to be ${profile.expected.playbookId}`,
+      })
+      .toBe(profile.expected.playbookId);
   });
 }
