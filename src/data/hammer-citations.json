@@ -25,7 +25,7 @@
       "survey",
       "longitudinal-study"
     ],
-    "url_status_values": "VERIFIED (independently confirmed in public search) | UNVERIFIED (provided but not confirmed -- suppress from UI) | FABRICATED (title does not exist at source -- replace or remove)"
+    "url_status_values": "VERIFIED (independently confirmed in public search) | UNVERIFIED (provided but not confirmed -- suppress from UI) | FABRICATED (title does not exist at source -- replace or remove)",
     "unlit_room_max_severity": 2,
     "anchor_max_severity": 2,
     "broken_compass_max_severity": 2,
