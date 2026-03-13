@@ -21,6 +21,7 @@
 
 import manifest from "@/data/vault-manifest.json";
 import { MEMOS, getMemoById } from "@/data/vaultMemos";
+import playbookLibrary from "@/data/playbook-library.json";
 
 // ─── Internal lookup ──────────────────────────────────────────────────────────
 
@@ -170,4 +171,16 @@ export function getCitationCountByState() {
       s.hammer_citation_ids.length,
     ])
   );
+}
+
+export function getPlaybookById(playbookId) {
+  if (!playbookId) return null;
+  const playbook = playbookLibrary.playbooks.find(
+    (p) => p.playbook_id === playbookId
+  );
+  if (!playbook) {
+    console.warn(`[vaultAssets] getPlaybookById: unknown playbookId "${playbookId}"`);
+    return null;
+  }
+  return playbook;
 }
