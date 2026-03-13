@@ -1,0 +1,416 @@
+{
+  "_schema_version": "1.0.0",
+  "_description": "Principal Resolution — Resolution Playbook Library. One playbook per state. Four sections per playbook: mirror, mechanism, cost, resolution. Keyed by v6.0 engine state ID. Do not reference tier-based keys.",
+  "_constraints": {
+    "state_ids": [
+      "LAST_LEG",
+      "SACRED_COW",
+      "CRACKED_MIRROR",
+      "EXIT_PATTERN",
+      "DEAD_CALM",
+      "SILOSOLATION",
+      "RUNAWAY_TREADMILL",
+      "FOSSIL_SYSTEM",
+      "ANCHOR",
+      "BROKEN_COMPASS",
+      "KID_GLOVES",
+      "UNLIT_ROOM"
+    ],
+    "sections": ["mirror", "mechanism", "cost", "resolution"],
+    "status_values": "DRAFT | REVIEW | APPROVED"
+  },
+  "playbooks": [
+    {
+      "playbook_id": "PB-001",
+      "state_id": "LAST_LEG",
+      "status": "APPROVED",
+      "tier": "STABILITY_SUPPORT",
+      "sections": {
+        "mirror": [
+          "The diagnostic didn't find a friction pattern in early formation or a dynamic that's been quietly normalized. It found an organization teetering on the line marking the point of no return. The window for careful, incremental action has closed.",
+          "You probably didn't need a diagnostic to tell you that. You've been feeling the weight of it. The people who left. The decisions that kept not getting made. The sense that the window for the thoughtful approach closed somewhere behind you while you were still trying to find it.",
+          "What the diagnostic did was put a number on what you've been sensing, confirm that the signals you've been reading are accurate, and tell you something you may not have let yourself say out loud yet: the time for deliberate is gone. What's available now is decisive.",
+          "The leaders who come out of a Last Leg situation well are the ones who stopped debating whether the moment had arrived and started moving. You're here. It has."
+        ],
+        "mechanism": [
+          "Last Leg is what happens when two clocks run simultaneously and nobody stops either of them.",
+          "The first clock is the friction itself — the dynamic inside the leadership layer, the decisions that stalled, the talent that started leaving. That clock has been running long enough that the organization has built workarounds around the workarounds. The original problem is now load-bearing in ways that make it feel too dangerous to touch.",
+          "The second clock is financial. At a certain leak ratio (the diagnostic found yours) the organization stops losing ground slowly and starts losing it in ways that compound faster than the recovery can run. The gap between where you expected to be and where you are isn't closing on its own. Every month it stays open, the options available to close it get fewer and more expensive.",
+          "What makes Last Leg its own category is the intersection of those two clocks. The human dynamic is urgent. The financial picture is urgent. And they're feeding each other. The people problem is accelerating the financial problem, and the financial pressure is making the people problem harder to address. That loop doesn't break from the inside, and it doesn't break slowly."
+        ],
+        "cost": [
+          "The financial output named a number. At this profile, that number is no longer a projection — it's a confirmed rate of loss running in real time.",
+          "The talent picture tells the same story from a different angle. The people who left took more than their output with them. They took client relationships, institutional knowledge, and the confidence of the people who watched them go. Every departure in a Last Leg organization sends a signal to the people who remain, and the people who remain are making decisions about their own futures based on what they're watching.",
+          "The hardest cost to sit with is the opportunity cost of the time already spent. Every month the situation ran without being addressed was a month of recovery that is no longer available. Use it as fuel."
+        ],
+        "resolution": [
+          "This is not the engagement where we spend the first month building a diagnostic picture. You already have one. This is the engagement where we move.",
+          "The first conversation is about triage — what is losing ground, what can be stabilized quickly, and what needs to move first. That conversation happens fast, and it produces a short list of actions, not a long document.",
+          "From there, the work is direct and time-bounded. The conversations that need to happen get structured and supported so they land correctly the first time, because there isn't room in this situation for a second attempt at the same conversation. The talent that's still salvageable gets a reason to stay that's grounded in something real, not reassurance. The financial picture gets addressed with the same urgency the diagnostic found in it.",
+          "The leaders who come through a Last Leg situation don't do it by finding the perfect plan. They do it by making the decision to move before the last good option closes, and by having someone next to them who has navigated this terrain before and knows where the ground is solid.",
+          "That window is still open. Not indefinitely, but it's open now.",
+          "Call us today."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-002",
+      "state_id": "SACRED_COW",
+      "status": "APPROVED",
+      "tier": "EXECUTIVE_COUNSEL",
+      "sections": {
+        "mirror": [
+          "The diagnostic found something specific: you know what the problem is, you know where it lives, and you've made a calculation (more than once, probably) that the cost of addressing it exceeds the cost of absorbing it.",
+          "That calculation made sense when you first ran it. It may have made sense the second time. At some point — and the diagnostic suggests that point has passed — the math flipped. The absorption is now more expensive than the address. The organization just hasn't updated its position.",
+          "You likely have one person in your leadership layer who produces enough — in revenue, in relationships, in institutional knowledge, in sheer force of personality — that their behavior has been granted an exemption the rest of the organization can see clearly and nobody will say out loud. The meetings that bend around them. The talented people who've left without fully explaining why. The decisions that get made or unmade based on what that person will or won't tolerate.",
+          "The team has been watching how you handle it. They've drawn conclusions."
+        ],
+        "mechanism": [
+          "Robert Sutton's research on what he called the total cost of a difficult high performer is one of the more clarifying data points in organizational behavior. The individual looks profitable on paper. When you account for the leadership time spent managing their behavior, the output suppressed in the people working around them, and the departures they've either caused or accelerated — the balance sheet looks different.",
+          "The organization almost never runs that calculation deliberately. It runs a simpler one: this person produces X, and addressing the situation risks losing X. What that calculation misses is the cost accumulating on the other side of the ledger — quietly, continuously, and in the behavior of every person watching how the situation gets handled.",
+          "That last piece is where the Sacred Cow dynamic does its most durable damage. The person at the center of it is a problem. The organizational message their protection sends is a larger one. Every high performer in that building has registered what the threshold for consequence actually is (which is everyone). Some of them have already decided it tells them something important about whether this is a place worth staying."
+        ],
+        "cost": [
+          "The financial output named what's visible. What's harder to model is the tax this situation is collecting from people who are never going to put it in a report.",
+          "Your best people are carrying extra weight. Not because the work is hard (they can handle hard work) but because a portion of their energy every week goes toward navigating around a dynamic that shouldn't be there. They've built workarounds. They've learned which conversations to avoid and which rooms to be careful in. They've gotten good at it. That expertise is costing them capacity that should be going toward the actual work, and it's costing you an organization that runs at full strength.",
+          "The retention picture is where it compounds. High performers have options, and they evaluate them against a simple question: is this environment worth what it asks of me? The Sacred Cow dynamic changes that calculation for everyone who can see it clearly — which is everyone. The people who've already left took institutional knowledge, client relationships, and their own future output with them. The people still there are running their own numbers.",
+          "The longer the protection holds, the more expensive the eventual reckoning becomes — either the cost of the person's continued presence, or the cost of losing them badly after waiting too long."
+        ],
+        "resolution": [
+          "The leaders who navigate this well share one characteristic: they stopped trying to resolve it from inside the relationship and brought in someone with enough distance to call it clearly.",
+          "Here's what that looks like in practice.",
+          "We start by building an accurate picture of the actual cost — not the one the organization has been running informally, but a thorough accounting of what the situation is producing on both sides of the ledger. That picture almost always clarifies the decision that's been feeling impossible. The fog around a Sacred Cow situation is usually a function of proximity. Accurate numbers have a way of cutting through it.",
+          "From there, the work is about how to move. That means preparing you for a conversation that has a high probability of going well when it's structured correctly, and a high probability of going badly when it isn't. It means thinking through the downstream effects on the team — because how this gets handled matters as much as the outcome, and the organization will be watching both. And it means having someone in your corner during the period after, when the dynamic shifts and the team recalibrates to a new normal.",
+          "Most leaders are surprised by two things: how much clearer the path looks once the cost is accurately named, and how much better the organization feels once it's walked.",
+          "The situation you're in is workable. It requires a decision, some careful execution, and someone who has done this before.",
+          "That's what we're here for."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-003",
+      "state_id": "CRACKED_MIRROR",
+      "status": "APPROVED",
+      "tier": "EXECUTIVE_COUNSEL",
+      "sections": {
+        "mirror": [
+          "You've built something real. The organization running around you is evidence of that — the decisions made, the people developed, the problems solved that didn't have obvious solutions. That history is not in question.",
+          "What the diagnostic found is something that happens to a specific kind of leader: the ones who've been in the chair long enough, and who matter enough to the people around them, that the feedback ecosystem quietly shifts. Capable people read the room and adjust what they bring into it. They're being considerate. They're also, without meaning to, leaving you with a slightly edited version of reality.",
+          "You've probably noticed the edges of it. The meetings that resolve a little too smoothly. The direct report who is brilliant in a one-on-one and suddenly cautious in a group. The sense that you're getting the polished version of what people actually think, and that the unpolished version would be more useful.",
+          "That instinct is correct. And the fact that you're here, looking at this, suggests you've known it for a while."
+        ],
+        "mechanism": [
+          "Here's the reassuring part: this is well-documented territory.",
+          "Dacher Keltner's research on power and perception found something consistent across leaders at every level: the longer you hold a position, the less accurately your brain registers the social feedback around you. The people delivering it have learned, through entirely reasonable trial and error, how to shape it in ways that land better. They're being considerate. And the cumulative effect of that consideration is a leader working from a picture that's been quietly curated by everyone around them.",
+          "Tasha Eurich's research puts the self-awareness gap in starker terms: 95% of leaders believe they're self-aware. Around 10 to 15% actually are. Tenure and authority move the number in the wrong direction (the position changes what information reaches you and how) long before you notice it happening.",
+          "The result, in practice, is a leader who is working hard, making decisions thoughtfully, and operating on a picture of the organization that is about 20% less accurate than it should be. Nobody lied. Everyone got good at being diplomatic."
+        ],
+        "cost": [
+          "The diplomatic gap has a price, and it shows up in specific places.",
+          "Decisions get revisited more than they should — the people who had reservations didn't surface them at the right moment, and those reservations show up later, in implementation, as friction. Projects stall at handoffs where two people have incompatible understandings of what was agreed, and neither of them wants to be the one to surface the discrepancy upward. Talented people develop a quiet expertise in managing around the dynamic rather than through it — impressive, and also a significant drain on capacity that could be going somewhere else.",
+          "The subtler cost is what happens to your own development. Every leader has blind spots. The ones who keep growing are the ones whose environment tells them where those blind spots are. When the environment has learned to work around them instead, the gap between how you experience your leadership and how your team experiences it widens slowly, without drama, until something makes it visible all at once.",
+          "The diagnostic found this at a stage where it's very workable. That's worth noting."
+        ],
+        "resolution": [
+          "The most useful thing we do in the early stage of an engagement like this is simple: we talk to your people.",
+          "Actual conversations, conducted with enough distance from the org chart that people can be honest, with someone who has no history in the building (and no stake in what they find). We surface the unpolished version — where the diplomatic gap is largest, what it's costing, and what specifically would need to change for it to close.",
+          "Then we bring that back to you directly, without the editorial layer, and work through it together. What it means for how you run the leadership team. What needs to come back into the room that's currently being managed around you. What your best people need in order to bring their full thinking forward again.",
+          "This part is almost always more manageable than leaders expect. The anticipation of the hard feedback tends to be worse than the feedback itself. And the relief of working from an accurate picture (rather than the diplomatic version) is usually immediate.",
+          "The leaders who do this well come out of it with a team that's more candid, more effective, and more enjoyable to lead. When the room stops managing around the leader and starts working with them, the difference is felt quickly and broadly.",
+          "If this is landing as something you've been sensing for a while, that's the right instinct. It usually means the timing is good.",
+          "Let's talk about what this looks like for your organization specifically."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-004",
+      "state_id": "EXIT_PATTERN",
+      "status": "APPROVED",
+      "tier": "INTERVENTION",
+      "sections": {
+        "mirror": [
+          "The diagnostic found something that's easy to misread as a retention problem. Retention problems have straightforward solutions. What the diagnostic found requires a different diagnosis entirely — an environment that capable people have decided, one by one, is no longer worth what it asks of them.",
+          "The exits probably didn't arrive with fanfare. They rarely do. Someone gave notice, said something gracious in their farewell email, and left for an opportunity that was, depending on who you asked, better aligned with their goals. The real reason was something quieter. Six to eighteen months before their LinkedIn job search, a moment came where they stopped believing their best work was possible here. A calculation, made privately and revised upward over time, about whether the friction of staying exceeded the cost of leaving.",
+          "By the time the Exit Pattern is confirmed, that calculation has been run by enough people that it's become part of the culture. The ones who left shaped the story the ones who stayed are telling themselves. And the ones who stayed are running their own numbers."
+        ],
+        "mechanism": [
+          "Exit Pattern organizations don't lose people because the market got competitive or the compensation fell behind. They lose people because something in the environment — a leadership dynamic, a structural frustration, a pattern of decisions that strayed from a core value set — crossed a threshold that talented people don't tend to announce.",
+          "Gallup's research on voluntary turnover found that 52% of exits were preventable, and that in the vast majority of cases, the manager either knew or should have known something was wrong. The departure wasn't a surprise to the organization's immune system. It was a surprise to the people at the top who had stopped receiving accurate information about what the environment actually felt like to work in — or worse — stopped caring about it.",
+          "The mechanism is straightforward and uncomfortable: the same dynamic that drove people out is still in place. The organization didn't change when the first person left, or the second. It absorbed the departures, redistributed the work, and continued. What it didn't do is examine what it was communicating to the people still there about what kind of place this is and what kind of leadership it practices.",
+          "That communication is ongoing. It happens in every meeting, every decision, every moment where the pattern either gets addressed or gets accommodated again. The people still there are paying attention to every one of those moments."
+        ],
+        "cost": [
+          "Gallup puts the replacement cost of a single employee at one-half to two times their annual salary. At the volume of exits this diagnostic profile represents, that number stops being an HR statistic and starts being a material financial event — one that recurs every time the underlying dynamic produces another departure.",
+          "The financial figure understates the actual cost by a meaningful margin. It accounts for recruitment and onboarding. It doesn't account for the institutional knowledge that walked out with each person, the client relationships that followed some of them, or the output lost during the months of declining engagement that preceded the resignation. People don't leave organizations at full productivity. They leave on a long, quiet slope that starts well before the conversation with HR.",
+          "The cultural cost is the one that compounds longest. Every departure that goes unexamined sends a message to the people who remain about the organization's relationship with the people in it. That message accumulates. The organization that doesn't address the Exit Pattern doesn't just keep losing people — it starts attracting a different kind of person. One who either hasn't noticed what's happening yet, or has noticed and decided they're fine with it. Neither is the talent profile that builds something great."
+        ],
+        "resolution": [
+          "The first conversation we have in an Exit Pattern engagement is the one the organization hasn't had yet: what actually drove the departures.",
+          "Not the exit interview version, which by the time it's conducted has been edited for professionalism and future references. The real version — built from candid conversations with people who are still there, who watched the exits happen, and who have a very clear picture of what the environment communicates that leadership often doesn't. That picture is almost always more specific than expected, and more actionable.",
+          "From there, the work has two tracks that run simultaneously. The first is stopping the current bleed — identifying the people whose departure would be most damaging, understanding where they are in their own calculus, and giving them a substantive reason to update it. Not a retention bonus. A genuine change in the conditions that have been driving the math in the wrong direction.",
+          "The second track is the underlying dynamic. Whatever produced the Exit Pattern is still operating. Addressing the departures without addressing the source is the organizational equivalent of treating a fever without finding the infection. The exits will continue, on the same schedule, until the environment that's producing them changes.",
+          "The organizations that come out of an Exit Pattern well are the ones that treat the departures as accurate feedback rather than unfortunate events — and then do something specific with what the feedback says.",
+          "That's where we start."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-005",
+      "state_id": "DEAD_CALM",
+      "status": "APPROVED",
+      "tier": "INTERVENTION",
+      "sections": {
+        "mirror": [
+          "Nobody is fighting. Nobody is moving.",
+          "The diagnostic found a leadership team that has reached a state of such careful mutual awareness that the energy required to maintain the peace has crowded out the energy required to make decisions. Meetings happen. Agendas get covered. Action items get assigned and revisited and reassigned. The calendar stays full and the organization stays still.",
+          "Dead Calm is the most professionally managed form of dysfunction in this diagnostic library. Everyone in that room is talented enough to know exactly what's happening and experienced enough to know exactly how to avoid being the one who names it. The result is a leadership team that has become, without meaning to, extraordinarily good at the appearance of progress.",
+          "You've probably felt it. The decision that got made in the meeting and unmade in the hallway afterward. The initiative that had full support in the room and no owner by Friday. The sense that the organization is capable of so much more than it's currently producing, and that something in the room where the decisions get made is the reason why.",
+          "That something has a name now."
+        ],
+        "mechanism": [
+          "Dead Calm forms at the intersection of two very human tendencies: the desire to preserve relationships and the desire to avoid being wrong in public.",
+          "In a high-functioning leadership team, those tendencies get balanced by a shared commitment to honest disagreement. In a Dead Calm organization, the balance has tipped. The relationships have become more important than the decisions, and the fear of being wrong has become more powerful than the desire to achieve. Nobody made that choice deliberately. It accumulated, one carefully worded meeting at a time, until conflict avoidance became the norm and candor became the exception.",
+          "Patrick Lencioni's work on dysfunctional teams identified the absence of productive conflict as one of the most reliable predictors of collective underperformance. The teams that can't disagree openly don't stop having disagreements — they have them privately, in side conversations and corridor caucuses that produce competing narratives instead of shared decisions. The formal process becomes theater. The real decisions happen elsewhere, or don't happen at all.",
+          "What makes Dead Calm particularly difficult to self-diagnose is that it looks, from the outside, like a mature and collegial leadership culture. The absence of visible conflict reads as health. It isn't. It's what organizational paralysis looks like when the people involved are too professional to let it show."
+        ],
+        "cost": [
+          "The cost of Dead Calm is almost entirely invisible on a standard financial report, which is part of what makes it so durable.",
+          "It lives in the decisions that didn't get made at the right moment — the strategic pivot that got discussed for two quarters before anyone committed, the personnel decision that everyone knew needed to happen and nobody would call, the market opportunity that required a fast yes and got a thoughtful maybe. Each of those moments has a price. Collectively, they represent the gap between what this leadership team is capable of and what it's actually producing.",
+          "There's a downstream effect that compounds the direct cost. When a leadership team can't make decisions, the organization beneath it stops bringing decisions forward. People learn, quickly and accurately, that the escalation path leads to a room where things go to be discussed rather than resolved. They start making decisions at their level that should be made at a higher one, or they stop making them at all and wait. Either way, the organization's ability to move at the speed the market requires degrades quietly and steadily.",
+          "The financial output named what's visible. The invisible cost is the organizational velocity this team should be generating and isn't."
+        ],
+        "resolution": [
+          "The instinct in a Dead Calm situation is to call a retreat. Get everyone in a room, do some trust-building exercises, establish new norms for candid conversation. That instinct is well-meaning and almost always insufficient, because the problem isn't that the team doesn't know how to disagree. It's that the environment has made disagreement feel more costly than silence, and a two-day offsite doesn't change that calculation.",
+          "What changes it is structure and someone with enough standing to hold the room to a different standard.",
+          "The first thing we do is find out what's actually keeping the team stuck — not the official version, which will describe communication styles and competing priorities, but the specific moments, specific relationships, and specific unspoken agreements that have made candor feel like a risk. That picture is almost always more specific than the team expects, and it almost always points to one or two dynamics rather than a general culture problem.",
+          "From there, the work is about creating the conditions for honest disagreement to become the norm rather than the exception. That means redesigning how the leadership team meets and decides — not the agenda, but the architecture of accountability that determines whether a decision made in the room stays made when everyone leaves it. It means surfacing the conversations that have been happening in the corridor and moving them onto the table where they can actually produce something. And it means having someone in the room who has no stake in the existing relationships and no interest in preserving the comfortable silence.",
+          "Dead Calm breaks when someone calls the question. We'll be that someone."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-006",
+      "state_id": "SILOSOLATION",
+      "status": "APPROVED",
+      "tier": "INTERVENTION",
+      "sections": {
+        "mirror": [
+          "Nobody built it this way on purpose. Silosolation has a way of making leaders feel like they missed something obvious when what actually happened is much more ordinary. Good people doing what they can with the resources they have. The fact that those efforts produced a disjointed corporate mosaic of teams is nobody's proudest achievement.",
+          "What the diagnostic found is an organization that has fractured into units that have stopped behaving like parts of the same whole. Each department is performing. The enterprise is not.",
+          "You've seen it. The project that should have taken six weeks and required four months of alignment meetings. The initiative that two departments both claimed ownership of and neither actually moved. The hallway conversation that accomplished more than the formal process, because the formal process had seventeen people in it who all needed to feel consulted."
+        ],
+        "mechanism": [
+          "Silosolation has a self-reinforcing quality that makes it particularly stubborn. Here's how it works.",
+          "When cross-functional collaboration becomes expensive enough — in time, in political capital, in the sheer exhaustion of navigating competing priorities — people stop attempting it unless they absolutely have to. They optimize for what they can control, which is their own department, and they build walls they call processes. Those processes protect their team's output and their own sanity. They also make the next cross-functional effort more expensive than the last one, which makes people less likely to attempt it, which makes the walls thicker.",
+          "Patrick Lencioni's research on organizational health found that siloed functions aren't primarily a structural problem — they're a trust problem wearing a structural disguise. When teams don't trust that collaboration will be reciprocated, they stop collaborating. When leadership doesn't model cross-functional accountability, departments learn that the real game is internal performance, not collective outcome.",
+          "The result is an organization full of people who are genuinely trying hard and collectively producing less than the sum of their parts. Which is a frustrating place to lead, and an even more frustrating place to work."
+        ],
+        "cost": [
+          "The visible cost is in the coordination overhead — the meetings, the delays, the rework that happens when two teams discover mid-project that they've been operating from different assumptions. That cost is real and the diagnostic captured a portion of it.",
+          "The less visible cost is in the decisions that never got made because they required cross-functional agreement and cross-functional agreement had become too expensive to attempt. Those are the strategic moves that stayed on the whiteboard. The market opportunities that got discussed in one department and never made it across the hall to the people who could have acted on them. The problems that every team knew about and assumed someone else was handling.",
+          "There's also a talent dimension that compounds quietly. High performers (the ones with the most options) tend to leave siloed organizations because the cumulative friction of working in an environment where good ideas cannot advance burns away the reasons one once had to stay. They don't always name that in an exit interview. They say something about career growth and mean something about organizational exhaustion."
+        ],
+        "resolution": [
+          "The instinct in a Silosolation situation is to reorganize. New structure, new reporting lines, new cross-functional task forces with optimistic names. That instinct is understandable and almost always premature, because structure is not what broke down here. Trust and accountability did, and you can't reorg your way to either of those.",
+          "What actually works starts at the top and moves deliberately downward.",
+          "The first thing we do is map where the walls are thickest and why — not the official version, which will describe process gaps and resource constraints, but the human version, which will describe the specific relationships that broke down, the specific moments where collaboration was attempted and failed, and the specific people whose behavior set the tone for what cross-functional engagement looks like in this organization. That map is almost always more specific and more actionable than leadership expects.",
+          "From there, the work is about rebuilding the conditions for collaboration rather than mandating it. That means establishing shared accountability at the leadership level that makes siloed performance genuinely insufficient — not as a punitive measure, but as a structural reality that changes the incentive. It means creating forums where cross-functional friction can be named before it calcifies into walls. And it means a leadership team that models the behavior it's asking the organization to adopt, which sounds obvious and is apparently very difficult, given how rarely it happens without outside help.",
+          "Silosolation is one of the more solvable problems in this diagnostic library. The organization has the talent. It just needs the conditions.",
+          "Let's build them."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-007",
+      "state_id": "RUNAWAY_TREADMILL",
+      "status": "APPROVED",
+      "tier": "ROADMAP",
+      "sections": {
+        "mirror": [
+          "The diagnostic found an organization that is working extremely hard and moving slower than it should. The people are clearly capable, but a significant portion of their effort is going toward sustaining the activity itself rather than producing the outcome it was designed to produce.",
+          "You've felt it. The calendar that never empties. The team that is simultaneously exhausted and behind. The sense that the organization has gotten very good at being busy and progressively less good at being effective. The meeting that exists to prepare for the meeting. The process that was built to solve a problem that no longer exists, still running on schedule, still consuming hours nobody can account for at the end of the week.",
+          "The Runaway Treadmill is what happens when an organization scales its activity faster than it scales its judgment about which activity is worth scaling. Every initiative made sense when it was introduced. Nobody ever stopped to ask whether it still made sense, because stopping to ask that question would require slowing down, and slowing down stopped feeling like an option somewhere along the way.",
+          "The treadmill isn't broken. It's a treadmill. Who wants their business to be running in place?"
+        ],
+        "mechanism": [
+          "The Runaway Treadmill has a specific origin story, and it almost always starts with success.",
+          "Growth organizations develop activity patterns that work. Those patterns get repeated, systematized, and eventually institutionalized — because the people inside them are rational, and codifying what works is rational behavior. The problem arrives when the organization changes but the activity patterns don't. What worked at twenty people gets formalized at fifty and becomes load-bearing at a hundred, long after it stopped being the right answer.",
+          "The research on organizational complexity is consistent on this point. As organizations grow, the coordination cost of managing existing activity rises faster than the output that activity produces. The work expands to fill the structure built to contain it, and the structure keeps expanding because nobody has the mandate (or the time) to question whether it should.",
+          "The deeper mechanism is psychological. Busyness provides cover. An organization that is visibly working hard is difficult to criticize, which means the hard question, 'Are we working hard on the right things?' rarely gets asked out loud. The people closest to the inefficiency often see it most clearly and say the least, because pointing at the treadmill while everyone is running on it is a socially expensive thing to do."
+        ],
+        "cost": [
+          "The diagnostic captured the visible layer — the execution gap, the stalled projects, the hours absorbed by coordination that should be going toward output. That number is real and it's probably conservative.",
+          "The cost that doesn't make it into the model is the opportunity cost of the leadership attention this pattern consumes. Every hour a leader spends managing the complexity of the current activity load is an hour not spent on the decisions that actually move the organization forward. At the senior level, that's an expensive trade. Accumulated across a leadership team over a year, it's the difference between an organization that's steering and one that's just running.",
+          "There's a talent dimension here too. The people who see the inefficiency most clearly are often the ones with the highest standards for their own output. Working inside a system that converts their effort into less than it should produce is demoralizing in a specific way — not dramatically, but steadily. They don't leave angry. They leave quietly, with a clear-eyed assessment of what this environment was doing to their best work."
+        ],
+        "resolution": [
+          "The temptation in a Runaway Treadmill situation is to add something — a new framework, a productivity system, a set of operating principles that will bring discipline to the chaos. The organizations that try that approach discover, usually within a quarter, that they have successfully added one more thing to the treadmill.",
+          "What actually works is subtraction.",
+          "The first thing we do is build an accurate picture of where the effort is actually going — not the official version from the project tracker, but the real version, mapped against the outcomes each activity is producing. That audit is almost always clarifying in ways that surprise leadership. The activities consuming the most energy are rarely the ones producing the most value, and the ones producing the most value are rarely getting the attention they deserve.",
+          "From there, the work is about building the organizational permission to stop. That sounds simple. It requires more deliberate effort than most leaders expect, because the activity patterns on a Runaway Treadmill have stakeholders — people whose roles, metrics, and identities are tied to the continuation of the thing we're questioning. Navigating that requires a clear rationale, careful sequencing, and someone who has done it before and knows where the resistance will come from before it arrives.",
+          "The organizations that come out of this well don't just run leaner. They run with a clarity about what they're actually trying to accomplish that the treadmill had been obscuring for years. That clarity, it turns out, is also motivating. People work harder when they can see what the work is for.",
+          "Let's find out what's worth keeping."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-008",
+      "state_id": "FOSSIL_SYSTEM",
+      "status": "APPROVED",
+      "tier": "ROADMAP",
+      "sections": {
+        "mirror": [
+          "Every layer of this system made sense when it was added. That's precisely what makes it so difficult to remove.",
+          "The processes in place were built by capable people solving real problems. The approval chain that slows everything down was installed after something went wrong without one. The reporting structure that doesn't reflect how decisions actually get made was drawn to solve a coordination problem that the organization has long since outgrown. The policy that everyone works around was written for a version of this organization that hasn't existed for years.",
+          "The system wasn't neglected. It was built, carefully and deliberately, and then the organization changed around it while the system stayed put.",
+          "You've seen it in the specific texture of daily friction. The decision that requires sign-off from someone three levels removed from the work. The process that produces a document nobody reads but everyone is required to submit. The meeting that exists because it has always existed, populated by people who stopped knowing why they were there sometime in the previous administration.",
+          "The fossil isn't the organization. It's the layer the organization has been building on top of, for longer than anyone wants to calculate."
+        ],
+        "mechanism": [
+          "Fossil Systems form through a process that organizational researchers call institutional drift — the gradual accumulation of policies, processes, and structures that were each individually rational at the time of their creation and collectively irrational by the time anyone thinks to examine them together.",
+          "Each layer gets added in response to a real event. A compliance failure produces a new approval step. A miscommunication produces a new reporting requirement. A personnel problem produces a new policy. None of those responses were wrong. The problem is that organizations are much better at adding layers than removing them. Removal requires someone to make the case that the original problem no longer warrants the current solution. That case requires institutional memory that, in many organizations, has already retired or resigned.",
+          "The result is a system that has become, in places, entirely self-referential. It exists to maintain itself. The people inside it spend a portion of every week feeding a machine that produces nothing except the continuation of the machine. They know it. They've known it for a while. And they've learned, accurately, that pointing at it is unlikely to produce change and very likely to produce additional process."
+        ],
+        "cost": [
+          "The visible cost is in the velocity drag — the decisions that took three weeks because the approval chain required it, the initiatives that stalled at the boundary between two processes that were never designed to interface with each other, the talent time consumed by compliance with systems that add friction without adding value.",
+          "The less visible cost is strategic. A Fossil System organization doesn't just move slowly — it moves slowly in ways that are difficult to explain to the people being asked to tolerate the pace. High performers have a low threshold for systems that waste their time. They didn't join the organization to feed the machine. When the machine starts consuming more than it produces, they start looking for environments where their energy goes somewhere useful.",
+          "The deepest cost is the one that compounds in the background: the decisions that never got made because the system made the cost of making them too high. The innovation that didn't happen because the process for approving it required six months and four committees. The competitive response that arrived too late because the organization's decision architecture wasn't built for the speed the market required. Those costs don't show up in a financial model. They show up in the gap between where the organization is and where it could be."
+        ],
+        "resolution": [
+          "The instinct in a Fossil System situation is to declare a transformation. New operating model, new systems, new ways of working — a clean break from the accumulated weight of the old one. That instinct is understandable and almost always too ambitious to execute, because transformation programs have a way of becoming the most elaborate fossils in the collection.",
+          "What works is more surgical.",
+          "The first thing we do is map what's actually load-bearing. Not everything in a Fossil System is dead weight — some of it is genuinely structural, and removing it without understanding what it's holding up is how organizations create new problems while solving old ones. The audit distinguishes between the processes that exist for good reasons that have been forgotten, the processes that exist for reasons that no longer apply, and the processes that exist because nobody has ever asked why they exist. Those are three different situations with three different solutions.",
+          "From there, the work is about building the organizational permission and the sequencing to remove what doesn't belong. That requires more care than it sounds like it should, because Fossil Systems have constituencies — people whose roles are defined by the maintenance of the system, and people who've built their working patterns around its constraints. Change has to be introduced in a sequence that doesn't destabilize the parts that are actually working while it removes the parts that aren't.",
+          "The organizations that come out of this well describe the same experience: a specific lightness that arrives when the weight of the unnecessary finally comes off. The work doesn't get easier. The organization gets faster, and the people in it get their energy back.",
+          "That's worth the effort of the excavation."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-009",
+      "state_id": "ANCHOR",
+      "status": "APPROVED",
+      "tier": "ROADMAP",
+      "sections": {
+        "mirror": [
+          "The diagnostic found something that doesn't always get named as a problem because it doesn't look like one from the outside. The organization is moving. Decisions are getting made. The team is capable and the leadership is engaged. And yet there's a persistent sense that the output doesn't quite match the input — that the effort going in is more than the results coming out, and that the gap has been there long enough to start feeling permanent.",
+          "The Anchor is infrastructure friction. The tools, the processes, the team composition, or the coordination overhead that made complete sense at an earlier stage and have quietly become the thing the organization is pulling against. Nobody installed it as a drag. It arrived as a solution and stayed past its usefulness.",
+          "You've probably felt it in specific places. The coordination overhead that seems disproportionate to the size of the team. The decision that should be simple and isn't, because the structure around it was built for a different version of this organization. The talented person who is spending a meaningful portion of their week on something that shouldn't require their attention at this stage.",
+          "The will is there. The momentum is real. Something is consuming more energy than the work itself should require."
+        ],
+        "mechanism": [
+          "The Anchor forms at a specific moment in an organization's growth: the point where the infrastructure built for the previous stage becomes the constraint on the next one.",
+          "Frederick Brooks identified the core dynamic in his research on software development teams, but the finding generalizes cleanly: as organizations grow, the coordination cost of managing existing structure rises faster than the output that structure produces. What worked at ten people requires modification at twenty-five. What worked at twenty-five starts generating drag at seventy-five. The org chart, the tools, the meeting cadence, the decision rights — all of it was calibrated for a version of the organization that no longer exists, and recalibrating it requires someone to stop long enough to notice that the calibration is off.",
+          "That stopping is the hard part. Growth organizations develop a cultural aversion to pausing, because pausing feels like losing ground. The result is an organization that keeps accelerating while pulling an increasing amount of weight, and interprets the effort required as evidence that the work is hard rather than evidence that the infrastructure needs updating.",
+          "The drag is real. It's also almost entirely addressable. That's what makes The Anchor one of the more energizing findings in this diagnostic library — the problem is structural, not cultural, and structures can be changed."
+        ],
+        "cost": [
+          "The financial output captured the execution gap — the distance between where the organization expected to be and where it is. At this profile, a meaningful portion of that gap is infrastructure friction rather than strategic miscalculation or talent deficit.",
+          "The opportunity cost is where it compounds. Every hour a capable person spends navigating coordination overhead that shouldn't exist at this stage is an hour of output that doesn't happen. At scale, across a full leadership team, that's not a rounding error — it's a structural tax on the organization's best thinking, collected weekly, that nobody has formally calculated because it doesn't show up on any report as a line item.",
+          "There's a talent dimension that deserves attention. High performers are unusually sensitive to systems that waste their capacity. They're not impatient with hard work — they're impatient with unnecessary work, and they're accurate at distinguishing between the two. An Anchor organization asks its best people to spend part of every week pulling weight that the organization's growth should have shed by now. That ask has a shelf life."
+        ],
+        "resolution": [
+          "The Anchor is one of the more tractable problems in this diagnostic library, which is worth saying at the outset because the friction it produces can feel intractable from the inside.",
+          "The first thing we do is identify precisely where the drag is coming from — not the general sense that things are slower than they should be, but the specific structural points where the organization's current size and the infrastructure built for its previous size are in conflict. That identification is almost always more specific than leadership expects, and more fixable. The Anchor rarely turns out to be everything. It turns out to be three or four things, two of which can be addressed quickly and one of which requires more deliberate work.",
+          "From there, the work is sequenced to capture the quick wins first — the coordination overhead that can be reduced immediately, the decision rights that can be clarified without a restructure, the tools or processes that can be updated without disrupting the parts of the infrastructure that are working well. Those early wins matter not just for the efficiency they produce but for the signal they send: the organization is capable of updating itself, and leadership is willing to do the work of making that happen.",
+          "The organizations that address their Anchor early — before the drag becomes cultural rather than structural — tend to find that the energy released is disproportionate to the effort required. Removing the weight is faster than carrying it.",
+          "Let's find out exactly what's creating the drag."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-010",
+      "state_id": "BROKEN_COMPASS",
+      "status": "APPROVED",
+      "tier": "ROADMAP",
+      "sections": {
+        "mirror": [
+          "The diagnostic found a leadership team that is pulling in enough different directions that the organization beneath it has stopped being able to tell which way is forward.",
+          "Somewhere between the strategy and the execution, the signal fractured. The people being asked which way is forward are getting different answers depending on who they ask.",
+          "You've seen it in the texture of daily decision-making. The initiative that got green-lit by one leader and quietly deprioritized by another. The team that received conflicting guidance from two people who theoretically agreed on the objective. The employee who learned to route requests through the leader most likely to say yes, because the answer varies enough that routing is a viable strategy. The meeting where alignment was reached and the hallway conversations afterward revealed that four different things had been agreed to.",
+          "The compass isn't broken because nobody cares about the direction. It's broken because the people holding it have developed different understandings of where north is, and nobody has said so out loud in a room where it could be resolved."
+        ],
+        "mechanism": [
+          "Broken Compass organizations almost always have a shared strategy document. It's usually well-written. The problem is that strategy documents describe destinations, and the gap between a described destination and an operationalized one is where the Broken Compass forms.",
+          "Chris Argyris identified the mechanism decades ago in his research on organizational learning: the difference between what people say they believe (espoused theory) and what their behavior actually reveals they believe (theory in use). In a Broken Compass organization, the leadership team has espoused agreement on direction while operating from meaningfully different theories about what that direction requires in practice. Those differences rarely get surfaced directly, because surfacing them would require admitting that the alignment everyone agreed to isn't as solid as it appeared.",
+          "The result is an organization navigating by multiple compasses that are giving slightly different readings. Each leader is making rational decisions from their own interpretation. The organization experiences those decisions as inconsistency, receives inconsistent signals about what actually matters, and develops, over time, a sophisticated capacity for reading the political landscape rather than executing against a shared direction. That capacity is impressive and expensive."
+        ],
+        "cost": [
+          "The visible cost is in the execution drag — the initiatives that stalled because two leaders had different views on priority, the decisions that got revisited because the first answer depended on who was asked, the coordination overhead generated by an organization that has learned it needs to triangulate before it can move.",
+          "The less visible cost is in the trust erosion that accumulates beneath it. When the people doing the work receive inconsistent direction from the people responsible for providing it, they draw conclusions. About whether leadership actually knows what it wants. About whether the stated priorities reflect the real ones. About whether the effort of full commitment is warranted in an environment where the goalposts move depending on who set them that week.",
+          "That erosion is quiet and durable. It doesn't show up in engagement surveys as 'leadership misalignment.' It shows up as a general reduction in the discretionary effort people are willing to extend — the extra investment that separates good execution from great execution, withheld not out of malice but out of a rational assessment that the environment doesn't reliably reward it."
+        ],
+        "resolution": [
+          "The instinct in a Broken Compass situation is to schedule an alignment session. Get the leadership team in a room, work through the strategy, leave with a shared document that everyone has signed off on. That instinct produces good documents and limited change, because the gap isn't in the strategy — it's in the unspoken disagreements about what the strategy requires that have been accumulating underneath the official version.",
+          "What actually works starts with surfacing those disagreements explicitly, in a structured environment where they can be examined without becoming personal.",
+          "The first thing we do is map where the compass readings diverge — not by asking leaders to describe their strategic priorities, but by looking at the decisions they've actually made and the direction they've actually pointed their teams. Behavior is a more accurate compass than a strategy document, and the map it produces is almost always more specific and more actionable than the conversation the leadership team has been having about alignment.",
+          "From there, the work is about closing the gap between the espoused strategy and the operational one — resolving the specific disagreements that have been producing inconsistent direction, establishing the decision rights that clarify who sets the reading when interpretations diverge, and creating the forum where those divergences can be named and resolved before they travel down into the organization as conflicting signals.",
+          "The leadership teams that do this work well describe a specific shift in how the organization feels to lead afterward. Less friction at the handoffs. Less time spent managing the consequences of inconsistency. More energy going toward the actual work, because the people doing it have stopped spending a portion of every week trying to figure out which direction is actually north.",
+          "That's a good place to lead from."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-011",
+      "state_id": "KID_GLOVES",
+      "status": "APPROVED",
+      "tier": "DEVELOPMENT",
+      "sections": {
+        "mirror": [
+          "The diagnostic found an organization that has gotten very good at having the wrong version of the right conversations.",
+          "The topics are on the table. The performance issue gets discussed. The strategic disagreement gets an agenda item. The difficult feedback makes it into the one-on-one. And then something happens on the way to the conclusion — a softening, a hedge, a careful reframe that keeps the relationship intact and leaves the actual issue exactly where it was. Everyone leaves the room having technically addressed the thing, and nothing changes.",
+          "Kid Gloves organizations are not conflict-avoidant in the way that phrase usually gets used. They're not refusing to have the conversation. They've developed something more sophisticated and more expensive: the appearance of candor without the substance of it. The language of directness deployed in service of indirection.",
+          "You've probably seen it in specific moments. The feedback session that covered everything except the one thing that needed to be said. The performance conversation that ended with the employee feeling supported and the manager feeling relieved, while the underlying issue continued unchanged. The strategic debate that produced a decision everyone could live with rather than the decision the situation required.",
+          "The organization isn't avoiding the hard things. It's developed a very refined technique for approaching them without arriving."
+        ],
+        "mechanism": [
+          "Kid Gloves forms at the intersection of two genuinely good instincts: the desire to treat people with care, and the desire to preserve productive working relationships. Both of those instincts are correct. The problem arrives when they're applied in a way that prioritizes the comfort of the conversation over the usefulness of it.",
+          "Tasha Eurich's research on self-awareness found that the feedback most people receive is systematically less honest than the feedback they need — not because the people delivering it are dishonest, but because honesty carries social risk that most organizational cultures haven't made worth taking. People learn, through entirely reasonable experience, that softened feedback produces better immediate outcomes than direct feedback. The recipient stays regulated. The relationship stays intact. The problem stays in place.",
+          "The deeper mechanism is organizational. When leaders model softened feedback, the people around them learn that softened feedback is the standard. That standard travels down through the organization faster than any stated value about candor, because behavior is a more powerful teacher than policy. The result is a culture where everyone is being careful with everyone else, the actual assessments are happening in private, and the gap between what people say and what they think has become wide enough to drive decisions through."
+        ],
+        "cost": [
+          "The financial output at this profile is lower than the states above it in the diagnostic roster, and that's appropriate — Kid Gloves is an early-stage finding. The cost here is less about what's already been lost and more about the trajectory the current pattern is establishing.",
+          "The most direct cost is in the performance that isn't being addressed. Every issue that gets approached but not arrived at continues. The underperforming team member who received careful feedback and heard encouragement. The strategic misalignment that got a thoughtful discussion and a non-decision. The cultural norm that everyone privately disagrees with and nobody will say so in a room where it could change. Each of those has a carrying cost that compounds quietly.",
+          "The more significant cost is what the Kid Gloves culture is doing to the organization's best people. An organization that has systematized careful delivery over honest delivery is, from the perspective of its most capable people, an organization that is unserious. That assessment leads somewhere, and that place is far enough away that you won't ever see or hear from them again. And we both understand that replacement costs add up."
+        ],
+        "resolution": [
+          "Kid Gloves is the most workable finding in this diagnostic library. The organization has the relationships, the capability, and — in most cases — the genuine desire to do this differently. What it's missing is the model and the permission.",
+          "The first thing we do is establish what honest feedback actually looks like in practice in this organization — not as an abstract value, but as a specific skill with specific language and specific techniques for delivering it in a way that is both direct and humane. Those two things are not in tension. The organizational culture has decided they are, and that decision is what's costing the performance.",
+          "From there, the work is about building the conditions where candor becomes the norm rather than the exception. That means starting at the leadership level — because the culture of feedback in an organization follows the model its leaders set, and changing the model requires leaders who are willing to both give and receive feedback differently than they currently do. It means creating structured opportunities for the conversations that have been approached without being arrived at to be completed. And it means giving the organization a shared language for the difference between feedback that's kind and feedback that's merely comfortable — because most people in a Kid Gloves culture genuinely can't tell the difference anymore.",
+          "The organizations that address this early — before the pattern calcifies into something more structural — tend to find that the shift is faster than expected. People have been waiting for permission to be honest. When the permission arrives with a model for how to do it well, most of them take it immediately.",
+          "That's a good problem to have."
+        ]
+      }
+    },
+    {
+      "playbook_id": "PB-012",
+      "state_id": "UNLIT_ROOM",
+      "status": "APPROVED",
+      "tier": "DEVELOPMENT",
+      "sections": {
+        "mirror": [
+          "The diagnostic didn't find a crisis. That's worth saying clearly, because the instrument is designed to find crises and this isn't one. What it found is earlier and in some ways more interesting: the conditions that precede one.",
+          "The Unlit Room is the finding that arrives when something is assembling in the background that hasn't been named yet. The friction is present but hasn't located itself. The signals are there but haven't compounded into a pattern that's impossible to ignore. The organization is functioning, the leadership is engaged, and there is something in the room that nobody has turned the light on yet.",
+          "You probably sensed it before you took the diagnostic. A conversation that felt slightly off. A dynamic in the leadership team that hasn't been examined directly. A decision that keeps not getting made without a clear reason why. Nothing dramatic. Just the specific quality of friction that shows up when something real is present but hasn't been named."
+        ],
+        "mechanism": [
+          "The Unlit Room rarely gets created in a single moment. Instead, a series of small moments each felt manageable on their own and collectively established a pattern that's now running in the background of how the organization operates.",
+          "Amy Edmondson's foundational research on psychological safety found that teams develop behavioral norms very early, and those norms are extraordinarily resistant to change once established. The signals that determine whether it's safe to raise something uncomfortable are read accurately and quickly by everyone in the room. When those signals suggest that certain things aren't welcome, people stop bringing them — not dramatically, not all at once, but gradually and thoroughly enough that the absence becomes the norm.",
+          "The Unlit Room is what that absence looks like before it becomes expensive. The feedback that isn't quite making it to the surface. The concern that gets raised in a one-on-one and doesn't travel further. The dynamic that everyone has privately registered and nobody has put on the agenda. Each of those is a small thing. The pattern they're assembling is not."
+        ],
+        "cost": [
+          "The financial output at this profile reflects what the diagnostic found: early stage friction with a cost that is currently modest and a trajectory that is worth paying attention to.",
+          "The honest framing of the cost here is forward-looking rather than historical. The Unlit Room organization hasn't lost much yet. What it's doing is establishing the conditions under which it will. The feedback norms forming now will determine what information reaches leadership a year from now. The dynamics assembling in the background now will determine what the leadership team looks like in two years. The pattern running quietly underneath the surface now is the thing that will require a much more significant intervention if it's allowed to run long enough to become structural.",
+          "The organizations that address the Unlit Room early tend to look back on the decision as one of the better ones they made — not because the immediate cost justified it, but because the cost it prevented never appeared on any report. The absence of a problem is the hardest value to calculate and the most real."
+        ],
+        "resolution": [
+          "The Unlit Room is the finding where the work is least dramatic and most leveraged. There's no crisis to stabilize, no entrenched dynamic to dismantle, no accumulated damage to repair. There's a pattern in early formation and a leadership team with the agency and the timing to shape it before it shapes them.",
+          "The first thing we do is turn the light on — find out specifically what's assembling, where it's coming from, and what the early signals are telling us about the direction it's heading. That's a different kind of conversation than the ones that happen at higher severity states. It's more exploratory, less urgent, and in many ways more interesting. The organization isn't in trouble. It's at a fork, and the work is about understanding which path it's currently on and whether that's the one it would choose deliberately.",
+          "From there, the engagement is about building the infrastructure that makes the good path sustainable. That means establishing the feedback norms that keep information moving accurately through the organization before the current pattern calcifies them. It means surfacing the dynamics that have been running in the background and giving them a forum where they can be examined and resolved rather than accumulated. And it means building the leadership team's capacity for the kind of honest conversation that keeps an organization effective, and mitigates the risk of a more significant intervention later.",
+          "The leaders who engage at this stage tend to describe the same experience afterward: a specific confidence that comes from knowing what's actually in the room. Not because everything is perfect, but because nothing is hidden.",
+          "That's a remarkably good place to lead from. And it's available right now, before the window narrows."
+        ]
+      }
+    }
+  ]
+}
