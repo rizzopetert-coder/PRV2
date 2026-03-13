@@ -302,6 +302,32 @@ export default async function LexiconStatePage({ params }) {
           >
             Resolution Core
           </h2>
+
+          {/* Playbook entry point — renders when playbook is linked */}
+          {resolution_playbook_ids?.length > 0 && (
+            <a
+              href={`/vault/lexicon/${assets.slug}/playbook`}
+              className="block border border-brand-border px-8 py-8 mb-6 hover:border-brand-accent transition-colors duration-200 group"
+            >
+              <p className="font-mono text-[9px] tracking-widest uppercase text-brand-accent mb-3">
+                Resolution Playbook // {resolution_playbook_ids[0]}
+              </p>
+              <p
+                className="text-xl text-brand-text group-hover:text-brand-accent transition-colors mb-3"
+                style={{ fontFamily: "'Sorts Mill Goudy', Georgia, serif", fontStyle: "italic" }}
+              >
+                What this looks like when it gets addressed.
+              </p>
+              <p className="font-mono text-xs text-brand-muted leading-relaxed max-w-xl">
+                The resolution playbook for {label} — the mechanism, the cost, and what the path forward actually looks like for an organization at this profile.
+              </p>
+              <span className="font-mono text-[9px] tracking-widest uppercase text-brand-accent mt-4 inline-block group-hover:text-brand-text transition-colors">
+                Read the Playbook →
+              </span>
+            </a>
+          )}
+
+          {/* Resolution Core — gated */}
           <div className="border border-brand-border px-8 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div>
               <span className="font-mono text-[9px] tracking-widest uppercase border border-brand-accent text-brand-accent px-2 py-0.5 mb-4 inline-block">
