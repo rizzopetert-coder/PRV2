@@ -406,6 +406,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
           resolution_blockage: inputData.resolutionBlockage,
           decisions:           inputData.decisions,
           primary_emotion:     inputData.primaryEmotion,
+          playbookId:          summary.state?.resolution_playbook_ids?.[0] || null,
           context: {
             industry:           inputData.industry,
             orgStage:           inputData.orgStage,
@@ -445,6 +446,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
         resolution_blockage: inputData.resolutionBlockage,
         decisions:           inputData.decisions,
         primary_emotion:     inputData.primaryEmotion,
+        playbookId:          summary.state?.resolution_playbook_ids?.[0] || null,
         context: {
           industry:           inputData.industry,
           orgStage:           inputData.orgStage,
