@@ -31,7 +31,7 @@
         "HC-096"
       ],
       "intelligence_memo_ids": ["MEMO-08"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-001"],
       "seo_meta": {
         "title": "Last Leg \u2014 Institutional State | Principal Resolution",
         "description": "An organization in Last Leg is past the warning window. Leadership payroll leak exceeds 20%, critical exits have occurred, and the friction is structural. This is the diagnostic profile and the stabilization path.",
@@ -67,7 +67,7 @@
         "HC-104"
       ],
       "intelligence_memo_ids": ["MEMO-05"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-002"],
       "seo_meta": {
         "title": "The Sacred Cow \u2014 Institutional State | Principal Resolution",
         "description": "The Sacred Cow persists not because leadership doesn't know. It persists because admitting the problem means admitting the decision that created it. This is the diagnostic profile and the resolution path.",
@@ -104,7 +104,7 @@
         "HC-103"
       ],
       "intelligence_memo_ids": ["MEMO-11"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-003"],
       "seo_meta": {
         "title": "Cracked Mirror \u2014 Institutional State | Principal Resolution",
         "description": "When leaders can't see themselves accurately, every decision they make is built on a distorted foundation. This is the diagnostic profile and the resolution path for Cracked Mirror.",
@@ -139,7 +139,7 @@
         "HC-096"
       ],
       "intelligence_memo_ids": ["MEMO-13"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-004"],
       "seo_meta": {
         "title": "The Exit Pattern \u2014 Institutional State | Principal Resolution",
         "description": "When departures become a pattern, the organization is no longer losing individuals \u2014 it's losing the argument for staying. This is the diagnostic profile and the intervention path.",
@@ -182,7 +182,7 @@
         "HC-099"
       ],
       "intelligence_memo_ids": ["MEMO-09"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-005"],
       "seo_meta": {
         "title": "Dead Calm \u2014 Institutional State | Principal Resolution",
         "description": "Dead Calm looks like stability. It functions like paralysis. Decisions stall, forums become theater, and the organization loses ground while appearing composed. This is the diagnostic profile.",
@@ -218,7 +218,7 @@
         "HC-091"
       ],
       "intelligence_memo_ids": ["MEMO-02"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-006"],
       "seo_meta": {
         "title": "Silosolation \u2014 Institutional State | Principal Resolution",
         "description": "Silosolation is what happens when functional isolation becomes the operating model. Units stop coordinating and start defending. This is the diagnostic profile and the structural intervention.",
@@ -252,7 +252,7 @@
         "HC-086"
       ],
       "intelligence_memo_ids": ["MEMO-10"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-007"],
       "seo_meta": {
         "title": "Runaway Treadmill \u2014 Institutional State | Principal Resolution",
         "description": "Growth without infrastructure is not momentum. It's accumulated risk. Runaway Treadmill identifies the point where velocity outpaces the organization's ability to steer.",
@@ -294,7 +294,7 @@
         "HC-100"
       ],
       "intelligence_memo_ids": ["MEMO-07", "MEMO-12"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-008"],
       "seo_meta": {
         "title": "The Fossil System \u2014 Institutional State | Principal Resolution",
         "description": "The Fossil System is not failing because people are incompetent. It's failing because the model they're running was designed for a different organization. This is the diagnostic profile and the redesign path.",
@@ -331,7 +331,7 @@
         "HC-101"
       ],
       "intelligence_memo_ids": ["MEMO-14"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-009"],
       "seo_meta": {
         "title": "The Anchor \u2014 Institutional State | Principal Resolution",
         "description": "The Anchor is not the absence of friction \u2014 it's the active management of it. This is the diagnostic profile for organizational health and what it takes to hold it.",
@@ -371,7 +371,7 @@
         "HC-102"
       ],
       "intelligence_memo_ids": ["MEMO-04"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-010"],
       "seo_meta": {
         "title": "Broken Compass \u2014 Institutional State | Principal Resolution",
         "description": "When leadership can't agree on direction, the organization doesn't stall \u2014 it splinters. Every team navigates by a different map. This is the diagnostic profile and the alignment path.",
@@ -410,7 +410,7 @@
         "HC-098"
       ],
       "intelligence_memo_ids": ["MEMO-01", "MEMO-03"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-011"],
       "seo_meta": {
         "title": "Kid Gloves \u2014 Institutional State | Principal Resolution",
         "description": "Organizations that confuse warmth with effectiveness don't lose people in blowups. They lose them quietly. Kid Gloves is the diagnostic profile for conflict avoidance and its compounding cost.",
@@ -443,7 +443,7 @@
         "HC-098"
       ],
       "intelligence_memo_ids": ["MEMO-06"],
-      "resolution_playbook_ids": [],
+      "resolution_playbook_ids": ["PB-012"],
       "seo_meta": {
         "title": "The Unlit Room \u2014 Institutional State | Principal Resolution",
         "description": "The Unlit Room is not healthy. It's early. The conditions for dysfunction are assembling before the signals are legible. This is the diagnostic profile for organizations at the leading edge of friction.",
