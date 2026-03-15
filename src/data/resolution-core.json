@@ -1,362 +1,522 @@
-[
-  {
-    "state_id": "LAST_LEG",
-    "tier": "STABILITY_SUPPORT",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
-    },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
-    },
-    "intake_question_ids": {
-      "core": "IQ-STABILITY_SUPPORT-CORE",
-      "state": "IQ-LAST_LEG"
-    },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
+{
+  "_schema_version": "1.0.0",
+  "_description": "Principal Resolution -- Resolution Core. Proprietary engagement architecture for all twelve institutional states. Gated to verified clients only. Referenced by /secure/vault/[slug] page component. Each entry references intake question sets by ID from intake-questions.json.",
+  "_last_updated": "2026-03-15",
+  "evidence_basis": {
+    "summary": "The firm's engagements are grounded in a documented body of evidence on the cost of organizational friction and the return on resolving it. The figures below establish the scale of what is recoverable. The firm does not guarantee a specific reduction against the diagnostic's cost figure -- the diagnostic models directional cost, not auditable cost -- but the changed condition each engagement produces is measurable, and the firm works with the client at close to identify the specific operational signals that confirm the cost is moving.",
+    "citations": [
+      {
+        "source": "Gallup",
+        "publication": "State of the Global Workplace",
+        "finding": "Business units in the top quartile of employee engagement report 23% higher profitability, 18% higher productivity, and significantly lower turnover than those in the bottom quartile.",
+        "hammer_citation_ref": "HC-001"
+      },
+      {
+        "source": "McKinsey & Company",
+        "publication": "Organizational Health Index",
+        "finding": "Companies in the top quartile of organizational health generate three times the total shareholder returns of those in the bottom quartile. Drawn from surveys of over 1.5 million employees.",
+        "hammer_citation_ref": "HC-106"
+      },
+      {
+        "source": "McKinsey & Company",
+        "publication": "Leadership Effectiveness Research",
+        "finding": "Organizations with effective leadership practices are 50% more productive than those with ineffective leadership.",
+        "hammer_citation_ref": "HC-107"
+      }
+    ]
   },
-  {
-    "state_id": "SACRED_COW",
-    "tier": "EXECUTIVE_COUNSEL",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
+  "states": [
+    {
+      "state_id": "LAST_LEG",
+      "intake_question_ids": [
+        "IQ-STABILITY_SUPPORT-CORE",
+        "IQ-LAST_LEG"
+      ],
+      "engagement_premise": "Last Leg is not a situation that a structured diagnostic process will resolve. The window for deliberate, phased work has closed. What is needed is someone who can move fast, say what needs to be said to the people who need to hear it, and make decisions alongside leadership that the organization cannot make on its own right now. The engagement exists because the cost of waiting for a more orderly process exceeds the cost of acting now with imperfect information.",
+      "entry_point": "The first conversation establishes two things: who is still functional and what cannot wait. The engagement does not begin with an assessment phase. It begins by identifying the one or two decisions that are compressing the situation and working with the client to move those first. Everything else gets sequenced from there. The first week is triage, not diagnosis.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Stabilize the Room",
+            "description": "Identify the people and decisions driving the most immediate pressure. Have the conversations that have been deferred. Establish what is still intact and what has already been lost. The goal of this phase is not resolution -- it is stopping the bleeding and creating enough stability for the next phase to be possible."
+          },
+          {
+            "phase": "02",
+            "label": "Name What Is Happening",
+            "description": "Once immediate pressure is contained, the organization needs a shared, honest account of how it got here. This is not a blame exercise. It is a factual reconstruction that gives leadership a common foundation to work from. Without it, every subsequent decision gets made against a different version of the problem."
+          },
+          {
+            "phase": "03",
+            "label": "Rebuild Decision Capacity",
+            "description": "Most Last Leg organizations have lost the ability to make decisions and let them stand. This phase re-establishes the structures, the processes, the accountability, and the relationships required for the leadership team to function without external support. The work is not to design a new organization. It is to repair the one that exists."
+          },
+          {
+            "phase": "04",
+            "label": "Transition and Close",
+            "description": "The engagement does not close when the crisis feels resolved -- it closes when the structures, processes, and communication channels in place are strong enough to hold without external support. The close includes a documented account of what changed, what remains fragile, and what to watch for."
+          }
+        ]
+      },
+      "output": "A stabilized organization with restored decision-making capacity, a shared account of what happened and why, and a documented transition record that names what is in place, what remains at risk, and what the organization needs to protect going forward. The primary output is a changed condition, not a report. The engagement also includes a Resolution Toolkit assembled at intake -- crisis-ready templates, communication frameworks, and stabilization tools selected for the specific conditions of this situation. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that stabilize and resolve the patterns associated with Last Leg recover the compounding costs that unresolved crisis produces -- the leadership execution gap, the personnel loss, and the stalled initiative capital that the diagnostic identified. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "The client withholds the full picture at intake. Last Leg engagements fail most often when the firm is given a partial account of what happened and discovers the rest mid-engagement. Full disclosure at the start is not optional.",
+        "Leadership is not unified on the decision to engage. If a key member of the leadership team is privately opposed to outside involvement, that opposition will surface in the work and slow or block resolution. The firm needs to know about it before it is in the room.",
+        "The organization mistakes stabilization for resolution. The first phase stops the bleeding. It does not close the wound. Organizations that disengage after Phase 01 often return to Last Leg within twelve months.",
+        "The personnel situation deteriorates during the engagement. If the departure pattern accelerates while the work is underway, the engagement scope must be reassessed. The firm cannot stabilize an organization that is simultaneously losing the people required to hold what is being built."
+      ],
+      "resolution_condition": "The engagement is closed when three conditions are met: the immediate crisis is contained and not actively worsening, the leadership team has restored functional decision-making capacity without external support, and there is a documented shared account of what happened that leadership has accepted as accurate. The written close-out summary and Resolution Toolkit are delivered at this stage. Resolution is not the absence of friction. It is the restoration of the organization's ability to manage its own friction without outside intervention."
     },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
+    {
+      "state_id": "SACRED_COW",
+      "intake_question_ids": [
+        "IQ-EXECUTIVE_COUNSEL-CORE",
+        "IQ-SACRED_COW"
+      ],
+      "engagement_premise": "The Sacred Cow is not a structural problem. It is a people problem that the organization has decided to treat as a structural one because naming it directly means implicating someone influential. The engagement exists to do what the organization cannot do for itself: name the dynamic clearly, help the leader understand what it is actually costing, and build a path to resolution that does not require the organization to pretend the problem is something other than what it is. This work happens in confidence, outside the relationships that have protected the problem, because that is the only place it can happen honestly.",
+      "entry_point": "The first conversation is not about the person at the center of the problem. It is about the leader -- what they know, what they have tried, what they are afraid of, and what they are unwilling to do. The full picture of the political architecture is required before the resolution path can be understood. The entry point is an interview, not a confrontation. Strategy comes after the picture is complete.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Map the Architecture",
+            "description": "Before anything moves, the full landscape must be understood -- who the person is, what influence they hold, who benefits from the current arrangement, who is paying the cost, and what has already been tried. This phase is listening and mapping. Nothing is named publicly yet. The goal is a clear picture of what is actually in place before any decision is made about how to address it."
+          },
+          {
+            "phase": "02",
+            "label": "Name It in the Room",
+            "description": "The leader and the firm arrive at a shared, honest account of the situation -- what the person is doing, what it is costing, and what the organization has been unwilling to say directly. This conversation is confidential. It is an interview, not a confrontation. The purpose is to give the leader a clear-eyed view of the situation that is not filtered through the relationships that have made clarity difficult."
+          },
+          {
+            "phase": "03",
+            "label": "Define the Resolution Path",
+            "description": "Once the situation is named clearly, the question becomes what resolution actually requires. In some cases that means a direct conversation with the person at the center of the problem. In others it means a structural change, a process redesign, or a role redefinition that removes the influence without a direct confrontation. In others it means a personnel decision. The options are worked through honestly, including the ones the client would prefer not to consider."
+          },
+          {
+            "phase": "04",
+            "label": "Execute and Hold",
+            "description": "Resolution in Sacred Cow situations does not happen in one conversation. The dynamic that protected the problem will reassert itself if the resolution is not held over time. This phase supports the leader through the execution -- the conversations, the decisions, and the pressure that comes after the first move is made. The engagement stays active until the resolution is stable, not just until the first difficult thing is done."
+          }
+        ]
+      },
+      "output": "A leader who has named the situation clearly and made the decisions required to resolve it, supported through the execution of those decisions. The primary output is a changed condition -- the protected dynamic has been addressed and the cost has stopped compounding. The engagement closes with a written summary documenting what was surfaced, what was decided, what was executed, and what the leader should watch for if the dynamic shows signs of reassembling. This record is confidential and intended for the leader's use only. The engagement also includes a Resolution Toolkit assembled at intake -- reference frameworks, decision tools, and leadership resources selected for the specific dynamics this leader is navigating. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that resolve the protected dynamics associated with Sacred Cow recover the compounding costs that institutional protection produces. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "The client names the situation but will not act on what they have named. Understanding the problem and being willing to resolve it are two different things. If the leader reaches clarity and then finds reasons not to move, the engagement stalls. The firm can support the decision. It cannot make it.",
+        "The influential person is more central to the organization's function than the client acknowledged at intake. If addressing them directly would create a crisis the organization cannot absorb, the resolution path changes significantly. This possibility needs to be assessed honestly before the first move is made.",
+        "The client's own role in sustaining the dynamic is not acknowledged. Sacred Cow situations almost always involve a leader who has made accommodations that enabled the problem. If that piece is not named and owned, the resolution is incomplete and the dynamic is likely to reassemble around someone else.",
+        "Confidentiality breaks down. This work depends on the client's ability to hold what is discussed outside the building. If the content of the firm's conversations with the client reaches the person at the center of the problem before the resolution is ready to execute, the engagement is compromised."
+      ],
+      "resolution_condition": "The engagement is closed when the protected dynamic has been directly addressed -- through conversation, structural change, process redesign, or personnel decision -- and the leader has demonstrated the capacity to hold the resolution without external support. The written close-out summary and Resolution Toolkit are delivered at this stage. Closed does not mean the relationship with the person is repaired. It means the behavior is no longer immune to consequence and the organization is no longer paying the cost of protecting it."
     },
-    "intake_question_ids": {
-      "core": "IQ-EXECUTIVE_COUNSEL-CORE",
-      "state": "IQ-SACRED_COW"
+    {
+      "state_id": "CRACKED_MIRROR",
+      "intake_question_ids": [
+        "IQ-EXECUTIVE_COUNSEL-CORE",
+        "IQ-CRACKED_MIRROR"
+      ],
+      "engagement_premise": "Cracked Mirror is the most structurally awkward of all twelve states because the person with the authority to resolve the problem is the same person the problem runs through. The engagement exists not to tell the leader what is wrong with them but to give them access to a view of the organization they cannot get from inside it. Proximity distorts. The longer someone has held a position, the more the patterns of that position become part of how they see everything else. An external relationship changes what is visible -- not by being critical but by being outside.",
+      "entry_point": "The first conversation establishes what the leader already suspects about themselves and the organization. Most leaders in a Cracked Mirror situation have a partial read on the dynamic -- they know something is off but cannot locate it precisely because they are inside it. The entry point is that partial read. The firm listens to what the leader already sees, asks what they cannot explain, and begins building the picture from there. It is an interview, not an assessment.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Establish the External Reference Point",
+            "description": "Before any findings are named, the relationship itself needs to become a reliable instrument. The leader needs to experience the firm as a presence that will say what others won't, without agenda and without consequence. This phase is about building the trust that makes the later work possible. It cannot be rushed."
+          },
+          {
+            "phase": "02",
+            "label": "Map the Gap",
+            "description": "With the relationship established, the work turns to understanding the gap between how the leader perceives the organization and how the organization experiences the leader. This is done through the firm's direct observation and through structured conversation -- not through surveys or 360 processes. The gap is mapped privately before anything is named to the leader."
+          },
+          {
+            "phase": "03",
+            "label": "Name What the Mirror Shows",
+            "description": "The findings are brought to the leader directly and honestly. This is the most delicate phase of the engagement -- not because the findings are damaging but because they require the leader to hold a picture of themselves that proximity has made unavailable. The firm delivers this as a finding, not a judgment. The leader's response to what they hear shapes everything that follows."
+          },
+          {
+            "phase": "04",
+            "label": "Recalibrate and Rebuild",
+            "description": "Once the leader has the accurate picture, the work becomes practical: what changes, in what order, and how does the leader know whether the changes are holding. This phase produces concrete adjustments to how the leader operates -- in meetings, in decisions, in the communication channels and feedback processes through which information moves through the organization. It is operational recalibration, not therapy."
+          }
+        ]
+      },
+      "output": "A leader with an accurate picture of how they are experienced by the organization and a set of concrete operational adjustments that close the gap between that picture and how they intend to lead. The engagement closes with a written summary documenting what the gap was, what was changed, and what the leader should use as ongoing signals that the recalibration is holding. This summary is confidential. The engagement also includes a Resolution Toolkit assembled at intake -- reference frameworks, decision tools, and leadership resources selected for the specific dynamics this leader is navigating. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that resolve the self-perception gaps associated with Cracked Mirror recover the decision quality, feedback fidelity, and leadership execution costs the distortion was producing. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "The leader intellectually accepts the findings but does not change behavior. Understanding and changing are not the same thing. If the leader can describe the gap accurately but continues operating the same way, the engagement has produced insight without resolution.",
+        "The leader shares the findings with people inside the organization before the recalibration is underway. Cracked Mirror work depends on the leader being able to hold what they are learning privately long enough to act on it. Premature disclosure collapses the space the work requires.",
+        "The organization's problems are more structural than the Cracked Mirror diagnosis suggests. If the friction is not primarily sourced in the leader's self-perception but in a genuine structural or process failure, the engagement will surface that and the scope will need to shift.",
+        "The leader's direct reports adjust their behavior in response to the engagement without the underlying dynamic changing. Surface improvement that masks a persistent gap is a common failure mode and requires the firm to look past what the leader is reporting."
+      ],
+      "resolution_condition": "The engagement is closed when the leader can accurately describe how they are experienced by the organization, has made the operational adjustments required to close the material gaps, and has sustained those adjustments long enough that the organization's experience of them has measurably shifted. The written summary and Resolution Toolkit are delivered at close. Resolution is not perfection. It is an accurate mirror and the demonstrated capacity to use it."
     },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
+    {
+      "state_id": "EXIT_PATTERN",
+      "intake_question_ids": [
+        "IQ-INTERVENTION-CORE",
+        "IQ-EXIT_PATTERN"
+      ],
+      "engagement_premise": "The Exit Pattern is not a recruiting problem. The organization is losing people because the environment has become something that people with options have decided is no longer worth tolerating -- and replacing those people without changing the environment means the next hire walks into the same conditions the last person left. The engagement exists to address what the departures are evidence of, not the departures themselves. That means going into the environment, understanding what it has become and why, and making the changes required so that the organization stops driving away the people it needs.",
+      "entry_point": "The first conversation establishes what the organization believes is causing the exits and what it has been unwilling to examine. Most Exit Pattern situations involve a gap between the official explanation for departures and the actual one. The entry point surfaces that gap -- not to assign blame but to establish what the firm is actually working with. Until the real source is named, every intervention addresses the wrong thing.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Read the Pattern",
+            "description": "The departures are mapped. Who left, when, what they said publicly, and where available what they said privately. The pattern is not random -- it has a shape. That shape reveals what kind of people the organization has been losing, how long it has been losing them, and what conditions made staying feel like the wrong decision. This phase produces a clear picture of what drove people out and what has been left behind."
+          },
+          {
+            "phase": "02",
+            "label": "Locate the Source",
+            "description": "With the pattern mapped, the work turns to understanding what is generating it. In most Exit Pattern situations the source is a specific dynamic -- a leadership behavior, a structural condition, a broken process, or a cultural norm that has been protected or ignored. This phase names the source directly through observation and structured conversation with the people still in the organization. What they say, and what they are careful not to say, are both findings."
+          },
+          {
+            "phase": "03",
+            "label": "Address the Conditions",
+            "description": "The source is addressed directly. This phase looks different depending on what the source is -- a personnel decision, a structural change, a process redesign, a role redefinition, or some combination. The firm works with the client to execute the changes required, in the order required, with honesty about what each change will cost and what it will produce."
+          },
+          {
+            "phase": "04",
+            "label": "Tell the Truth Internally",
+            "description": "Once the conditions change, the people still in the organization need to be told directly what happened, what changed, and why. People who watched colleagues leave are skeptical by default and they are right to be. A genuine change that is never communicated is indistinguishable from a performative one. This phase works with the client to deliver an honest internal account of what the organization examined, what it found, and what it decided to do about it. That communication is not spin. It is the organization saying out loud what it could not say before."
+          }
+        ]
+      },
+      "output": "An organization whose environment no longer drives away the people it needs. The primary output is a changed condition -- the source has been addressed, the internal communication has been delivered, and the organization is no longer producing the conditions that made staying feel like the wrong decision. The engagement closes with a written summary documenting what the pattern revealed, what was changed, and what the organization should monitor to confirm the change is holding. The engagement also includes a Resolution Toolkit assembled at intake and expanded at close -- templates, frameworks, and operational tools selected to support the specific resolution this engagement is working toward and to hold what changes after the work is done. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that resolve exit patterns recover the turnover costs, recruiting overhead, and institutional knowledge loss the diagnostic identified. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "The organization addresses the symptoms without reaching the source. Improving onboarding, adjusting compensation, or adding retention programs will not stop an exit pattern that is sourced in a leadership dynamic or a cultural condition. Surface changes produce surface results.",
+        "The source is a person the organization is unwilling to address. If the exit pattern traces back to someone whose position, relationships, or perceived value makes them untouchable, the engagement will identify that and the client will face a decision about whether they are willing to act on it. The firm cannot resolve a pattern the client will not allow to be resolved.",
+        "The organization makes the changes but does not tell its people. A changed condition that is never communicated internally is not fully resolved. The people who stayed watched colleagues leave -- they need a direct, honest account of what the organization examined and what it changed. Internal communication is not a follow-on activity. It is part of the resolution. An organization that fixes the problem privately and says nothing publicly has not finished the work.",
+        "The departure pattern accelerates during the engagement. If the act of examining the environment triggers additional exits, the scope must be reassessed. This sometimes happens when the examination itself confirms for people on the fence that the situation is as bad as they suspected."
+      ],
+      "resolution_condition": "The engagement is closed when the source of the exit pattern has been directly addressed, the conditions that produced it have demonstrably changed, and the organization has delivered an honest internal account of what changed and why, received as credible by the people inside it. The written summary and Resolution Toolkit are delivered at close. Resolution is not zero turnover. It is an environment where people with options are choosing to stay."
     },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "CRACKED_MIRROR",
-    "tier": "EXECUTIVE_COUNSEL",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
+    {
+      "state_id": "DEAD_CALM",
+      "intake_question_ids": [
+        "IQ-INTERVENTION-CORE",
+        "IQ-DEAD_CALM"
+      ],
+      "engagement_premise": "Dead Calm is not a conflict problem. It is a stillness problem. The leadership team has reached a state of such careful mutual awareness that the energy required to maintain the peace has crowded out the energy required to make decisions. Nobody is fighting. Nobody is moving. The organization looks functional from the outside and is quietly losing ground from the inside. The engagement exists to break the stillness -- not by creating conflict but by creating the conditions where honest conversation can happen and decisions can be made and held.",
+      "entry_point": "The first conversation establishes what the leadership team has been unwilling to say to each other and why. In Dead Calm situations the blockage is almost never a lack of intelligence or capability. It is a relational architecture that has made candor feel more costly than silence. The entry point is understanding that architecture -- who defers to whom, where the unspoken agreements live, and what everyone in the room already knows but has agreed not to say. That map is the starting point for everything that follows.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Name the Stillness",
+            "description": "Before any decision gets made, the dynamic itself needs to be named. The leadership team needs a shared, honest account of what has been happening -- not as an indictment but as a diagnosis. The firm brings that account into the room directly. The goal of this phase is not to make people uncomfortable. It is to make the invisible visible so the team has something real to work with."
+          },
+          {
+            "phase": "02",
+            "label": "Rebuild the Forum",
+            "description": "Dead Calm organizations almost always have forums for decision-making that have become performative. Meetings happen. Conversations occur. Nothing gets resolved. This phase redesigns how the leadership team convenes -- the structure, the frequency, the ground rules, the communication channels, and the accountability that turns a meeting into a decision. The new forum is tested in real time, not theorized in a document."
+          },
+          {
+            "phase": "03",
+            "label": "Make the Deferred Decisions",
+            "description": "With a functional forum in place, the deferred decisions get made. The firm works with the leadership team to identify the decisions that have been stalled longest, surface the real disagreements underneath them, and move them through to resolution. This is the most difficult phase of the engagement because it requires the team to do the thing they have been avoiding. The firm is in the room when it happens."
+          },
+          {
+            "phase": "04",
+            "label": "Hold the New Condition",
+            "description": "A leadership team that has operated in Dead Calm for a long time will feel the pull back toward it. Stillness is comfortable. This phase works with the team to establish the habits, the accountability structures, and the relational norms that make candor the default rather than the exception. The goal is a team that can have the hard conversation without needing an outside presence to make it safe."
+          }
+        ]
+      },
+      "output": "A leadership team that has restored functional decision-making capacity and demonstrated the ability to surface and resolve real disagreements. The primary output is a changed condition -- decisions are being made, held, and executed. The engagement closes with a written summary documenting what the dynamic was, what changed, and what the team should watch for if the old patterns begin to reassert themselves. The engagement also includes a Resolution Toolkit assembled at intake -- templates, frameworks, and operational tools selected to support the specific resolution this engagement is working toward and to hold what changes after the work is done. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that resolve the decision paralysis associated with Dead Calm recover the leadership execution gap, decision latency costs, and stalled initiative capital the diagnostic identified. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "One member of the leadership team is not genuinely committed to the new condition. Dead Calm is often sustained by one or two people whose comfort with the status quo outweighs their discomfort with the cost of it. If that person is present in the room but not genuinely engaged in the work, the dynamic will reassemble around them the moment the firm exits.",
+        "The deferred decisions implicate someone in the room. When the real disagreements are surfaced, they sometimes reveal that a decision has been avoided because making it means confronting a specific person's performance, behavior, or fit. That confrontation cannot be indefinitely deferred. If the team is unwilling to have it, the engagement will reach a ceiling.",
+        "The new forum produces discussion but not resolution. Building a better meeting structure and clearer communication channels is necessary but not sufficient. If the underlying relational dynamic has not shifted, the new forum becomes the old forum with better agendas. The firm watches for this and names it directly if it occurs.",
+        "The client mistakes the engagement for team building. Dead Calm is not a cohesion problem. Approaches that focus on relationships, trust exercises, or communication styles without addressing the structural and relational reasons decisions are not being made will not resolve it."
+      ],
+      "resolution_condition": "The engagement is closed when the leadership team has demonstrated sustained functional decision-making capacity without external facilitation -- decisions are being made, held, and not reopened without cause, and the team has shown the ability to surface real disagreements and work through them directly. The written summary and Resolution Toolkit are delivered at close. Resolution is not a team that never disagrees. It is a team that knows how to disagree productively and does not need outside help to do it."
     },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
+    {
+      "state_id": "SILOSOLATION",
+      "intake_question_ids": [
+        "IQ-INTERVENTION-CORE",
+        "IQ-SILOSOLATION"
+      ],
+      "engagement_premise": "Silosolation is what happens when functional isolation becomes the operating model. Each unit has developed its own logic, its own priorities, and its own definition of success -- and those definitions have quietly stopped being compatible with each other. The people working at the seams between those units absorb the cost of that incompatibility every day, in the form of duplicated effort, dropped handoffs, and the low-grade friction of working hard in directions that no longer add up. The engagement exists to redesign the processes, communication channels, role definitions, and decision rights between those units -- not by forcing collaboration but by building the structures that make coordination possible without requiring heroic effort from the people trying to do their jobs.",
+      "entry_point": "The first conversation establishes where the seams are and what is happening at them. In Silosolation situations the leadership team often has a general sense that coordination is broken but has not mapped precisely where the breakdown lives, what is causing it, and who is absorbing the cost. The entry point is that map. The firm listens to the leadership team's account and then listens to the people working at the seams -- because those two accounts are almost always different, and the gap between them is where the diagnosis lives.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Map the Seams",
+            "description": "The breakdown points are identified precisely. Where does information stop moving? Where does accountability disappear at handoffs? Where are workarounds in place that everyone accepts as normal? This phase produces a clear picture of where the coordination failures are concentrated, what is causing them, and what they are costing the people and teams who encounter them every day."
+          },
+          {
+            "phase": "02",
+            "label": "Understand What Built the Walls",
+            "description": "Silos do not build themselves. They are the accumulated result of decisions -- about structure, incentives, role definitions, communication channels, and leadership behavior -- that made isolation more rational than coordination. This phase examines those decisions honestly. Some of them were reasonable at the time and have since become liabilities. Others were never examined at all. Understanding what built the walls is necessary before anything can be done to change them."
+          },
+          {
+            "phase": "03",
+            "label": "Redesign the Connective Tissue",
+            "description": "With the breakdown points mapped and their causes understood, the structural work begins. This phase redesigns the forums, the accountabilities, the information flows, the communication channels, the role definitions at handoff points, and the decision rights that sit at the seams between units. The goal is not to eliminate the units -- it is to make the boundaries between them permeable enough that the organization functions as a whole rather than as a collection of locally optimized parts."
+          },
+          {
+            "phase": "04",
+            "label": "Install and Test",
+            "description": "Structural redesigns fail when they are theorized but not tested. This phase installs the new processes, communication channels, and role definitions in real operating conditions, observes what holds and what does not, and makes the adjustments required before the firm exits. The leadership team is not handed a blueprint. They are supported through the process of making it real."
+          }
+        ]
+      },
+      "output": "An organization whose units are coordinating effectively enough that the seams between them are no longer the primary source of friction and cost. The primary output is a changed condition -- information moves, accountability holds at handoffs, and the people working across unit boundaries are no longer absorbing a disproportionate share of the organization's operational burden. The engagement closes with a written summary documenting what the breakdown points were, what was redesigned, and what the organization should monitor to confirm the new structures are holding. The engagement also includes a Resolution Toolkit assembled at intake -- templates, frameworks, and operational tools selected to support the specific resolution this engagement is working toward and to hold what changes after the work is done. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that resolve the coordination failures associated with Silosolation recover the duplicated effort, decision latency, and radiated team impact costs the diagnostic identified. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "The leadership team is not aligned on the goal of coordination. If the heads of the siloed units have competing incentives that make coordination genuinely costly to them personally, process and structural redesign alone will not resolve it. The incentive problem has to be addressed alongside the structural one, or the new processes will be worked around.",
+        "The breakdown is sourced in a leadership dynamic rather than a structural one. In some Silosolation situations the real problem is that two leaders do not respect each other and have built their units accordingly. Process and structural changes will not fix a relationship problem. If this is the source, the engagement scope needs to shift.",
+        "The workarounds become load-bearing. Organizations that have been siloed for a long time often have informal networks and individual relationships that are compensating for the structural failures. Redesigning the processes and communication channels without understanding what those informal networks are doing risks breaking something that is currently keeping things functional.",
+        "The new structures are installed but not used. A redesigned forum, communication channel, or accountability process that people quietly stop using within sixty days is a common failure mode. The test-and-install phase exists precisely to catch this before the firm exits."
+      ],
+      "resolution_condition": "The engagement is closed when the redesigned processes, communication channels, role definitions, and decision rights are in place, have been tested in real operating conditions, and are demonstrably being used by the people they were designed for. The written summary and Resolution Toolkit are delivered at close. Resolution is not perfect coordination. It is an organization where the seams between units are no longer the most expensive place to work."
     },
-    "intake_question_ids": {
-      "core": "IQ-EXECUTIVE_COUNSEL-CORE",
-      "state": "IQ-CRACKED_MIRROR"
+    {
+      "state_id": "RUNAWAY_TREADMILL",
+      "intake_question_ids": [
+        "IQ-ROADMAP-CORE",
+        "IQ-RUNAWAY_TREADMILL"
+      ],
+      "engagement_premise": "Runaway Treadmill is a growth problem that has outrun the organization's ability to manage it. The pace is real, the effort is genuine, and the people are working hard -- but the systems, processes, role definitions, and communication channels that were built for a smaller, simpler organization have not kept pace with what the organization has become. The result is motion without reliable direction, effort without reliable output, and a leadership team that is too busy running to notice that speed and progress have come apart. The engagement exists to create the deliberate pause that the organization has not been able to give itself -- and to use that pause to rebuild the infrastructure the pace has outrun.",
+      "entry_point": "The first conversation establishes where the organization's velocity is working against it. In Runaway Treadmill situations the leadership team is usually aware that something is wrong but has difficulty naming it precisely because the pace itself makes reflection difficult. The entry point is a direct examination of where decisions are getting made without the right information, where roles have expanded beyond their original definition without being formally redesigned, and where communication channels have not kept pace with the organization's growth. That examination is the starting point for understanding what needs to be rebuilt.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Slow Down to See Clearly",
+            "description": "Before anything can be redesigned, the organization needs enough space to examine itself honestly. This phase creates that space -- not by stopping the work but by carving out the time and the forum for the leadership team to look at what is actually happening rather than responding to what is immediately in front of them. The firm facilitates that examination and names what the team cannot see clearly because they are too close to it."
+          },
+          {
+            "phase": "02",
+            "label": "Map What Has Outpaced What",
+            "description": "With the space established, the work turns to understanding precisely where the organization's growth has outrun its infrastructure. Which processes were designed for a team of twenty and are now being used by a team of two hundred? Which roles have expanded informally without being formally redefined? Which communication channels were built for a flat organization and are now bottlenecking a layered one? Which decisions are being made without the right people in the room because nobody has updated who the right people are? This phase produces a precise picture of the gaps between what the organization has become and how it is still operating."
+          },
+          {
+            "phase": "03",
+            "label": "Rebuild the Infrastructure",
+            "description": "With the gaps mapped, the rebuilding begins. This phase redesigns the processes, role definitions, communication channels, decision rights, and accountability frameworks that have not kept pace. The redesign is sequenced by impact -- the highest-cost gaps get addressed first. The firm works alongside the leadership team to build the new infrastructure, not hand it over as a document."
+          },
+          {
+            "phase": "04",
+            "label": "Recalibrate the Pace",
+            "description": "Infrastructure alone is not enough. An organization that has been running at unsustainable velocity has cultural habits around speed that will reassert themselves if they are not directly addressed. This phase works with the leadership team to establish the operating rhythms, the decision cadences, and the communication norms that allow the organization to move fast without outrunning its own capacity to steer."
+          }
+        ]
+      },
+      "output": "An organization whose infrastructure has caught up with its velocity -- processes, role definitions, communication channels, and decision rights that reflect what the organization actually is rather than what it was when it was smaller. The primary output is a changed condition: the organization is moving at a pace it can manage, decisions are being made with the right information by the right people, and the leadership team has the visibility required to tell the difference between speed and progress. The engagement closes with a written summary documenting what was outpaced, what was rebuilt, and what the organization should monitor as it continues to grow. The engagement also includes a Resolution Toolkit assembled at intake and expanded at close -- policy templates, role clarity frameworks, communication channel guides, and decision rights documentation that give the organization the infrastructure to sustain what the engagement produces. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that resolve the infrastructure gaps associated with Runaway Treadmill recover the decision latency, coordination overhead, and execution gap costs the diagnostic identified. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "The organization treats the engagement as a pause rather than a rebuild. Slowing down to examine the infrastructure is not the same as committing to change it. If the leadership team uses the space the engagement creates to catch their breath rather than to do the rebuilding, the engagement produces insight without resolution.",
+        "The pace reasserts itself before the infrastructure is in place. Growth organizations are under real external pressure. If the market, the investors, or the competitive environment accelerates during the engagement, the leadership team will feel the pull back toward velocity before the rebuilding is complete. The firm names this dynamic directly and works with the client to protect the space required to finish the work.",
+        "Role redefinition surfaces personnel problems. When roles are formally examined, it sometimes becomes clear that the people currently in them are not suited to what those roles now require. That is a personnel conversation that the engagement will surface but that the client must be willing to have.",
+        "The rebuilt infrastructure is not adopted by the people it was designed for. A redesigned process or communication channel that the team quietly works around is not a resolution. The recalibration phase tests adoption in real conditions before the firm exits."
+      ],
+      "resolution_condition": "The engagement is closed when the organization's infrastructure -- its processes, role definitions, communication channels, and decision rights -- reflects what the organization actually is, the leadership team has demonstrated the ability to operate at a pace they can manage without external support, and the rebuilt systems have been tested and adopted in real operating conditions. The written summary and Resolution Toolkit are delivered at close. Resolution is not a slower organization. It is an organization that knows how fast it can go and has built the infrastructure to go that fast reliably."
     },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
+    {
+      "state_id": "FOSSIL_SYSTEM",
+      "intake_question_ids": [
+        "IQ-ROADMAP-CORE",
+        "IQ-FOSSIL_SYSTEM"
+      ],
+      "engagement_premise": "The Fossil System is not failing because the people running it are incompetent. It is failing because the processes, role definitions, communication channels, decision rights, and organizational structures they are running were designed for a version of the organization that no longer exists. Nobody built it this way on purpose. Good people solving immediate problems over years produced a system that now resists the changes it needs most. The engagement exists to map what was built, understand what is genuinely load-bearing and what is calcified habit, and redesign the parts that are holding the organization back without destabilizing the parts that are holding it together.",
+      "entry_point": "The first conversation establishes what the organization has been trying to change and what has stopped it. Fossil System situations almost always have a history of failed or incomplete change efforts -- initiatives that launched with energy and stalled, redesigns that produced documentation but not adoption, decisions that were made and then quietly unmade. That history is the entry point. Understanding what was tried, what it ran into, and why it did not hold is more diagnostic than any current-state assessment. The resistance is the finding.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Reconstruct What Was Built and Why",
+            "description": "Before anything is changed, the existing system needs to be understood on its own terms. This phase reconstructs the history of how the current processes, role definitions, communication channels, and decision rights came to be -- not to assign blame but to understand the logic that produced them. Every system made sense at some point. Understanding that original logic is what makes it possible to distinguish between what can be changed and what will break something if it is."
+          },
+          {
+            "phase": "02",
+            "label": "Identify What Is Load-Bearing",
+            "description": "Not everything in a Fossil System is a problem. Some of what looks like calcification is actually structural integrity -- informal networks, institutional knowledge, and established relationships that are doing real work even if they are not on any org chart. This phase identifies what is genuinely worth preserving, what needs to be redesigned, and what needs to be retired. That distinction is the most important output of the diagnostic phase and the one most change efforts skip."
+          },
+          {
+            "phase": "03",
+            "label": "Design the Updated System",
+            "description": "With the load-bearing elements identified and protected, the redesign begins. This phase produces updated processes, clarified role definitions, rebuilt communication channels, and redesigned decision rights that reflect what the organization actually needs to operate effectively today. The design is developed alongside the leadership team -- not handed to them as a finished product -- because adoption depends on ownership and ownership requires participation in the design."
+          },
+          {
+            "phase": "04",
+            "label": "Manage the Transition",
+            "description": "Fossil System organizations have usually failed at transitions before. This phase manages the move from the old system to the new one with explicit attention to the points where previous change efforts stalled. The firm stays present through the transition, not just through the design. What gets built in a document is only as good as what gets adopted in practice."
+          }
+        ]
+      },
+      "output": "An organization operating on a system that reflects what it actually is -- processes that match its current scale and complexity, role definitions that reflect what people are actually responsible for, communication channels that move information to the right people at the right time, and decision rights that put authority where the work is. The primary output is a changed condition: the organization is no longer expending energy working around a system designed for a different version of itself. The engagement closes with a written summary documenting what was reconstructed, what was redesigned, and what the organization should monitor as the new system is adopted. The engagement also includes a Resolution Toolkit assembled at intake and expanded at close -- process documentation, role definition templates, communication channel guides, and decision rights frameworks that give the organization the reference infrastructure to sustain what was built. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that resolve the system obsolescence associated with Fossil System recover the execution overhead, coordination friction, and stalled initiative costs the diagnostic identified. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "The organization underestimates how much of the existing system is load-bearing. Fossil System engagements that move too fast to change too much at once risk dismantling informal structures and relationships that were doing real work. The reconstruct-and-identify phases are not optional -- they exist precisely to prevent this.",
+        "Leadership does not have the standing or the will to retire what needs to be retired. Some elements of a Fossil System are protected by people with tenure, relationships, or authority. If the leadership team is unwilling to make the calls required to retire those elements, the redesign will work around them and the new system will inherit the old system's most significant liabilities.",
+        "The redesign produces documentation that is not adopted. A beautifully designed process or communication channel that nobody follows is not a resolution. The transition phase tests adoption in real conditions and makes the adjustments required before the engagement closes.",
+        "The organization's history of failed change efforts has produced a skepticism that the new effort cannot overcome. If the people the redesign depends on have seen enough initiatives launch and stall that they have stopped believing change is possible, that skepticism will undermine adoption regardless of how good the design is. The firm names this dynamic and addresses it directly rather than designing around it."
+      ],
+      "resolution_condition": "The engagement is closed when the redesigned system -- its processes, role definitions, communication channels, and decision rights -- has been adopted in real operating conditions, the transition from the old system to the new one is complete, and the organization has demonstrated the ability to maintain and update the new system without external support. The written summary and Resolution Toolkit are delivered at close. Resolution is not a perfect system. It is a system the organization understands, owns, and can adapt as it continues to change."
     },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "EXIT_PATTERN",
-    "tier": "INTERVENTION",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
+    {
+      "state_id": "BROKEN_COMPASS",
+      "intake_question_ids": [
+        "IQ-ROADMAP-CORE",
+        "IQ-BROKEN_COMPASS"
+      ],
+      "engagement_premise": "Broken Compass is not a strategy problem. It is a people problem wearing a strategy problem's clothes. The people at the top are no longer navigating toward the same destination -- and because that divergence has not been named, every process, communication channel, and decision right in the organization is being operated against a different set of assumptions about where things are going. The cost of that divergence is not visible on any single report. It shows up as decisions that take too long, initiatives that lose momentum, and a leadership team that is working hard and producing less than the sum of its effort. The engagement exists to surface the divergence, name it honestly, and give the leadership team the conditions in which a shared direction can actually be established.",
+      "entry_point": "The first conversation establishes where the divergence lives and how long it has been there. In Broken Compass situations the leadership team has usually had versions of the direction conversation before -- in offsites, in planning sessions, in one-on-ones -- without producing a shared conclusion. The entry point is understanding why those conversations have not landed. What is the real disagreement underneath the surface one? Who in the room has a stake in the current ambiguity? What would each person have to give up for a shared direction to be possible? Those questions shape everything that follows.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Surface the Real Disagreement",
+            "description": "Most Broken Compass situations have an official version of the strategic disagreement and a real one. The official version is about priorities, timelines, or resource allocation. The real one is usually about something more fundamental -- the kind of organization this should be, the role of specific people in its future, or the legacy of decisions that have not been fully reckoned with. This phase surfaces the real disagreement through structured individual conversations before anything happens in a group setting. What people say privately and what they say in the room are two different data sets, and both are necessary."
+          },
+          {
+            "phase": "02",
+            "label": "Create the Conditions for an Honest Conversation",
+            "description": "The direction conversation has failed before because the conditions for honesty were not in place. Someone in the room had too much at stake. The forum was too formal or too informal. The right questions were not asked. This phase designs and facilitates the conversation that has not happened yet -- with the right people, in the right setting, with the firm present to ask the questions the team has been unable to ask itself and to hold the space when the conversation gets difficult."
+          },
+          {
+            "phase": "03",
+            "label": "Establish the Shared Direction",
+            "description": "The output of the honest conversation is a shared direction that everyone in the room has genuinely accepted -- not a document that everyone has signed. This phase works with the leadership team to translate the conclusion of that conversation into a clear, specific articulation of where the organization is going, what that means for its priorities, and what it means for the role definitions, processes, and decision rights that need to be updated to reflect the new direction."
+          },
+          {
+            "phase": "04",
+            "label": "Communicate and Align",
+            "description": "A shared direction that lives only in the leadership team is not fully established. This phase works with the client to communicate the direction to the broader organization in a way that is honest about the fact that clarity was previously missing, specific about what has changed, and concrete about what it means for the people receiving it. The communication is not spin. It is the organization telling the truth about where it is going and why."
+          }
+        ]
+      },
+      "output": "A leadership team that is navigating toward a genuinely shared destination, with the role definitions, processes, communication channels, and decision rights updated to reflect that direction. The primary output is a changed condition -- the divergence has been named, the direction has been established, and the organization is no longer operating against competing assumptions about where it is going. The engagement closes with a written summary documenting what the divergence was, how it was resolved, and what the leadership team should monitor to confirm the shared direction is holding. The engagement also includes a Resolution Toolkit assembled at intake -- frameworks, communication templates, decision rights documentation, and alignment tools selected to support the specific resolution this engagement is working toward and to hold what changes after the work is done. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that resolve the directional divergence associated with Broken Compass recover the decision latency, initiative momentum loss, and leadership execution gap the diagnostic identified. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "The honest conversation produces a direction that one or more members of the leadership team accepts in the room but does not genuinely commit to. Verbal agreement and genuine commitment are not the same thing. If someone leaves the conversation having said yes while privately meaning no, the divergence will reassemble quickly and with more protection than it had before.",
+        "The real disagreement is about a person's role in the organization's future. In some Broken Compass situations the strategic divergence is inseparable from a question about whether a specific person belongs in the leadership team as the organization moves forward. That is a personnel conversation, and it cannot be indefinitely deferred. If the direction conversation keeps stalling, this is often why.",
+        "The shared direction requires changes that the leadership team is unwilling to make. A genuinely new direction almost always means that some things the organization has been doing, funding, or protecting need to stop. If the leadership team establishes a direction in conversation but will not make the changes required to act on it, the direction is aspirational rather than operational.",
+        "The broader organization does not believe the direction is real. A leadership team that has been visibly divided for a long time will not automatically be trusted when it announces alignment. The communication phase is not optional -- and the credibility of the communication depends on its honesty about what was previously missing."
+      ],
+      "resolution_condition": "The engagement is closed when the leadership team has established a genuinely shared direction, updated the processes, role definitions, communication channels, and decision rights required to act on it, and communicated it to the broader organization in a way that has been received as credible. The written summary and Resolution Toolkit are delivered at close. Resolution is not permanent agreement. It is a leadership team that knows how to navigate disagreement toward a shared conclusion without needing outside help to do it."
     },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
+    {
+      "state_id": "ANCHOR",
+      "intake_question_ids": [
+        "IQ-ROADMAP-CORE",
+        "IQ-ANCHOR"
+      ],
+      "engagement_premise": "The Anchor is the only state in the diagnostic that is not a crisis. The organization has achieved genuine operational health -- coordinated decision-making, low friction, engaged leadership, and a culture that did not happen by accident. The engagement exists not to repair something broken but to protect something working. Organizational health degrades without deliberate maintenance. The conditions that produced it do not sustain themselves. The people, processes, role definitions, and communication channels that are generating the current health need to be understood clearly enough that the organization can protect them as it grows, changes leadership, or faces external pressure.",
+      "entry_point": "The first conversation establishes what the organization believes is responsible for its current health and how confident it is that those conditions will hold. Most Anchor organizations have a strong intuitive sense of what makes them work but have not mapped it precisely enough to protect it deliberately. The entry point is that map. What is actually generating the health? How much of it lives in specific people versus in systems and processes? What would be most at risk if the organization grew significantly, lost a key leader, or went through a period of external pressure? Those questions define the scope of the work.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Map What Is Working and Why",
+            "description": "Before anything else, the firm conducts a precise examination of what is generating the organization's current health. Which processes are producing the coordination? Which role definitions are creating the clarity? Which communication channels are keeping information moving to the right people? Which leadership behaviors are setting the conditions for everything else? This phase produces a clear, specific account of what the organization has built -- not as a celebration but as a blueprint. You cannot protect what you have not mapped."
+          },
+          {
+            "phase": "02",
+            "label": "Identify the Fragilities",
+            "description": "Every healthy organization has fragilities -- conditions that are currently working but would not survive a specific kind of pressure. A process that depends on one person's institutional knowledge. A communication channel that works because two leaders have a strong relationship that a personnel change would disrupt. A cultural norm that is held in place by a founding leader whose departure would leave it unanchored. This phase identifies those fragilities honestly and assesses their risk. Some can be addressed now. Others need to be monitored. All of them need to be known."
+          },
+          {
+            "phase": "03",
+            "label": "Build the Protection Infrastructure",
+            "description": "With the health mapped and the fragilities identified, the work turns to building the infrastructure that makes the current health less dependent on specific people and more embedded in the organization's processes, role definitions, communication channels, and decision rights. The goal is not to bureaucratize what is working. It is to make what is working durable enough to survive the changes that growth and time will inevitably bring."
+          },
+          {
+            "phase": "04",
+            "label": "Establish the Maintenance Cadence",
+            "description": "Organizational health does not maintain itself through a one-time engagement. This phase establishes the ongoing practices -- the review cadences, the accountability checkpoints, the early warning signals -- that give the organization the ability to monitor its own health and respond to early signs of degradation before they become structural problems. The firm designs the cadence with the leadership team and confirms it is in place before the engagement closes."
+          }
+        ]
+      },
+      "output": "An organization with a precise understanding of what is generating its current health, a protection infrastructure that makes that health less dependent on specific individuals and more embedded in its systems and processes, and a maintenance cadence that gives the leadership team the ongoing visibility required to protect what they have built. The primary output is a durable condition -- the health that existed at the start of the engagement is more resilient at the end of it. The engagement closes with a written summary documenting what was mapped, what fragilities were identified, what was built to address them, and what the maintenance cadence looks like going forward. The engagement also includes a Resolution Toolkit assembled at intake -- frameworks, process documentation, role definition templates, and maintenance guides selected to give the organization the reference infrastructure to sustain its health over time. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. The diagnostic identified the directional cost of friction in comparable organizations. The engagement addresses the conditions that would generate that cost if the current health were allowed to degrade. Organizations that maintain the patterns associated with the Anchor state avoid the compounding costs that other states in this diagnostic produce. At close, the firm works with the client to identify the specific operational signals that confirm the health is holding and the cost of friction remains contained.",
+      "failure_modes": [
+        "The organization mistakes the engagement for a validation exercise. The Anchor engagement is not a certification that the organization is healthy. It is a precise examination of what is working and what is fragile. Leaders who approach it looking for confirmation rather than clarity will not get the full value of what the work produces.",
+        "The protection infrastructure adds overhead without adding durability. Documenting processes, formalizing role definitions, and building maintenance cadences all carry a cost. If the infrastructure is built in ways that slow the organization down or create bureaucratic friction, it undermines the health it is designed to protect. The firm designs for durability, not documentation volume.",
+        "A key leader's departure during or after the engagement accelerates the fragilities before the protection infrastructure is in place. Leadership transitions are the most common trigger for health degradation in Anchor organizations. If a departure is anticipated, the engagement scope should be adjusted to prioritize the fragilities most exposed by that specific transition.",
+        "The maintenance cadence is established but not sustained. A review cadence that the leadership team quietly stops using within six months is a common failure mode. The firm builds the cadence to be as lightweight as possible while still providing meaningful signal, and confirms it is genuinely embedded before the engagement closes."
+      ],
+      "resolution_condition": "The engagement is closed when the organization's health has been precisely mapped, the primary fragilities have been addressed through updated processes, role definitions, communication channels, or decision rights, and the maintenance cadence is in place and being used. The written summary and Resolution Toolkit are delivered at close. Resolution in an Anchor engagement is not the correction of a problem. It is the protection of something worth keeping -- made durable enough to survive what growth and time will bring to it."
     },
-    "intake_question_ids": {
-      "core": "IQ-INTERVENTION-CORE",
-      "state": "IQ-EXIT_PATTERN"
+    {
+      "state_id": "KID_GLOVES",
+      "intake_question_ids": [
+        "IQ-DEVELOPMENT-CORE",
+        "IQ-KID_GLOVES"
+      ],
+      "engagement_premise": "Kid Gloves is a trust problem that has become a performance problem. The relationships in the organization are genuine -- people care about each other, the culture is warm, and that warmth is worth protecting. But the care has quietly become a reason not to say the things that need to be said, and the accumulation of unsaid things has a cost that does not show up until it is significant. The engagement exists not to harden the culture but to give it the one thing it is missing: the ability to have honest, direct conversations without the relationships bearing the full weight of the discomfort. A high-trust environment that cannot sustain candor is not as healthy as it feels.",
+      "entry_point": "The first conversation establishes what is not being said and what the organization believes would happen if it were. In Kid Gloves situations the leadership team almost always has a clear sense of what the avoided conversations are -- they are just not having them. The entry point is understanding why. Is it a specific relationship that sets the tone for the whole team? Is it a norm that formed early and has never been examined? Is it a leader whose response to direct feedback has trained everyone around them to soften what they say? The source of the avoidance shapes the resolution path.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Name What Is Not Being Said",
+            "description": "Before any new norms or processes are established, the specific avoided conversations need to be surfaced. This phase works with the leadership team -- individually first, then collectively -- to map what everyone knows but is not saying, what feedback has been softened beyond usefulness, and what decisions have been deferred because making them would require a direct conversation someone is not willing to have. The map is not shared publicly. It informs what the engagement needs to address."
+          },
+          {
+            "phase": "02",
+            "label": "Understand What Is Protecting the Avoidance",
+            "description": "Every Kid Gloves culture has something protecting it. Sometimes it is a specific leader whose emotional response to direct feedback has made honesty feel risky. Sometimes it is a founding relationship that the rest of the organization treats as untouchable. Sometimes it is simply a norm that formed early -- we are a kind culture -- that has never been examined closely enough to distinguish kindness from conflict avoidance. This phase names what is protecting the avoidance so the engagement can address it directly rather than working around it."
+          },
+          {
+            "phase": "03",
+            "label": "Build the Candor Infrastructure",
+            "description": "Candor does not happen by asking people to be more direct. It happens when the processes, communication channels, role definitions, and meeting structures make honesty the path of least resistance rather than the path of most risk. This phase redesigns the forums, feedback mechanisms, and accountability structures that shape how honest conversation moves through the organization. The goal is not to make the culture less warm. It is to make it warm and honest -- which is a higher standard than either alone."
+          },
+          {
+            "phase": "04",
+            "label": "Practice in Real Conditions",
+            "description": "New candor norms fail when they are established in theory and never tested in practice. This phase works with the leadership team to have the avoided conversations -- not as exercises but as real exchanges about real issues -- with the firm present to model the tone, hold the space, and demonstrate that the relationships can bear the weight of honesty without breaking. The first few real conversations are the most important. They set the new norm more effectively than any framework or process."
+          }
+        ]
+      },
+      "output": "A leadership team that has demonstrated the ability to have direct, honest conversations without the relationships breaking, operating within processes, communication channels, and meeting structures that make candor the expected standard rather than the uncomfortable exception. The primary output is a changed condition -- the most important conversations are happening, feedback is being delivered in a form that is actually useful, and the organization is no longer paying the compounding cost of accumulated unsaid things. The engagement closes with a written summary documenting what the avoidance pattern was, what was redesigned, and what the leadership team should monitor to confirm the new norm is holding. The engagement also includes a Resolution Toolkit assembled at intake -- feedback frameworks, communication guides, meeting structure templates, and candor-building tools selected for the specific avoidance patterns this engagement is working to resolve. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. Organizations that resolve the avoidance patterns associated with Kid Gloves typically see reductions in decision latency, meeting overhead, and the hidden cost of feedback that has been softened past the point of usefulness. At close, the firm works with the client to identify the specific operational signals that confirm the cost is moving in the right direction.",
+      "failure_modes": [
+        "The leader who is most central to the avoidance pattern is not genuinely open to changing it. A culture of conflict avoidance is almost always maintained by someone whose response to directness has made honesty feel costly. If that person is not genuinely willing to change how they receive difficult information, the engagement will reach a ceiling regardless of what else changes.",
+        "The new candor norms are practiced in safe conditions but not in the conversations that actually matter. A team that can be direct in a facilitated session and reverts to softness when the stakes are real has not changed. The practice phase specifically targets the high-stakes conversations, not the easy ones.",
+        "The culture confuses warmth with health so thoroughly that honest feedback is received as a breach of trust rather than an expression of it. This is a deeper cultural reframe than most Kid Gloves engagements require, but when it is present the firm names it directly rather than working around it.",
+        "The avoided conversations turn out to involve a more serious underlying dynamic than the Kid Gloves profile suggested. Occasionally what presents as conflict avoidance is actually a Sacred Cow or Cracked Mirror dynamic that the warmth of the culture has obscured. If the engagement surfaces this, the scope is reassessed."
+      ],
+      "resolution_condition": "The engagement is closed when the leadership team has demonstrated the ability to have direct, honest conversations without external facilitation, the processes and communication channels that support candor are in place and being used, and the avoided conversations that were mapped at the start of the engagement have been had. The written summary and Resolution Toolkit are delivered at close. Resolution is not a culture without warmth. It is a culture where the warmth and the honesty are both present -- and where the people in it have learned that the relationships are more durable than the avoidance assumed."
     },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "DEAD_CALM",
-    "tier": "INTERVENTION",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
-    },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
-    },
-    "intake_question_ids": {
-      "core": "IQ-INTERVENTION-CORE",
-      "state": "IQ-DEAD_CALM"
-    },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "SILOSOLATION",
-    "tier": "INTERVENTION",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
-    },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
-    },
-    "intake_question_ids": {
-      "core": "IQ-INTERVENTION-CORE",
-      "state": "IQ-SILOSOLATION"
-    },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "RUNAWAY_TREADMILL",
-    "tier": "ROADMAP",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
-    },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
-    },
-    "intake_question_ids": {
-      "core": "IQ-ROADMAP-CORE",
-      "state": "IQ-RUNAWAY_TREADMILL"
-    },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "FOSSIL_SYSTEM",
-    "tier": "ROADMAP",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
-    },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
-    },
-    "intake_question_ids": {
-      "core": "IQ-ROADMAP-CORE",
-      "state": "IQ-FOSSIL_SYSTEM"
-    },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "ANCHOR",
-    "tier": "ROADMAP",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
-    },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
-    },
-    "intake_question_ids": {
-      "core": "IQ-ROADMAP-CORE",
-      "state": "IQ-ANCHOR"
-    },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "BROKEN_COMPASS",
-    "tier": "ROADMAP",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
-    },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
-    },
-    "intake_question_ids": {
-      "core": "IQ-ROADMAP-CORE",
-      "state": "IQ-BROKEN_COMPASS"
-    },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "KID_GLOVES",
-    "tier": "DEVELOPMENT",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
-    },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
-    },
-    "intake_question_ids": {
-      "core": "IQ-DEVELOPMENT-CORE",
-      "state": "IQ-KID_GLOVES"
-    },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
-  },
-  {
-    "state_id": "UNLIT_ROOM",
-    "tier": "DEVELOPMENT",
-    "engagement_premise": "",
-    "entry_point": {
-      "format": "",
-      "client_ask": "",
-      "pete_objective": ""
-    },
-    "method": {
-      "phases": [
-        {
-          "label": "",
-          "description": "",
-          "duration": ""
-        }
-      ]
-    },
-    "intake_question_ids": {
-      "core": "IQ-DEVELOPMENT-CORE",
-      "state": "IQ-UNLIT_ROOM"
-    },
-    "output": {
-      "format": "",
-      "contains": "",
-      "leads_to": ""
-    },
-    "failure_modes": [],
-    "resolution_condition": ""
-  }
-]
+    {
+      "state_id": "UNLIT_ROOM",
+      "intake_question_ids": [
+        "IQ-DEVELOPMENT-CORE",
+        "IQ-UNLIT_ROOM"
+      ],
+      "engagement_premise": "The Unlit Room is the best possible time to engage. The friction is real but not yet structural. The signals are present but not yet compounding. The leader has the will and the agency to act -- which means the organization still has the luxury of choosing where to start rather than responding to where the crisis has already landed. The engagement exists to provide the clarity that turns an uncomfortable feeling into a precise understanding of where the friction lives, what is generating it, and what addressing it first will unlock for everything else. This is not repair work. It is the kind of investment that prevents repair work from becoming necessary.",
+      "entry_point": "The first conversation establishes what the leader can feel but cannot yet name. In Unlit Room situations the presenting picture is often vague -- something is off, the team is not quite performing at the level it should, decisions feel slightly harder than they ought to be. The entry point is taking that vague signal seriously rather than waiting for it to become specific. The firm listens carefully to what the leader notices, what the people around them seem to be experiencing, and what the organization's recent decisions and outputs reveal about where the friction is beginning to assemble. That listening is the diagnostic.",
+      "method": {
+        "phases": [
+          {
+            "phase": "01",
+            "label": "Turn the Light On",
+            "description": "The first task is locating the friction precisely. This phase moves through the organization's processes, role definitions, communication channels, decision rights, and leadership behaviors to identify where the early signals are concentrated. The friction in an Unlit Room is not yet visible in the financial data -- it shows up in the quality of conversations, the speed of decisions, the candor of feedback, and the energy of the people doing the work. The firm looks for it in those places."
+          },
+          {
+            "phase": "02",
+            "label": "Name What Is Assembling",
+            "description": "With the friction located, the work turns to understanding what is generating it and where it is headed if it is not addressed. This phase produces a precise account of the early-stage patterns -- the role ambiguities, the communication gaps, the feedback deficits, the decision-making habits -- that are currently low-cost and will become high-cost if they are allowed to develop. Naming them at this stage is what makes them addressable at low cost."
+          },
+          {
+            "phase": "03",
+            "label": "Address the Highest-Leverage Points First",
+            "description": "Not everything that is assembling needs to be addressed immediately. This phase works with the leader to identify the one or two changes that will produce the most significant impact on the trajectory -- the role clarification that removes the most ambiguity, the communication channel that is most consistently dropping information, the feedback mechanism that is most consistently softening what needs to be said. The Unlit Room engagement is not a comprehensive organizational redesign. It is a precise, early intervention at the points where the trajectory is most changeable."
+          },
+          {
+            "phase": "04",
+            "label": "Establish the Early Warning System",
+            "description": "The Unlit Room engagement closes with something no other state in the diagnostic requires in the same way: an ongoing monitoring capability. Because the friction was caught early, the organization has the opportunity to build the signals, review cadences, and accountability checkpoints that will tell the leadership team if the patterns begin to reassemble. This phase designs that system and confirms it is in place before the engagement closes."
+          }
+        ]
+      },
+      "output": "A leader with a precise understanding of where the friction was assembling, what was generating it, and what was changed to address it before it became structural. The primary output is a changed trajectory -- the organization is no longer moving toward a more expensive version of the problem. The engagement closes with a written summary documenting what was found, what was changed, and what the early warning system looks like going forward. The engagement also includes a Resolution Toolkit assembled at intake -- early-stage diagnostic frameworks, role clarity tools, feedback mechanism guides, and communication channel templates selected for the specific patterns this engagement is working to address before they become structural. The evidence basis for this engagement's cost impact is documented in the resolution-core evidence_basis block. The diagnostic identified the directional cost of the friction patterns associated with this state if they are allowed to develop. The engagement addresses those patterns at the point where they are least expensive to resolve. Organizations that intervene at the Unlit Room stage avoid the compounding costs associated with every other state in this diagnostic. The return on an early intervention is not a reduction in a current cost -- it is the prevention of a future one. At close, the firm works with the client to identify the specific operational signals that confirm the trajectory has changed.",
+      "failure_modes": [
+        "The leader waits for the signal to become clearer before engaging. The Unlit Room is valuable precisely because the friction has not yet compounded. Every month spent waiting for more clarity is a month in which the patterns are becoming more expensive to address. The instinct to wait for certainty is understandable and costly.",
+        "The engagement scope expands beyond what the early-stage signals warrant. Because the friction is not yet severe, there is a risk of over-engineering the response -- redesigning processes and structures that do not yet need redesigning and creating overhead in the name of prevention. The firm calibrates the scope to what the signals actually indicate, not to what could theoretically go wrong.",
+        "The early warning system is established but not used. A monitoring capability that the leadership team stops paying attention to within a few months is not a resolution. The firm builds the system to be as lightweight as possible while still providing meaningful signal, and designs it around the review cadences the organization already has rather than adding new ones.",
+        "The leader's sense that something is off turns out to be accurate but sourced in a different state than Unlit Room. Occasionally an Unlit Room diagnostic surfaces signals that indicate the organization is further along the friction curve than the initial profile suggested. If that happens, the engagement scope is reassessed and the resolution path is adjusted accordingly. The firm names this directly rather than completing the original scope against the wrong diagnosis."
+      ],
+      "resolution_condition": "The engagement is closed when the friction that was assembling has been precisely located and addressed at its highest-leverage points, the early warning system is in place and being used by the leadership team, and the leader has a clear picture of what to watch for and what to do if the signals begin to reassemble. The written summary and Resolution Toolkit are delivered at close. Resolution in an Unlit Room engagement is not the elimination of all friction -- some friction is normal and generative. It is the prevention of the kind of friction that compounds quietly until it becomes the most expensive thing in the building."
+    }
+  ]
+}

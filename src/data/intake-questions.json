@@ -6,9 +6,44 @@
     "type": "core",
     "questions": [
       {
-        "id": "IQ-STABILITY_SUPPORT-CORE-01",
-        "question": "",
-        "intent": ""
+        "id": "IQ-SS-CORE-01",
+        "question": "Who in the organization is still functioning as a stabilizing force right now?",
+        "intent": "Identify who Pete can anchor to. If no one, that changes the entry strategy."
+      },
+      {
+        "id": "IQ-SS-CORE-02",
+        "question": "What does the next 30 days look like if nothing changes?",
+        "intent": "Forces the client to articulate the actual trajectory. Establishes urgency without Pete having to create it."
+      },
+      {
+        "id": "IQ-SS-CORE-03",
+        "question": "What has the leadership team agreed on in the last 60 days?",
+        "intent": "Measures functional decision capacity. If nothing, the engagement starts there."
+      },
+      {
+        "id": "IQ-SS-CORE-04",
+        "question": "Who knows the full picture -- and who only knows their piece of it?",
+        "intent": "Maps information asymmetry. Critical for knowing where the real conversations need to happen."
+      },
+      {
+        "id": "IQ-SS-CORE-05",
+        "question": "What are you most afraid people will say if asked directly?",
+        "intent": "Surfaces the thing the client is protecting. Often the actual source of the problem."
+      },
+      {
+        "id": "IQ-SS-CORE-06",
+        "question": "What would have to be true for the organization to be stable six months from now?",
+        "intent": "Tests whether the client has a realistic success picture or is hoping for a return to a state that no longer exists."
+      },
+      {
+        "id": "IQ-SS-CORE-07",
+        "question": "What decisions are being deferred right now that cannot wait much longer?",
+        "intent": "Identifies the pressure points Pete needs to address first."
+      },
+      {
+        "id": "IQ-SS-CORE-08",
+        "question": "Has anyone named what is actually happening -- out loud, in a room with the right people?",
+        "intent": "Establishes whether the diagnosis has been said aloud or is still being managed around. Determines how much groundwork is needed."
       }
     ]
   },
@@ -19,9 +54,44 @@
     "type": "core",
     "questions": [
       {
-        "id": "IQ-EXECUTIVE_COUNSEL-CORE-01",
-        "question": "",
-        "intent": ""
+        "id": "IQ-EC-CORE-01",
+        "question": "What is the conversation you have not been able to have inside the organization -- and why?",
+        "intent": "The core diagnostic question for this tier. The answer defines the engagement."
+      },
+      {
+        "id": "IQ-EC-CORE-02",
+        "question": "Who in the organization do you trust completely -- and who do you trust with reservations?",
+        "intent": "Maps the political landscape. Tells Pete who is safe to name in sessions and who requires discretion."
+      },
+      {
+        "id": "IQ-EC-CORE-03",
+        "question": "What has the friction cost you personally -- not just the organization?",
+        "intent": "Distinguishes professional friction from personal toll. Leaders who have absorbed personal cost are more invested in resolution."
+      },
+      {
+        "id": "IQ-EC-CORE-04",
+        "question": "What have you tried to change that has not moved?",
+        "intent": "Identifies where the institutional resistance is. Patterns here often reveal the protected source."
+      },
+      {
+        "id": "IQ-EC-CORE-05",
+        "question": "What does a successful outcome look like to you -- specifically?",
+        "intent": "Tests whether the client has a concrete definition of resolution or a vague wish for things to be better."
+      },
+      {
+        "id": "IQ-EC-CORE-06",
+        "question": "What would you be unwilling to do to resolve this?",
+        "intent": "Establishes constraints early. Prevents the engagement from running into a wall Pete could have seen coming."
+      },
+      {
+        "id": "IQ-EC-CORE-07",
+        "question": "How long have you been managing this without naming it directly?",
+        "intent": "Calibrates tenure of the problem. Longer duration usually means deeper institutional protection."
+      },
+      {
+        "id": "IQ-EC-CORE-08",
+        "question": "What would change in the organization if this were resolved?",
+        "intent": "Tests whether the client can envision a concrete different state -- or whether the friction has become the operating condition."
       }
     ]
   },
@@ -32,9 +102,39 @@
     "type": "core",
     "questions": [
       {
-        "id": "IQ-INTERVENTION-CORE-01",
-        "question": "",
-        "intent": ""
+        "id": "IQ-INT-CORE-01",
+        "question": "What is the specific thing that needs to happen -- and what is preventing it?",
+        "intent": "Direct entry to the blockage. The answer tells Pete whether this is a political problem, a structural problem, or a people problem."
+      },
+      {
+        "id": "IQ-INT-CORE-02",
+        "question": "Who needs to be in the room for this to get resolved -- and who cannot be in the room?",
+        "intent": "Maps the key players and identifies who is part of the solution versus part of the problem."
+      },
+      {
+        "id": "IQ-INT-CORE-03",
+        "question": "What has already been attempted, and what did it run into?",
+        "intent": "Prevents Pete from repeating failed approaches. Reveals what the institution has already tried to protect."
+      },
+      {
+        "id": "IQ-INT-CORE-04",
+        "question": "What happens if this is not resolved in the next 90 days?",
+        "intent": "Forces a concrete consequence timeline. Clients who cannot answer this may not be ready for an Intervention."
+      },
+      {
+        "id": "IQ-INT-CORE-05",
+        "question": "Who in leadership is committed to resolution -- and who is privately comfortable with the current state?",
+        "intent": "Identifies resistance before Pete is in the room. Critical for knowing where to direct pressure."
+      },
+      {
+        "id": "IQ-INT-CORE-06",
+        "question": "Is there a personnel decision that has been deferred because of this situation?",
+        "intent": "Surfaces the thing everyone knows but hasn't named. Often the actual resolution that needs to happen."
+      },
+      {
+        "id": "IQ-INT-CORE-07",
+        "question": "What would a successful outcome look like -- and who would need to accept it?",
+        "intent": "Establishes the definition of done and identifies who has veto power over resolution."
       }
     ]
   },
@@ -45,9 +145,44 @@
     "type": "core",
     "questions": [
       {
-        "id": "IQ-ROADMAP-CORE-01",
-        "question": "",
-        "intent": ""
+        "id": "IQ-RM-CORE-01",
+        "question": "Where does the friction show up most visibly -- in meetings, in decisions, or between specific groups?",
+        "intent": "Narrows the diagnostic focus. Helps Pete know where to start listening."
+      },
+      {
+        "id": "IQ-RM-CORE-02",
+        "question": "Who in the organization has the clearest picture of what is actually happening?",
+        "intent": "Identifies the key informants for the listening phase. Usually not the people at the top."
+      },
+      {
+        "id": "IQ-RM-CORE-03",
+        "question": "What do you think the team would say if asked directly what is broken?",
+        "intent": "Tests whether the leader has a realistic read on what their team is experiencing."
+      },
+      {
+        "id": "IQ-RM-CORE-04",
+        "question": "What has been tried before -- formally or informally?",
+        "intent": "Establishes baseline so the Roadmap builds forward rather than repeating history."
+      },
+      {
+        "id": "IQ-RM-CORE-05",
+        "question": "What decisions have been stalled, deferred, or reopened repeatedly?",
+        "intent": "Decision patterns are the best surface signal for structural friction. Patterns here shape the diagnostic focus."
+      },
+      {
+        "id": "IQ-RM-CORE-06",
+        "question": "What would the organization need to stop doing for things to improve?",
+        "intent": "A question most clients haven't been asked. The answer often points directly at the problem."
+      },
+      {
+        "id": "IQ-RM-CORE-07",
+        "question": "Is there anyone whose role or behavior is central to the friction -- and has that been named?",
+        "intent": "Tests for a protected source before the engagement begins. If yes, Pete may need to re-tier toward Intervention or Executive Counsel."
+      },
+      {
+        "id": "IQ-RM-CORE-08",
+        "question": "What does the team already know that leadership hasn't fully heard yet?",
+        "intent": "Signals whether a listening deficit is part of the problem. Often the most useful single answer Pete receives."
       }
     ]
   },
@@ -58,165 +193,44 @@
     "type": "core",
     "questions": [
       {
-        "id": "IQ-DEVELOPMENT-CORE-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-LAST_LEG",
-    "tier": "STABILITY_SUPPORT",
-    "state_id": "LAST_LEG",
-    "type": "state",
-    "questions": [
+        "id": "IQ-DEV-CORE-01",
+        "question": "What behavior or pattern are you trying to change -- and how long has it been showing up?",
+        "intent": "Establishes whether this is a new pattern or an old one that has been tolerated. Duration matters for scoping."
+      },
       {
-        "id": "IQ-LAST_LEG-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-SACRED_COW",
-    "tier": "EXECUTIVE_COUNSEL",
-    "state_id": "SACRED_COW",
-    "type": "state",
-    "questions": [
+        "id": "IQ-DEV-CORE-02",
+        "question": "What has the leader or team been told about what needs to change?",
+        "intent": "Tests whether feedback has actually been delivered or is still being managed around."
+      },
       {
-        "id": "IQ-SACRED_COW-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-CRACKED_MIRROR",
-    "tier": "EXECUTIVE_COUNSEL",
-    "state_id": "CRACKED_MIRROR",
-    "type": "state",
-    "questions": [
+        "id": "IQ-DEV-CORE-03",
+        "question": "What does good look like for this person or team -- specifically?",
+        "intent": "Forces a concrete success definition. Vague goals produce vague development."
+      },
       {
-        "id": "IQ-CRACKED_MIRROR-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-EXIT_PATTERN",
-    "tier": "INTERVENTION",
-    "state_id": "EXIT_PATTERN",
-    "type": "state",
-    "questions": [
+        "id": "IQ-DEV-CORE-04",
+        "question": "Is the person aware that this engagement is happening, and are they willing?",
+        "intent": "Non-negotiable intake question. Development without consent is discipline with better branding."
+      },
       {
-        "id": "IQ-EXIT_PATTERN-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-DEAD_CALM",
-    "tier": "INTERVENTION",
-    "state_id": "DEAD_CALM",
-    "type": "state",
-    "questions": [
+        "id": "IQ-DEV-CORE-05",
+        "question": "What is the leader's relationship to feedback -- do they seek it, tolerate it, or avoid it?",
+        "intent": "The most predictive signal for development outcomes. Tells Pete how much of the work will be building receptivity first."
+      },
       {
-        "id": "IQ-DEAD_CALM-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-SILOSOLATION",
-    "tier": "INTERVENTION",
-    "state_id": "SILOSOLATION",
-    "type": "state",
-    "questions": [
+        "id": "IQ-DEV-CORE-06",
+        "question": "What would success look like to the people around this leader, not just to the leader themselves?",
+        "intent": "Expands the definition of success beyond self-perception. Critical for leaders who are strong performers with blind spots."
+      },
       {
-        "id": "IQ-SILOSOLATION-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-RUNAWAY_TREADMILL",
-    "tier": "ROADMAP",
-    "state_id": "RUNAWAY_TREADMILL",
-    "type": "state",
-    "questions": [
+        "id": "IQ-DEV-CORE-07",
+        "question": "What has gotten in the way of this being addressed internally?",
+        "intent": "Reveals whether there is a structural or political reason development hasn't happened yet -- or whether it simply wasn't prioritized."
+      },
       {
-        "id": "IQ-RUNAWAY_TREADMILL-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-FOSSIL_SYSTEM",
-    "tier": "ROADMAP",
-    "state_id": "FOSSIL_SYSTEM",
-    "type": "state",
-    "questions": [
-      {
-        "id": "IQ-FOSSIL_SYSTEM-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-ANCHOR",
-    "tier": "ROADMAP",
-    "state_id": "ANCHOR",
-    "type": "state",
-    "questions": [
-      {
-        "id": "IQ-ANCHOR-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-BROKEN_COMPASS",
-    "tier": "ROADMAP",
-    "state_id": "BROKEN_COMPASS",
-    "type": "state",
-    "questions": [
-      {
-        "id": "IQ-BROKEN_COMPASS-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-KID_GLOVES",
-    "tier": "DEVELOPMENT",
-    "state_id": "KID_GLOVES",
-    "type": "state",
-    "questions": [
-      {
-        "id": "IQ-KID_GLOVES-01",
-        "question": "",
-        "intent": ""
-      }
-    ]
-  },
-  {
-    "question_set_id": "IQ-UNLIT_ROOM",
-    "tier": "DEVELOPMENT",
-    "state_id": "UNLIT_ROOM",
-    "type": "state",
-    "questions": [
-      {
-        "id": "IQ-UNLIT_ROOM-01",
-        "question": "",
-        "intent": ""
+        "id": "IQ-DEV-CORE-08",
+        "question": "What is the timeline -- is there a performance or personnel consequence on the horizon?",
+        "intent": "Determines whether this is proactive development or a last-before-action engagement. Changes the approach significantly."
       }
     ]
   }

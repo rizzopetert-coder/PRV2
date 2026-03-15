@@ -145,14 +145,14 @@
         "description": "When departures become a pattern, the organization is no longer losing individuals \u2014 it's losing the argument for staying. This is the diagnostic profile and the intervention path.",
         "canonical": "/vault/lexicon/exit-pattern"
       },
-      "advisor_take": "By the time you're tracking the exits, you've already lost the argument. The people who leave aren't the problem \u2014 they're the evidence. What they're leaving tells you everything your engagement survey won't. The pattern is legible if you're willing to read it.",
+      "advisor_take": "By the time you're tracking the exits, you've already lost the argument. The people who leave aren't the problem -- they're the evidence. What they're leaving tells you everything your engagement survey won't. The pattern is legible if you're willing to read it -- and reading it clearly is what makes it possible to change what the next person walks into.",
       "advisor_take_source": "manifest"
     },
     {
       "state_id": "DEAD_CALM",
       "slug": "dead-calm",
       "label": "Dead Calm",
-      "short_description": "Decisions are not being made. The structural conditions for decision-making \u2014 forums, accountability, urgency \u2014 have been replaced by a performative stability that masks paralysis. The organization looks functional. It is not moving.",
+      "short_description": "Decisions are not being made. The structural conditions for decision-making \u2014 forums, accountability, urgency \u2014 have been replaced by a performative stability that masks paralysis. The people inside it know it is not moving. They have learned not to say so.",
       "ui_severity_rating": 3,
       "engine_severity": "MID",
       "natural_tier": "INTERVENTION",
@@ -194,7 +194,7 @@
       "state_id": "SILOSOLATION",
       "slug": "silosolation",
       "label": "Silosolation",
-      "short_description": "Cross-functional coordination has broken down to a degree that each unit is optimizing independently and sub-optimizing collectively. Information stops at department walls, accountability diffuses at handoffs, and the organization's output is less than the sum of its parts.",
+      "short_description": "Cross-functional coordination has broken down to a degree that each unit is optimizing independently and sub-optimizing collectively. Information stops at department walls, accountability diffuses at handoffs, and the people working at the seams between those units absorb the cost of that breakdown every day.",
       "ui_severity_rating": 3,
       "engine_severity": "MID",
       "natural_tier": "INTERVENTION",
@@ -258,7 +258,7 @@
         "description": "Growth without infrastructure is not momentum. It's accumulated risk. Runaway Treadmill identifies the point where velocity outpaces the organization's ability to steer.",
         "canonical": "/vault/lexicon/runaway-treadmill"
       },
-      "advisor_take": "Growth is not a defense. Moving fast without the infrastructure to hold it together isn't momentum \u2014 it's accumulated risk running on optimism. The treadmill doesn't care how hard you're working. It cares whether you built systems to match the velocity.",
+      "advisor_take": "Growth is not a defense. Moving fast without the infrastructure to hold it together isn't momentum -- it's accumulated risk running on optimism. The people running hardest are usually the last ones to say it out loud. The treadmill doesn't care how hard you're working. It cares whether you built systems to match the velocity -- and whether anyone has been honest enough to say the systems aren't there yet.",
       "advisor_take_source": "manifest"
     },
     {
@@ -337,7 +337,7 @@
         "description": "The Anchor is not the absence of friction \u2014 it's the active management of it. This is the diagnostic profile for organizational health and what it takes to hold it.",
         "canonical": "/vault/lexicon/anchor"
       },
-      "advisor_take": "This isn't the finish line. It's the baseline. Organizational health degrades without deliberate maintenance — the conditions that produced it don't sustain themselves. Brooks showed that coordination cost scales faster than team size. The work here is protection, not celebration — and part of that protection is knowing when to stop adding people to something that's working.",
+      "advisor_take": "This isn't the finish line. It's the baseline. Organizational health degrades without deliberate maintenance -- the conditions that produced it don't sustain themselves. Brooks showed that coordination cost scales faster than team size. The work here is protection, not celebration -- and part of that protection is knowing when to stop adding people to something that's working.",
       "advisor_take_source": "manifest"
     },
     {
@@ -422,7 +422,7 @@
       "state_id": "UNLIT_ROOM",
       "slug": "unlit-room",
       "label": "The Unlit Room",
-      "short_description": "The friction is present but unlocatable. Signals are low, personnel risk is contained, and decision velocity is functional \u2014 but something is off and the organization can't name it. The Unlit Room is an early-warning state: the conditions for dysfunction are assembling before the symptoms are visible.",
+      "short_description": "The friction is present but unlocatable. Signals are low, personnel risk is contained, and decision velocity is functional \u2014 but something is off and the people inside the organization can feel it before they can name it. The Unlit Room is an early-warning state: the conditions for dysfunction are assembling before the symptoms are visible.",
       "ui_severity_rating": 2,
       "engine_severity": "LOW",
       "natural_tier": "DEVELOPMENT",
@@ -449,7 +449,7 @@
         "description": "The Unlit Room is not healthy. It's early. The conditions for dysfunction are assembling before the signals are legible. This is the diagnostic profile for organizations at the leading edge of friction.",
         "canonical": "/vault/lexicon/unlit-room"
       },
-      "advisor_take": "The absence of a visible crisis is not evidence of health. Something is assembling in the dark \u2014 you can feel it without being able to name it. That's not a reason to wait. That's the optimal moment to look.",
+      "advisor_take": "The absence of a visible crisis is not evidence of health. Something is assembling in the dark -- you can feel it without being able to name it. The people around you can feel it too. That's not a reason to wait. That's the optimal moment to look -- before the thing assembling in the dark becomes the thing everyone is managing around.",
       "advisor_take_source": "manifest"
     }
   ],

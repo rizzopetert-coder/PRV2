@@ -34,7 +34,7 @@ export const STATE_GLOSSARY = [
   {
     id:         'LAST_LEG',
     label:      'Last Leg',
-    definition: 'The cost of the current situation has already passed the point where incremental recovery is possible. Time is the primary variable and it is working against the organization.',
+    definition: 'The cost of the current situation has already passed the point where incremental recovery is possible. Time is the primary variable and it is working against the organization -- and against the people still in it who are deciding whether to stay.',
   },
   {
     id:         'SACRED_COW',
@@ -54,7 +54,7 @@ export const STATE_GLOSSARY = [
   {
     id:         'SILOSOLATION',
     label:      'Silosolation',
-    definition: 'The organization has fractured into self-contained units that have stopped sharing information, resources, or accountability. Each unit is locally functional. The whole is not.',
+    definition: 'The organization has fractured into self-contained units that have stopped sharing information, resources, or accountability. Each unit is locally functional. The whole is not -- and the people doing the work at the seams between those units are absorbing the cost of that fracture every day.',
   },
   {
     id:         'EXIT_PATTERN',
@@ -64,7 +64,7 @@ export const STATE_GLOSSARY = [
   {
     id:         'RUNAWAY_TREADMILL',
     label:      'Runaway Treadmill',
-    definition: 'The organization has mistaken motion for progress. Urgency has become a cultural identity. The pace prevents the reflection required to notice that speed and direction are not the same thing.',
+    definition: 'The organization has mistaken motion for progress. Urgency has become a cultural identity. The people running hardest are the least likely to say it out loud. The pace prevents the reflection required to notice that speed and direction are not the same thing.',
   },
   {
     id:         'FOSSIL_SYSTEM',
@@ -309,20 +309,20 @@ export function buildRecommendationRationale(tier, state, agencyScore, inputData
   const { priorAttempt, resolutionBlockage, frictionLocation, personnelRisk, orgStage, leadershipTenure } = inputData;
 
   if (tier === TIERS.STABILITY_SUPPORT) {
-    return "The math has turned on this one. The cost of inaction has exceeded what a structured intervention can address incrementally. What is needed now is not a plan -- it is immediate stabilization. The window for a deliberate process has closed and what happens in the next few weeks will determine what is possible after that.";
+    return "The math has turned on this one. The cost of inaction has exceeded what a structured intervention can address incrementally. There are people in this organization who already know that -- and some of them are running out of reasons to stay. What is needed now is not a plan -- it is immediate stabilization by someone who knows how to move fast without adding to the damage. What happens in the next few weeks will determine what is salvageable -- for the organization and for the people still in it.";
   }
 
   if (tier === TIERS.EXECUTIVE_COUNSEL) {
     if (priorAttempt === 'EXTERNAL' && resolutionBlockage === 'ATTEMPTED') {
-      return "The Executive Counsel is the right entry point because two prior attempts at resolution have not held. The source of the blockage has institutional protection and a structured engagement will work around it rather than through it. What is needed is a sustained, confidential relationship that can operate outside the dynamics that have protected the problem so far.";
+      return "The Executive Counsel is the right entry point because two prior attempts at resolution have not held. Someone in this organization is actively invested in the current state remaining unchanged, and a structured engagement will not reach them. What is needed is a sustained, confidential relationship that can operate outside the relationships that have kept this unresolved -- and give this leader a place to navigate it without the constraints those relationships create.";
     }
     if (leadershipTenure === 'UNDER_ONE') {
-      return "The Executive Counsel is the right entry point because you are navigating a problem you inherited, not one you created. The friction predates your tenure and the people who built it are probably still in the room. What you need is a confidential relationship with someone who can help you see the landscape clearly and move through it without the constraints that come with a formal engagement.";
+      return "The Executive Counsel is the right entry point because you are navigating a problem you inherited, not one you created. The friction predates your tenure and the people who built it are probably still in the room. What you need is a confidential relationship with someone who can help you see the landscape clearly -- who the people are, what they are protecting, and how to move through it without triggering the defenses that stopped the last person who tried. That clarity is what gives a leader in this position real options.";
     }
     if (resolutionBlockage === 'ATTEMPTED') {
-      return "The Executive Counsel is the right entry point because something is actively preventing the resolution the organization knows it needs, and a structured engagement alone will not reach it. The failed attempt has confirmed there is a political or structural wall in the way. What is needed is a sustained, confidential presence that can operate where the formal process cannot.";
+      return "The Executive Counsel is the right entry point because something is actively preventing the resolution the organization knows it needs, and a structured engagement alone will not reach it. The failed attempt has confirmed that someone in this organization is invested in the current state -- and the formal process cannot get past them. What is needed is a sustained, confidential presence that can operate outside the relationships that have kept this unresolved, and outside the history of failed attempts that has made everyone inside more guarded.";
     }
-    return "The Executive Counsel is the right entry point because what this profile describes is not a situation that a time-bound structured engagement will resolve. The friction is too embedded, the stakes are too specific, and what is needed is an ongoing confidential relationship -- not a project with a deliverable at the end.";
+    return "The Executive Counsel is the right entry point because what this profile describes is not a situation that a time-bound structured engagement will resolve. The friction is too embedded, the stakes are too specific, and what is needed is an ongoing confidential relationship with someone who has no stake in the outcome and no allegiance to the people protecting the problem. Not a project with a deliverable at the end -- a sustained presence that gives this leader somewhere to think out loud without consequences. That is what changes the quality of the decisions being made inside the building.";
   }
 
   if (tier === TIERS.INTERVENTION) {
@@ -336,7 +336,7 @@ export function buildRecommendationRationale(tier, state, agencyScore, inputData
       return "The Intervention is the right entry point because the friction is inside the leadership team and there is already a personnel consequence in play. At that combination, a diagnostic and roadmap phase delays the resolution the organization actually needs. We come in, address it directly, and you leave with the thing done -- not a plan to do it.";
     }
     if (orgStage === 'LEGACY' && leadershipTenure === 'SEVEN_PLUS') {
-      return "The Intervention is the right entry point because what this profile describes has been in place long enough that a roadmap phase would spend its time documenting what everyone already knows. The patterns are established, the cost is confirmed, and the organization needs someone to move it -- not map it.";
+      return "The Intervention is the right entry point because what this profile describes has been in place long enough that a roadmap phase would spend its time documenting what everyone already knows. The people in this organization have been managing around this for years. They do not need a plan -- they need someone to walk in and do what the tenure of the problem has made impossible from the inside.";
     }
     return "The Intervention is the right entry point based on this profile. What is needed is resolution, not a plan for resolution. The Roadmap is the right entry point when the organization needs clarity on what to address. This organization already has that clarity. What it needs now is someone to address it.";
   }
@@ -348,11 +348,11 @@ export function buildRecommendationRationale(tier, state, agencyScore, inputData
     if (frictionLocation === 'CROSS_FUNCTIONAL') {
       return "Cross-functional friction is the hardest kind to resolve without first mapping it precisely -- because what looks like a relationship problem is almost always a structural one. The Roadmap will identify whether the friction is in the design of the organization or in the dynamics between the people in it. Those are different problems with different solutions, and the distinction is worth getting right before bringing someone in to address it.";
     }
-    return "The Roadmap is the right entry point based on this profile. The friction is real and the cost is confirmed -- but this organization is in a position to address it deliberately rather than urgently. The Roadmap will name the source precisely and give your team a structured path to resolution.";
+    return "The friction is real and the cost is confirmed -- but this organization is in a position to address it deliberately rather than urgently. The first move is listening -- to the people doing the work, not just the people managing it. The source of the friction is almost always visible to them. The Roadmap surfaces what they already know, names it precisely, and gives your team a structured path to act on it.";
   }
 
   if (tier === TIERS.DEVELOPMENT) {
-    return "Development is the right entry point because the machine is running. The conditions are good, the agency is high, and what is missing is not a repair -- it is a force multiplier. The highest-leverage investment available to this organization right now is in the people leading it.";
+    return "Development is the right entry point because the machine is running. The conditions are good, the agency is high, and what is missing is not a repair -- it is a force multiplier. The highest-leverage investment available to this organization right now is in the people leading it. That investment only works if it includes honest, consistent feedback -- the kind that tells people where they actually stand, not where it is comfortable to say they stand.";
   }
 
   return null;
@@ -423,16 +423,17 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
   };
 
   const downloadPDF = async () => {
-  const { pdf } = await import('@react-pdf/renderer');
-  const { DiagnosticDocument } = await import('./DiagnosticPDF');
-  const blob = await pdf(
-    <DiagnosticDocument summary={summary} inputData={inputData} />
-  ).toBlob();
+    const { pdf } = await import('@react-pdf/renderer');
+    const { DiagnosticDocument } = await import('./DiagnosticPDF');
+    const blob = await pdf(
+      <DiagnosticDocument summary={summary} inputData={inputData} />
+    ).toBlob();
     const url  = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href     = url;
     link.download = `Principal_Resolution_Record_${Date.now()}.pdf`;
-    link.click()// Silent dispatch to Zapier on PDF download -- primary CRM trigger
+    link.click();
+    // Silent dispatch to Zapier on PDF download -- primary CRM trigger
     fetch('/api/diagnostic-dispatch', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -446,6 +447,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
         resolution_blockage: inputData.resolutionBlockage,
         decisions:           inputData.decisions,
         primary_emotion:     inputData.primaryEmotion,
+        resolutionVision:    inputData.resolutionVision,
         playbookId:          summary.state?.resolution_playbook_ids?.[0] || null,
         context: {
           industry:           inputData.industry,
@@ -456,6 +458,7 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
         },
       }),
     }).catch(() => {});
+  };
 
     if (dispatchUrl) {
       fetch('/api/diagnostic-dispatch', {
@@ -878,4 +881,3 @@ export default function ResultsLedger({ summary, dispatchUrl, onReset, inputData
       </div>
     </div>
   );
-}

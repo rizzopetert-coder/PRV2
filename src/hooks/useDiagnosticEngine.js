@@ -209,11 +209,9 @@ const BEHAVIORAL_INSIGHTS = {
   WITHIN_LEADERSHIP_NO_FORUM_CONSULTING:  "A consulting firm whose leadership team has no safe forum for honest disagreement is selling something internally that it doesn't practice. Your senior people have noticed that gap. They're just professional enough not to say so directly.",
   WITHIN_LEADERSHIP_NO_FORUM_NONPROFIT:   "A nonprofit leadership team with no forum for honest disagreement is often carrying its dysfunction in the name of the mission -- and in the name of each other. The relationships that built something meaningful become the reason nobody will say the hard thing. The people doing the work feel the cost of that more directly than anyone in the leadership team realizes.",
   WITHIN_LEADERSHIP_NO_FORUM_HEALTH:      "A healthcare leadership team with no safe forum for internal friction is managing the highest-stakes version of this problem. The silence at the top has consequences that travel further than in almost any other sector.",
-  WITHIN_LEADERSHIP_NO_FORUM:             "Friction inside the leadership team with no place to safely surface it is the most expensive combination in this diagnostic. It stays invisible to the organization right up until it isn't -- and by then the cheap resolution is long gone.",
-
+  WITHIN_LEADERSHIP_NO_FORUM:             "Friction inside the leadership team with no place to safely surface it is the most expensive combination in this diagnostic. The people doing the work feel the effects of what the leadership team won't say to each other -- even when they can't name the source. It stays invisible right up until it isn't -- and by then the cheap resolution is long gone.",
   // WITHIN_LEADERSHIP + PREDETERMINED
-  WITHIN_LEADERSHIP_PREDETERMINED_TECH:        "In a fast-moving tech organization, predetermined outcomes in leadership conversations are particularly damaging because speed is supposed to be the advantage. When the answer is decided before the discussion, you're not moving fast. You're just moving confidently in the wrong direction.",
-  WITHIN_LEADERSHIP_PREDETERMINED_CONSULTING:  "A consulting firm where leadership outcomes are predetermined before the conversation starts has a credibility problem that goes beyond the internal dynamic. The methodology you sell requires exactly the kind of honest inquiry your leadership team has stopped practicing.",
+  WITHIN_LEADERSHIP_PREDETERMINED_TECH:        "In a fast-moving tech organization, predetermined outcomes in leadership conversations are particularly damaging because speed is supposed to be the advantage. When the answer is decided before the discussion, you're not moving fast. You're just moving confidently in the wrong direction -- and the people in that room who saw the right direction have learned to stop pointing it out.",  WITHIN_LEADERSHIP_PREDETERMINED_CONSULTING:  "A consulting firm where leadership outcomes are predetermined before the conversation starts has a credibility problem that goes beyond the internal dynamic. The methodology you sell requires exactly the kind of honest inquiry your leadership team has stopped practicing.",
   WITHIN_LEADERSHIP_PREDETERMINED:             "When outcomes feel predetermined, people stop bringing their real thinking into the room. What looks like agreement is usually just exhaustion. The organization is making decisions based on a conversation that isn't actually happening.",
 
   // WITHIN_LEADERSHIP + COST_TOO_HIGH
@@ -342,13 +340,11 @@ function resolveInsight(step, data, sequence) {
   // Beat 2: fires when primaryEmotion is selected — responds to what they named.
   if (step === 0) {
     if (!data.primaryEmotion) {
-      return "This takes about three minutes. The advisor will be reading what you describe the whole way through. Not to judge it, but to tell you what it sees. Be as honest as you can afford to be. That's what makes the picture accurate.";
-    }
+      return "This takes about three minutes. The advisor will be reading what you describe the whole way through. Not to judge it, but to tell you what it sees. The picture it produces is only as accurate as the honesty you bring to it -- and the people on the other side of this problem will feel the difference between a leader who looked clearly and one who didn't.";    }
     const responses = {
       EXHAUSTION:  "That's real, and it matters that you named it. People who've been holding something this long usually have a clearer picture of the problem than they give themselves credit for. Let's find out what it's actually costing.",
       FRUSTRATION: "Frustration usually means you already know what needs to happen. The question is why it keeps not happening. That's exactly what this instrument is designed to find.",
-      FEAR:        "Naming uncertainty takes more honesty than certainty does. What you're about to see is a picture, not a verdict. You get to decide what to do with it.",
-      APATHY:      "If the energy to expect resolution has run out, that's worth knowing too. Sometimes the most useful thing a diagnostic can do is confirm that the situation is real and that the cost of continuing it is real. Let's see what the numbers say.",
+      FEAR:        "Naming uncertainty takes more honesty than naming certainty does. What you're about to see is a picture, not a verdict. You get to decide what to do with it -- and having a clear picture is worth the cost.",      APATHY:      "If the energy to expect resolution has run out, that's worth knowing too. Sometimes the most useful thing a diagnostic can do is confirm that the situation is real and that the cost of continuing it is real. Let's see what the numbers say.",
     };
     return responses[data.primaryEmotion] || "Good. Let's get into it.";
   }
@@ -359,17 +355,13 @@ function resolveInsight(step, data, sequence) {
     // Full context + tenure-specific reads
     if (industry && orgStage && headcountRange && leadershipTenure) {
       if (leadershipTenure === 'UNDER_ONE' && orgStage === 'LEGACY') {
-        return "Here's the thing about inheriting a legacy organization -- the friction you're dealing with was built by people who are probably still in the room. That's not your fault. But it is your problem now.";
-      }
+        return "Here's the thing about inheriting a legacy organization -- the friction you're dealing with was built by people who are probably still in the room. That's not your fault. But it is your problem now. The leaders who navigate this well do it by getting a clear picture of who built what and why -- before they start moving things.";      }
       if (leadershipTenure === 'SEVEN_PLUS' && orgStage === 'LEGACY') {
-        return "Seven-plus years in a legacy organization means the patterns here didn't sneak up on anyone. They got normalized. That's actually the harder problem -- not because it can't be fixed, but because everyone stopped seeing it as a problem.";
-      }
+        return "Seven-plus years in a legacy organization means the patterns here didn't sneak up on anyone. They got normalized. That's actually the harder problem -- not because it can't be fixed, but because the people who could fix it have been inside it long enough that the shape of it has become invisible to them. An outside view doesn't just confirm what's there. It shows what proximity has made impossible to see.";      }
       if (leadershipTenure === 'UNDER_ONE' && orgStage === 'STARTUP') {
-        return "New leadership in a startup means the founding dynamic is either still running the room or actively being worked against. Either way, the first year is when patterns get set that last a decade.";
-      }
+        return "New leadership in a startup means the founding dynamic is either still running the room or actively being worked against. The people who built this are watching how you handle it. The first year is when patterns get set that last a decade -- and the people around you are deciding right now whether this organization is the kind of place they want to be in five years.";      }
       if (orgStage === 'STARTUP' && headcountRange === 'MID') {
-        return "The thing that got you to 100 people is usually the thing that starts breaking things at 100 people. Founding-era friction doesn't age well. It compounds.";
-      }
+        return "The thing that got you to 100 people is usually the thing that starts breaking things at 100 people. Founding-era friction doesn't age well. It compounds -- and the people who joined because of what this place was are the first ones to notice when it stops being that.";      }
       return "Good. The picture is starting to take shape. What comes next is where it gets specific.";
     }
 
@@ -445,8 +437,7 @@ function resolveInsight(step, data, sequence) {
 
       // Decision velocity — new v6.0 signal
       if (decisions === 'STALLED') {
-        return "Decisions that get deferred or reopened constantly are one of the most reliable signs that the friction isn't just interpersonal -- it's structural. The organization has lost the ability to make a call and let it stand.";
-      }
+        return "Decisions that get deferred or reopened constantly are one of the most reliable signs that the friction isn't just interpersonal -- it's structural. Somewhere in this organization, someone has the standing to reopen any decision that doesn't go the way they need it to go. The people around that dynamic know exactly who it is. They've just learned that naming it doesn't help.";      }
 
       // Personnel risk signals
       if (personnelRisk === 'LOST') {

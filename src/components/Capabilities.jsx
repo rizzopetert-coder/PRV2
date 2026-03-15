@@ -28,23 +28,23 @@ const tiers = [
     name: "The Intervention",
     icon: <Zap size={24} />,
     description: "Direct tactical support for the hard stuff. We step into the room to handle the high-stakes conversations and structural resets that internal teams are too polite to attempt. The result is faster decisions, cleared air, and a team that knows someone finally said what needed to be said.",
-    outcome: "You leave with resolution. Not a plan to resolve. Not a framework for resolving. The thing itself, done.",
+    outcome: "You leave with resolution. Not a plan to resolve. Not a framework for resolving. The thing itself, done -- with the people who needed to be part of it having been part of it.",    
     cta: "Bring us in",
   },
   {
     id: "03",
     name: "Executive Counsel",
     icon: <CounselIcon size={24} />,
-    description: "The ongoing advisory relationship for the conversations that cannot happen inside the building. No agenda, no allegiance, no filtered feedback. Principal-level access, monthly cadence, on-call between sessions. This is the consigliere arrangement -- for leaders who need a trusted outside voice in the room on an ongoing basis.",
-    outcome: "You leave every session with clarity you couldn't have gotten from anyone inside the organization. That's the arrangement.",
+    description: "The ongoing advisory relationship for the conversations that cannot happen inside the building. No agenda, no allegiance, no filtered feedback. The leaders who use this arrangement make better decisions -- because they finally have somewhere to think out loud about the people and dynamics that every internal conversation has to work around.",    outcome: "You leave every session with clarity you couldn't have gotten from anyone inside the organization. That's the arrangement.",
+    outcome: "You leave every session with clarity about the people, the dynamics, and the decisions -- clarity you couldn't have gotten from anyone inside the organization. That's the arrangement.",
     cta: "Inquire about Executive Counsel",
   },
   {
     id: "04",
     name: "Development",
     icon: <BookOpen size={24} />,
-    description: "We develop leaders who make the people around them better — not leaders who make themselves more indispensable. Practical tools, real-world application, and a framework built on the principle that clarity is the highest form of kindness you can offer a team.",
-    outcome: "You leave with leaders who make the people around them measurably better — and know exactly why that matters.",
+    description: "We develop leaders who make the people around them better — not leaders who make themselves more indispensable. Practical tools, real-world application, and a framework built on the principle that clarity is the highest form of kindness you can offer a team. The measure is not what the leader learns. It is what their team is able to do because of it.",    outcome: "You leave with leaders who make the people around them measurably better — and know exactly why that matters.",
+    outcome: "You leave with leaders who make the people around them measurably better, who say the things that need to be said, and who know exactly why both of those things matter.",
     cta: "Schedule a Session",
   }
 ];
@@ -53,8 +53,8 @@ const stabilityTier = {
   id: "05",
   name: "Stability Support",
   icon: <HeartHandshake size={32} />,
-  description: "When the situation has outrun your internal capacity to manage it. We come in during leadership pivots, mass exits, and organizational trauma to keep the mission intact while you find your footing.",
-  outcome: "Your mission stays intact. Your people come through it with more trust in leadership than when the crisis began.",
+  description: "When the situation has outrun your internal capacity to manage it. We come in during leadership pivots, mass exits, and organizational trauma -- name what is happening, tell the people who need to hear it, and start doing the things the organization cannot do for itself right now. This is not advisory work. We are in the room, making the hard calls, until the new normal is stabilized.",  outcome: "Your mission stays intact. Your people come through it with more trust in leadership than when the crisis began.",
+  outcome: "Your mission stays intact. Your people come through it having been told the truth -- and with more trust in leadership than when the crisis began.",
   cta: "Call us now",
 };
 
